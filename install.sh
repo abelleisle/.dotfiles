@@ -15,8 +15,13 @@ ln -s $PWD/zsh/zshrc ~/.zshrc
 
 ln -s $PWD/xset/xprofile ~/.xprofile
 
+ln -s $PWD/xset/Xresources ~/.Xresources
+
 ln -s $PWD/xres ~/.xres
-ln -s $PWD/xres/Xresources ~/.Xresources
+
+ln -s $PWD/themes ~/.themes
+
+ln -s $PWD/scripts ~/.scripts
 
 cp -vf wallpapers/* ~/Pictures/Wallpapers/
 

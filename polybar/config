@@ -22,9 +22,10 @@ urgent_bg=#CC6666
 ;--------------------------------------------
 
 [bar/base]
+monitor=DP-1
 dpi=96
 width=100%
-height=25
+height=20
 offset-x=0
 offset-y=0
 
@@ -46,11 +47,17 @@ font-0=ttyp0:pixelsize=10;2
 font-1=siji:size=10;2
 font-2=GohuFont:pixelsize=10;2
 
-modules-left= workspaces xwindow
+modules-left= ewmh xwindow
 modules-center=
 modules-right= volume date
 
 fixed-center = false
+
+[bar/second]
+inherit = bar/base
+monitor = DVI-D-0
+tray-position = right
+
 
 ;--------------------------------------------
 ; modules                                   ;
@@ -143,13 +150,19 @@ format-muted-padding=0
 
 ramp-headphones-0=
 
-[module/workspaces]
+[module/ewmh]
 
-type = internal/openbox
-format = <label-state> <label-mode>
+type = internal/xworkspaces
+;format = <label-state> <label-mode>
+format =  <label-state>
 index-sort = true
 wrapping-scroll = false
 strip-wsnumbers = true
+
+label-active = %name%
+label-active-background = ${colors.modules_bg}
+label-active-foreground = ${colors.modules_fg}
+label-active-padding = 1
 
 label-mode-background = ${colors.modules_prefix_bg}
 label-mode-foreground = ${colors.modules_prefix_fg}
@@ -174,5 +187,12 @@ label-urgent = %name%
 label-urgent-background = ${colors.urgent_bg}
 label-urgent-foreground = ${colors.modules_prefix_bg}
 label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-background = ${colors.modules_prefix_bg}
+label-empty-foreground = ${colors.modules_prefix_fg}
+label-empty-padding = 1
+
+
 
 ; vim:ft=dosini

@@ -4,3 +4,5 @@ xset +fp /home/andy/.fonts/
 xset +fp /usr/share/fonts/TTF/
 xset +fp /usr/share/fonts/PCF/
 xset fp rehash
+
+xrdb -merge .Xresources

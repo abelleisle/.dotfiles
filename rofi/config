@@ -1,6 +1,6 @@
 # Dark theme.
-rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
-rofi.font:		   	xos4 Terminus, 9
+rofi.theme: ~/.themes/agila/rofi/rofi-dark.rasi
+rofi.font:		   	ttyp0, 10
 rofi.lines:			8
 rofi.width:			-80
 rofi.prompt:        ">>>"
