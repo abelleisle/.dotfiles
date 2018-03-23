@@ -22,9 +22,9 @@ urgent_bg=#CC6666
 ;--------------------------------------------
 
 [bar/base]
-dpi=192
+dpi=96
 width=100%
-height=18
+height=25
 offset-x=0
 offset-y=0
 
@@ -42,24 +42,19 @@ padding-right=1
 module-margin-left=2
 
 font-N=<fontconfig pattern>;<vertical offset>
-font-0=WunconSiji:size=4;2
-font-1=UW ttyp0:pixelsize=10;2
+font-0=ttyp0:pixelsize=10;2
+font-1=siji:size=10;2
 font-2=GohuFont:pixelsize=10;2
 
-modules-left= workspaces xwindow music
+modules-left= workspaces xwindow
 modules-center=
-modules-right= essid volume backlight battery date
+modules-right= volume date
 
 fixed-center = false
 
 ;--------------------------------------------
 ; modules                                   ;
 ;--------------------------------------------
-
-[module/network]
-type = internal/network
-interface = wlp6s0
-ping-interval = 3
 
 [module/xwindow]
 y-offset=10
@@ -117,49 +112,6 @@ click-left = playerctl previous
 click-middle = playerctl play-pause
 click-right = playerctl next
 
-[module/battery]
-type=internal/battery
-full-at=99
-battery=BAT0
-adapter=AC0
-poll-interval=5
-
-format-charging=<label-charging>
-
-format-charging-prefix=
-format-charging-prefix-background=${colors.modules_prefix_bg}
-format-charging-prefix-foreground=${colors.modules_prefix_fg}
-format-charging-prefix-padding=1
-
-label-charging=%percentage%%
-label-charging-background=${colors.modules_bg}
-label-charging-foreground=${colors.modules_fg}
-label-charging-padding=1
-
-format-discharging=<label-discharging>
-
-format-discharging-prefix=
-format-discharging-prefix-background=${colors.modules_prefix_bg}
-format-discharging-prefix-foreground=${colors.modules_prefix_fg}
-format-discharging-prefix-padding=1
-
-label-discharging=%percentage%%
-label-discharging-background=${colors.modules_bg}
-label-discharging-foreground=${colors.modules_fg}
-label-discharging-padding=1
-
-format-full=<label-full>
-
-format-full-prefix=
-format-full-prefix-background=${colors.modules_prefix_bg}
-format-full-prefix-foreground=${colors.modules_prefix_fg}
-format-full-prefix-padding=1
-
-label-full=%percentage%%
-label-full-background=${colors.modules_bg}
-label-full-foreground=${colors.modules_fg}
-label-full-padding = 1
-
 [module/volume]
 type=internal/volume
 format-volume =<label-volume>
@@ -191,41 +143,9 @@ format-muted-padding=0
 
 ramp-headphones-0=
 
-[module/essid]
-inherit = module/network
-
-format-connected=<label-connected>
-
-format-connected-prefix=
-format-connected-prefix-padding=1
-format-connected-prefix-background=${colors.modules_prefix_bg}
-format-connected-prefix-foreground=${colors.modules_prefix_fg}
-
-label-connected=%essid%
-label-connected-background=${colors.modules_bg}
-label-connected-foreground=${colors.modules_fg}
-label-connected-padding=1
-
-ramp-signal-background=${colors.light_teal}
-ramp-signal-foreground=${colors.bg}
-ramp-connected-foreground=${colors.bg}
-ramp-signal-padding=1
-
-format-disconnected=<label-disconnected>
-
-format-disconnected-prefix=
-format-disconnected-prefix-padding=1
-format-disconnected-prefix-background=${colors.modules_prefix_bg}
-format-disconnected-prefix-foreground=${colors.modules_prefix_fg}
-
-label-disconnected=DISCONNECTED
-label-disconnected-background=${colors.modules_bg}
-label-disconnected-foreground=${colors.modules_fg}
-label-disconnected-padding=1
-
 [module/workspaces]
 
-type = internal/i3
+type = internal/openbox
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
@@ -254,22 +174,5 @@ label-urgent = %name%
 label-urgent-background = ${colors.urgent_bg}
 label-urgent-foreground = ${colors.modules_prefix_bg}
 label-urgent-padding = 1
-
-[module/backlight]
-type = internal/backlight
-card = intel_backlight
-enable-scroll = false
-
-format = <label>
-format-prefix=
-
-format-prefix-padding=1
-format-prefix-background=${colors.modules_prefix_bg}
-format-prefix-foreground=${colors.modules_prefix_fg}
-
-label=%percentage%%
-label-background=${colors.modules_bg}
-label-foreground=${colors.modules_fg}
-label-padding = 1
 
 ; vim:ft=dosini
