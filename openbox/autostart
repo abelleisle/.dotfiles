@@ -18,3 +18,4 @@
 polybar base &
 polybar second &
 owncloud &
+dunst &

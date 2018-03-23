@@ -1,0 +1,52 @@
+# Use PulseAudio by default
+pcm.!default {
+  type pulse
+  fallback "sysdefault"
+  rate_converter "speexrate_best"
+  hint {
+    show on
+    description "Default ALSA Output (currently PulseAudio Sound Server)"
+  }
+
+  slave {
+    pcm "hw:0,0"
+    period_time 0
+    period_size 2048
+    buffer_size 65536
+    buffer_time 0
+    periods 128
+    format S24_LE
+    rate 192000
+    channels 2
+  }
+  bindings {
+    0 0
+    1 1
+  }
+}
+
+ctl.!default {
+  type pulse
+  fallback "sysdefault"
+}
+
+pcm.dmixer {
+    type dmix
+    ipc_key 2048
+    slave {
+        pcm "hw:0,0"
+        period_time 0
+        period_size 2048
+        buffer_size 65536
+        buffer_time 0
+        periods 128
+        rate 48000
+        channels 2
+    }
+    bindings {
+        0 0
+        1 1
+    }
+}
+
+
