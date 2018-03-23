@@ -1,0 +1,15 @@
+# Dark theme.
+rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
+rofi.font:		   	xos4 Terminus, 9
+rofi.lines:			8
+rofi.width:			-80
+rofi.prompt:        ">>>"
+
+inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+}

@@ -1,0 +1,4 @@
+!#include ".cache/squash/x_colors"
+
+#include ".xres/xft"
+#include ".xres/urxvt"

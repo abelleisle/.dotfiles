@@ -1,0 +1,41 @@
+!-------------------------------------------------------------------------------
+! URxvt settings
+!-------------------------------------------------------------------------------
+
+URxvt.geometry:             80x40
+URxvt.transparent:          false
+URxvt.fading:               0
+URxvt.loginShell:           true
+URxvt.saveLines:            400
+URxvt.lineSpace:            0
+
+! Fonts
+URxvt.allow_bold:           true 
+URxvt*font:xft:Ttyp0:pixelsize=11, xft:Wuncon Siji:pixelsize=15
+URxvt*boldFont:xft:Ttyp0:pixelsize=11
+
+
+! Fix font space
+URxvt*letterSpace:0 
+
+! Scrollbar
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+
+! Add padding
+URxvt.internalBorder: 20
+
+! Perl extensions
+URxvt.perl-ext-common:      default,matcher
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          qutebrowser
+
+!URxvt.config-reload:        C-Down-Up 
+
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+
+! Pointer
+URxvt.pointerBlank:         true
