@@ -1,0 +1,2 @@
+#!/bin/sh
+xprop |awk '/WM_CLASS/{print $4}'
