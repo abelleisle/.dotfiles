@@ -1,0 +1,275 @@
+;--------------------------------------------
+; colors                                    ;
+;--------------------------------------------
+
+[colors]
+
+bar_bg = #1d1f21
+bar_fg = #c5c8c6
+
+border_col = #1d1f21
+
+modules_bg = #6D8EC1
+modules_fg = #F0F0F0
+
+modules_prefix_bg = #F0F0F0
+modules_prefix_fg = #1d1f21
+
+urgent_bg=#CC6666
+
+;--------------------------------------------
+; bars                                      ;
+;--------------------------------------------
+
+[bar/base]
+dpi=192
+width=100%
+height=18
+offset-x=0
+offset-y=0
+
+background=${colors.bar_bg}
+foreground=${colors.bar_fg}
+
+border-top-size=7
+border-bottom-size=7
+border-top-color= ${colors.bar_bg}
+border-bottom-color= ${colors.bar_bg}
+
+spacing=0
+padding-left=1
+padding-right=1
+module-margin-left=2
+
+font-N=<fontconfig pattern>;<vertical offset>
+font-0=WunconSiji:size=4;2
+font-1=UW ttyp0:pixelsize=10;2
+font-2=GohuFont:pixelsize=10;2
+
+modules-left= workspaces xwindow music
+modules-center=
+modules-right= essid volume backlight battery date
+
+fixed-center = false
+
+;--------------------------------------------
+; modules                                   ;
+;--------------------------------------------
+
+[module/network]
+type = internal/network
+interface = wlp6s0
+ping-interval = 3
+
+[module/xwindow]
+y-offset=10
+type=internal/xwindow
+format=<label>
+label=%title:0:20:%
+label-background=${colors.modules_bg}
+label-foreground=${colors.modules_fg}
+label-padding=1
+
+format-prefix=
+format-prefix-background=${colors.modules_prefix_bg}
+format-prefix-foreground=${colors.modules_prefix_fg}
+format-prefix-padding=1
+
+[module/date]
+type=internal/date
+interval=1.0
+date=
+date-alt= [ %a %d, %b |
+time=" %I:%M %p "
+time-alt=%H:%M:%S %p ]
+label=%date% %time%
+
+format=<label>
+format-padding=0
+
+format-prefix=
+format-prefix-background=${colors.modules_prefix_bg}
+format-prefix-foreground=${colors.modules_prefix_fg}
+format-prefix-padding=1
+
+label-background=${colors.modules_bg}
+label-foreground=${colors.modules_fg}
+label-padding=0
+
+[module/music]
+type = custom/script
+exec = ~/.config/polybar/mpris.sh
+interval = 2
+
+format = <label>
+
+label = "%output:0:45:...%"
+label-background=${colors.modules_bg}
+label-foreground=${colors.modules_fg}
+label-padding=0
+
+format-prefix=
+format-prefix-background=${colors.modules_prefix_bg}
+format-prefix-foreground=${colors.modules_prefix_fg}
+format-prefix-padding=1
+
+click-left = playerctl previous
+click-middle = playerctl play-pause
+click-right = playerctl next
+
+[module/battery]
+type=internal/battery
+full-at=99
+battery=BAT0
+adapter=AC0
+poll-interval=5
+
+format-charging=<label-charging>
+
+format-charging-prefix=
+format-charging-prefix-background=${colors.modules_prefix_bg}
+format-charging-prefix-foreground=${colors.modules_prefix_fg}
+format-charging-prefix-padding=1
+
+label-charging=%percentage%%
+label-charging-background=${colors.modules_bg}
+label-charging-foreground=${colors.modules_fg}
+label-charging-padding=1
+
+format-discharging=<label-discharging>
+
+format-discharging-prefix=
+format-discharging-prefix-background=${colors.modules_prefix_bg}
+format-discharging-prefix-foreground=${colors.modules_prefix_fg}
+format-discharging-prefix-padding=1
+
+label-discharging=%percentage%%
+label-discharging-background=${colors.modules_bg}
+label-discharging-foreground=${colors.modules_fg}
+label-discharging-padding=1
+
+format-full=<label-full>
+
+format-full-prefix=
+format-full-prefix-background=${colors.modules_prefix_bg}
+format-full-prefix-foreground=${colors.modules_prefix_fg}
+format-full-prefix-padding=1
+
+label-full=%percentage%%
+label-full-background=${colors.modules_bg}
+label-full-foreground=${colors.modules_fg}
+label-full-padding = 1
+
+[module/volume]
+type=internal/volume
+format-volume =<label-volume>
+
+format-volume-prefix=
+format-volume-prefix-background=${colors.modules_prefix_bg}
+format-volume-prefix-foreground=${colors.modules_prefix_fg}
+format-volume-prefix-padding=1
+
+label-volume=%percentage%%
+label-volume-background=${colors.modules_bg}
+label-volume-foreground=${colors.modules_fg}
+label-volume-padding=1
+
+format-muted=<label-muted>
+
+format-muted-prefix=
+format-muted-prefix-padding=1
+format-muted-prefix-background=${colors.modules_prefix_bg}
+format-muted-prefix-foreground=${colors.modules_prefix_fg}
+
+label-muted= 0%
+label-muted-foreground=${colors.modules_fg}
+label-muted-background=${colors.modules_bg}
+label-muted-padding=1
+
+format-volume-padding=0
+format-muted-padding=0
+
+ramp-headphones-0=
+
+[module/essid]
+inherit = module/network
+
+format-connected=<label-connected>
+
+format-connected-prefix=
+format-connected-prefix-padding=1
+format-connected-prefix-background=${colors.modules_prefix_bg}
+format-connected-prefix-foreground=${colors.modules_prefix_fg}
+
+label-connected=%essid%
+label-connected-background=${colors.modules_bg}
+label-connected-foreground=${colors.modules_fg}
+label-connected-padding=1
+
+ramp-signal-background=${colors.light_teal}
+ramp-signal-foreground=${colors.bg}
+ramp-connected-foreground=${colors.bg}
+ramp-signal-padding=1
+
+format-disconnected=<label-disconnected>
+
+format-disconnected-prefix=
+format-disconnected-prefix-padding=1
+format-disconnected-prefix-background=${colors.modules_prefix_bg}
+format-disconnected-prefix-foreground=${colors.modules_prefix_fg}
+
+label-disconnected=DISCONNECTED
+label-disconnected-background=${colors.modules_bg}
+label-disconnected-foreground=${colors.modules_fg}
+label-disconnected-padding=1
+
+[module/workspaces]
+
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+strip-wsnumbers = true
+
+label-mode-background = ${colors.modules_prefix_bg}
+label-mode-foreground = ${colors.modules_prefix_fg}
+label-mode-padding = 1
+
+label-focused = %name%
+label-focused-background = ${colors.modules_bg}
+label-focused-foreground = ${colors.modules_fg}
+label-focused-padding = 1
+
+label-unfocused = %name%
+label-unfocused-background = ${colors.modules_prefix_bg}
+label-unfocused-foreground = ${colors.modules_prefix_fg}
+label-unfocused-padding = 1
+
+label-visible = %name%
+label-visible-background = ${colors.modules_prefix_bg}
+label-visible-foreground = ${colors.modules_prefix_fg}
+label-visible-padding = 1
+
+label-urgent = %name%
+label-urgent-background = ${colors.urgent_bg}
+label-urgent-foreground = ${colors.modules_prefix_bg}
+label-urgent-padding = 1
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+enable-scroll = false
+
+format = <label>
+format-prefix=
+
+format-prefix-padding=1
+format-prefix-background=${colors.modules_prefix_bg}
+format-prefix-foreground=${colors.modules_prefix_fg}
+
+label=%percentage%%
+label-background=${colors.modules_bg}
+label-foreground=${colors.modules_fg}
+label-padding = 1
+
+; vim:ft=dosini
