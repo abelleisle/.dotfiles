@@ -3,25 +3,9 @@
 <openbox_menu xmlns="http://openbox.org/3.4/menu">
 
 <menu id="apps-accessories-menu" label="Accessories">
-  <item label="Calculator">
+  <item label="Speed Crunch">
     <action name="Execute">
-      <command>gnome-calculator</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Character Map">
-    <action name="Execute">
-      <command>gnome-character-map</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Ark File Archiver">
-    <action name="Execute">
-      <command>ark</command>
+      <command>speedcrunch</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
@@ -30,45 +14,12 @@
 </menu>
 
 <menu id="apps-editors-menu" label="Editors">
-  <item label="GVim">
+  <item label="neovim">
     <action name="Execute">
-      <command>gvim</command>
+      <command>urxvt -e nvim</command>
       <startupnotify>
         <enabled>yes</enabled>
-        <wmclass>GVim</wmclass>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Emacs">
-    <action name="Execute">
-      <command>emacs</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-        <wmclass>Emacs</wmclass>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="GEdit">
-    <action name="Execute">
-      <command>gedit</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Kate">
-    <action name="Execute">
-      <command>kate</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Kwrite">
-    <action name="Execute">
-      <command>kwrite</command>
-      <startupnotify>
-        <enabled>yes</enabled>
+        <wmclass>Neovim</wmclass>
       </startupnotify>
     </action>
   </item>
@@ -145,42 +96,9 @@
 </menu>
 
 <menu id="apps-multimedia-menu" label="Multimedia">
-  <item label="Amarok">
+  <item label="Spotify">
     <action name="Execute">
-      <command>amarok</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Rhythmbox">
-    <action name="Execute">
-      <command>rhythmbox</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="K3b">
-    <action name="Execute">
-      <command>k3b</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="MPlayer">
-    <action name="Execute">
-      <command>gmplayer</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-        <wmclass>MPlayer</wmclass>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Totem">
-    <action name="Execute">
-      <command>totem</command>
+      <command>spotify</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
@@ -189,42 +107,9 @@
 </menu>
 
 <menu id="apps-fileman-menu" label="File Managers">
-  <item label="Nautilus">
+  <item label="Ranger">
     <action name="Execute">
-      <command>nautilus --no-desktop --browser</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Thunar">
-    <action name="Execute">
-      <command>Thunar</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="KDE File Manager">
-    <action name="Execute">
-      <command>kfmclient openURL ~</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Rox">
-    <action name="Execute">
-      <command>rox</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-        <wmclass>ROX-Filer</wmclass>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="PCMan File Manager">
-    <action name="Execute">
-      <command>pcmanfm</command>
+      <command>urxvt -e ranger</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
@@ -241,17 +126,9 @@
       </startupnotify>
     </action>
   </item>
-  <item label="Gwenview">
+  <item label="Blender">
     <action name="Execute">
-      <command>gwenview</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Dia Diagram Editor">
-    <action name="Execute">
-      <command>dia</command>
+      <command>Blender</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
@@ -274,21 +151,9 @@
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
   </item>
-  <item label="Gnome Control Center">
+  <item label="LXDE Configuration Manager">
     <action name="Execute">
-      <command>gnome-control-center</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
-    </action>
-  </item>
-  <item label="KDE Control Center">
-    <action name="Execute">
-      <command>kcontrol</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
-    </action>
-  </item>
-  <item label="Xfce Settings">
-    <action name="Execute">
-      <command>xfce-setting-show</command>
+      <command>lxappearance</command>
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
   </item>

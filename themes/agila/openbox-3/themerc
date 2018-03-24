@@ -6,27 +6,27 @@ padding.height: 8
 
 # Menu
 menu.items.active.bg: Solid Flat
-menu.items.active.bg.color: #333333
-menu.items.active.text.color: #eeeeee
+menu.items.active.bg.color: #cdd3df
+menu.items.active.text.color: #1a1e24
 menu.items.bg: Flat Solid
-menu.items.bg.color: #eeeeee
+menu.items.bg.color: #1a1e24
 menu.items.disabled.text.color: #777777
 menu.items.font: shadow=n
-menu.items.text.color: #333333
+menu.items.text.color: #cdd3df
 menu.border.width: 10
-menu.border.color: #eeeeee
-menu.separator.color: #eeeeee
+menu.border.color: #1a1e24
+menu.separator.color: #1a1e24
 menu.title.bg: Solid Flat
-menu.title.bg.color: #eeeeee
-menu.title.text.color: #333333
+menu.title.bg.color: #ed5554
+menu.title.text.color: #cdd3df
 menu.title.text.font: shadow=n
 menu.title.text.justify: Center
 
 # OSD
 osd.bg: Solid Flat
-osd.bg.color: #eeeeee
+osd.bg.color: #1a1e24
 osd.label.bg: parentrelative
-osd.label.text.color: #222222
+osd.label.text.color: #cdd3df
 osd.hilight.bg.color: #333333
 osd.unhilight.bg.color: #333333
 

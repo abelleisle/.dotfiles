@@ -14,28 +14,78 @@ URxvt.allow_bold:           true
 URxvt*font:xft:Ttyp0:pixelsize=11, xft:Siji:pixelsize=15
 URxvt*boldFont:xft:Ttyp0:pixelsize=11
 
+URxvt.scrollBar:        false
+URxvt.scrollstyle:      plain
+URxvt.internalBorder:   20
+URxvt.perl-ext-common:  default,matcher
+URxvt.url-launcher:     qutebrowser
+URxvt.matcher.button:   1
+URxvt.secondaryScreen:  1
+URxvt.secondaryWheel:   1
+
 
 ! Fix font space
 URxvt*letterSpace:0 
 
-! Scrollbar
-URxvt.scrollStyle:          rxvt
-URxvt.scrollBar:            false
-
-! Add padding
-URxvt.internalBorder: 20
-
-! Perl extensions
-URxvt.perl-ext-common:      default,matcher
-URxvt.matcher.button:       1
-URxvt.urlLauncher:          qutebrowser
-
-!URxvt.config-reload:        C-Down-Up 
+! Pointer
+URxvt.pointerBlank:         "true"
 
 ! Cursor
 URxvt.cursorBlink:          true
 URxvt.cursorColor:          #657b83
 URxvt.cursorUnderline:      false
 
-! Pointer
-URxvt.pointerBlank:         true
+*background:  #1a1e24
+*foreground:  #cdd3df
+
+*color0:  #1a1e24
+*color8:  #ed5554
+
+*color9:  #ed5554
+*color1:  #ded3df
+!*color1:  #252b33
+
+*color2:  #98c379
+*color10:  #252a34
+
+*color3:  #fac751
+*color11:  #3b4453
+
+*color4:  #3f6173
+*color12:  #505964
+
+*color5:  #6398cf
+*color13:  #cdd3df
+
+*color6:  #c28aa3
+*color14:  #dae0ed
+
+*color7:  #cfcfcf
+*color15:  #926b3e
+
+!*background:  #1a1e24
+!*foreground:  #cdd3df
+!
+!*color0:  #1a1e24
+!*color8:  #ed5554
+!
+!*color1:  #ed5554
+!*color9:  #252b33
+!
+!*color2:  #98c379
+!*color10:  #252a34
+!
+!*color3:  #fac751
+!*color11:  #3b4453
+!
+!*color4:  #3f6173
+!*color12:  #505964
+!
+!*color5:  #6398cf
+!*color13:  #cdd3df
+!
+!*color6:  #c28aa3
+!*color14:  #dae0ed
+!
+!*color7:  #cfcfcf
+!*color15:  #926b3e

@@ -6,3 +6,5 @@ xset +fp /usr/share/fonts/PCF/
 xset fp rehash
 
 xrdb -merge .Xresources
+
+start-pulseaudio-x11 &

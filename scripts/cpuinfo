@@ -1,0 +1,6 @@
+#!/bin/sh
+
+temp=$(sensors | grep -i Package | head -n1 | sed -r 's/.*:\s+[\+-]?(.*C)\s+.*/\1/')
+usage=$(top -bn 2 -d 0.01 | grep '^%Cpu' | tail -n 1 | gawk '{print $2+$4+$6}')
+
+printf "$temp - $usage%%"

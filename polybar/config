@@ -4,18 +4,18 @@
 
 [colors]
 
-bar_bg = #1d1f21
-bar_fg = #c5c8c6
+bar_bg = #1a1e24
+bar_fg = #cdd3df
 
-border_col = #1d1f21
+border_col = #1a1e24
 
-modules_bg = #6D8EC1
-modules_fg = #F0F0F0
+modules_bg = #3f6173
+modules_fg = #cdd3df
 
-modules_prefix_bg = #F0F0F0
-modules_prefix_fg = #1d1f21
+modules_prefix_bg = #cdd3df
+modules_prefix_fg = #3f6173
 
-urgent_bg=#CC6666
+urgent_bg=#ed5554
 
 ;--------------------------------------------
 ; bars                                      ;
@@ -38,8 +38,8 @@ border-top-color= ${colors.bar_bg}
 border-bottom-color= ${colors.bar_bg}
 
 spacing=0
-padding-left=1
-padding-right=1
+padding-left=2
+padding-right=2
 module-margin-left=2
 
 font-N=<fontconfig pattern>;<vertical offset>
@@ -48,14 +48,15 @@ font-1=siji:size=10;2
 font-2=GohuFont:pixelsize=10;2
 
 modules-left= ewmh xwindow
-modules-center=
-modules-right= volume date
+modules-center= music
+modules-right= temperature cpu memory volume date
 
-fixed-center = false
+fixed-center = true
 
 [bar/second]
 inherit = bar/base
 monitor = DVI-D-0
+
 tray-position = right
 
 
@@ -63,11 +64,54 @@ tray-position = right
 ; modules                                   ;
 ;--------------------------------------------
 
+[module/temperature]
+type = internal/temperature
+
+format = <label>
+label-background=${colors.modules_bg}
+label-foreground=${colors.modules_fg}
+label-padding=1
+
+format-prefix=
+format-prefix-background=${colors.modules_prefix_bg}
+format-prefix-foreground=${colors.modules_prefix_fg}
+format-prefix-padding=1
+
+[module/cpu]
+type = internal/cpu
+
+format = <label>
+label-background=${colors.modules_bg}
+label-foreground=${colors.modules_fg}
+label-padding=1
+
+format-prefix=
+format-prefix-background=${colors.modules_prefix_bg}
+format-prefix-foreground=${colors.modules_prefix_fg}
+format-prefix-padding=1
+
+[module/memory]
+type = internal/memory
+
+format = <label>
+
+format-prefix=
+format-prefix-background=${colors.modules_prefix_bg}
+format-prefix-foreground=${colors.modules_prefix_fg}
+format-prefix-padding=1
+
+label=%percentage_used%%
+label-alt=%gb_used%/%gb_total%
+
+label-background=${colors.modules_bg}
+label-foreground=${colors.modules_fg}
+label-padding=1
+
 [module/xwindow]
 y-offset=10
 type=internal/xwindow
 format=<label>
-label=%title:0:20:%
+label=%title:0:30:%
 label-background=${colors.modules_bg}
 label-foreground=${colors.modules_fg}
 label-padding=1
@@ -81,9 +125,9 @@ format-prefix-padding=1
 type=internal/date
 interval=1.0
 date=
-date-alt= [ %a %d, %b |
-time=" %I:%M %p "
-time-alt=%H:%M:%S %p ]
+date-alt=" [ %a %d, %b |"
+time=" %H:%M "
+time-alt="%H:%M:%S ] "
 label=%date% %time%
 
 format=<label>
@@ -100,15 +144,15 @@ label-padding=0
 
 [module/music]
 type = custom/script
-exec = ~/.config/polybar/mpris.sh
+exec = echo $(playerctl metadata artist) - $(playerctl metadata title)
 interval = 2
 
 format = <label>
 
-label = "%output:0:45:...%"
+label = "%output%"
 label-background=${colors.modules_bg}
 label-foreground=${colors.modules_fg}
-label-padding=0
+label-padding=1
 
 format-prefix=
 format-prefix-background=${colors.modules_prefix_bg}
@@ -148,25 +192,24 @@ label-muted-padding=1
 format-volume-padding=0
 format-muted-padding=0
 
-ramp-headphones-0=
-
 [module/ewmh]
 
 type = internal/xworkspaces
 ;format = <label-state> <label-mode>
-format =  <label-state>
+format = <label-state>
 index-sort = true
 wrapping-scroll = false
 strip-wsnumbers = true
 
+format-prefix = 
+format-prefix-background=${colors.modules_prefix_bg}
+format-prefix-foreground=${colors.modules_prefix_fg}
+format-prefix-padding = 1
+
 label-active = %name%
-label-active-background = ${colors.modules_bg}
+label-active-background = ${colors.urgent_bg}
 label-active-foreground = ${colors.modules_fg}
 label-active-padding = 1
-
-label-mode-background = ${colors.modules_prefix_bg}
-label-mode-foreground = ${colors.modules_prefix_fg}
-label-mode-padding = 1
 
 label-focused = %name%
 label-focused-background = ${colors.modules_bg}
@@ -174,13 +217,13 @@ label-focused-foreground = ${colors.modules_fg}
 label-focused-padding = 1
 
 label-unfocused = %name%
-label-unfocused-background = ${colors.modules_prefix_bg}
-label-unfocused-foreground = ${colors.modules_prefix_fg}
+label-unfocused-background = ${colors.modules_bg}
+label-unfocused-foreground = ${colors.modules_fg}
 label-unfocused-padding = 1
 
 label-visible = %name%
-label-visible-background = ${colors.modules_prefix_bg}
-label-visible-foreground = ${colors.modules_prefix_fg}
+label-visible-background = ${colors.modules_bg}
+label-visible-foreground = ${colors.modulesfg}
 label-visible-padding = 1
 
 label-urgent = %name%
@@ -189,10 +232,9 @@ label-urgent-foreground = ${colors.modules_prefix_bg}
 label-urgent-padding = 1
 
 label-empty = %name%
-label-empty-background = ${colors.modules_prefix_bg}
-label-empty-foreground = ${colors.modules_prefix_fg}
+label-empty-background = ${colors.modules_bg}
+label-empty-foreground = ${colors.modules_fg}
 label-empty-padding = 1
-
 
 
 ; vim:ft=dosini

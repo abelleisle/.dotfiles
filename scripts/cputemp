@@ -1,5 +1,0 @@
-#!/bin/bash
-
-temp=$(sensors | grep -i Package | head -n1 | sed -r 's/.*:\s+[\+-]?(.*C)\s+.*/\1/')
-
-printf "CPU: $temp"
