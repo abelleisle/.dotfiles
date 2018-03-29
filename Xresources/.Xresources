@@ -1,0 +1,3 @@
+#include ".xres/xft"
+#include ".xres/urxvt"
+#include ".xres/2bwm"

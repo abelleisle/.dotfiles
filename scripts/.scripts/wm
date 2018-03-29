@@ -1,0 +1,7 @@
+#!/bin/sh
+
+2bwm &
+
+while :; do
+    sleep 10
+done

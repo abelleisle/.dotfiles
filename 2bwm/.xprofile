@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+
+xrdb -load ~/.Xresources
+
+xset +fp /home/andy/.fonts/
+xset +fp /usr/share/fonts/TTF/
+xset +fp /usr/share/fonts/PCF/
+xset fp rehash
+
+feh --bg-fill ~/.wallpapers/tree.png
+compton -cCzGb -t-3 -l-5 -r4 --config /dev/null --backend xrender --unredir-if-possible
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+xsetroot -cursor_name left_ptr &!
+
+sxhkd &!
+pulseaudio --start
+polybar base &!
+polybar second &!
+owncloud &!

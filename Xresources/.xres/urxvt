@@ -1,0 +1,75 @@
+!-------------------------------------------------------------------------------
+! URxvt settings
+!-------------------------------------------------------------------------------
+
+URxvt.geometry:             120x60
+URxvt.transparent:          false
+URxvt.fading:               0
+URxvt.loginShell:           true
+URxvt.saveLines:            400
+URxvt.lineSpace:            0
+
+! Fonts
+URxvt.allow_bold:           true 
+URxvt*font:xft:Ttyp0:pixelsize=11, xft:Siji:pixelsize=15
+URxvt*boldFont:xft:Ttyp0:pixelsize=11
+
+URxvt.scrollBar:        false
+URxvt.scrollstyle:      plain
+URxvt.internalBorder:   20
+URxvt.perl-ext-common:  default,matcher
+URxvt.url-launcher:     qutebrowser
+URxvt.matcher.button:   1
+URxvt.secondaryScreen:  1
+URxvt.secondaryWheel:   1
+
+
+! Fix font space
+URxvt*letterSpace:0 
+
+! Pointer
+URxvt.pointerBlank:         "true"
+
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+
+*background:  #1a1e24
+*foreground:  #cdd3df
+
+!black
+*color0:  #1a1e24
+*color8:  #ed5554
+
+!red
+*color9:  #ed5554
+*color1:  #ded3df
+
+!green
+*color2:  #98c379
+*color10:  #252a34
+
+!yellow
+*color3:  #fac751
+*color11:  #3b4453
+
+!blue
+*color4:  #3f6173
+*color12:  #505964
+
+!purple
+*color5:  #cc3c5f
+*color13:  #cdd3df
+
+!cyan
+*color6:  #5bb3b4
+*color14:   #3d5263
+
+!white
+*color7:  #cfcfcf
+*color15:  #926b3e
+
+!backups
+!*color1:  #252b33
+!*color14:  #dae0ed
