@@ -33,7 +33,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'artur-shaik/vim-javacomplete2'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'vim-scripts/cSyntaxAfter'
-    Plug 'bling/vim-bufferline'
     Plug 'dylanaraps/wal.vim'
     Plug 'sukima/xmledit'
     Plug 'junegunn/goyo.vim'
@@ -63,7 +62,7 @@ colorscheme agila
 syntax on
 set number relativenumber
 set ruler
-set showmode
+"!set showmode
 set showcmd
 
 " cut long messages
@@ -175,9 +174,8 @@ autocmd WinLeave * call s:DimInactiveWindow()
 "---------------------------------
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
 "hi Comment ctermfg=red
-hi CursorLineNr ctermfg=7
+"hi CursorLineNr ctermfg=7
 noremap <Leader>c :set cursorcolumn! <CR>
-set cursorline
 
 set colorcolumn=81
 hi colorcolumn ctermfg=14
