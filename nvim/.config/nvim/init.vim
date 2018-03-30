@@ -180,6 +180,8 @@ noremap <Leader>c :set cursorcolumn! <CR>
 set colorcolumn=81
 hi colorcolumn ctermfg=14
 
+set fillchars+=vert:│
+
 set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
