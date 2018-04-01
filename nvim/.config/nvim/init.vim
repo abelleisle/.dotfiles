@@ -156,7 +156,7 @@ function! StatuslineGit()
 	return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 
-hi def Dim cterm=none ctermbg=none ctermfg=14
+hi def Dim cterm=none ctermbg=none ctermfg=8
 
 function! s:DimInactiveWindow()
     syntax region Dim start='' end='$$$end$$$'
