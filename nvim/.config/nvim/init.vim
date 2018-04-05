@@ -27,6 +27,7 @@ call plug#begin('~/.config/nvim/plugged')
     endif
     Plug 'Shougo/neosnippet'
     Plug 'Shougo/neosnippet-snippets'
+    Plug 'honza/vim-snippets'
 
     Plug 'https://github.com/jiangmiao/auto-pairs'
 
@@ -36,6 +37,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'dylanaraps/wal.vim'
     Plug 'sukima/xmledit'
     Plug 'junegunn/goyo.vim'
+
+    Plug 'JPR75/vip'
+    Plug 'vim-syntastic/syntastic'
+    Plug 'suoto/vim-hdl'
 
     Plug 'christoomey/vim-tmux-navigator'
 
@@ -270,10 +275,6 @@ endif
 "---------------------------------
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-" delimitMate
-"---------------------------------
-let delimitMate_expand_cr = 1
-
 " ctrlp
 "---------------------------------
 " Use <leader>t to open ctrlp
@@ -312,3 +313,11 @@ function! TexEdit()
 endfunction
 
 autocmd! FileType tex call TexEdit()
+
+
+" Syntastic
+"---------------------------------
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
