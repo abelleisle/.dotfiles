@@ -1,6 +1,8 @@
 # .dotfiles
 These are my dotfiles. Currently I use a static colorscheme because I feel like that works for me.
 
+![alt text](https://i.imgur.com/7tM9I5H.png)
+
 ## Installing
 I use stow to manage my dotfiles.
 
