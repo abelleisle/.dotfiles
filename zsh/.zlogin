@@ -1,3 +1,3 @@
 #!/bin/zsh
-export PATH=~/.scripts:/opt/texlive/2017/bin/x86_64-linux/:/opt/java/bin/:$PATH
+export PATH=~/.scripts:/opt/java/bin/:/usr/gnat/bin/:$PATH
 export JAVA_HOME=/opt/java
