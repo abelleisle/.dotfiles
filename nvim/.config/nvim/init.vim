@@ -57,7 +57,12 @@ filetype plugin indent on
 
 " General Options
 "---------------------------------
-colorscheme agila
+let hostname = substitute(system('hostname'), '\n', '', '')
+if hostname == "adesktop"
+    colorscheme agila
+elseif hostname == "aarch"
+    colorscheme dawn
+endif
 
 syntax on
 set number relativenumber
