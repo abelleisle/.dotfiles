@@ -14,8 +14,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'https://github.com/tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'LaTeX-Box-Team/LaTeX-Box'
+
     Plug 'scrooloose/nerdtree'
     Plug 'jistr/vim-nerdtree-tabs'
+    Plug 'ctrlpvim/ctrlp.vim'
 
     if has('nvim')
         Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -32,8 +34,11 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'https://github.com/jiangmiao/auto-pairs'
 
     Plug 'artur-shaik/vim-javacomplete2'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'vim-scripts/cSyntaxAfter'
+
+    Plug 'Valloric/vim-operator-highlight'
+    Plug 'bfrg/vim-cpp-modern'
+    Plug 'Yggdroot/indentLine'
+
     Plug 'dylanaraps/wal.vim'
     Plug 'sukima/xmledit'
     Plug 'junegunn/goyo.vim'
@@ -183,6 +188,7 @@ autocmd WinLeave * call s:DimInactiveWindow()
 " Syntax highlighting
 "---------------------------------
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
+autocmd BufNewFile,BufRead *.asm set filetype=nasm
 "hi Comment ctermfg=red
 "hi CursorLineNr ctermfg=7
 noremap <Leader>c :set cursorcolumn! <CR>
@@ -227,14 +233,20 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>s :split<CR>
+
 " Code Folding
 "---------------------------------
-if has ('folding')
-    set nofoldenable
-    set foldmethod=syntax
-    set foldmarker={{{,}}}
-    set foldcolumn=0
-endif
+"if has ('folding')
+"    set nofoldenable
+"    set foldmethod=syntax
+"    set foldmarker={{{,}}}
+"    set foldcolumn=0
+"endif
+
+autocmd FileType c, cpp, java setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*//'
+autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*#'
 
 function RangerExplorer()
     exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
@@ -286,12 +298,19 @@ let g:ctrlp_use_caching=0
 
 " cSyntaxAfter
 "---------------------------------
-autocmd! FileType c,cpp,java,php call CSyntaxAfter()
+"autocmd! FileType c,cpp,java,php call CSyntaxAfter()
 
 
 " NERDTree
 "--------------------------------
 
+" Syntastic
+"---------------------------------
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_quiet_messages = {"level": "warnings"}
 
 " LaTeX - Box
 "---------------------------------
@@ -305,19 +324,18 @@ let g:LatexBox_latexmk_preview_continuously = 1
 let g:LatexBox_viewer = "mupdf"
 
 function! TexEdit()
-    set spelllang=en_gb spell
     set modeline
     set colorcolumn=
-    :Goyo 80%
+
     map <Leader>m :Latexmk<CR>
+
+    setlocal spell spelllang=en_us
+
+    Goyo 80%
 endfunction
 
 autocmd! FileType tex call TexEdit()
 
-
-" Syntastic
+" IndentLine
 "---------------------------------
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:indentLine_color_term = 8
