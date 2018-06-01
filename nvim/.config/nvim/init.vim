@@ -40,8 +40,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'Yggdroot/indentLine'
 
     Plug 'dylanaraps/wal.vim'
-    Plug 'sukima/xmledit'
     Plug 'junegunn/goyo.vim'
+    Plug 'alvan/vim-closetag'
 
     Plug 'JPR75/vip'
     Plug 'vim-syntastic/syntastic'
@@ -238,12 +238,12 @@ nnoremap <Leader>s :split<CR>
 
 " Code Folding
 "---------------------------------
-"if has ('folding')
-"    set nofoldenable
-"    set foldmethod=syntax
-"    set foldmarker={{{,}}}
-"    set foldcolumn=0
-"endif
+if has ('folding')
+    set nofoldenable
+    set foldmethod=syntax
+    set foldmarker={{{,}}}
+    set foldcolumn=0
+endif
 
 autocmd FileType c, cpp, java setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*//'
 autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*#'
@@ -293,6 +293,7 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 "let g:ctrlp_map = '<leader>t'
 " Ignore these directories
 set wildignore+=*/build/**
+set wildignore+=*/out/**
 " disable caching
 let g:ctrlp_use_caching=0
 
@@ -311,6 +312,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_quiet_messages = {"level": "warnings"}
+let g:syntastic_cpp_compiler_options = "-std=c++17 -Wall -Wextra -Werror -Wpedantic -Isrc -Iinclude -Ilib"
 
 " LaTeX - Box
 "---------------------------------
@@ -339,3 +341,38 @@ autocmd! FileType tex call TexEdit()
 " IndentLine
 "---------------------------------
 let g:indentLine_color_term = 8
+
+" Vim-CloseTag
+"---------------------------------
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.php'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml,php'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'

@@ -12646,3 +12646,230 @@ Apr 14 16:00 : client: [17] opened from [::1]:38428
 Apr 14 16:00 : client: [17] closed
 Apr 14 16:00 : player: played "Jazz/Jazz Collection/Big Bands/038/038-17-Chick Webb 1937-38-The Dipsy Doodle.flac"
 Apr 14 16:00 : client: [7] closed
+May 01 19:15 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 01 19:15 : client: [0] opened from 127.0.0.1:47886
+May 01 19:15 : client: [1] opened from 127.0.0.1:47888
+May 01 19:15 : client: [2] opened from [::1]:48012
+May 01 19:17 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 01 19:17 : client: [3] opened from [::1]:48090
+May 01 19:17 : client: [3] closed
+May 01 19:18 : client: [2] closed
+May 01 19:18 : client: [4] opened from [::1]:48160
+May 01 19:18 : client: [5] opened from [::1]:48162
+May 01 19:18 : client: [5] closed
+May 01 19:19 : client: [4] closed
+May 01 19:19 : client: [6] opened from [::1]:48178
+May 01 19:19 : client: [7] opened from [::1]:48180
+May 01 19:19 : client: [7] closed
+May 01 19:19 : client: [6] closed
+May 01 19:19 : client: [8] opened from [::1]:48190
+May 01 19:19 : client: [9] opened from [::1]:48192
+May 01 19:19 : client: [9] closed
+May 01 19:19 : client: [8] closed
+May 01 19:19 : client: [10] opened from [::1]:48196
+May 01 19:19 : client: [11] opened from [::1]:48198
+May 01 19:19 : client: [11] closed
+May 01 19:20 : client: [10] closed
+May 01 19:20 : client: [12] opened from [::1]:48202
+May 01 19:20 : client: [13] opened from [::1]:48204
+May 01 19:20 : client: [13] closed
+May 01 19:20 : client: [12] closed
+May 01 19:20 : client: [14] opened from [::1]:48212
+May 01 19:20 : client: [15] opened from [::1]:48214
+May 01 19:20 : client: [15] closed
+May 01 19:20 : client: [14] closed
+May 01 19:20 : client: [16] opened from [::1]:48274
+May 01 19:20 : client: [17] opened from [::1]:48276
+May 01 19:20 : client: [17] closed
+May 01 19:22 : client: [18] opened from [::1]:48312
+May 01 19:22 : client: [18] closed
+May 01 19:23 : client: [16] closed
+May 01 19:23 : client: [19] opened from [::1]:48384
+May 01 19:23 : client: [20] opened from [::1]:48386
+May 01 19:23 : client: [20] closed
+May 01 19:33 : exception: "Schiit Modi Uber Analog Stereo" [pulse] failed to play: disconnected
+May 01 19:35 : exception: "Schiit Modi Uber Analog Stereo" [pulse] failed to play: disconnected
+May 01 19:35 : exception: Failed to open "Schiit Modi Uber Analog Stereo" [pulse]
+May 01 19:35 : exception: nested: failed to connect: Connection refused
+May 01 19:38 : client: [19] closed
+May 01 19:38 : client: [21] opened from [::1]:49234
+May 01 19:38 : client: [22] opened from [::1]:49236
+May 01 19:38 : client: [22] closed
+May 01 19:38 : client: [21] closed
+May 01 19:38 : client: [23] opened from [::1]:49246
+May 01 19:38 : client: [24] opened from [::1]:49248
+May 01 19:38 : client: [24] closed
+May 01 19:41 : client: [25] opened from [::1]:49348
+May 01 19:41 : client: [25] closed
+May 01 19:42 : client: [26] opened from [::1]:49354
+May 01 19:42 : client: [26] closed
+May 01 19:51 : player: played "Dream Theater/01 Studio Albums/2007 - Systematic Chaos/01 - In the Presence of Enemies - Part I.mp3"
+May 01 19:51 : client: [27] opened from [::1]:50054
+May 01 19:51 : client: [27] closed
+May 01 19:56 : player: played "Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/03 - Strange Deja Vu.mp3"
+May 01 19:56 : client: [28] opened from [::1]:50498
+May 01 19:56 : client: [28] closed
+May 01 20:02 : player: played "Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/08 - Only A Matter Of Time.mp3"
+May 01 20:02 : client: [29] opened from [::1]:50936
+May 01 20:02 : client: [29] closed
+May 01 20:04 : player: played "Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/06. Machine Chatter.mp3"
+May 01 20:04 : client: [30] opened from [::1]:50950
+May 01 20:04 : client: [30] closed
+May 01 20:16 : player: played "Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/07 - Lines In The Sand.mp3"
+May 01 20:16 : client: [31] opened from [::1]:51764
+May 01 20:16 : client: [31] closed
+May 01 20:19 : player: played "Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/10 - One Last Time.mp3"
+May 01 20:19 : client: [32] opened from [::1]:51932
+May 01 20:19 : client: [32] closed
+May 01 20:22 : player: played "Dream Theater/01 Studio Albums/2003 - Train of Thought/05 - Vacant.mp3"
+May 01 20:22 : client: [33] opened from [::1]:52074
+May 01 20:22 : client: [33] closed
+May 01 20:32 : player: played "Dream Theater/01 Studio Albums/1992 - Images and Words/05 - Metropolis - Part I- The Miracle and the Sleeper.mp3"
+May 01 20:32 : client: [34] opened from [::1]:52770
+May 01 20:32 : client: [34] closed
+May 01 20:38 : player: played "Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/08 - VIII Losing Time - Grand Finale.mp3"
+May 01 20:38 : client: [35] opened from [::1]:53352
+May 01 20:38 : client: [35] closed
+May 01 20:45 : player: played "Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/11 - The Spirit Carries On.mp3"
+May 01 20:45 : client: [36] opened from [::1]:53758
+May 01 20:45 : client: [36] closed
+May 01 20:49 : player: played "Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/16. A Tempting Offer.mp3"
+May 01 20:49 : client: [37] opened from [::1]:54012
+May 01 20:49 : client: [37] closed
+May 01 21:05 : player: played "Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd1/01. A Nightmare To Remember.mp3"
+May 01 21:05 : client: [38] opened from [::1]:54702
+May 01 21:05 : client: [38] closed
+May 01 21:09 : player: played "Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/02 - Status Seeker.mp3"
+May 01 21:09 : client: [39] opened from [::1]:55138
+May 01 21:09 : client: [39] closed
+May 01 21:14 : player: played "Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/05. A Better Life.mp3"
+May 01 21:14 : client: [40] opened from [::1]:55198
+May 01 21:14 : client: [40] closed
+May 01 21:20 : player: played "Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd2/05. Larks Tongues In Aspic Pt.2.mp3"
+May 01 21:20 : client: [41] opened from [::1]:55344
+May 01 21:20 : client: [41] closed
+May 01 21:28 : client: [42] opened from 127.0.0.1:55352
+May 01 21:28 : client: [42] closed
+May 02 19:24 : player: played "Dream Theater/01 Studio Albums/2003 - Train of Thought/06 - Stream of Consciousness.mp3"
+May 02 19:24 : client: [43] opened from [::1]:59948
+May 02 19:24 : client: [43] closed
+May 02 19:29 : player: played "Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/03. Heaven's Cove.mp3"
+May 02 19:29 : client: [44] opened from [::1]:60030
+May 02 19:29 : client: [44] closed
+May 02 19:31 : client: [45] opened from [::1]:60082
+May 02 19:31 : client: [45] closed
+May 02 19:54 : player: played "Dream Theater/01 Studio Albums/2013 - Dream Theater/09 - illumination theory.mp3"
+May 02 19:54 : client: [46] opened from [::1]:60380
+May 02 19:54 : client: [46] closed
+May 02 19:54 : client: [47] opened from [::1]:60382
+May 02 19:54 : client: [47] closed
+May 02 19:54 : client: [48] opened from [::1]:60386
+May 02 19:54 : client: [48] closed
+May 02 19:58 : player: played "Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/03. The Gift Of Music.mp3"
+May 02 19:58 : client: [49] opened from [::1]:60528
+May 02 19:58 : client: [49] closed
+May 02 19:58 : client: [23] closed
+May 02 19:58 : client: [50] opened from [::1]:60532
+May 02 19:58 : client: [50] closed
+May 02 19:58 : client: [51] opened from [::1]:60538
+May 02 19:58 : client: [51] closed
+May 02 19:58 : client: [52] opened from [::1]:60540
+May 02 19:58 : client: [52] closed
+May 02 19:58 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 02 19:58 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 02 19:58 : client: [0] opened from 127.0.0.1:60424
+May 02 19:59 : client: [1] opened from [::1]:60550
+May 02 19:59 : client: [2] opened from [::1]:60552
+May 02 19:59 : client: [2] closed
+May 02 19:59 : client: [1] closed
+May 03 16:30 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 03 16:30 : client: [0] opened from [::1]:58312
+May 03 16:30 : client: [1] opened from [::1]:58314
+May 03 16:30 : client: [1] closed
+May 03 16:30 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 03 16:31 : client: [0] closed
+May 03 16:33 : client: [2] opened from [::1]:58326
+May 03 16:33 : client: [3] opened from [::1]:58328
+May 03 16:33 : client: [3] closed
+May 03 16:33 : client: [2] closed
+May 03 20:14 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 03 20:14 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+May 03 20:14 : client: [0] opened from 127.0.0.1:33316
+May 03 20:14 : client: [1] opened from 127.0.0.1:33318
+May 03 20:14 : client: [2] opened from [::1]:48016
+May 03 20:14 : client: [3] opened from [::1]:48018
+May 03 20:14 : client: [3] closed
+May 03 20:14 : player: played "Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd2/03. Odyssey.mp3"
+May 03 20:14 : client: [2] closed
+May 03 20:14 : client: [4] opened from [::1]:48022
+May 03 20:17 : client: [4] closed
+May 03 20:17 : client: [5] opened from [::1]:48136
+May 03 20:18 : client: [6] opened from [::1]:48180
+May 03 20:18 : client: [6] closed
+May 03 20:21 : player: played "Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/07. The Walking Shadow.mp3"
+May 03 20:21 : client: [7] opened from [::1]:48246
+May 03 20:21 : client: [7] closed
+May 03 20:32 : player: played "Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/06 - Beyond This Life.mp3"
+May 03 20:32 : client: [8] opened from [::1]:48432
+May 03 20:32 : client: [8] closed
+May 03 23:03 : client: [9] opened from [::1]:53440
+May 03 23:03 : client: [9] closed
+May 03 23:10 : player: played "Dream Theater/01 Studio Albums/2013 - Dream Theater/06 - behind the veil.mp3"
+May 03 23:10 : client: [10] opened from [::1]:53546
+May 03 23:10 : client: [10] closed
+May 03 23:15 : player: played "Dream Theater/01 Studio Albums/1992 - Images and Words/04 - Surrounded.mp3"
+May 03 23:15 : client: [11] opened from [::1]:53628
+May 03 23:15 : client: [11] closed
+May 03 23:15 : client: [12] opened from [::1]:53634
+May 03 23:15 : client: [12] closed
+May 03 23:17 : client: [13] opened from [::1]:53662
+May 03 23:17 : client: [14] opened from [::1]:53664
+May 03 23:17 : client: [14] closed
+May 03 23:17 : client: [13] closed
+May 03 23:18 : client: [15] opened from [::1]:53672
+May 03 23:18 : client: [16] opened from [::1]:53674
+May 03 23:18 : client: [16] closed
+May 03 23:18 : client: [15] closed
+May 03 23:19 : client: [17] opened from [::1]:53676
+May 03 23:19 : client: [18] opened from [::1]:53678
+May 03 23:19 : client: [18] closed
+May 03 23:19 : client: [17] closed
+May 03 23:19 : client: [19] opened from [::1]:53682
+May 03 23:19 : client: [20] opened from [::1]:53684
+May 03 23:19 : client: [20] closed
+May 03 23:19 : client: [19] closed
+May 03 23:21 : client: [21] opened from [::1]:53742
+May 03 23:21 : client: [22] opened from [::1]:53744
+May 03 23:21 : client: [22] closed
+May 03 23:21 : client: [21] closed
+May 03 23:21 : client: [5] closed
+May 03 23:21 : client: [23] opened from [::1]:53748
+May 03 23:21 : client: [24] opened from [::1]:53750
+May 03 23:21 : client: [24] closed
+May 03 23:21 : player: played "Dream Theater/01 Studio Albums/2007 - Systematic Chaos/02 - Forsaken.mp3"
+May 03 23:21 : client: [25] opened from [::1]:53752
+May 03 23:21 : client: [25] closed
+May 03 23:26 : player: played "Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/09 - beneath the surface.mp3"
+May 03 23:26 : client: [26] opened from [::1]:53878
+May 03 23:26 : client: [26] closed
+May 03 23:33 : player: played "Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/07. A Savior In The Square.mp3"
+May 03 23:33 : client: [27] opened from [::1]:54128
+May 03 23:33 : client: [27] closed
+May 03 23:37 : player: played "Dream Theater/01 Studio Albums/1992 - Images and Words/02 - Another Day.mp3"
+May 03 23:37 : client: [28] opened from [::1]:54240
+May 03 23:37 : client: [28] closed
+May 04 11:55 : client: [29] opened from [::1]:56256
+May 04 11:55 : client: [29] closed
+May 04 11:55 : client: [30] opened from [::1]:56258
+May 04 11:55 : client: [30] closed
+May 05 01:47 : player: played "Dream Theater/01 Studio Albums/2013 - Dream Theater/02 - the enemy inside.mp3"
+May 05 01:47 : client: [31] opened from [::1]:35240
+May 05 01:47 : client: [31] closed
+May 05 02:01 : client: [32] opened from 127.0.0.1:49792
+May 05 02:01 : client: [32] closed
+May 05 04:45 : player: played "Dream Theater/01 Studio Albums/2005 - Octavarium/08 - Octavarium.mp3"
+May 05 04:45 : client: [33] opened from [::1]:37288
+May 05 04:45 : client: [33] closed
+May 06 21:36 : avahi: Client Disconnected, will reconnect shortly
+May 06 21:36 : avahi: Could not reconnect: Daemon not running
+May 06 21:36 : player: played "Dream Theater/01 Studio Albums/2013 - Dream Theater/05 - the bigger picture.mp3"

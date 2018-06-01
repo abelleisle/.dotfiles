@@ -10,9 +10,9 @@ pcm.!default {
 
   slave {
     pcm "hw:0,0"
-    period_time 0
-    period_size 2048
-    buffer_size 65536
+    #period_time 0
+    period_size 1028
+    buffer_size 4096
     buffer_time 0
     periods 128
     format S24_LE

@@ -1,0 +1,42 @@
+[default]
+highlight_event_days = True
+show_all_days = False
+timedelta = 7d
+
+[highlight_days]
+color = ''
+method = fg
+
+[calendars]
+#[[my_calendars_local]]
+#path = ~/.calendars/*
+#type = discover
+#color = light blue
+
+[[personal]]
+path = ~/.calendars/personal/
+type = discover
+color = dark green
+
+[[finals]]
+path = ~/.calendars/finals/
+type = discover
+color = light red
+
+[[class]]
+path = ~/.calendars/class/
+type = discover
+color = light blue
+
+[locale]
+firstweekday = 6
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
+
+[view]
+frame = width
+event_view_always_visible = True
+dynamic_days = False
