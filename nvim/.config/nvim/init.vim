@@ -245,8 +245,8 @@ if has ('folding')
     set foldcolumn=0
 endif
 
-autocmd FileType c, cpp, java setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*//'
-autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*#'
+"autocmd FileType c, cpp, java setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*//'
+"autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*#'
 
 function RangerExplorer()
     exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
@@ -312,7 +312,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_quiet_messages = {"level": "warnings"}
-let g:syntastic_cpp_compiler_options = "-std=c++17 -Wall -Wextra -Werror -Wpedantic -Isrc -Iinclude -Ilib"
+let g:syntastic_cpp_compiler_options = "-std=c++17 -Wall -Wextra -Werror -Wpedantic -Isrc -Iinclude Iinc -Ilib"
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': ['c','cpp','h','hpp'] }
+
 
 " LaTeX - Box
 "---------------------------------
