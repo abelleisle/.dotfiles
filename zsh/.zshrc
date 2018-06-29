@@ -103,3 +103,4 @@ source $ZSH/oh-my-zsh.sh
 alias vim='nvim'
 alias calsync='vdirsyncer sync'
 alias cal='ikhal'
+alias discord='flatpak run com.discordapp.Discord'

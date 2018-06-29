@@ -294,6 +294,8 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " Ignore these directories
 set wildignore+=*/build/**
 set wildignore+=*/out/**
+set wildignore+=*.o
+set wildignore+=*.class
 " disable caching
 let g:ctrlp_use_caching=0
 
