@@ -22,6 +22,7 @@ call plug#begin('~/.config/nvim/plugged')
     if has('nvim')
         Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
         Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
+        Plug 'zchee/deoplete-clang'
     else
         Plug 'Shougo/deoplete.nvim'
         Plug 'roxma/nvim-yarp'

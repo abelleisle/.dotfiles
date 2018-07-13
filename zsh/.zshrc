@@ -100,7 +100,15 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#export PATH=~/.scripts:/opt/java/bin/:/usr/gnat/bin/:$PATH
+export PATH=~/.scripts/:$PATH
 alias vim='nvim'
 alias calsync='vdirsyncer sync'
 alias cal='ikhal'
 alias discord='flatpak run com.discordapp.Discord'
+
+mcd()
+{
+    mkdir $@
+    cd $@
+}
