@@ -105,7 +105,7 @@ export PATH=~/.scripts/:$PATH
 alias vim='nvim'
 alias calsync='vdirsyncer sync'
 alias cal='ikhal'
-alias discord='flatpak run com.discordapp.Discord'
+alias discord='flatpak run com.discordapp.Discord --filesystem=home'
 
 mcd()
 {
