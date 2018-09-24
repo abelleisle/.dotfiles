@@ -50,6 +50,9 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'christoomey/vim-tmux-navigator'
 
+    Plug 'godlygeek/tabular'
+    Plug 'plasticboy/vim-markdown'
+
     "TODO fix this one
     "Plugin 'terryma/vim-multiple-cursors'
     "
