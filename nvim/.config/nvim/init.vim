@@ -336,9 +336,9 @@ function! TexEdit()
 
     map <Leader>m :Latexmk<CR>
 
-    setlocal spell spelllang=en_us
-
     Goyo 80%
+
+    setlocal spelllang=en_us spell 
 endfunction
 
 autocmd! FileType tex call TexEdit()

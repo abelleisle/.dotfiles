@@ -1,0 +1,2 @@
+#!/bin/sh
+transmission-daemon -T -p 9091 -a "127.0.0.1"

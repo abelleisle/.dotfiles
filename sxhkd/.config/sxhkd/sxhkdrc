@@ -72,6 +72,7 @@ XF86AudioLowerVolume
 #super + ctrl + v
 #	scrot -s
 ##
-## lock screen
-#super + p
-#	oblogout
+
+# lock screen
+super + p
+	xtrlock
