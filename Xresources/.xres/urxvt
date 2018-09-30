@@ -1,4 +1,4 @@
--------------------------------------------------------------------------------
+!-------------------------------------------------------------------------------
 ! URxvt settings
 !-------------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ URxvt.lineSpace:            0
 ! Fonts
 URxvt.allow_bold:           true 
 URxvt*font:xft:Ttyp0:pixelsize=11, xft:Siji:pixelsize=15
-URxvt*boldFont:xft:Ttyp0:pixelsize=11
+URxvt*boldFont:xft:Ttyp0:pixelsize=11:style=bold
 
 URxvt.scrollBar:        false
 URxvt.scrollstyle:      plain
