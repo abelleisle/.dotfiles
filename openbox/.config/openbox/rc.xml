@@ -165,7 +165,7 @@
     <right>0</right>
   </margins>
   <dock>
-    <position>Right</position>
+    <position>Bottom</position>
     <!-- (Top|Bottom)(Left|Right|)|Top|Bottom|Left|Right|Floating -->
     <floatingX>0</floatingX>
     <floatingY>0</floatingY>
@@ -363,8 +363,26 @@
         <direction>down</direction>
       </action>
     </keybind>
+    <keybind key="W-X">
+        <action name="ToggleMaximize"/>
+    </keybind>
+    <keybind key="W-S-X">
+        <action name="ToggleFullscreen"/>
+    </keybind>
+    <keybind key="W-F">
+        <action name="ToggleOmnipresent"/>
+    </keybind>
+    <keybind key="W-N">
+        <action name="ToggleMaximize"><direction>horizontal</direction></action>
+    </keybind>
+    <keybind key="W-U">
+        <action name="ToggleMaximize"><direction>vertical</direction></action>
+    </keybind>
+    <keybind key="W-R">
+        <action name="RaiseLower"/>
+    </keybind>
     <!-- Keybindings for running applications -->
-    <keybind key="W-Return">
+    <!--<keybind key="W-Return">
       <action name="Execute">
         <name>Terminal</name>
         <command>urxvt</command>
@@ -389,14 +407,14 @@
       </action>
     </keybind>
     <keybind key="W-P">
-     <action name="Execute">
-      <startupnotify>
-       <enabled>true</enabled>
-        <name>oblogut</name>
-      </startupnotify>
-      <command>oblogout</command>
-     </action>
-    </keybind>
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>oblogut</name>
+        </startupnotify>
+        <command>oblogout</command>
+      </action>
+    </keybind>-->
   </keyboard>
   <mouse>
     <dragThreshold>1</dragThreshold>
@@ -758,12 +776,15 @@
     <!-- show the manage desktops section in the client-list-(combined-)menu -->
   </menu>
   <applications>
-      <application class="oblogout">
-        <position force="yes">
-          <monitor>1</monitor>
-        </position>
-        <fullscreen>yes</fullscreen>
-      </application>
+    <application class="*">
+        <decor>no</decor>
+    </application>
+    <application class="oblogout">
+      <position force="yes">
+        <monitor>1</monitor>
+      </position>
+      <fullscreen>yes</fullscreen>
+    </application>
     <!--
   # this is an example with comments through out. use these to make your
   # own rules, but without the comments of course.

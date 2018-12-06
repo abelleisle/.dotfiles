@@ -15,8 +15,8 @@
 # If you want to use XFCE config tools...
 #
 #xfce-mcs-manager &
-feh --bg-fill ~/Pictures/Wallpapers/tree.png &
-polybar base &
-polybar second &
-owncloud &
-dunst &
+#feh --bg-fill ~/Pictures/Wallpapers/tree.png &
+#polybar base &
+#polybar second &
+#owncloud &
+#dunst &
