@@ -55,6 +55,15 @@
       </startupnotify>
     </action>
   </item>
+  <item label="Discord">
+    <action name="Execute">
+      <command>/home/andy/Build/Discord/Discord</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>Discord</wmclass>
+      </startupnotify>
+    </action>
+  </item>
 </menu>
 
 <menu id="apps-office-menu" label="Office">

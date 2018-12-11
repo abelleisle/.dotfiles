@@ -30,7 +30,7 @@
     <center>yes</center>
     <!-- whether to place windows in the center of the free area found or
        the top left corner -->
-    <monitor>Mouse</monitor>
+    <monitor>Any</monitor>
     <!-- with Smart placement on a multi-monitor system, try to place new windows
        on: 'Any' - any monitor, 'Mouse' - where the mouse is, 'Active' - where
        the active window is, 'Primary' - only on the primary monitor -->
@@ -364,22 +364,69 @@
       </action>
     </keybind>
     <keybind key="W-X">
-        <action name="ToggleMaximize"/>
+      <action name="ToggleMaximize"/>
     </keybind>
     <keybind key="W-S-X">
-        <action name="ToggleFullscreen"/>
+      <action name="ToggleFullscreen"/>
     </keybind>
     <keybind key="W-F">
-        <action name="ToggleOmnipresent"/>
+      <action name="ToggleOmnipresent"/>
     </keybind>
     <keybind key="W-N">
-        <action name="ToggleMaximize"><direction>horizontal</direction></action>
+      <action name="ToggleMaximize">
+        <direction>horizontal</direction>
+      </action>
     </keybind>
     <keybind key="W-U">
-        <action name="ToggleMaximize"><direction>vertical</direction></action>
+      <action name="ToggleMaximize">
+        <direction>vertical</direction>
+      </action>
     </keybind>
     <keybind key="W-R">
-        <action name="RaiseLower"/>
+      <action name="RaiseLower"/>
+    </keybind>
+    <keybind key="W-S-Y">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <height>100%</height>
+        <width>50%</width>
+      </action>
+    </keybind>
+    <keybind key="W-S-U">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <height>100%</height>
+        <width>50%</width>
+      </action>
+    </keybind>
+    <keybind key="W-space">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>center</x>
+        <y>0</y>
+        <height>100%</height>
+        <width>50%</width>
+      </action>
+    </keybind>
+    <keybind key="W-G">
+      <action name="MoveResizeTo">
+        <x>center</x>
+        <y>center</y>
+      </action>
+    </keybind>
+    <keybind key="W-period">
+      <action name="MoveResizeTo">
+        <monitor>2</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-comma">
+      <action name="MoveResizeTo">
+        <monitor>1</monitor>
+      </action>
     </keybind>
     <!-- Keybindings for running applications -->
     <!--<keybind key="W-Return">
@@ -777,7 +824,7 @@
   </menu>
   <applications>
     <application class="*">
-        <decor>no</decor>
+      <decor>no</decor>
     </application>
     <application class="oblogout">
       <position force="yes">
