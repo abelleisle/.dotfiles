@@ -2,8 +2,8 @@ sw_volume: 30
 audio_device_state:1:Schiit Modi Uber Analog Stereo
 audio_device_state:1:my_fifo
 state: pause
-current: 100
-time: 128.704000
+current: 102
+time: 502.740000
 random: 0
 repeat: 0
 single: 0
@@ -12,160 +12,107 @@ crossfade: 0
 mixrampdb: 0.000000
 mixrampdelay: -1.000000
 playlist_begin
-0:Dream Theater/01 Studio Albums/2013 - Dream Theater/06 - behind the veil.mp3
-1:Dream Theater/01 Studio Albums/1992 - Images and Words/04 - Surrounded.mp3
-2:Dream Theater/01 Studio Albums/1994 - Awake/04 - A Mind Beside Itself- I. Erotomania.mp3
-3:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/05 - Burning My Soul.mp3
-4:Dream Theater/01 Studio Albums/2007 - Systematic Chaos/08 - In the Presence of Enemies - Part II.mp3
-5:Dream Theater/01 Studio Albums/1992 - Images and Words/05 - Metropolis - Part I- The Miracle and the Sleeper.mp3
-6:Dream Theater/01 Studio Albums/2007 - Systematic Chaos/02 - Forsaken.mp3
-7:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/09 - beneath the surface.mp3
-8:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/07. A Savior In The Square.mp3
-9:Dream Theater/01 Studio Albums/1992 - Images and Words/02 - Another Day.mp3
-10:Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/02 - Status Seeker.mp3
-11:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/01. 2285 Entr'acte.mp3
-12:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/05 - V Goodnight Kiss.mp3
-13:Dream Theater/01 Studio Albums/1994 - Awake/06 - A Mind Beside Itself- III. The Silent Man.mp3
-14:Dream Theater/01 Studio Albums/2003 - Train of Thought/02 - This Dying Soul.mp3
-15:Dream Theater/01 Studio Albums/2003 - Train of Thought/03 - Endless Sacrifice.mp3
-16:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/07 - Through Her Eyes.mp3
-17:Dream Theater/01 Studio Albums/2013 - Dream Theater/08 - along for the ride.mp3
-18:Dream Theater/01 Studio Albums/1994 - Awake/08 - Lie.mp3
-19:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd1/01. A Nightmare To Remember.mp3
-20:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/10. Three Days.mp3
-21:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/14. Ravenskill.mp3
-22:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/17. Digital Discord.mp3
-23:Dream Theater/01 Studio Albums/1994 - Awake/09 - Lifting Shadows Off a Dream.mp3
-24:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/13. A Life Left Behind.mp3
-25:Dream Theater/01 Studio Albums/1994 - Awake/01 - 6 O'Clock.mp3
-26:Dream Theater/01 Studio Albums/2005 - Octavarium/02 - The Answer Lies Within.mp3
-27:Dream Theater/01 Studio Albums/2003 - Train of Thought/04 - Honor Thy Father.mp3
-28:Dream Theater/01 Studio Albums/2005 - Octavarium/04 - I Walk Beside You.mp3
-29:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/03. The Gift Of Music.mp3
-30:Dream Theater/01 Studio Albums/2007 - Systematic Chaos/04 - The Dark Eternal Night.mp3
-31:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/09. Losing Faythe.mp3
-32:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/10. Whispers On The Wind.mp3
-33:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/09 - Just Let Me Breathe.mp3
-34:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/02. Moment Of Betrayal.mp3
-35:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/06. Lord Nafaryus.mp3
-36:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/16. A Tempting Offer.mp3
-37:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD1/03 - Misunderstood.mp3
-38:Dream Theater/01 Studio Albums/2003 - Train of Thought/06 - Stream of Consciousness.mp3
-39:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/06. Machine Chatter.mp3
-40:Dream Theater/01 Studio Albums/2007 - Systematic Chaos/05 - Repentance.mp3
-41:Dream Theater/01 Studio Albums/2003 - Train of Thought/07 - In the Name of God.mp3
-42:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd2/06. To Tame A Land.mp3
-43:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/12 - Finally Free.mp3
-44:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/01 - Regression.mp3
-45:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/11. Hymn Of A Thousand Voices.mp3
-46:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/08 - VIII Losing Time - Grand Finale.mp3
-47:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd3/01. A Nightmare To Remember (Instrumental).mp3
-48:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/11. The Hovering Sojourn.mp3
-49:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd1/02. A Rite Of Passage.mp3
-50:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/08. My Last Farewell.mp3
-51:Dream Theater/01 Studio Albums/2007 - Systematic Chaos/03 - Constant Motion.mp3
-52:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/08 - Take Away My Pain.mp3
-53:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/04 - Hollow Years.mp3
-54:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/11 - Trial Of Tears [I - It's Raining, II - Deep In Heaven, III - The Wasteland].mp3
-55:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/05. The Path That Divides.mp3
-56:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd2/04. Take Your Fingers From My Hair.mp3
-57:Dream Theater/01 Studio Albums/1994 - Awake/07 - The Mirror.mp3
-58:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd3/02. A Rite of Passage (Instrumental).mp3
-59:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/09 - The Dance of Eternity.mp3
-60:Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/07 - The Ones Who Help To Set The Sun.mp3
-61:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd2/02. Tenement Funster - Flick Of The Wrist - Lily Of The Valey.mp3
-62:Dream Theater/01 Studio Albums/2005 - Octavarium/06 - Never Enough.mp3
-63:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd2/05. Larks Tongues In Aspic Pt.2.mp3
-64:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/11 - The Spirit Carries On.mp3
-65:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/03 - Strange Deja Vu.mp3
-66:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/07 - far from heaven.mp3
-67:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd3/03. Wither (Instrumental).mp3
-68:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/09. Act Of Faythe.mp3
-69:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/18. The X Aspect.mp3
-70:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/02. Dystopian Overture.mp3
-71:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/04 - this is the life.mp3
-72:Dream Theater/01 Studio Albums/1994 - Awake/10 - Scarred.mp3
-73:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd3/04. The Shattered Fortress (Instrumental).mp3
-74:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/08. When Your Time Has Come.mp3
-75:Dream Theater/01 Studio Albums/2005 - Octavarium/01 - The Root of All Evil.mp3
-76:Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/04 - The Killing Hand.mp3
-77:Dream Theater/01 Studio Albums/2005 - Octavarium/07 - Sacrificed Sons.mp3
-78:Dream Theater/01 Studio Albums/2013 - Dream Theater/04 - enigma machine.mp3
-79:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/01. Descent Of The Nomacs.mp3
-80:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/04 - Through My Words.mp3
-81:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/03 - lost not forgotten.mp3
-82:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/15. Chosen.mp3
-83:Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/08 - Only A Matter Of Time.mp3
-84:Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/05 - Light Fuse And Get Away.mp3
-85:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/02 - Overture 1928.mp3
-86:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/08 - breaking all illusions.mp3
-87:Dream Theater/01 Studio Albums/1992 - Images and Words/03 - Take the Time.mp3
-88:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/04 - IV The Test That Stumped Them All.mp3
-89:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/12. Our New World.mp3
-90:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/12. Brother, Can You Hear Me.mp3
-91:Dream Theater/01 Studio Albums/1994 - Awake/03 - Innocence Faded.mp3
-92:Dream Theater/01 Studio Albums/1994 - Awake/02 - Caught in a Web.mp3
-93:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/01 - I Overture.mp3
-94:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD1/05 - Disappear.mp3
-95:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/03. Heaven's Cove.mp3
-96:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/05. A Better Life.mp3
-97:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/20. The Road To Revolution.mp3
-98:Dream Theater/01 Studio Albums/2013 - Dream Theater/02 - the enemy inside.mp3
-99:Dream Theater/01 Studio Albums/2005 - Octavarium/08 - Octavarium.mp3
-100:Dream Theater/01 Studio Albums/2013 - Dream Theater/05 - the bigger picture.mp3
-101:Dream Theater/01 Studio Albums/2013 - Dream Theater/01 - false awakening suite.mp3
-102:Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/06 - Afterlife.mp3
-103:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/02 - II About To Crash.mp3
-104:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/06 - VI Solitary Shell.mp3
-105:Dream Theater/01 Studio Albums/2013 - Dream Theater/03 - the looking glass.mp3
-106:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/02 - build me up, break me down.mp3
-107:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD1/01 - The Glass Prison.mp3
-108:Dream Theater/01 Studio Albums/2013 - Dream Theater/07 - surrender to reason.mp3
-109:Dream Theater/01 Studio Albums/2005 - Octavarium/03 - These Walls.mp3
-110:Dream Theater/01 Studio Albums/2003 - Train of Thought/01 - As I Am.mp3
-111:Dream Theater/01 Studio Albums/1992 - Images and Words/08 - Learning to Live.mp3
-112:Dream Theater/01 Studio Albums/1992 - Images and Words/01 - Pull Me Under.mp3
-113:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/06 - outcry.mp3
-114:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/07 - Lines In The Sand.mp3
-115:Dream Theater/01 Studio Albums/2007 - Systematic Chaos/07 - The Ministry of Lost Souls.mp3
-116:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/01 - New Millennium.mp3
-117:Dream Theater/01 Studio Albums/2005 - Octavarium/05 - Panic Attack.mp3
-118:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/03 - III War Inside My Head.mp3
-119:Dream Theater/01 Studio Albums/1994 - Awake/11 - Space-Dye Vest.mp3
-120:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/04. The Answer.mp3
-121:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd1/05. The Best Of Times.mp3
-122:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD1/19. A New Beginning.mp3
-123:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/03 - Peruvian Skies.mp3
-124:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/10 - Anna Lee.mp3
-125:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd3/05. The Best of Times (Instrumental).mp3
-126:Dream Theater/01 Studio Albums/2007 - Systematic Chaos/01 - In the Presence of Enemies - Part I.mp3
-127:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd1/03. Wither.mp3
-128:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd2/03. Odyssey.mp3
-129:Dream Theater/01 Studio Albums/1992 - Images and Words/06 - Under a Glass Moon.mp3
-130:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd2/01. Stargazer.mp3
-131:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/10 - One Last Time.mp3
-132:Dream Theater/01 Studio Albums/2003 - Train of Thought/05 - Vacant.mp3
-133:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd3/06. The Count of Tuscany (Instrumental).mp3
-134:Dream Theater/01 Studio Albums/2007 - Systematic Chaos/06 - Prophets of War.mp3
-135:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD1/04 - The Great Debate.mp3
-136:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/07. The Walking Shadow.mp3
-137:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/14. Astonishing.mp3
-138:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/06 - Hell's Kitchen.mp3
-139:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD1/02 - Blind Faith.mp3
-140:Dream Theater/01 Studio Albums/1992 - Images and Words/07 - Wait for Sleep.mp3
-141:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/05 - bridges in the sky.mp3
-142:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/05 - Fatal Tragedy.mp3
-143:Dream Theater/01 Studio Albums/1997 - Falling Into Infinity/02 - You Not Me.mp3
-144:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/08 - Home.mp3
-145:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd1/04. The Shattered Fortress.mp3
-146:Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/03 - The Ytse Jam.mp3
-147:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/13. Power Down.mp3
-148:Dream Theater/01 Studio Albums/1994 - Awake/05 - A Mind Beside Itself- II. Voices.mp3
-149:Dream Theater/01 Studio Albums/2016 - The Astonishing/CD2/04. Begin Again.mp3
-150:Dream Theater/01 Studio Albums/2013 - Dream Theater/09 - illumination theory.mp3
-151:Dream Theater/01 Studio Albums/1989 - When Dream And Day Unite/01 - A Fortune In Lies.mp3
-152:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/01 - on the backs of angels.mp3
-153:Dream Theater/01 Studio Albums/1999 - Metropolis Pt.2 Scenes From A Memory/06 - Beyond This Life.mp3
-154:Dream Theater/01 Studio Albums/2009 - Black Clouds and Silver Linings/cd1/06. The Count Of Tuscany.mp3
-155:Dream Theater/01 Studio Albums/2002 - Six Degrees of Inner Turbulence/CD2/07 - VII About To Crash (Reprise).mp3
+0:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/11 Afterlife (Alternate Version(320kbps)).mp3
+1:Avenged sevenfold/2010 - Nightmare/Victim.mp3
+2:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/To End the Rapture.mp3
+3:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Turn the Other Way.mp3
+4:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Darkness Surrounding.mp3
+5:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/The Art of Subconscious Illusion.mp3
+6:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/We Come Out at Night.mp3
+7:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Lips of Deceit.mp3
+8:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Warmness on the Soul.mp3
+9:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/An Epic of Time Wasted.mp3
+10:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Breaking Their Hold.mp3
+11:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Forgotten Faces.mp3
+12:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Thick and Thin.mp3
+13:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Streets.mp3
+14:Avenged sevenfold/2002 - Sounding the Seventh Trumpet/Shattered By Broken Dreams.mp3
+15:Avenged sevenfold/2001 - Warmness on the Soul/Warmness on the Soul.mp3
+16:Avenged sevenfold/2001 - Warmness on the Soul/Darkness Surrounding.mp3
+17:Avenged sevenfold/2001 - Warmness on the Soul/We Come Out at Night.mp3
+18:Avenged sevenfold/2001 - Warmness on the Soul/To End the Rapture.mp3
+19:Avenged sevenfold/2003 - Waking the Fallen/Waking the Fallen.mp3
+20:Avenged sevenfold/2003 - Waking the Fallen/Unholy Confessions.mp3
+21:Avenged sevenfold/2003 - Waking the Fallen/Chapter Four.mp3
+22:Avenged sevenfold/2003 - Waking the Fallen/Remenissions.mp3
+23:Avenged sevenfold/2003 - Waking the Fallen/Desecrate Through Reverance.mp3
+24:Avenged sevenfold/2003 - Waking the Fallen/Eternal Rest.mp3
+25:Avenged sevenfold/2003 - Waking the Fallen/Second Heartbeat.mp3
+26:Avenged sevenfold/2003 - Waking the Fallen/Radiant Eclipse.mp3
+27:Avenged sevenfold/2003 - Waking the Fallen/I Won't See You Tonight, Pt. 1.mp3
+28:Avenged sevenfold/2003 - Waking the Fallen/I Won't See You Tonight, Pt. 2.mp3
+29:Avenged sevenfold/2003 - Waking the Fallen/Clairvoyant Disease.mp3
+30:Avenged sevenfold/2003 - Waking the Fallen/And All Things Will End.mp3
+31:Avenged sevenfold/2005 - City of Evil/Beast and the Harlot.mp3
+32:Avenged sevenfold/2005 - City of Evil/Burn It Down.mp3
+33:Avenged sevenfold/2005 - City of Evil/Blinded in Chains.mp3
+34:Avenged sevenfold/2005 - City of Evil/Bat Country.mp3
+35:Avenged sevenfold/2005 - City of Evil/Trashed and Scattered.mp3
+36:Avenged sevenfold/2005 - City of Evil/Seize the Day.mp3
+37:Avenged sevenfold/2005 - City of Evil/Sidewinder.mp3
+38:Avenged sevenfold/2005 - City of Evil/The Wicked End.mp3
+39:Avenged sevenfold/2005 - City of Evil/Strength of the World.mp3
+40:Avenged sevenfold/2005 - City of Evil/Betrayed.mp3
+41:Avenged sevenfold/2005 - City of Evil/M.I.A.mp3
+42:Avenged sevenfold/2007 - Avenged Sevenfold/Critical Acclaim.mp3
+43:Avenged sevenfold/2007 - Avenged Sevenfold/Almost Easy.mp3
+44:Avenged sevenfold/2007 - Avenged Sevenfold/Scream.mp3
+45:Avenged sevenfold/2007 - Avenged Sevenfold/Afterlife.mp3
+46:Avenged sevenfold/2007 - Avenged Sevenfold/Gunslinger.mp3
+47:Avenged sevenfold/2007 - Avenged Sevenfold/Unbound (The Wild Ride).mp3
+48:Avenged sevenfold/2007 - Avenged Sevenfold/Brompton Cocktail.mp3
+49:Avenged sevenfold/2007 - Avenged Sevenfold/Lost.mp3
+50:Avenged sevenfold/2007 - Avenged Sevenfold/A Little Piece of Heaven.mp3
+51:Avenged sevenfold/2007 - Avenged Sevenfold/Dear God.mp3
+52:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/01 Demons.mp3
+53:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/02 Girl I Know.mp3
+54:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/03 Crossroads.mp3
+55:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/04 Flash of the Blade (Iron Maiden Cover).mp3
+56:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/05 Until the End.mp3
+57:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/06 Tension.mp3
+58:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/07 Walk (Pantera Cover).mp3
+59:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/08 The Fight.mp3
+60:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/09 Dancing Dead.mp3
+61:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/10 Almost Easy (Remix).mp3
+62:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/11 Afterlife (Alternate Version).mp3
+63:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/12 Almost Easy (Live in Seattle) (Bonus).mp3
+64:Avenged sevenfold/2008 - Live In LBC & Diamonds In The Rough/Diamonds In The Rough/13 Bat Country (Live in Fresno).mp3
+65:Avenged sevenfold/2010 - Nightmare/Welcome To The Family.mp3
+66:Avenged sevenfold/2010 - Nightmare/Danger Line.mp3
+67:Avenged sevenfold/2010 - Nightmare/Buried Alive.mp3
+68:Avenged sevenfold/2010 - Nightmare/Natural Born Killer.mp3
+69:Avenged sevenfold/2010 - Nightmare/So Far Away.mp3
+70:Avenged sevenfold/2010 - Nightmare/God Hate Us.mp3
+71:Avenged sevenfold/2010 - Nightmare/Tonight The World Dies.mp3
+72:Avenged sevenfold/2010 - Nightmare/Fiction.mp3
+73:Avenged sevenfold/2010 - Nightmare/Save Me.mp3
+74:Avenged sevenfold/2010 - Nightmare/Nightmare.mp3
+75:Avenged sevenfold/2012 - Carry On/Avenged Sevenfold - Carry On (Call of Duty Black Ops II Version).mp3
+76:Avenged sevenfold/2013 - Hail To The King/01 - Shepherd Of Fire.mp3
+77:Avenged sevenfold/2013 - Hail To The King/02 - Hail To The King.mp3
+78:Avenged sevenfold/2013 - Hail To The King/03 - Doing Time.mp3
+79:Avenged sevenfold/2013 - Hail To The King/04 - This Means War.mp3
+80:Avenged sevenfold/2013 - Hail To The King/05 - Requiem.mp3
+81:Avenged sevenfold/2013 - Hail To The King/06 - Crimson Day.mp3
+82:Avenged sevenfold/2013 - Hail To The King/07 - Heretic.mp3
+83:Avenged sevenfold/2013 - Hail To The King/08 - Coming Home.mp3
+84:Avenged sevenfold/2013 - Hail To The King/09 - Planets.mp3
+85:Avenged sevenfold/2013 - Hail To The King/10 - Acid Rain.mp3
+86:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/01 - on the backs of angels.mp3
+87:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/02 - build me up, break me down.mp3
+88:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/03 - lost not forgotten.mp3
+89:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/04 - this is the life.mp3
+90:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/05 - bridges in the sky.mp3
+91:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/06 - outcry.mp3
+92:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/07 - far from heaven.mp3
+93:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/08 - breaking all illusions.mp3
+94:Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/09 - beneath the surface.mp3
+95:Dream Theater/01 Studio Albums/2005 - Octavarium/01 - The Root of All Evil.mp3
+96:Dream Theater/01 Studio Albums/2005 - Octavarium/02 - The Answer Lies Within.mp3
+97:Dream Theater/01 Studio Albums/2005 - Octavarium/03 - These Walls.mp3
+98:Dream Theater/01 Studio Albums/2005 - Octavarium/04 - I Walk Beside You.mp3
+99:Dream Theater/01 Studio Albums/2005 - Octavarium/05 - Panic Attack.mp3
+100:Dream Theater/01 Studio Albums/2005 - Octavarium/06 - Never Enough.mp3
+101:Dream Theater/01 Studio Albums/2005 - Octavarium/07 - Sacrificed Sons.mp3
+102:Dream Theater/01 Studio Albums/2005 - Octavarium/08 - Octavarium.mp3
 playlist_end
