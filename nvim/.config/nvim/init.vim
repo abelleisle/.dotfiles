@@ -249,12 +249,12 @@ nnoremap <Leader>s :split<CR>
 
 " Code Folding
 "---------------------------------
-if has ('folding')
-    set nofoldenable
-    set foldmethod=syntax
-    set foldmarker={{{,}}}
-    set foldcolumn=0
-endif
+"if has ('folding')
+"    set nofoldenable
+"    set foldmethod=syntax
+"    set foldmarker={{{,}}}
+"    set foldcolumn=0
+"endif
 
 "autocmd FileType c, cpp, java setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*//'
 "autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*#'
