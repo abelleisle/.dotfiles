@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/andy/.oh-my-zsh
+export ZSH=/home/andy/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -101,7 +101,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #export PATH=~/.scripts:/opt/java/bin/:/usr/gnat/bin/:$PATH
-export PATH=~/.scripts/:$PATH
+#export PATH=~/.scripts/:$PATH
+#export PATH=~/Extra/Vivado/Vivado/2018.3/bin/:$PATH
 alias vim='nvim'
 alias calsync='vdirsyncer sync'
 alias cal='ikhal'

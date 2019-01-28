@@ -25201,3 +25201,370 @@ Dec 09 15:05 : client: [20] closed
 Dec 10 00:54 : avahi: Client Disconnected, will reconnect shortly
 Dec 10 00:54 : avahi: Could not reconnect: Daemon not running
 Dec 10 00:54 : player: played "Dream Theater/01 Studio Albums/2005 - Octavarium/08 - Octavarium.mp3"
+Dec 27 21:07 : exception: RTIOThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 27 21:07 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 27 21:07 : client: [0] opened from 127.0.0.1:37600
+Dec 27 21:07 : client: [1] opened from [::1]:47050
+Dec 27 21:07 : client: [2] opened from [::1]:47052
+Dec 27 21:07 : client: [2] closed
+Dec 27 21:07 : client: [1] closed
+Dec 27 21:10 : exception: RTIOThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 27 21:10 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 27 21:10 : client: [0] opened from 127.0.0.1:37952
+Dec 27 21:10 : client: [1] opened from 127.0.0.1:37954
+Dec 27 21:10 : client: [1] malformed command "GET / HTTP/1.1"
+Dec 27 21:10 : client: [1] closed
+Dec 27 21:10 : client: [2] opened from 127.0.0.1:37956
+Dec 27 21:10 : client: [2] malformed command "GET /favicon.ico HTTP/1.1"
+Dec 27 21:10 : client: [2] closed
+Dec 27 21:10 : client: [3] opened from [::1]:47412
+Dec 27 21:10 : client: [4] opened from [::1]:47414
+Dec 27 21:10 : client: [4] closed
+Dec 27 21:10 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 27 21:10 : client: [3] closed
+Dec 27 21:10 : client: [5] opened from [::1]:47422
+Dec 27 21:10 : client: [6] opened from [::1]:47424
+Dec 27 21:10 : client: [6] closed
+Dec 27 21:11 : client: [7] opened from [::1]:47446
+Dec 27 21:11 : client: [7] closed
+Dec 27 21:11 : client: [8] opened from [::1]:47454
+Dec 27 21:11 : client: [8] closed
+Dec 27 21:13 : ffmpeg/mov,mp4,m4a,3gp,3g2,mj2: stream 0, timescale not set
+Dec 27 21:13 : update: added Books/Dan Brown - Angels and Demons (Unabridged)/Angels and Demons Unabridged Part1.m4a
+Dec 27 21:13 : ffmpeg/mov,mp4,m4a,3gp,3g2,mj2: stream 0, timescale not set
+Dec 27 21:13 : update: added Books/Dan Brown - Angels and Demons (Unabridged)/Angels and Demons Unabridged Part2.m4b
+Dec 27 21:13 : ffmpeg/mov,mp4,m4a,3gp,3g2,mj2: stream 0, timescale not set
+Dec 27 21:13 : update: added Books/Dan Brown - Angels and Demons (Unabridged)/Angels and Demons Unabridged Part3.m4b
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 02 - The Vanishing Glass.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 07 - The Sorting Hat.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 03 - The Letters From No One.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 08 - The Potions Master.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 15 - The Forbidden Forest.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 13 - Nicolas Flamel.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 09 - The Midnight Duel.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 10 - Halloween.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 01 - The Boy Who Lived.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 05 - Diagon Alley.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 11 - Quidditch.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 17 - The Man With Two Faces.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 12 - The Mirror of Erised.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 16 -Through the Trapdoor.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 06 - The Journey From Platform Nine and Three Quarters.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 04 - The Keeper of the Keys.mp3
+Dec 27 21:13 : update: added Books/Book 01 - Harry Potter and the Philosophers Stone/Chapter 14 - Norbert the Norwegian Ridgeback.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 36 - The Only One He Ever Feared.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 22 - St Mungo's Hospital For Magical Maladies And Injuries.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 38 - The Second War Begins.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 35 - Beyond The Veil.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 07 - The Ministry Of Magic.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 03 - The Advance Guard.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 32 - Out Of The Fire.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 12 - Professor Umbridge.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 19 - The Lion And The Serpent.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 33 - Fight And Flight.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 04 - Number Twelve, Grimmauld Place.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 08 - The Hearing.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 06 - The Noble And Most Ancient House Of Black.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 26 - Seen And Unforeseen.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 20 - Hagrid's Tale.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 29 - Careers Advice.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 24 - Occlumency.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 28 - Snape's Worst Memory.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 16 - In The Hog's Head.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 18 - Dumbledore's Army.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 13 - Detention With Dolores.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 31 - OWLs.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 05 - The Order Of The Phoenix.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 27 - The Centaur And The Sneak.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 17 - Educational Decree Number Twenty-Four.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 37 - The Lost Prophecy.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 23 - Christmas On The Closed Ward.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 14 - Percy And Padfoot.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 15 - The Hogwarts High Inquisitor.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 11 - The Sorting Hat's New Song.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 01 - Dudley Demented.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 25 - The Beetle At Bay.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 34 - The Department Of Mysteries.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 30 - Grawp.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 21 - The Eye Of The Snake.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 02 - A Peck Of Owls.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 09 - The Woes Of Mrs Weasley.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 05 - Harry Potter And The Order Of The Phoenix/Chapter 10 - Luna Lovegood.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 06 - The Portkey.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 32 - Flesh, Blood And Bone.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 03 - The Invitation.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 33 - The Death Eaters.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 05 - Weasleys' Wizard Wheezes.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 13 - Mad-Eye Moody.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 37 - The Beginning.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 14 - The Unforgivable Curses.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 02 - The Scar.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 01 - The Riddle House.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 04 - Back To The Burrow.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 29 - The Dream.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 09 - The Dark Mark.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 11 - Aboard The Hogwarts Express.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 12 - The Triwizard Tournament.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 22 - The Unexpected Task.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 15 - Beauxbatons And Durmstrang.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 26 - The Second Task.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 18 - The Weighing Of The Wands.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 17 - The Four Champions.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 24 - Rita Skeeter's Scoop.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 30 - The Pensieve.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 35 - Veritaserum.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 19 - The Hungarian Horntail.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 34 - Priori Incantatem.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 20 - The First Task.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 27 - Padfoot Returns.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 08 - The Quidditch World Cup.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 21 - The House-Elf Liberation Front.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 16 - The Goblet Of Fire.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 07 - Bagman And Crouch.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 31 - The Third Task.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 23 - The Yule Ball.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 25 - The Egg And The Eye.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 28 - The Madness Of Mr Crouch.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 10 - Mayhem At The Ministry.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 04 - Harry Potter And The Goblet Of Fire/Chapter 36 - The Parting Of The Ways.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 20 - The Dementors' Kiss.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 13 - Gryffindor vs Ravenclaw.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 18 - Moony, Wormtail, Padfoot And Prongs.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 17 - Cat, Rat And Dog.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 03 - The Knight Bus.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 01 - Owl Post.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 02 - Aunt Marge's Big Mistake.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 07 - The Boggart In The Wardrobe.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 19 - The Servant Of Lord Voldemort.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 05 - The Dementor.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 22 - Owl Post Again.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 21 - Hermione's Secret.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 10 - The Marauder's Map.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 06 - Talons And Tea Leaves.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 08 - Flight Of The Fat Lady.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 12 - The Patronus.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 09 - Grim Defeat.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 15 - The Quidditch Final.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 04 - The Leaky Cauldron.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 14 - Snape's Grudge.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 11 - The Firebolt.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 03 - Harry Potter And The Prisoner Of Azkaban/Chapter 16 - Professor Trelawney's Prediction.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 13 - The Secret Riddle.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 17 - A Sluggish Memory.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 27 - The Lightning-Struck Tower.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 26 - The Cave.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 12 - Silver And Opals.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 15 - The Unbreakable Vow.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 21 - The Unknowable Room.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 16 - A Very Frosty Christmas.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 11 - Hermione's Helping Hand.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 22 - After The Burial.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 28 - The Flight Of The Prince.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 23 - Horcruxes.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 05 - An Excess Of Phlegm.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 06 - Draco's Detour.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 01 - The Other Minister.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 04 - Horace Slughorn.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 10 - The House Of Gaunt.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 09 - The Half-Blood Prince.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 03 - Will And Won't.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 24 - Sectumsempra.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 14 - Felix Felicis.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 30 - The White Tomb.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 18 - Birthday Surprises.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 02 - Spinner's End.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 08 - Snape Victorious.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 20 - Lord Voldemort's Request.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 29 - The Phoenix Lament.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 07 - The Slug Club.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 19 - Elf Tails.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 06 - Harry Potter And The Half-Blood Prince/Chapter 25 - The Seer Overheard.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 08 - The Potions Teacher.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 14 - Norbert, The Norwegian Ridgeback.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 02 - The Vanishing Glass.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 09 - The Midnight Duel.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 17 - The Man With Two Faces.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 01 - The Boy Who Lived.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 16 - Through The Trapdoor.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 11 - Quidditch.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 04 - The Keeper Of The Keys.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 10 - Hallowe'en.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 03 - The Letters From No One.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 15 - The Forbidden Forest.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 07 - The Sorting Hat.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 12 - The Mirror Of Erised.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 05 - Diagon Alley.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 13 - Nicolas Flamel.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 01 - Harry Potter And The Sorcerer's Stone/Chapter 06 - The Journey From Platform Nine And Three Quarters.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 01 - The Worst Birthday.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 06 - Gilderoy Lockhart.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 02 - Dobby's Warning.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 05 - The Whomping Willow.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 15 - Aragog.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 10 - The Rogue Bludger.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 09 - The Writing On The Wall.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 14 - Cornelius Fudge.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 08 - The Deathday Party.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 11 - The Duelling Club.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 16 - The Chamber Of Secrets.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 12 - The Polyjuice Potion.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 04 - At Flourish And Blotts.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 18 - Dobby's Reward.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 13 - The Very Secret Diary.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 17 - The Heir Of Slytherin.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 07 - Mudbloods And Murmurs.mp3
+Dec 27 21:13 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 02 - Harry Potter And The Chamber Of Secrets/Chapter 03 - The Burrow.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 27 - The Final Hiding Place.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 37 - Nineteen Years Later (Epilogue).mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 29 - The Lost Diadem.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 14 - The Thief.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 18 - The Life And Lies Of Albus Dumbledore.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 01 - The Dark Lord Ascending.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 24 - The Wandmaker.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 32 - The Elder Wand.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 34 - The Forest Again.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 09 - A Place To Hide.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 16 - Godric's Hollow.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 08 - The Wedding.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 26 - Gringotts.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 03 - The Dursleys Departing.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 25 - Shell Cottage.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 20 - Xenophilius Lovegood.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 17 - Bathilda's Secret.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 19 - The Silver Doe.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 28 - The Missing Mirror.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 15 - The Goblin's Revenge.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 35 - King's Cross.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 06 - The Ghoul In Pyjamas.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 07 - The Will Of Albus Dumbledore.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 21 - The Tale Of The Three Brothers.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 13 - The Muggle-Born Registration Commission.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 31 - The Battle Of Hogwarts.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 33 - The Prince's Tale.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 30 - The Sacking Of Severus Snape.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 12 - Magic Is Might.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 02 - In Memoriam.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 04 - The Seven Potters.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 36 - The Flaw In The Plan.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 23 - Malfoy Manor.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 10 - Kreacher's Tale.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 11 - The Bribe.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 22 - The Deathly Hallows.mp3
+Dec 27 21:14 : update: added Books/Harry Potter Audio Books 1-7; Read by Jim Dale [MP3]/Book 07 - Harry Potter And The Deathly Hallows/Chapter 05 - Fallen Warrior.mp3
+Dec 27 21:16 : client: [9] opened from [::1]:47570
+Dec 27 21:16 : client: [9] closed
+Dec 27 21:16 : client: [10] opened from [::1]:47572
+Dec 27 21:16 : client: [10] closed
+Dec 27 21:17 : client: [11] opened from 127.0.0.1:38152
+Dec 27 21:17 : client: [11] closed
+Dec 27 21:17 : client: [12] opened from 127.0.0.1:38154
+Dec 27 21:17 : client: [12] closed
+Dec 27 21:17 : client: [13] opened from 127.0.0.1:38156
+Dec 27 21:17 : client: [13] closed
+Dec 27 21:17 : client: [14] opened from 127.0.0.1:38158
+Dec 27 21:17 : client: [14] closed
+Dec 27 21:19 : player: played "Haken/2010 - Aquarius/06. Sun.mp3"
+Dec 27 21:19 : client: [15] opened from [::1]:47660
+Dec 27 21:19 : client: [15] closed
+Dec 27 21:20 : client: [16] opened from [::1]:47676
+Dec 27 21:20 : client: [16] closed
+Dec 27 21:21 : client: [17] opened from [::1]:47706
+Dec 27 21:21 : client: [17] closed
+Dec 27 21:21 : client: [18] opened from [::1]:47708
+Dec 27 21:21 : client: [18] closed
+Dec 27 21:22 : client: [5] closed
+Dec 27 21:22 : client: [19] opened from [::1]:47722
+Dec 27 21:22 : client: [20] opened from [::1]:47724
+Dec 27 21:22 : client: [20] closed
+Dec 27 21:22 : client: [19] closed
+Dec 27 21:22 : client: [21] opened from [::1]:47726
+Dec 27 21:22 : client: [22] opened from [::1]:47728
+Dec 27 21:22 : client: [22] closed
+Dec 27 21:22 : client: [21] closed
+Dec 27 21:22 : client: [23] opened from [::1]:47730
+Dec 27 21:22 : client: [24] opened from [::1]:47732
+Dec 27 21:22 : client: [24] closed
+Dec 27 21:22 : client: [23] closed
+Dec 27 21:22 : client: [25] opened from [::1]:47738
+Dec 27 21:22 : client: [26] opened from [::1]:47740
+Dec 27 21:22 : client: [26] closed
+Dec 27 21:25 : player: played "Dream Theater/01 Studio Albums/2005 - Octavarium/04 - I Walk Beside You.mp3"
+Dec 27 21:25 : client: [27] opened from [::1]:47898
+Dec 27 21:25 : client: [27] closed
+Dec 27 21:33 : player: played "Haken/2011 - Visions/06- Shapeshifter.mp3"
+Dec 27 21:33 : client: [28] opened from [::1]:48268
+Dec 27 21:33 : client: [28] closed
+Dec 27 21:36 : client: [25] closed
+Dec 28 00:37 : exception: RTIOThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 28 00:37 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 28 00:37 : client: [0] opened from 127.0.0.1:46640
+Dec 28 00:41 : client: [0] closed
+Dec 28 00:41 : client: [1] opened from 127.0.0.1:46662
+Dec 28 00:43 : client: [1] closed
+Dec 28 00:43 : client: [2] opened from 127.0.0.1:46672
+Dec 28 19:24 : exception: RTIOThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 28 19:24 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 28 19:24 : client: [0] opened from 127.0.0.1:58050
+Dec 28 19:25 : client: [1] opened from [::1]:51752
+Dec 28 19:25 : client: [2] opened from [::1]:51754
+Dec 28 19:25 : client: [2] closed
+Dec 28 19:26 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Dec 28 19:26 : client: [3] opened from [::1]:51756
+Dec 28 19:26 : client: [3] closed
+Dec 28 19:32 : exception: Bad playlist name
+Dec 28 19:32 : client: [1] closed
+Dec 28 19:32 : client: [4] opened from [::1]:52106
+Dec 28 19:32 : client: [5] opened from [::1]:52108
+Dec 28 19:32 : client: [5] closed
+Dec 28 19:32 : player: played "Avenged sevenfold/2007 - Avenged Sevenfold/Afterlife.mp3"
+Dec 28 19:32 : client: [6] opened from [::1]:52112
+Dec 28 19:32 : client: [6] closed
+Dec 28 19:32 : client: [7] opened from [::1]:52114
+Dec 28 19:32 : client: [7] closed
+Dec 28 19:32 : client: [8] opened from [::1]:52116
+Dec 28 19:32 : client: [8] closed
+Dec 28 19:45 : player: played "Dream Theater/01 Studio Albums/2011 - A Dramatic Turn of Events/08 - breaking all illusions.mp3"
+Dec 28 19:45 : client: [9] opened from [::1]:52514
+Dec 28 19:45 : client: [9] closed
+Dec 28 19:50 : player: played "Avenged sevenfold/2007 - Avenged Sevenfold/Unbound (The Wild Ride).mp3"
+Dec 28 19:50 : client: [10] opened from [::1]:52728
+Dec 28 19:50 : client: [10] closed
+Dec 28 19:50 : client: [11] opened from 127.0.0.1:59052
+Dec 28 19:50 : client: [11] closed
+Dec 28 20:25 : player: played "Haken/2011 - Visions/02- Nocturnal Conspiracy.mp3"
+Dec 28 20:25 : client: [12] opened from [::1]:55084
+Dec 28 20:25 : client: [12] closed
+Dec 28 20:31 : player: played "Avenged sevenfold/2013 - Hail To The King/09 - Planets.mp3"
+Dec 28 20:31 : client: [13] opened from [::1]:55678
+Dec 28 20:31 : client: [13] closed
+Dec 28 20:36 : player: played "Avenged sevenfold/2003 - Waking the Fallen/Clairvoyant Disease.mp3"
+Dec 28 20:36 : client: [14] opened from [::1]:55810
+Dec 28 20:36 : client: [14] closed
+Dec 28 20:37 : client: [15] opened from [::1]:55826
+Dec 28 20:37 : client: [15] closed
+Dec 28 20:44 : client: [16] opened from 127.0.0.1:34398
+Dec 28 20:44 : client: [16] closed
+Dec 28 20:44 : client: [17] opened from 127.0.0.1:34404
+Dec 28 20:44 : client: [17] closed
+Dec 28 20:46 : client: [18] opened from 127.0.0.1:34618
+Dec 28 20:46 : client: [18] closed
+Dec 28 20:56 : client: [19] opened from 127.0.0.1:34800
+Dec 28 20:56 : client: [19] closed
+Dec 28 20:57 : client: [20] opened from 127.0.0.1:34898
+Dec 28 20:57 : client: [20] closed
+Dec 28 21:10 : client: [21] opened from 127.0.0.1:35302
+Dec 28 21:10 : client: [21] closed
+Dec 28 21:10 : player: played "Dream Theater/01 Studio Albums/2005 - Octavarium/07 - Sacrificed Sons.mp3"
+Dec 28 21:10 : client: [22] opened from [::1]:57316
+Dec 28 21:10 : client: [22] closed
+Dec 28 21:13 : client: [23] opened from 127.0.0.1:35848
+Dec 28 21:13 : client: [23] closed
+Dec 28 21:15 : client: [24] opened from 127.0.0.1:35908
+Dec 28 21:15 : client: [24] closed
+Dec 28 21:21 : player: played "Avenged sevenfold/2005 - City of Evil/M.I.A.mp3"
+Dec 28 21:21 : client: [25] opened from [::1]:59164
+Dec 28 21:21 : client: [25] closed
+Dec 28 21:23 : client: [26] opened from 127.0.0.1:37330
+Dec 28 21:23 : client: [26] closed
+Dec 28 22:02 : client: [0] closed
+Dec 28 22:02 : client: [4] closed

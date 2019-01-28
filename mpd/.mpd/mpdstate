@@ -1,10 +1,10 @@
-sw_volume: 30
+sw_volume: 53
 audio_device_state:1:Schiit Modi Uber Analog Stereo
 audio_device_state:1:my_fifo
 state: pause
-current: 102
-time: 502.740000
-random: 0
+current: 27
+time: 102.185000
+random: 1
 repeat: 0
 single: 0
 consume: 0
@@ -115,4 +115,39 @@ playlist_begin
 100:Dream Theater/01 Studio Albums/2005 - Octavarium/06 - Never Enough.mp3
 101:Dream Theater/01 Studio Albums/2005 - Octavarium/07 - Sacrificed Sons.mp3
 102:Dream Theater/01 Studio Albums/2005 - Octavarium/08 - Octavarium.mp3
+103:Haken/2008 - Enter the 5th Dimension/01. Blind.mp3
+104:Haken/2008 - Enter the 5th Dimension/02. Black Seed.mp3
+105:Haken/2008 - Enter the 5th Dimension/03. Manifold.mp3
+106:Haken/2008 - Enter the 5th Dimension/04. Sleeping Thoughts wake.mp3
+107:Haken/2008 - Enter the 5th Dimension/05. Souls.mp3
+108:Haken/2008 - Enter the 5th Dimension/06. Snow.mp3
+109:Haken/2010 - Aquarius/01. The Point of No Return.mp3
+110:Haken/2010 - Aquarius/02. Streams.mp3
+111:Haken/2010 - Aquarius/03. Aquarium.mp3
+112:Haken/2010 - Aquarius/04. Eternal Rain.mp3
+113:Haken/2010 - Aquarius/05. Drowning In the Flood.mp3
+114:Haken/2010 - Aquarius/06. Sun.mp3
+115:Haken/2010 - Aquarius/07. Celestial Elixir.mp3
+116:Haken/2011 - Visions/01. Premonition.mp3
+117:Haken/2011 - Visions/02- Nocturnal Conspiracy.mp3
+118:Haken/2011 - Visions/03- Insomnia.mp3
+119:Haken/2011 - Visions/04- The Mind's Eye.mp3
+120:Haken/2011 - Visions/05- Portals.mp3
+121:Haken/2011 - Visions/06- Shapeshifter.mp3
+122:Haken/2011 - Visions/07- Deathless.mp3
+123:Haken/2011 - Visions/08- Visions.mp3
+124:Haken/2013 - The Mountain/01. The Path.mp3
+125:Haken/2013 - The Mountain/02. Atlas Stone.mp3
+126:Haken/2013 - The Mountain/03. Cockroach King.mp3
+127:Haken/2013 - The Mountain/04. In Memoriam.mp3
+128:Haken/2013 - The Mountain/05. Because It's There.mp3
+129:Haken/2013 - The Mountain/06. Falling Back To Earth.mp3
+130:Haken/2013 - The Mountain/07. As Death Embraces.mp3
+131:Haken/2013 - The Mountain/08. Pareidolia.mp3
+132:Haken/2013 - The Mountain/09. Somebody.mp3
+133:Haken/2013 - The Mountain/10. The Path Unbeaten (Bonustrack).mp3
+134:Haken/2013 - The Mountain/11. Nobody (Bonustrack).mp3
+135:Haken/2014 - Restoration/01. Darkest Light.mp3
+136:Haken/2014 - Restoration/02 - Earthlings.mp3
+137:Haken/2014 - Restoration/03 - Crystallised.mp3
 playlist_end

@@ -29,6 +29,8 @@ height=20
 offset-x=0
 offset-y=0
 
+tray-position = right
+
 background=${colors.bar_bg}
 foreground=${colors.bar_fg}
 
@@ -42,7 +44,7 @@ padding-left=2
 padding-right=2
 module-margin-left=2
 
-font-N=<fontconfig pattern>;<vertical offset>
+;font-N=<fontconfig pattern>;<vertical offset>
 font-0=ttyp0:pixelsize=10;2
 font-1=siji:size=10;2
 font-2=GohuFont:pixelsize=10;2
@@ -56,8 +58,6 @@ fixed-center = true
 [bar/second]
 inherit = bar/base
 monitor = DVI-D-0
-
-tray-position = right
 
 ;--------------------------------------------
 ; modules                                   ;

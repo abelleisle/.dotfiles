@@ -53,6 +53,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
 
+    Plug 'antoyo/vim-licenses'
+    
     "TODO fix this one
     "Plugin 'terryma/vim-multiple-cursors'
     "
@@ -81,6 +83,7 @@ endif
 syntax on
 set number relativenumber
 set ruler
+set spelllang=en_us
 "!set showmode
 set showcmd
 
@@ -185,14 +188,15 @@ function! s:UndimActiveWindow()
     ownsyntax
 endfunction
 
-autocmd WinEnter * call s:UndimActiveWindow()
-autocmd BufEnter * call s:UndimActiveWindow()
-autocmd WinLeave * call s:DimInactiveWindow()
+"autocmd WinEnter * call s:UndimActiveWindow()
+"autocmd BufEnter * call s:UndimActiveWindow()
+"autocmd WinLeave * call s:DimInactiveWindow()
 
 " Syntax highlighting
 "---------------------------------
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
 autocmd BufNewFile,BufRead *.asm set filetype=nasm
+autocmd BufNewFile,BufRead *.lua set filetype=lua
 "hi Comment ctermfg=red
 "hi CursorLineNr ctermfg=7
 noremap <Leader>c :set cursorcolumn! <CR>
@@ -211,6 +215,7 @@ let g:ophigh_filetypes_to_ignore.asm =    1
 let g:ophigh_filetypes_to_ignore.nasm =   2
 let g:ophigh_filetypes_to_ignore.arm =    3
 let g:ophigh_filetypes_to_ignore.armasm = 4
+let g:ophigh_filetypes_to_ignore.lua = 5
 
 
 " Keybinds
@@ -249,12 +254,12 @@ nnoremap <Leader>s :split<CR>
 
 " Code Folding
 "---------------------------------
-"if has ('folding')
-"    set nofoldenable
+if has ('folding')
+    set nofoldenable
 "    set foldmethod=syntax
 "    set foldmarker={{{,}}}
 "    set foldcolumn=0
-"endif
+endif
 
 "autocmd FileType c, cpp, java setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*//'
 "autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*#'
@@ -349,7 +354,7 @@ function! TexEdit()
 
     Goyo 80%
 
-    setlocal spelllang=en_us spell 
+    setlocal spell 
 endfunction
 
 autocmd! FileType tex call TexEdit()
@@ -392,3 +397,19 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 "
 let g:closetag_close_shortcut = '<leader>>'
+
+" Vim-Licenses
+"---------------------------------
+let g:licenses_authors_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
+let g:licenses_copyright_holders_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
+
+" Markdown
+"---------------------------------
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
+
+augroup markdownSpell
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd BufRead,BufNewFile *.md setlocal spell
+augroup END
