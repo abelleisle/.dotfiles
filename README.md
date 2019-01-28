@@ -27,3 +27,8 @@ Then remove the ncmpcpp files
 ```
 stow -D ncmpcpp
 ```
+
+### Special note about Pulseaudio
+
+Pulse doesn't like symlinked configs, so stow can't be used to install the pulse
+configs, those must be manually copied to '~/.config/pulse/'
