@@ -6,3 +6,4 @@ Xft.hintstyle: 	        hintfull
 Xft.lcdfilter: 	        lcddefault
 Xft.rgba: 		        rgba
 Xcursor.size:	        16 !32, 48 or 64 may also be good values
+Xcursor.theme:          Breeze_Amber

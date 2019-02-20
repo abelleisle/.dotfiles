@@ -54,6 +54,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'plasticboy/vim-markdown'
 
     Plug 'antoyo/vim-licenses'
+
+    Plug 'tpope/vim-surround'
     
     "TODO fix this one
     "Plugin 'terryma/vim-multiple-cursors'
@@ -93,8 +95,8 @@ set shm=atI
 " set textwidth=80
 set textwidth=0 wrapmargin=0
 
-" don't wrap long lines
-"set nowrap
+" wrap long lines at the word
+set wrap linebreak nolist
 
 set splitbelow
 set splitright
@@ -127,8 +129,7 @@ set directory=~/.config/nvim/swap,~/tmp,.      " keep swp files under ~/.vim/swa
 "set shiftwidth=4
 "set softtabstop=4
 "set smarttab
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
-
+set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
 
 " Status
 "---------------------------------
