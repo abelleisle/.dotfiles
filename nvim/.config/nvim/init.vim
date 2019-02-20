@@ -211,12 +211,13 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-let g:ophigh_filetypes_to_ignore = {}
-let g:ophigh_filetypes_to_ignore.asm =    1
-let g:ophigh_filetypes_to_ignore.nasm =   2
-let g:ophigh_filetypes_to_ignore.arm =    3
+let g:ophigh_filetypes_to_ignore        = {}
+let g:ophigh_filetypes_to_ignore.asm    = 1
+let g:ophigh_filetypes_to_ignore.nasm   = 2
+let g:ophigh_filetypes_to_ignore.arm    = 3
 let g:ophigh_filetypes_to_ignore.armasm = 4
-let g:ophigh_filetypes_to_ignore.lua = 5
+let g:ophigh_filetypes_to_ignore.lua    = 5
+let g:ophigh_filetypes_to_ignore.vhdl   = 6
 
 
 " Keybinds
