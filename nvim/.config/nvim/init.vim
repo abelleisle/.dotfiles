@@ -218,6 +218,7 @@ let g:ophigh_filetypes_to_ignore.arm    = 3
 let g:ophigh_filetypes_to_ignore.armasm = 4
 let g:ophigh_filetypes_to_ignore.lua    = 5
 let g:ophigh_filetypes_to_ignore.vhdl   = 6
+let g:ophigh_filetypes_to_ignore.mips   = 7
 
 
 " Keybinds
