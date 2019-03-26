@@ -347,6 +347,7 @@ let g:tex_fold_enabled = 0
 let g:tex_comment_nospell = 1
 let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_preview_continuously = 1
+let g:LatexBox_latexmk_options = '-shell-escape'
 let g:LatexBox_viewer = "mupdf"
 
 function! TexEdit()
