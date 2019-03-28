@@ -28,8 +28,9 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'roxma/nvim-yarp'
         Plug 'roxma/vim-hug-neovim-rpc'
     endif
-    Plug 'Shougo/neosnippet'
-    Plug 'Shougo/neosnippet-snippets'
+    Plug 'SirVer/ultisnips'
+    ""Plug 'Shougo/neosnippet'
+    ""Plug 'Shougo/neosnippet-snippets'
     Plug 'honza/vim-snippets'
 
     Plug 'https://github.com/jiangmiao/auto-pairs'
@@ -62,7 +63,6 @@ call plug#begin('~/.config/nvim/plugged')
     "
     "Plugin 'jeaye/color_coded'
     "Plugin 'Valloric/YouCompleteMe'
-    "Plugin 'SirVer/ultisnips'
     "Plugin 'honza/vim-snippets'
     "Plugin 'vim-airline/vim-airline'
     "Plugin 'vim-airline/vim-airline-themes'
@@ -267,35 +267,31 @@ endif
 "autocmd FileType c, cpp, java setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*//'
 "autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\s*#'
 
-function RangerExplorer()
-    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-    if filereadable('/tmp/vim_ranger_current_file')
-        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-        call system('rm /tmp/vim_ranger_current_file')
-    endif
-    redraw!
-endfun
-map <Leader>x :call RangerExplorer()<CR>
-
 
 " deoplete & neosnippet
 "---------------------------------
 let g:deoplete#enable_at_startup = 1 
-let g:neosnippet#enable_snipmate_compatibility = 1
+"let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.config/nvim/bundle/vim-snippets/snippets'
+"let g:neosnippet#snippets_directory='~/.config/nvim/bundle/vim-snippets/snippets'
 
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+"UltiSnips
+let g:UltiSnipsExpandTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-k>"
+let g:UltiSnipsJumpBackwardTrigger="<C-p>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
 if has('conceal')
