@@ -56,6 +56,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'antoyo/vim-licenses'
 
     Plug 'tpope/vim-surround'
+
+    Plug 'majutsushi/tagbar'
     
     "TODO fix this one
     "Plugin 'terryma/vim-multiple-cursors'
