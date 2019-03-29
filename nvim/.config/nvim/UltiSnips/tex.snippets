@@ -1,0 +1,20 @@
+snippet dm "Math" wA
+\[
+$1
+.\] $0
+endsnippet
+
+snippet mk "Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+snippet sign "Signature"
+Yours truly,
+
+Andrew Belle-Isle
+endsnippet
