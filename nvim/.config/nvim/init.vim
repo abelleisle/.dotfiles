@@ -12,6 +12,7 @@ filetype off                  " required
 call plug#begin('~/.config/nvim/plugged')
 
     Plug 'https://github.com/tpope/vim-fugitive'
+    Plug 'tpope/vim-unimpaired'
     Plug 'airblade/vim-gitgutter'
     Plug 'LaTeX-Box-Team/LaTeX-Box'
 
