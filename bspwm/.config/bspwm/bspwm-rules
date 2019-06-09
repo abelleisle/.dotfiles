@@ -1,0 +1,20 @@
+#!/bin/sh
+
+id=$1;
+instance=$3;
+class=$2;
+
+case $class in
+    (Spotify) echo desktop=9;;
+    (discord) echo desktop=9;;
+    (Gimp*) echo state=floating;;
+    (Steam) echo state=floating\ desktop=8;;
+
+    (main) echo state=floating;;
+    (loxel) echo state=floating;;
+
+    ('')
+            case $(ps -p "$(xdo pid $id)" -o comm= 2>/dev/null) in
+                (spotify) echo desktop=9;;
+            esac;;
+esac;
