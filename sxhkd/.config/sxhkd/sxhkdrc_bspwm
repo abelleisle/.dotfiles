@@ -41,8 +41,8 @@ super + b
 	qutebrowser
 
 # open ranger
-super + r
-	urxvt -e ranger
+#super + r
+#	urxvt -e ranger
 
 #
 # bspwm hotkeys
@@ -58,7 +58,11 @@ super + {_,shift + }q
 
 # alternate between the tiled and monocle layout
 super + m
-	bspc desktop -l next
+	bspc desktop -l next; \
+    case $(bspc query -T -d | jq -r .layout) in \
+        ("tiled") bspc node -l normal;; \
+        ("monocle") bspc node -l above;; \
+    esac
 
 # if the current node is automatic, send it to the last manual, otherwise pull the last leaf
 super + y
@@ -153,3 +157,6 @@ super + {Left,Down,Up,Right}
 # rotate by 90 degrees
 super + {_,shift+} a
     bspc node @focused:/ --rotate {90,270}
+
+super + {_,shift+,ctrl+} r
+    bspc node focused -l {above,normal,below}
