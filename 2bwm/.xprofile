@@ -17,11 +17,12 @@ xsetroot -cursor_name left_ptr &
 ./.nv/fans &
 pulseaudio --start
 
-if [ "$(wmctrl -m | grep Name: | awk '{print $2}')" = "awesome" ]; then
-    echo "Awesome"
-else
-    sxhkd &
-    ~/.config/polybar/launch.sh
-fi
+sxhkd -c ~/.config/sxhkd/sxhkdrc_bspwm &
+~/.config/polybar/launch.sh
+
+~/Build/Discord/Discord &
+spotify &
 
 owncloud &
+
+bspwm

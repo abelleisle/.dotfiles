@@ -103,7 +103,6 @@ source $ZSH/oh-my-zsh.sh
 #export PATH=~/.scripts:/opt/java/bin/:/usr/gnat/bin/:$PATH
 #export PATH=~/.scripts/:$PATH
 #export PATH=~/Extra/Vivado/Vivado/2018.3/bin/:$PATH
-alias vim='nvim'
 alias calsync='vdirsyncer sync'
 alias cal='ikhal'
 alias discord='~/Build/Discord/Discord'
