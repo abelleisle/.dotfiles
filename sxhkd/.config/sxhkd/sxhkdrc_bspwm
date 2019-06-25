@@ -158,5 +158,8 @@ super + {Left,Down,Up,Right}
 super + {_,shift+} a
     bspc node @focused:/ --rotate {90,270}
 
+super + ctrl + a
+    bspc node @parent -R 90
+
 super + {_,shift+,ctrl+} r
     bspc node focused -l {above,normal,below}
