@@ -228,6 +228,7 @@ let g:ophigh_filetypes_to_ignore.mips   = 7
 "---------------------------------
 let mapleader = ","
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+nnoremap <leader><tab> mc80A <esc>080lDgelD`cP
 
 map <Up> <Nop>
 map <Down> <Nop>
