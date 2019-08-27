@@ -14,7 +14,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 xsetroot -cursor_name left_ptr &
 
-./.nv/fans &
+#./.nv/fans &
 pulseaudio --start
 
 sxhkd -c ~/.config/sxhkd/sxhkdrc_bspwm &

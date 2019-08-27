@@ -22,7 +22,7 @@ urgent_bg=#ed5554
 ;--------------------------------------------
 
 [bar/base]
-monitor=DP-1
+monitor=DP-0
 dpi=96
 width=100%
 height=20

@@ -8,7 +8,7 @@ case $class in
     (Spotify) echo desktop=9;;
     (discord) echo desktop=9;;
     (Gimp*) echo state=floating;;
-    (Steam) echo state=floating\ desktop=8;;
+    #(Steam) echo state=floating\ desktop=8;;
 
     (main) echo state=floating;;
     (loxel) echo state=floating;;

@@ -38,8 +38,12 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'artur-shaik/vim-javacomplete2'
 
+    "CPP
     Plug 'Valloric/vim-operator-highlight'
-    Plug 'bfrg/vim-cpp-modern'
+    "Plug 'bfrg/vim-cpp-modern'
+    Plug 'octol/vim-cpp-enhanced-highlight'
+    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
     Plug 'Yggdroot/indentLine'
 
     Plug 'dylanaraps/wal.vim'
