@@ -17,6 +17,7 @@ xsetroot -cursor_name left_ptr &
 #./.nv/fans &
 pulseaudio --start
 
+export SXHKD_SHELL=/bin/zsh
 sxhkd -c ~/.config/sxhkd/sxhkdrc_bspwm &
 ~/.config/polybar/launch.sh
 

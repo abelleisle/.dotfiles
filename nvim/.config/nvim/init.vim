@@ -23,13 +23,14 @@ call plug#begin('~/.config/nvim/plugged')
     if has('nvim')
         Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
         Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
-        Plug 'zchee/deoplete-clang'
+        "Plug 'zchee/deoplete-clang'
     else
         Plug 'Shougo/deoplete.nvim'
         Plug 'roxma/nvim-yarp'
         Plug 'roxma/vim-hug-neovim-rpc'
     endif
     Plug 'SirVer/ultisnips'
+    "Plug 'xavierd/clang_complete'
     ""Plug 'Shougo/neosnippet'
     ""Plug 'Shougo/neosnippet-snippets'
     Plug 'honza/vim-snippets'
@@ -53,6 +54,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'JPR75/vip'
     Plug 'vim-syntastic/syntastic'
     Plug 'suoto/vim-hdl'
+    Plug 'tikhomirov/vim-glsl'
 
     Plug 'christoomey/vim-tmux-navigator'
 
@@ -262,6 +264,7 @@ nnoremap <c-l> <c-w>l
 
 nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>s :split<CR>
+nnoremap <Leader>n :noh<CR>
 
 " Code Folding
 "---------------------------------
@@ -370,6 +373,7 @@ autocmd! FileType tex call TexEdit()
 " IndentLine
 "---------------------------------
 let g:indentLine_color_term = 8
+:set list lcs=tab:\¦\ 
 
 " Vim-CloseTag
 "---------------------------------
@@ -408,7 +412,7 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " Vim-Licenses
 "---------------------------------
-let g:licenses_authors_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
+"let g:licenses_authors_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
 let g:licenses_copyright_holders_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
 
 " Markdown
@@ -421,3 +425,8 @@ augroup markdownSpell
     autocmd FileType markdown setlocal spell
     autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
+
+" Clang-Complete
+"---------------------------------
+"let g:clang_library_path='/usr/lib/libLLVM.so'
+let g:clang_library_path='/usr/lib/libclang.so'
