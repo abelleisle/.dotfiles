@@ -35,6 +35,13 @@ call plug#begin('~/.config/nvim/plugged')
     ""Plug 'Shougo/neosnippet-snippets'
     Plug 'honza/vim-snippets'
 
+    " AUTO COMPLETION
+    "Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+    " Need ccls installed for C/C++
+    " Need lua_lsp for lua autocompletion
+    " MUST run :CocInstall coc-snippets to get snippets support
+    "Plug 'jackguo380/vim-lsp-cxx-highlight'
+    
     Plug 'https://github.com/jiangmiao/auto-pairs'
 
     Plug 'artur-shaik/vim-javacomplete2'
@@ -92,6 +99,7 @@ elseif hostname == "aarch"
 endif
 
 syntax on
+set hidden
 set number relativenumber
 set ruler
 set spelllang=en_us
@@ -295,7 +303,7 @@ let g:deoplete#enable_at_startup = 1
 
 "UltiSnips
 let g:UltiSnipsExpandTrigger="<C-k>"
-let g:UltiSnipsJumpForwardTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-n>"
 let g:UltiSnipsJumpBackwardTrigger="<C-p>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
@@ -430,3 +438,9 @@ augroup END
 "---------------------------------
 "let g:clang_library_path='/usr/lib/libLLVM.so'
 let g:clang_library_path='/usr/lib/libclang.so'
+
+
+" CXX highlighting
+"---------------------------------
+"let g:lsp_cxx_hl_use_text_props = 1
+set updatetime=300
