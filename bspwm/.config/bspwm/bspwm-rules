@@ -4,11 +4,16 @@ id=$1;
 instance=$3;
 class=$2;
 
+FLOATING_DESKTOP_ID=$(bspc query -D -d '6')
+desk_id=$(bspc query -D -d "${5:-focused}")
+
+[ "$FLOATING_DESKTOP_ID" = "$desk_id" ] && echo "state=floating"
+
 case $class in
     (Spotify) echo desktop=9;;
     (discord) echo desktop=9;;
     (Gimp*) echo state=floating;;
-    #(Steam) echo state=floating\ desktop=8;;
+    (Steam) echo desktop=8;;
 
     (main) echo state=floating;;
     (loxel) echo state=floating;;

@@ -25,6 +25,7 @@ bspc config focus_by_distance 	true
 #bspc config history_aware_focus	true
 bspc wm --record-history on;
 
+#bspc config external_rules_command "./.config/bspwm/bspwm-floating"
 bspc config external_rules_command "./.config/bspwm/bspwm-rules"
 
 bspc config focus_follows_pointer true
