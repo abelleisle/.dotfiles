@@ -72,10 +72,10 @@ if has("nvim")
   let g:terminal_color_14 = "#c28aa3"
   let g:terminal_color_15 = "#926b3e"
   let g:terminal_color_background = g:terminal_color_15
-  let g:terminal_color_foreground = g:terminal_color_7
+  let g:terminal_color_foreground = g:terminal_color_0
   if &background == "light"
     let g:terminal_color_background = g:terminal_color_7
-    let g:terminal_color_foreground = g:terminal_color_2
+    let g:terminal_color_foreground = g:terminal_color_0
   endif
 endif
 
@@ -116,18 +116,18 @@ call <sid>hi("ErrorMsg",      s:gui08, s:gui00, s:cterm08, s:cterm00, "", "")
 call <sid>hi("Exception",     s:gui08, "", s:cterm08, "", "", "")
 call <sid>hi("FoldColumn",    s:gui0C, s:gui01, s:cterm0C, s:cterm01, "", "")
 call <sid>hi("Folded",        s:gui03, s:gui01, s:cterm04, s:cterm01, "", "")
-call <sid>hi("IncSearch",     s:gui01, s:gui09, "none", s:cterm07, "none", "")
+call <sid>hi("IncSearch",     s:gui01, s:gui09, "none", s:cterm01, "none", "")
 call <sid>hi("Italic",        "", "", "", "", "none", "")
 call <sid>hi("Macro",         s:gui08, "", s:cterm08, "", "", "")
 call <sid>hi("MatchParen",    "", s:gui03, "", s:cterm03,  "", "")
 call <sid>hi("ModeMsg",       s:gui0B, "", s:cterm03, "", "", "")
 call <sid>hi("MoreMsg",       s:gui0B, "", s:cterm07, "", "", "")
 call <sid>hi("Question",      s:gui0D, "", s:cterm0D, "", "", "")
-call <sid>hi("Search",        "", s:gui07, "none", s:cterm07,  "", "")
+call <sid>hi("Search",        "", s:gui07, "none", s:cterm0E,  "", "")
 call <sid>hi("SpecialKey",    s:gui03, "", s:cterm02, "", "", "")
 call <sid>hi("TooLong",       s:gui08, "", s:cterm08, "", "", "")
 call <sid>hi("Underlined",    s:gui08, "", s:cterm08, "", "", "")
-call <sid>hi("Visual",        "", s:gui02, "", s:cterm07, "", "")
+call <sid>hi("Visual",        "", s:gui02, "", s:cterm00, "", "")
 call <sid>hi("VisualNOS",     s:gui08, "", s:cterm08, "", "", "")
 call <sid>hi("WarningMsg",    s:gui08, "", s:cterm08, "", "", "")
 call <sid>hi("WildMenu",      s:gui08, s:gui09, s:cterm09, s:cterm0D, "", "")
@@ -142,7 +142,7 @@ call <sid>hi("StatusLineNC",  s:gui03, s:gui01, s:cterm04, s:cterm00, "none", ""
 call <sid>hi("VertSplit",     s:gui01, s:gui01, s:cterm07, s:cterm00, "none", "")
 call <sid>hi("ColorColumn",   "", s:gui01, "", s:cterm07, "none", "")
 call <sid>hi("CursorColumn",  "", s:gui01, "", s:cterm07, "none", "")
-call <sid>hi("CursorLine",    "", s:gui01, "", s:cterm07, "none", "")
+call <sid>hi("CursorLine",    "", s:gui01, "", s:cterm00, "none", "")
 call <sid>hi("CursorLineNr",  s:gui04, s:gui01, s:cterm0A, "none", "bold", "")
 call <sid>hi("QuickFixLine",  "", s:gui01, "", s:cterm01, "none", "")
 call <sid>hi("PMenu",         s:gui05, s:gui01, s:cterm05, s:cterm01, "none", "")

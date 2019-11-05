@@ -1,6 +1,8 @@
 "   
 " ~/.vimrc
 "
+"
+"line 
 
 " Vundle
 "---------------------------------
@@ -294,9 +296,9 @@ let g:deoplete#enable_at_startup = 1
 "xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 "UltiSnips
-let g:UltiSnipsExpandTrigger="<C-k>"
-let g:UltiSnipsJumpForwardTrigger="<C-k>"
-let g:UltiSnipsJumpBackwardTrigger="<C-p>"
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " SuperTab like snippets behavior.

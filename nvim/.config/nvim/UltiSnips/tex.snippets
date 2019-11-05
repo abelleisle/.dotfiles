@@ -13,6 +13,10 @@ else:
 `$2
 endsnippet
 
+snippet ms "Sub" wA
+${1:var}_{${2:ss}}${0}
+endsnippet
+
 snippet sign "Signature"
 Yours truly,
 
@@ -25,6 +29,10 @@ endsnippet
 
 snippet '(\d+si)' "Siunits" wA
 ~\\si{${1}}${0}
+endsnippet
+
+snippet mt "mathit" wA
+\\mathit{${1:var}}${0}
 endsnippet
 
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
