@@ -111,9 +111,6 @@ set showcmd
 " cut long messages
 set shm=atI
 
-" set textwidth=80
-set textwidth=0 wrapmargin=0
-
 " wrap long lines at the word
 set wrap linebreak nolist
 
@@ -144,10 +141,6 @@ set directory=~/.config/nvim/swap,~/tmp,.      " keep swp files under ~/.vim/swa
 
 " Indenting
 "---------------------------------
-"set tabstop=4
-"set shiftwidth=4
-"set softtabstop=4
-"set smarttab
 set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
 
 " Status
@@ -217,8 +210,7 @@ endfunction
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
 autocmd BufNewFile,BufRead *.asm set filetype=nasm
 autocmd BufNewFile,BufRead *.lua set filetype=lua
-"hi Comment ctermfg=red
-"hi CursorLineNr ctermfg=7
+
 noremap <Leader>c :set cursorcolumn! <CR>
 
 set colorcolumn=81
@@ -340,7 +332,6 @@ let g:ctrlp_use_caching=0
 "---------------------------------
 "autocmd! FileType c,cpp,java,php call CSyntaxAfter()
 
-
 " NERDTree
 "--------------------------------
 
@@ -354,7 +345,6 @@ let g:syntastic_quiet_messages = {"level": "warnings"}
 let g:syntastic_cpp_compiler_options = "-std=c++17 -Wall -Wextra -Werror -Wpedantic -Isrc -Iinclude Iinc -Ilib"
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': ['c','cpp','h','hpp'] }
 
-
 " LaTeX - Box
 "---------------------------------
 let g:tex_flavor = "latex"
@@ -366,19 +356,6 @@ let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_preview_continuously = 1
 let g:LatexBox_latexmk_options = '-shell-escape'
 let g:LatexBox_viewer = "mupdf"
-
-function! TexEdit()
-    set modeline
-    set colorcolumn=
-
-    map <Leader>m :Latexmk<CR>
-
-    Goyo 80%
-
-    setlocal spell 
-endfunction
-
-autocmd! FileType tex call TexEdit()
 
 " IndentLine
 "---------------------------------
@@ -425,17 +402,6 @@ let g:closetag_close_shortcut = '<leader>>'
 "let g:licenses_authors_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
 let g:licenses_copyright_holders_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
 
-" Markdown
-"---------------------------------
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_conceal = 0
-
-augroup markdownSpell
-    autocmd!
-    autocmd FileType markdown setlocal spell
-    autocmd BufRead,BufNewFile *.md setlocal spell
-augroup END
-
 " Clang-Complete
 "---------------------------------
 "let g:clang_library_path='/usr/lib/libLLVM.so'
@@ -446,3 +412,44 @@ let g:clang_library_path='/usr/lib/libclang.so'
 "---------------------------------
 "let g:lsp_cxx_hl_use_text_props = 1
 set updatetime=300
+
+"---------------------------------
+"---------------------------------
+" FILETYPES
+"---------------------------------
+"---------------------------------
+
+" Markdown
+"---------------------------------
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
+
+augroup markdownSpell
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd FileType markdown setlocal spell
+    autocmd FileType markdown set tw=80 fo+=wa
+augroup END
+
+" txt
+"---------------------------------
+augroup text
+    autocmd!
+    autocmd FileType text setlocal spell
+    autocmd FileType text set tw=80 fo+=wa
+augroup END
+
+" LaTeX/tex
+"---------------------------------
+function! TexEdit()
+    set modeline
+    set colorcolumn=
+
+    map <Leader>m :Latexmk<CR>
+
+    Goyo 80%
+
+    setlocal spell 
+endfunction
+
+autocmd! FileType tex call TexEdit()
