@@ -27,8 +27,8 @@ snippet fq "Fraction" wA
 \\frac{${1:num}}{${2:denom}} ${0}
 endsnippet
 
-snippet '(\d+si)' "Siunits" wA
-~\\si{${1}}${0}
+snippet '(\d+)(si)' "Siunits" wrA
+`!p snip.rv = match.group(1)`\si{$1}$0
 endsnippet
 
 snippet mt "mathit" wA
@@ -41,4 +41,12 @@ endsnippet
 
 snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+snippet // "Fraction" iA
+\\frac{$1}{$2}$0
+endsnippet
+
+snippet /int "Fraction" iA
+\\int_{$1}^{$2} $3 ~d$4 $0
 endsnippet
