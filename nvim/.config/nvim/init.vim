@@ -11,9 +11,15 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.config/nvim/plugged')
 
+    " AUTO COMPLETION
+    Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+    " Need ccls installed for C/C++
+    " Need lua_lsp for lua autocompletion
+    " MUST run :CocInstall coc-snippets to get snippets support
+    Plug 'jackguo380/vim-lsp-cxx-highlight'
+
     Plug 'https://github.com/tpope/vim-fugitive'
     Plug 'tpope/vim-unimpaired'
-    Plug 'airblade/vim-gitgutter'
     Plug 'LaTeX-Box-Team/LaTeX-Box'
 
     Plug 'scrooloose/nerdtree'
@@ -21,8 +27,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ctrlpvim/ctrlp.vim'
 
     if has('nvim')
-        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
+        "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        "Plug 'Shougo/deoppet.nvim', { 'do': ':UpdateRemotePlugins' }
         "Plug 'zchee/deoplete-clang'
     else
         Plug 'Shougo/deoplete.nvim'
@@ -34,22 +40,17 @@ call plug#begin('~/.config/nvim/plugged')
     ""Plug 'Shougo/neosnippet'
     ""Plug 'Shougo/neosnippet-snippets'
     Plug 'honza/vim-snippets'
+    Plug 'justinmk/vim-sneak'
+    Plug 'easymotion/vim-easymotion'
 
-    " AUTO COMPLETION
-    "Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-    " Need ccls installed for C/C++
-    " Need lua_lsp for lua autocompletion
-    " MUST run :CocInstall coc-snippets to get snippets support
-    "Plug 'jackguo380/vim-lsp-cxx-highlight'
-    
     Plug 'https://github.com/jiangmiao/auto-pairs'
 
     Plug 'artur-shaik/vim-javacomplete2'
 
     "CPP
-    Plug 'Valloric/vim-operator-highlight'
+    "Plug 'Valloric/vim-operator-highlight'
     "Plug 'bfrg/vim-cpp-modern'
-    Plug 'octol/vim-cpp-enhanced-highlight'
+    "Plug 'octol/vim-cpp-enhanced-highlight'
     "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     Plug 'Yggdroot/indentLine'
@@ -74,6 +75,10 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'majutsushi/tagbar'
     
+    Plug 'morhetz/gruvbox'
+
+    Plug 'airblade/vim-gitgutter'
+    
     "TODO fix this one
     "Plugin 'terryma/vim-multiple-cursors'
     "
@@ -91,9 +96,19 @@ filetype plugin indent on
 
 " General Options
 "---------------------------------
+
+set termguicolors
+
 let hostname = substitute(system('hostname'), '\n', '', '')
 if hostname == "adesktop"
-    colorscheme agila
+    "colorscheme agila
+    set background=dark
+    let g:gruvbox_italic=1
+    let g:gruvbox_bold=1
+    let g:gruvbox_underline=1
+    let g:gruvbox_undercurl=1
+    let g:gruvbox_contrast_dark = 'hard'
+    colorscheme gruvbox
 elseif hostname == "aarch"
     colorscheme dawn
 endif
@@ -105,6 +120,8 @@ set ruler
 set spelllang=en_us
 "!set showmode
 set showcmd
+set scrolloff=15
+set signcolumn=yes
 
 " cut long messages
 set shm=atI
@@ -174,7 +191,7 @@ set statusline+=%#TeritaryBlock#
 set statusline+=\ %f\ 
 set statusline+=%M\ 
 set statusline+=%#TeritaryBlock#
-set statusline+=%=
+set statusline+=%=\ %l\,%c\ 
 set statusline+=%#SecondaryBlock#
 set statusline+=\ %Y\ 
 set statusline+=%#PrimaryBlock#
