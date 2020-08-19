@@ -67,6 +67,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
     Plug 'antoyo/vim-licenses'
 
@@ -451,3 +452,7 @@ function! TexEdit()
 endfunction
 
 autocmd! FileType tex call TexEdit()
+
+" Markdown Previewer
+"---------------------------------
+let g:mkdp_auto_close = 0
