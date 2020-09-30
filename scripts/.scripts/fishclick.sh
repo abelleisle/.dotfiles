@@ -19,5 +19,5 @@ sleep 3;
 
 while true
 do
-    xdotool click --delay 500 --repeat 1 3;
+    xdotool click --delay 250 --repeat 1 3;
 done

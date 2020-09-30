@@ -68,6 +68,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
     Plug 'antoyo/vim-licenses'
 
@@ -101,14 +102,14 @@ set termguicolors
 
 let hostname = substitute(system('hostname'), '\n', '', '')
 if hostname == "adesktop"
-    "colorscheme agila
-    set background=dark
-    let g:gruvbox_italic=1
-    let g:gruvbox_bold=1
-    let g:gruvbox_underline=1
-    let g:gruvbox_undercurl=1
-    let g:gruvbox_contrast_dark = 'hard'
-    colorscheme gruvbox
+    colorscheme agila
+    "set background=dark
+    "let g:gruvbox_italic=1
+    "let g:gruvbox_bold=1
+    "let g:gruvbox_underline=1
+    "let g:gruvbox_undercurl=1
+    "let g:gruvbox_contrast_dark = 'hard'
+    "colorscheme gruvbox
 elseif hostname == "aarch"
     colorscheme dawn
 endif
@@ -415,7 +416,7 @@ let g:closetag_close_shortcut = '<leader>>'
 " Vim-Licenses
 "---------------------------------
 "let g:licenses_authors_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
-let g:licenses_copyright_holders_name = 'Belle-Isle, Andrew <drumsetmonkey@gmail.com>'
+let g:licenses_copyright_holders_name = 'Belle-Isle, Andrew <abelleisle@protonmail.com>'
 
 " Clang-Complete
 "---------------------------------
@@ -468,3 +469,7 @@ function! TexEdit()
 endfunction
 
 autocmd! FileType tex call TexEdit()
+
+" Markdown Previewer
+"---------------------------------
+let g:mkdp_auto_close = 0

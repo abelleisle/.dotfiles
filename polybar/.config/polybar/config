@@ -22,7 +22,7 @@ urgent_bg=#ed5554
 ;--------------------------------------------
 
 [bar/base]
-monitor=DP-0
+monitor=${env:MONITOR_1:DP-0}
 dpi=96
 width=100%
 height=20
@@ -50,14 +50,16 @@ font-1=siji:size=10;2
 font-2=GohuFont:pixelsize=10;2
 
 modules-left= bspwm xwindow
-modules-center= mpd
-modules-right= temperature cpu memory volume date
+modules-center= music playpause
+modules-right= temperature cpu memory date dunst
 
 fixed-center = true
 
+enable-ipc=true
+
 [bar/second]
 inherit = bar/base
-monitor = DVI-D-0
+monitor = ${env:MONITOR_2:DVI-D-0}
 
 ;--------------------------------------------
 ; modules                                   ;
@@ -144,7 +146,7 @@ label-padding=0
 [module/music]
 type = custom/script
 exec = echo $(playerctl metadata artist) - $(playerctl metadata title)
-interval = 2
+interval = 1
 
 format = <label>
 
@@ -161,6 +163,19 @@ format-prefix-padding=1
 click-left = playerctl previous
 click-middle = playerctl play-pause
 click-right = playerctl next
+
+[module/playpause]
+type = custom/script
+exec = echo $(playerctl status)
+click-left = "playerctl play-pause"
+interval = 1
+
+format = <label>
+
+label = "%output%"
+label-background=${colors.modules_bg}
+label-foreground=${colors.modules_fg}
+label-padding=1
 
 [module/mpd]
 type = internal/mpd
@@ -216,11 +231,14 @@ icon-next-foreground = ${colors.modules_prefix_fg}
 icon-next-padding=1
 
 [module/volume]
-type=internal/volume
+type=internal/pulseaudio
 format-volume =<label-volume>
 master-soundcard = default
 speaker-soundcard = default
 headphone-soundcard = default
+interval = 1
+sink = alsa_output.usb-Schiit_Audio_Schiit_Modi_Uber-00.analog-stereo
+use-ui-max = false
 
 format-volume-prefix=
 format-volume-prefix-background=${colors.modules_prefix_bg}
@@ -393,3 +411,25 @@ label-empty-foreground = ${colors.bar_bg}
 label-empty-padding = 1
 
 ; vim:ft=dosini
+
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python ~/.scripts/polybar-spotify/spotify_status.py -f '{artist}: {song}'
+format-underline = #1db954
+
+[module/dunst]
+type = custom/ipc
+initial = 1
+format = <output>
+format-foreground = ${colors.modules_fg}
+format-background = ${colors.modules_bg}
+
+format-prefix = 
+format-prefix-foreground = ${colors.modules_prefix_fg}
+format-prefix-background = ${colors.modules_prefix_bg}
+
+hook-0 = echo "%{A1:notify-send "DUNST_COMMAND_PAUSE" && polybar-msg hook dunst 2:}%{A}"
+hook-1 = echo "%{A1:notify-send "DUNST_COMMAND_RESUME" && polybar-msg hook dunst 1:}%{A}"

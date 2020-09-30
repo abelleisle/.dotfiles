@@ -57,7 +57,7 @@
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
-      <name>Ttyp0</name>
+      <name>Fira Code</name>
       <size>8</size>
       <!-- font size in points -->
       <weight>Bold</weight>
@@ -66,16 +66,16 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveWindow">
-      <name>Ttyp0</name>
+      <name>Fira Code Medium</name>
       <size>8</size>
       <!-- font size in points -->
-      <weight>Bold</weight>
+      <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
       <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuHeader">
-      <name>Ttyp0</name>
+      <name>Fira Code weight=453</name>
       <size>9</size>
       <!-- font size in points -->
       <weight>Normal</weight>
@@ -84,8 +84,8 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="MenuItem">
-      <name>Ttyp0</name>
-      <size>9</size>
+      <name>Fira Code weight=453</name>
+      <size>8</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -93,19 +93,19 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="ActiveOnScreenDisplay">
-      <name>Ttyp0</name>
-      <size>9</size>
+      <name>Fira Code</name>
+      <size>8</size>
       <!-- font size in points -->
-      <weight>Bold</weight>
+      <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
       <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveOnScreenDisplay">
-      <name>Ttyp0</name>
-      <size>9</size>
+      <name>Fira Code</name>
+      <size>8</size>
       <!-- font size in points -->
-      <weight>Bold</weight>
+      <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
       <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
@@ -159,8 +159,8 @@
      Many programs reserve space automatically, but you can use this in other
      cases. -->
   <margins>
-    <top>20</top>
-    <bottom>0</bottom>
+    <top>0</top>
+    <bottom>30</bottom>
     <left>0</left>
     <right>0</right>
   </margins>
@@ -172,7 +172,7 @@
     <noStrut>no</noStrut>
     <stacking>Above</stacking>
     <!-- 'Above', 'Normal', or 'Below' -->
-    <direction>Vertical</direction>
+    <direction>Horizontal</direction>
     <!-- 'Vertical' or 'Horizontal' -->
     <autoHide>no</autoHide>
     <hideDelay>300</hideDelay>
@@ -365,6 +365,8 @@
     </keybind>
     <keybind key="W-X">
       <action name="ToggleMaximize"/>
+      <direction>horizontal</direction>
+      <direction>vertical</direction>
     </keybind>
     <keybind key="W-S-X">
       <action name="ToggleFullscreen"/>
@@ -499,36 +501,6 @@
         <action name="FocusToBottom"/>
         <action name="Unfocus"/>
       </mousebind>
-      <mousebind button="A-Up" action="Click">
-        <action name="GoToDesktop">
-          <to>previous</to>
-        </action>
-      </mousebind>
-      <mousebind button="A-Down" action="Click">
-        <action name="GoToDesktop">
-          <to>next</to>
-        </action>
-      </mousebind>
-      <mousebind button="C-A-Up" action="Click">
-        <action name="GoToDesktop">
-          <to>previous</to>
-        </action>
-      </mousebind>
-      <mousebind button="C-A-Down" action="Click">
-        <action name="GoToDesktop">
-          <to>next</to>
-        </action>
-      </mousebind>
-      <mousebind button="A-S-Up" action="Click">
-        <action name="SendToDesktop">
-          <to>previous</to>
-        </action>
-      </mousebind>
-      <mousebind button="A-S-Down" action="Click">
-        <action name="SendToDesktop">
-          <to>next</to>
-        </action>
-      </mousebind>
     </context>
     <context name="Titlebar">
       <mousebind button="Left" action="Drag">
@@ -536,6 +508,8 @@
       </mousebind>
       <mousebind button="Left" action="DoubleClick">
         <action xmlns="http://openbox.org/3.4/rc" name="ToggleMaximize"/>
+        <direction>vertical</direction>
+        <direction>horizontal</direction>
       </mousebind>
       <mousebind button="Up" action="Click">
         <action name="if">
@@ -699,6 +673,8 @@
       </mousebind>
       <mousebind button="Left" action="Click">
         <action name="ToggleMaximize"/>
+        <direction>vertical</direction>
+        <direction>horizontal</direction>
       </mousebind>
       <mousebind button="Middle" action="Click">
         <action name="ToggleMaximize">
@@ -823,9 +799,6 @@
     <!-- show the manage desktops section in the client-list-(combined-)menu -->
   </menu>
   <applications>
-    <application class="*">
-      <decor>no</decor>
-    </application>
     <application class="oblogout">
       <position force="yes">
         <monitor>1</monitor>

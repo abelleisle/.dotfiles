@@ -16,7 +16,7 @@
 #
 #xfce-mcs-manager &
 #feh --bg-fill ~/Pictures/Wallpapers/tree.png &
-#polybar base &
-#polybar second &
-#owncloud &
-#dunst &
+sxhkd -c ~/.config/sxhkd/sxhkdrc_2bwm &
+tint2 &
+nextcloud &
+dunst &

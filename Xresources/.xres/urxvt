@@ -18,7 +18,7 @@ URxvt.scrollBar:        false
 URxvt.scrollstyle:      plain
 URxvt.internalBorder:   20
 URxvt.perl-ext-common:  default,matcher
-URxvt.url-launcher:     qutebrowser
+URxvt.url-launcher:     firefox
 URxvt.matcher.button:   1
 URxvt.secondaryScreen:  1
 URxvt.secondaryWheel:   1

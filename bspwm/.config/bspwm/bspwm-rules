@@ -13,10 +13,12 @@ case $class in
     (Spotify) echo desktop=9;;
     (discord) echo desktop=9;;
     (Gimp*) echo state=floating;;
-    (Steam) echo desktop=8;;
+    (Steam) echo desktop=8 follow=no;;
 
     (main) echo state=floating;;
     (loxel) echo state=floating;;
+    (Qemu-system-i386) echo state=floating;;
+    (*Octave*) echo state=floating;;
 
     ('')
             case $(ps -p "$(xdo pid $id)" -o comm= 2>/dev/null) in

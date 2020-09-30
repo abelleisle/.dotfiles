@@ -2,6 +2,21 @@
 	--bar-height: 120px;
 }
 
+@font-face {
+    font-family: 'Fira Code';
+    src:
+        local('Fira Code Retina');
+        local('Fira Code Retina'),
+        url('FiraCode-Retina.otf');
+        font-weight: regular;
+        font-style: normal;
+}
+
+body {
+    font-family: 'Iosevka';
+    font-size: 12px;
+}
+
 /*Round corner cover image*/
 .card-image,
 .card-placeholder-wrapper,
@@ -531,6 +546,7 @@ span.glue-page-header__title-text {
 .view-player {
 	height: var(--bar-height) !important;
 	border-top: 0;
+    font-size: 10px;
 }
 
 .view-player .now-playing {

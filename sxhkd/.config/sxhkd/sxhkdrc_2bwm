@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	urxvt
+	kitty
 
 # program launcher
 super + d
@@ -17,13 +17,6 @@ super + shift + d
 super + Escape
 	pkill -USR1 -x sxhkd
 
-# run keepassxc
-super + shift + backslash
-	keepassxc
-
-# auto type keepass password
-super + backslash
-	keepassxc --auto-type
 #
 # mpc controls
 #
@@ -47,7 +40,7 @@ XF86AudioRaiseVolume
 # lower volume
 XF86AudioLowerVolume
 	mpc volume -2
-
+#
 #
 # general keybinds
 #

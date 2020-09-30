@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.scripts:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/andy/.oh-my-zsh
@@ -105,13 +106,12 @@ source $ZSH/oh-my-zsh.sh
 #export PATH=~/.scripts/:$PATH
 #export PATH=~/Extra/Vivado/Vivado/2018.3/bin/:$PATH
 alias calsync='vdirsyncer sync'
-alias cal='ikhal'
 alias discord='~/Build/Discord/Discord'
 
 mcd()
 {
-    mkdir $@
-    cd $@
+    mkdir $1
+    cd $1
 }
 
 function swap()         
