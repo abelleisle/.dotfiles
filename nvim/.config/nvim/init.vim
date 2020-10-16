@@ -12,7 +12,7 @@ filetype off                  " required
 call plug#begin('~/.config/nvim/plugged')
 
     " AUTO COMPLETION
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Need ccls installed for C/C++
     " Need lua_lsp for lua autocompletion
     " MUST run :CocInstall coc-snippets to get snippets support
@@ -20,7 +20,8 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'https://github.com/tpope/vim-fugitive'
     Plug 'tpope/vim-unimpaired'
-    Plug 'LaTeX-Box-Team/LaTeX-Box'
+    Plug 'lervag/vimtex'
+    Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
 
     Plug 'scrooloose/nerdtree'
     Plug 'jistr/vim-nerdtree-tabs'
@@ -61,7 +62,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'JPR75/vip'
     Plug 'vim-syntastic/syntastic'
-    Plug 'suoto/vim-hdl'
+    "Plug 'suoto/vim-hdl'
     Plug 'tikhomirov/vim-glsl'
 
     Plug 'christoomey/vim-tmux-navigator'
@@ -324,7 +325,8 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " For conceal markers.
 if has('conceal')
-  set conceallevel=2 concealcursor=niv
+  set conceallevel=2
+  set concealcursor=nc
 endif
 
 " javacomplete
@@ -361,17 +363,25 @@ let g:syntastic_quiet_messages = {"level": "warnings"}
 let g:syntastic_cpp_compiler_options = "-std=c++17 -Wall -Wextra -Werror -Wpedantic -Isrc -Iinclude Iinc -Ilib"
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': ['c','cpp','h','hpp'] }
 
-" LaTeX - Box
+" LaTeX
 "---------------------------------
-let g:tex_flavor = "latex"
-let g:tex_fast = "cmMprs"
-let g:tex_conceal = ""
-let g:tex_fold_enabled = 0
-let g:tex_comment_nospell = 1
-let g:LatexBox_quickfix = 2
-let g:LatexBox_latexmk_preview_continuously = 1
-let g:LatexBox_latexmk_options = '-shell-escape'
-let g:LatexBox_viewer = "mupdf"
+let g:tex_flavor='latex'
+let g:vimtex_view_method='mupdf'
+let g:vimtex_quickfix_mode=0
+let g:tex_superscripts= "[0-9a-zA-Z.,:;+-<>/()=]"
+let g:tex_subscripts= "[0-9a-zA-Z,+-/().]"
+let g:tex_conceal_frac=1
+let g:tex_conceal='abdgm'
+
+"let g:tex_flavor = 'latex'
+"let g:tex_fast = 'cmMprs'
+"let g:tex_conceal = ''
+"let g:tex_fold_enabled = 0
+"let g:tex_comment_nospell = 1
+"let g:LatexBox_quickfix = 2
+"let g:LatexBox_latexmk_preview_continuously = 1
+"let g:LatexBox_latexmk_options = '-shell-escape'
+"let g:LatexBox_viewer = 'mupdf'
 
 " IndentLine
 "---------------------------------
@@ -454,21 +464,6 @@ augroup text
     autocmd FileType text setlocal spell
     autocmd FileType text set tw=80 fo+=wa
 augroup END
-
-" LaTeX/tex
-"---------------------------------
-function! TexEdit()
-    set modeline
-    set colorcolumn=
-
-    map <Leader>m :Latexmk<CR>
-
-    Goyo 80%
-
-    setlocal spell 
-endfunction
-
-autocmd! FileType tex call TexEdit()
 
 " Markdown Previewer
 "---------------------------------
