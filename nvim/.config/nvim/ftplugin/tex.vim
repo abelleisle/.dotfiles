@@ -2,6 +2,7 @@ set modeline
 set colorcolumn=
 
 map <Leader>m :VimtexCompile<CR>
+map <Leader>t :VimtexTocOpen<CR>
 
 Goyo 85%
 
@@ -14,9 +15,9 @@ noremap <silent> $ g$
 onoremap <silent> j gj
 onoremap <silent> k gk
 
+syntax match texSpecialChar '\\\\' contained conceal cchar=↩
+syntax match texSpecialChar '\\%' contained conceal cchar=%
+
 let g:indentLine_enabled = 0
 set conceallevel=2
 set concealcursor=c
-
-syntax match texSpecialChar '\\\\' contained conceal cchar=↩
-syntax match texSpecialChar '\\%' contained conceal cchar=%

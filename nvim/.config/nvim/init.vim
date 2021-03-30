@@ -386,6 +386,7 @@ let g:tex_conceal='abdgm'
 " IndentLine
 "---------------------------------
 let g:indentLine_color_term = 8
+let g:indentLine_setConceal = 0
 :set list lcs=tab:\¦\ 
 
 " Vim-CloseTag

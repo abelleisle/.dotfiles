@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 xrdb -load ~/.Xresources
 
@@ -6,6 +6,10 @@ xset +fp /home/andy/.fonts/
 xset +fp /usr/share/fonts/TTF/
 xset +fp /usr/share/fonts/PCF/
 xset fp rehash
+
+if [ -d "$HOME/.local/bin" ] && (! echo $PATH | grep -q "$HOME/.local/bin"); then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 feh --bg-fill ~/.wallpapers/tree.png
 compton -cCzGb -t-3 -l-5 -r4 --config /dev/null --backend xrender --unredir-if-possible
@@ -15,7 +19,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 xsetroot -cursor_name left_ptr &
 
 #./.nv/fans &
-pulseaudio --start
+#pulseaudio --start
+pipewire &
 
 #export SXHKD_SHELL=/bin/zsh
 #sxhkd -c ~/.config/sxhkd/sxhkdrc_bspwm &
@@ -28,6 +33,7 @@ pulseaudio --start
 
 export MONITOR_1="DP-0"
 export MONITOR_2="DVI-D-0"
+#export MONITOR_2="HDMI-0"
 
 if [[ -z "${_DESKTOP_USER_}" ]]; then
     #statements

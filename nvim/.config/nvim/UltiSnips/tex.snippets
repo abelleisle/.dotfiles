@@ -1,7 +1,7 @@
 snippet dm "Math" wA
 \[
 $1
-.\] $0
+\] $0
 endsnippet
 
 snippet mk "Math" wA
@@ -57,4 +57,13 @@ endsnippet
 
 snippet /ar "Fraction" iA
 \\autoref{$1} $0
+endsnippet
+
+snippet fig "Figure environment" b
+\begin{figure}[${2:htpb}]
+	\centering
+	\includegraphics[width=${3:0.8}\linewidth]{${4:name.ext}}
+	\caption{${5:Figure Caption}}
+	\label{fig:${6:figureLabel}}
+\end{figure} $0
 endsnippet

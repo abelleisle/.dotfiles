@@ -1,5 +1,0 @@
-# Dark theme.
-rofi.theme: ~/.themes/agila/rofi/rofi-dark.rasi
-rofi.font:	ttyp0, 10
-rofi.lines:	8
-rofi.width:	-80
