@@ -5,7 +5,7 @@
       "filetypes": ["c", "cpp", "objc", "objcpp", "h", "hpp"],
       "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
       "initializationOptions": {
-         "compilationDatabaseDirectory": "build", 
+         "compilationDatabaseDirectory": "build",
          "cache": {
            "directory": "/tmp/ccls"
          },

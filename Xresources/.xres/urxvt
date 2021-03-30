@@ -39,7 +39,8 @@ URxvt.cursorUnderline:      false
 *foreground:  #cdd3df
 
 !black
-*color0:  #1a1e24
+#*color0:  #1a1e24
+*color0:  #3b4453
 *color8:  #3b4453
 !*color8:  #ed5554
 

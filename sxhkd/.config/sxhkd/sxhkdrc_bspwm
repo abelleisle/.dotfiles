@@ -7,17 +7,17 @@ super + Return
     kitty
 	#alacritty
 
-# Program launcher
+# Application Launcher
 super + d
-	rofi -show run -display-run ">>>"
-
+    rofi -modi "drun" -show drun -display-drun ">>>"
+#
 # Window Switcher
 super + shift + d
     rofi -show window -display-window ">>>"
 
-# Application Launcher
+# Program launcher
 super + ctrl + d
-    rofi -show drun -display-run ">>>"
+	rofi -show run -display-run ">>>"
 
 # Make sxhkd reload its configuration files:
 super + @Escape
