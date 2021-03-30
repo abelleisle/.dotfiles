@@ -2,6 +2,7 @@ set modeline
 set colorcolumn=
 
 map <Leader>m :VimtexCompile<CR>
+map <Leader>t :VimtexTocOpen<CR>
 
 Goyo 85%
 
