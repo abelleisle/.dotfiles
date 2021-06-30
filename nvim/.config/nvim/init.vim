@@ -2,9 +2,8 @@
 " ~/.vimrc
 "
 
-" Vundle
+" vim-plug
 "---------------------------------
-set nocompatible              " be iMproved, required
 set encoding=utf-8
 filetype off                  " required
 
@@ -25,7 +24,9 @@ call plug#begin('~/.config/nvim/plugged')
 
     Plug 'scrooloose/nerdtree'
     Plug 'jistr/vim-nerdtree-tabs'
-    Plug 'ctrlpvim/ctrlp.vim'
+    "Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
 
     if has('nvim')
         "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -258,7 +259,7 @@ let g:ophigh_filetypes_to_ignore.mips   = 7
 
 " Keybinds
 "---------------------------------
-let mapleader = ","
+let mapleader = " "
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 nnoremap <leader><tab> mc80A <esc>080lDgelD`cP
 
@@ -291,6 +292,7 @@ nnoremap <c-l> <c-w>l
 nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>s :split<CR>
 nnoremap <Leader>n :noh<CR>
+nnoremap <Leader>t :NERDTreeToggle<CR>
 
 " Code Folding
 "---------------------------------
@@ -476,3 +478,9 @@ augroup END
 " Markdown Previewer
 "---------------------------------
 let g:mkdp_auto_close = 0
+
+" fzf
+"---------------------------------
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+nnoremap <c-p> :Files<CR>
+inoremap <c-p> <c-o>:Files<CR>
