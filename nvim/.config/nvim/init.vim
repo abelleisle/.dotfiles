@@ -240,6 +240,7 @@ noremap <Leader>c :set cursorcolumn! <CR>
 
 set colorcolumn=81
 hi colorcolumn ctermfg=14
+set textwidth=80
 
 set fillchars+=vert:│
 
@@ -484,3 +485,4 @@ let g:mkdp_auto_close = 0
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 nnoremap <c-p> :Files<CR>
 inoremap <c-p> <c-o>:Files<CR>
+nnoremap <Leader>f :Rg<CR>

@@ -23,5 +23,6 @@
         "systemverilog"
     ]
     }
-  }
+  },
+  "git.addGBlameToVirtualText": true
 }
