@@ -28,8 +28,11 @@ M.config = function()
         sign_priority = 5,
         status_formatter = nil, -- Use default
         current_line_blame = true,
-        current_line_blame_delay = 1000,
-        current_line_blame_position = 'eol',
+        current_line_blame_opts = {
+            delay = 1000,
+            virt_text = true,
+            virt_text_pos = 'eol'
+        },
         use_internal_diff = true,
     }
 

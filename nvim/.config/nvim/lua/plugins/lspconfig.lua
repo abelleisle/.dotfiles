@@ -93,7 +93,8 @@ M.config = function()
                     workspace = {
                         library = {
                             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                            --library = vim.api.nvim_get_runtime_file("", true),
                         },
                         maxPreload = 100000,
                         preloadFileSize = 10000
