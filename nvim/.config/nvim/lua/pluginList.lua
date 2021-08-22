@@ -19,6 +19,11 @@ packer.init {
     },
     git = {
         clone_timeout = 600, -- Timeout, in seconds, for git clones
+
+        subcommands = {
+            --update = 'pull --ff-only --progress --rebase=false --allow-unrelated-histories',
+        }
+
     }
 }
 
