@@ -20,3 +20,11 @@ vim.g.tex_superscripts= "[0-9a-zA-Z.,:;+-<>/()=]"
 vim.g.tex_subscripts= "[0-9a-zA-Z,+-/().]"
 vim.g.tex_conceal_frac=1
 vim.g.tex_conceal='abdgm'
+vim.g.vimtex_compiler_latexmk = {
+    options = {
+        '--shell-escape',
+        '-verbose',
+        '-file-line-error',
+        '-interaction=nonstopmode'
+    }
+}
