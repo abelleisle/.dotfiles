@@ -21,7 +21,7 @@ packer.init {
         clone_timeout = 600, -- Timeout, in seconds, for git clones
 
         subcommands = {
-            --update = 'pull --ff-only --progress --rebase=false --allow-unrelated-histories',
+            update = 'pull --ff-only --progress --rebase=false --allow-unrelated-histories',
         }
 
     }
@@ -146,27 +146,63 @@ return packer.startup(
         --     }
         -- }
 
-        use { -- Completion Plugin
-            "nvim-lua/completion-nvim",
-            after = "nvim-lspconfig",
-            event = "BufRead",
-            config = function()
-                vim.g.completion_enable_auto_popup = 1
-                vim.g.completion_enable_snippet = 'UltiSnips'
-                -- vim.cmd("autocmd BufEnter * lua require'completion'.on_attach()")
-            end,
+        -- use { -- Completion Plugin
+        --     "nvim-lua/completion-nvim",
+        --     after = "nvim-lspconfig",
+        --     event = "BufRead",
+        --     config = function()
+        --         vim.g.completion_enable_auto_popup = 1
+        --         vim.g.completion_enable_snippet = 'UltiSnips'
+        --         -- vim.cmd("autocmd BufEnter * lua require'completion'.on_attach()")
+        --     end,
+        --     requires = {
+        --         {
+        --             "SirVer/ultisnips",
+        --             config = function()
+        --                 vim.g.UltiSnipsExpandTrigger="<Nop>"
+        --                 vim.g.UltiSnipsJumpForwardTrigger="<Nop>"
+        --                 vim.g.UltiSnipsJumpBackwardTrigger="<Nop>"
+        --                 vim.g.UltiSnipsSnippetDirectories={"UltiSnips"}
+        --             end
+        --         },
+        --         "honza/vim-snippets"
+        --     }
+        -- }
+        
+--         Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+--         " 9000+ Snippets
+--         Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+-- 
+--         " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+--         " Need to **configure separately**
+-- 
+--         Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+
+        use {
+            "ms-jpq/coq_nvim",
+            branch = 'coq',
+
             requires = {
                 {
-                    "SirVer/ultisnips",
-                    config = function()
-                        vim.g.UltiSnipsExpandTrigger="<Nop>"
-                        vim.g.UltiSnipsJumpForwardTrigger="<Nop>"
-                        vim.g.UltiSnipsJumpBackwardTrigger="<Nop>"
-                        vim.g.UltiSnipsSnippetDirectories={"UltiSnips"}
-                    end
+                    'ms-jpq/coq.artifacts',
+                    branch = 'artifacts'
                 },
-                "honza/vim-snippets"
-            }
+                {
+                    'ms-jpq/coq.thirdparty',
+                    branch = '3p'
+                }
+            },
+
+            config = function()
+                vim.g.coq_settings = {
+                    auto_start = 'shut-up',
+                    keymap = {
+                        jump_to_mark = '<C-q>',
+                        bigger_preview = nil
+                    }
+                }
+            end
+
         }
 
         use { -- Automatically format files
@@ -207,9 +243,10 @@ return packer.startup(
             end
         }
 
+        --[[
         use { -- Automatically add ending pairs
             "windwp/nvim-autopairs",
-            --after = "nvim-compe",
+            --after = "coq_nvim",
             config = function()
                 local npairs = require("nvim-autopairs")
                 local ts_conds = require("nvim-autopairs.ts-conds")
@@ -218,15 +255,16 @@ return packer.startup(
                     check_ts = true,
                     ts_config = {
 
-                    }
+                    },
+                    map_cr = false,
+                    enable_check_bracket_line = false
                 })
-
-                -- npairs.add_rules({
-                --     rule("%", "%", "lua")
-                --         :with_pair(ts_conds.is_ts_node({'string','comment'})),
-                --     rule("$", "$", "lua")
-                --         :with_pair(ts_conds.is_not_ts_node({'function'}))
-                -- })
+                npairs.add_rules({
+                    rule("%", "%", "lua")
+                        :with_pair(ts_conds.is_ts_node({'string','comment'})),
+                    rule("$", "$", "lua")
+                        :with_pair(ts_conds.is_not_ts_node({'function'}))
+                })
                 -- require("nvim-autopairs.completion.compe").setup(
                 --     {
                 --         map_cr = true,
@@ -235,7 +273,17 @@ return packer.startup(
                 -- )
             end
         }
+        --]]
 
+        use {
+            "steelsojka/pears.nvim",
+            config = function ()
+                require('pears').setup()
+            end
+        }
+
+
+        --[[
         use { -- Automatically close HTML/XML tags
             "windwp/nvim-ts-autotag",
             after = "nvim-treesitter",
@@ -246,6 +294,7 @@ return packer.startup(
                 })
             end
         }
+        --]]
 
         use {
             "lewis6991/spellsitter.nvim",
@@ -268,15 +317,15 @@ return packer.startup(
             end
         }
 
-        use { -- Easy navigation between pairs
-            "andymass/vim-matchup",
-            event = "CursorMoved",
-            config = function()
-                --vim.g.matchup_matchparen_deferred = 1
-                vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-                vim.g.matchup_honor_rnu = 1
-            end
-        }
+        -- use { -- Easy navigation between pairs
+        --     "andymass/vim-matchup",
+        --     event = "CursorMoved",
+        --     config = function()
+        --         --vim.g.matchup_matchparen_deferred = 1
+        --         --vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+        --         --vim.g.matchup_honor_rnu = 1
+        --     end
+        -- }
 
         use { -- Comment lines easily
             "terrortylor/nvim-comment",

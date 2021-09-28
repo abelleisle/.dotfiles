@@ -24,6 +24,10 @@ M.config = function()
         -- windwp/nvim-autopairs
         autopairs = {
             enable = true,
+        },
+
+        indent = {
+            enable = true
         }
     }
 end
