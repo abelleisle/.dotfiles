@@ -33,7 +33,9 @@ M.config = function()
             virt_text = true,
             virt_text_pos = 'eol'
         },
-        use_internal_diff = true,
+        diff_opts = {
+            internal = true,
+        }
     }
 
     vim.cmd("hi signcolumn guifg=bg   guibg=bg")

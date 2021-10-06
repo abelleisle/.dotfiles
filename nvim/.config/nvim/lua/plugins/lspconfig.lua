@@ -17,7 +17,7 @@ M.config = function()
         }
 
         --require "lsp_signature".on_attach(cfg)
-        require'completion'.on_attach()
+        --require'completion'.on_attach()
 
         buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -46,7 +46,7 @@ M.config = function()
         elseif client.resolved_capabilities.document_range_formatting then
             buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
         end
-    end
+    end -- fn on_attach()
 
     -- lspInstall + lspconfig stuff
 
@@ -56,6 +56,7 @@ M.config = function()
         local lspconf = require("lspconfig")
         local servers = require "lspinstall".installed_servers()
         local util    = require("lspconfig/util")
+        local coq     = require("coq")
         
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -68,17 +69,17 @@ M.config = function()
         }
 
         for _, lang in pairs(servers) do
-            lspconf[lang].setup {
+            lspconf[lang].setup(coq.lsp_ensure_capabilities({
                 on_attach = on_attach,
                 capabilities = capabilities,
                 root_dir = vim.loop.cwd,
                 flags = {
                     debounce_text_changes = 150
                 }
-            }
+            }))
         end
 
-        lspconf.lua.setup {
+        lspconf.lua.setup(coq.lsp_ensure_capabilities({
             on_attach = on_attach,
             capabilities = capabilities,
             settings = {
@@ -104,9 +105,9 @@ M.config = function()
                     }
                 }
             }
-        }
+        }))
 
-        lspconf.ccls.setup {
+        lspconf.ccls.setup(coq.lsp_ensure_capabilities({
           on_attach = on_attach,
           capabilities = capabilities,
           init_options = {
@@ -131,7 +132,7 @@ M.config = function()
                                        '.ccls')(fname) or util.path.dirname(fname)
           end
           -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
-        }
+        }))
         
         -- adds a check to see if any of the active clients have the capability
         -- textDocument/documentHighlight. without the check it was causing constant
@@ -144,7 +145,7 @@ M.config = function()
                 break -- only add the autocmds once
             end
         end
-    end
+    end -- fn setup_servers()
 
     setup_servers()
 
@@ -170,6 +171,6 @@ M.config = function()
     vim.cmd("autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()")
     vim.cmd("autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()")
 
-end
+end -- fn M.config
 
 return M
