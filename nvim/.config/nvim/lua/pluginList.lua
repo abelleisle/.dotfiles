@@ -64,7 +64,7 @@ return packer.startup(
         --------------
 
         use { -- Gruvbox theme
-            "npxbr/gruvbox.nvim",
+            "ellisonleao/gruvbox.nvim",
             requires = {"rktjmp/lush.nvim"}
         }
 
