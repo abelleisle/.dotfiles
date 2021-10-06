@@ -56,30 +56,30 @@ M.config = function()
         local lspconf = require("lspconfig")
         local servers = require "lspinstall".installed_servers()
         local util    = require("lspconfig/util")
-        local coq     = require("coq")
         
         local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-        capabilities.textDocument.completion.completionItem.resolveSupport = {
-            properties = {
-                'documentation',
-                'detail',
-                'additionalTextEdits',
-            }
-        }
+        -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+        -- capabilities.textDocument.completion.completionItem.resolveSupport = {
+        --     properties = {
+        --         'documentation',
+        --         'detail',
+        --         'additionalTextEdits',
+        --     }
+        -- }
+        capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
         for _, lang in pairs(servers) do
-            lspconf[lang].setup(coq.lsp_ensure_capabilities({
+            lspconf[lang].setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
                 root_dir = vim.loop.cwd,
                 flags = {
                     debounce_text_changes = 150
                 }
-            }))
+            }
         end
 
-        lspconf.lua.setup(coq.lsp_ensure_capabilities({
+        lspconf.lua.setup {
             on_attach = on_attach,
             capabilities = capabilities,
             settings = {
@@ -105,9 +105,9 @@ M.config = function()
                     }
                 }
             }
-        }))
+        }
 
-        lspconf.ccls.setup(coq.lsp_ensure_capabilities({
+        lspconf.ccls.setup {
           on_attach = on_attach,
           capabilities = capabilities,
           init_options = {
@@ -123,7 +123,7 @@ M.config = function()
             };
           },
           cmd = { "ccls" },
-          filetypes = { "c", "cpp", "objc", "objcpp" },
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
           --root_dir = vim.loop.cwd,
           root_dir = function(fname)
               return util.root_pattern('compile_commands.json',
@@ -132,7 +132,7 @@ M.config = function()
                                        '.ccls')(fname) or util.path.dirname(fname)
           end
           -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
-        }))
+        }
         
         -- adds a check to see if any of the active clients have the capability
         -- textDocument/documentHighlight. without the check it was causing constant

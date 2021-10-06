@@ -178,6 +178,7 @@ return packer.startup(
 -- 
 --         Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
+        --[[
         use {
             "ms-jpq/coq_nvim",
             branch = 'coq',
@@ -202,7 +203,56 @@ return packer.startup(
                     }
                 }
             end
+        }
+        --]]
 
+        use {
+            "rafamadriz/friendly-snippets",
+            event = "InsertEnter",
+        }
+
+        use {
+            "hrsh7th/nvim-cmp",
+            module = "cmp",
+            after = "friendly-snippets",
+            config = function()
+                require("plugins.cmp").config()
+            end
+        }
+
+        use {
+            "L3MON4D3/LuaSnip",
+            wants = "friendly-snippets",
+            after = "nvim-cmp",
+            config = function()
+                require("plugins.cmp").luasnip()
+            end
+        }
+
+        use {
+            "saadparwaiz1/cmp_luasnip",
+            after = "LuaSnip",
+        }
+
+        use {
+            "hrsh7th/cmp-nvim-lua",
+            after = "cmp_luasnip",
+        }
+
+        use {
+            "hrsh7th/cmp-nvim-lsp",
+            module = "cmp_nvim_lsp",
+            after = "nvim-lspconfig",
+        }
+
+        use {
+            "hrsh7th/cmp-buffer",
+            after = "cmp-nvim-lsp",
+        }
+
+        use {
+            "hrsh7th/cmp-path",
+            after = "cmp-buffer",
         }
 
         use { -- Automatically format files
@@ -243,7 +293,6 @@ return packer.startup(
             end
         }
 
-        --[[
         use { -- Automatically add ending pairs
             "windwp/nvim-autopairs",
             --after = "coq_nvim",
@@ -271,19 +320,27 @@ return packer.startup(
                 --         map_complete = true -- insert () func completion
                 --     }
                 -- )
+                -- you need setup cmp first put this after cmp.setup()
+                require("nvim-autopairs.completion.cmp").setup({
+                    map_cr = true, --  map <CR> on insert mode
+                    map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+                    auto_select = true, -- automatically select the first item
+                    insert = false, -- use insert confirm behavior instead of replace
+                    map_char = { -- modifies the function or method delimiter by filetypes
+                    }
+                })
             end
         }
-        --]]
 
+        --[[
         use {
             "steelsojka/pears.nvim",
             config = function ()
                 require('pears').setup()
             end
         }
+        --]]
 
-
-        --[[
         use { -- Automatically close HTML/XML tags
             "windwp/nvim-ts-autotag",
             after = "nvim-treesitter",
@@ -294,7 +351,6 @@ return packer.startup(
                 })
             end
         }
-        --]]
 
         use {
             "lewis6991/spellsitter.nvim",
@@ -317,15 +373,20 @@ return packer.startup(
             end
         }
 
-        -- use { -- Easy navigation between pairs
-        --     "andymass/vim-matchup",
-        --     event = "CursorMoved",
-        --     config = function()
-        --         --vim.g.matchup_matchparen_deferred = 1
-        --         --vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-        --         --vim.g.matchup_honor_rnu = 1
-        --     end
-        -- }
+        use { -- Easy navigation between pairs
+            "andymass/vim-matchup",
+            event = "CursorMoved",
+            config = function()
+                require('nvim-treesitter.configs').setup {
+                    matchup = {
+                        enable = true,
+                    }
+                }
+                --vim.g.matchup_matchparen_deferred = 1
+                --vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+                --vim.g.matchup_honor_rnu = 1
+            end
+        }
 
         use { -- Comment lines easily
             "terrortylor/nvim-comment",
