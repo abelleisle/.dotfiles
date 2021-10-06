@@ -122,7 +122,7 @@ M.config = function()
             };
           },
           cmd = { "ccls" },
-          filetypes = { "c", "cpp", "objc", "objcpp" },
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda"},
           --root_dir = vim.loop.cwd,
           root_dir = function(fname)
               return util.root_pattern('compile_commands.json',

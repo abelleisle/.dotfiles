@@ -349,5 +349,10 @@ return packer.startup(
             "lervag/vimtex",
             ft = {'tex'},
         }
+
+        use {
+            "lambdalisue/suda.vim"
+        }
+
     end
 )
