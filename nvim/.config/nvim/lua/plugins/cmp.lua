@@ -9,6 +9,7 @@ M.config = function()
     snippet = {
         expand = function(args)
             require("luasnip").lsp_expand(args.body)
+            vim.fn["UltiSnips#Anon"](args.body)
         end,
     },
     formatting = {
@@ -40,19 +41,25 @@ M.config = function()
             select = true,
         },
         ["<Tab>"] = function(fallback)
-            if vim.fn.pumvisible() == 1 then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-n>", true, true, true), "n")
+            if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#ExpandSnippet()<CR>", true, true, true), "")
+            elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<ESC>:call UltiSnips#JumpForwards()<CR>", true, true, true), "")
             elseif require("luasnip").expand_or_jumpable() then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+            elseif vim.fn.pumvisible() == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-n>", true, true, true), "n")
             else
                 fallback()
             end
         end,
         ["<S-Tab>"] = function(fallback)
-            if vim.fn.pumvisible() == 1 then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-p>", true, true, true), "n")
+            if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#JumpBackwards()<CR>", true, true, true), "")
             elseif require("luasnip").jumpable(-1) then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+            elseif vim.fn.pumvisible() == 1 then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-p>", true, true, true), "n")
             else
                 fallback()
             end
@@ -64,6 +71,7 @@ M.config = function()
         { name = "buffer" },
         { name = "nvim_lua" },
         { name = "path" },
+        { name = "ultisnips" },
     },
     }
 

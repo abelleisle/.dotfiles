@@ -88,7 +88,10 @@ M.config = function()
         -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
         open_on_tab         = false,
         -- hijacks new directory buffers when they are opened.
-        update_to_buf_dir   = true,
+        update_to_buf_dir   = {
+            enable = true,   -- enable feature
+            auto_open = true -- open tree if it was previsouly open
+        },
         -- hijack the cursor in the tree to put it at the start of the filename
         hijack_cursor       = false,
         -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) 
@@ -126,7 +129,7 @@ M.config = function()
             -- if true, it will only use your list to set the mappings
             custom_only = false,
             -- list of mappings to set on the tree manually
-            list = {}
+            list = {list}
             }
         }
     }

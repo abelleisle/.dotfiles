@@ -255,6 +255,21 @@ return packer.startup(
             after = "cmp-buffer",
         }
 
+        use {
+            "SirVer/ultisnips",
+            config = function()
+                vim.g.UltiSnipsExpandTrigger="<Nop>"
+                vim.g.UltiSnipsJumpForwardTrigger="<Nop>"
+                vim.g.UltiSnipsJumpBackwardTrigger="<Nop>"
+                vim.g.UltiSnipsSnippetDirectories={"UltiSnips"}
+                vim.g.UltiSnipsRemoveSelectModeMappings = 0
+            end,
+            requires = {
+                "honza/vim-snippets",
+                "quangnguyen30192/cmp-nvim-ultisnips",
+            }
+        }
+
         use { -- Automatically format files
             "sbdchd/neoformat", cmd = "Neoformat"
         }

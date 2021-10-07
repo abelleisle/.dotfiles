@@ -19,8 +19,8 @@ g.gruvbox_bold = 1
 g.gruvbox_underline = 1
 g.gruvbox_undercurl = 1
 g.gruvbox_contrast_dark = "hard"
---vim.cmd([[colorscheme gruvbox]])
-vim.cmd([[colorscheme agila]])
+vim.cmd([[colorscheme gruvbox]])
+--vim.cmd([[colorscheme agila]])
 
 --require "highlights"
 require "mappings"
