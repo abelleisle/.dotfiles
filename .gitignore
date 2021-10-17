@@ -2,3 +2,4 @@ swap/
 undo/
 plugged/
 nvim/.config/nvim/plugin/
+env/bin/zephyr-sdk/

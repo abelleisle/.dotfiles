@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -n $(command -v scream) ]]; then
+    pkill -9 scream
+    scream -i virbr0 -o pulse > /tmp/screamlogs 2>&1 & disown
+else
+    echo "Scream is not installed.."
+fi

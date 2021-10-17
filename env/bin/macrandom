@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "$EUID" -ne 0 ] ; then
+    echo "Script must be run as root"
+    exit
+fi
+
+dev="$(ip route get 8.8.8.8 | awk '{ print $5; exit }')"
+
+ip link set down $dev
+macchanger -r $dev
+ip link set up $dev
