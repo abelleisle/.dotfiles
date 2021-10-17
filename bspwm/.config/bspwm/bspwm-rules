@@ -10,28 +10,15 @@ desk_id=$(bspc query -D -d "${5:-focused}")
 [ "$FLOATING_DESKTOP_ID" = "$desk_id" ] && echo "state=floating"
 
 case $class in
-    # GUI APPS
     (Spotify) echo desktop=9;;
     (discord) echo desktop=9;;
     (Gimp*) echo state=floating;;
-    (Steam*) echo desktop=8 follow=no;;
-    (SpeedCrunch) echo state=floating;;
+    (Steam) echo desktop=8 follow=no;;
 
-    # SYSTEM GUI APPS
-    (Pavucontrol) echo state=floating;;
-    (zoom) echo state=floating;;
-    (feh) echo state=floating;;
-    (kitty) echo state=floating;;
-    (Nextcloud) echo state=floating;;
-
-    # School crap
-    (*Octave*) echo state=floating;;
-    (Vivado) echo state=floating;;
-
-    # Projet Specific
     (main) echo state=floating;;
     (loxel) echo state=floating;;
     (Qemu-system-i386) echo state=floating;;
+    (*Octave*) echo state=floating;;
 
     ('')
             case $(ps -p "$(xdo pid $id)" -o comm= 2>/dev/null) in
