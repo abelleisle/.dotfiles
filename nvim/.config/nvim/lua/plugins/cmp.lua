@@ -40,7 +40,7 @@ M.config = function()
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         },
-        ["<Tab>"] = function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#ExpandSnippet()<CR>", true, true, true), "")
             elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
@@ -52,8 +52,8 @@ M.config = function()
             else
                 fallback()
             end
-        end,
-        ["<S-Tab>"] = function(fallback)
+        end, {"i", "s"}),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#JumpBackwards()<CR>", true, true, true), "")
             elseif require("luasnip").jumpable(-1) then
@@ -63,7 +63,7 @@ M.config = function()
             else
                 fallback()
             end
-        end,
+        end, {"i", "s"})
     },
     sources = {
         { name = "nvim_lsp" },
@@ -79,15 +79,15 @@ end
 
 M.luasnip = function()
     local present, luasnip = pcall(require, "luasnip")
-   if not present then
-      return
-   end
+    if not present then
+        return
+    end
 
-   luasnip.config.set_config {
-      history = true,
-      updateevents = "TextChanged,TextChangedI",
-   }
-   --require("luasnip/loaders/from_vscode").load { path = { chadrc_config.plugins.options.luasnip.snippet_path } }
+    luasnip.config.set_config {
+        history = true,
+        updateevents = "TextChanged,TextChangedI",
+    }
+    --require("luasnip/loaders/from_vscode").load { path = { chadrc_config.plugins.options.luasnip.snippet_path } }
 end
 
 return M
