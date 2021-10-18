@@ -5,9 +5,9 @@
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM=$HOME/.custom-zsh
 
-#if [ -f ~/.profile ]; then
-#    source ~/.profile
-#fi
+if [ -f ~/.profile ]; then
+    source ~/.profile
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

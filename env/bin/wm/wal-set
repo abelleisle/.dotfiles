@@ -18,7 +18,8 @@ reload_dunst() {
             -cf "${color15:-#000000}" \
             -nf "${color15:-#000000}" \
             -frame_color "${color7:-#FFFFFF}" \
-            -fn "Fira Code Regular 12" \
+            -font "FiraCode Nerd Font 12" \
+            -icon_position "left" \
             -geometry "300x60-20+45" &
     fi
 }
@@ -26,13 +27,13 @@ reload_dunst() {
 set_discord() {
 
     # Install with flatpak
-    if [[ -f ${HOME}/.var/app/com.discordapp.Discord/config/BetterDiscord/themes ]] 
+    if [[ -d ${HOME}/.var/app/com.discordapp.Discord/config/BetterDiscord/themes ]] 
     then
         pywal-discord -p ${HOME}/.var/app/com.discordapp.Discord/config/BetterDiscord/themes/ -t default
     fi
 
     # Install with regular install
-    if [[ -f ${HOME}/.config/BetterDiscord/themes ]]
+    if [[ -d ${HOME}/.config/BetterDiscord/themes ]]
     then
         pywal-discord -t default
     fi
