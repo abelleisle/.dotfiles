@@ -41,6 +41,11 @@ set_discord() {
 
 }
 
+set_speedcrunch() {
+    mkdir -p ${HOME}/.local/share/SpeedCrunch/color-schemes
+    ln -s ${HOME}/.cache/wal/colors-speedcrunch.json ${HOME}/.local/share/SpeedCrunch/color-schemes/PyWal.json
+}
+
 set_col() {
 	echo $color0 > /tmp/wal-bg
 	echo $color7 > /tmp/wal-fg
@@ -100,6 +105,7 @@ main() {
     #reload_bar &
     reload_dunst &
     set_discord &
+    set_speedcrunch &
     #set_qute &
     #set_oomox &
     #set_steam &
