@@ -22,7 +22,7 @@ reload_dunst() {
         #     -font "FiraCode Nerd Font 12" \
         #     -icon_position "left" \
         #     -geometry "300x60-20+45" &
-        dunst -config ~/.cache/wal/colors-dunst
+        dunst -config ~/.cache/wal/colors-dunst &
     fi
 }
 
