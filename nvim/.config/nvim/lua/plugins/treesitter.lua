@@ -15,6 +15,7 @@ M.config = function()
             "lua",
             "html",
             "css",
+            "cuda"
         },
         highlight = {
             enable = true,
