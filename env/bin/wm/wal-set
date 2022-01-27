@@ -9,7 +9,7 @@ source "${HOME}/.cache/wal/colors.sh"
 reload_dunst() {
     if command -v dunst &> /dev/null
     then
-        pkill dunst
+        pkill --exact dunst
         # dunst \
         #     -lb "${color0:-#FFFFFF}" \
         #     -nb "${color0:-#FFFFFF}" \
