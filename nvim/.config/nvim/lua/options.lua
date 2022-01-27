@@ -25,7 +25,9 @@ opt.textwidth = 80
 opt.colorcolumn = "81,101"
 opt.scrolloff=15
 opt.sidescrolloff=8
-opt.wrap = false
+opt.wrap = true
+opt.linebreak = true
+opt.breakindent = true
 vim.cmd('au TextYankPost * lua vim.highlight.on_yank {on_visual = false}')  -- disabled in visual mode
 
 -- Numbers
