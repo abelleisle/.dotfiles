@@ -12,7 +12,7 @@ g.auto_save = false
 -- colorscheme related stuff
 
 g.theme = "gruvbox"
-g.theme = "agila"
+--g.theme = "agila"
 o.background = "dark"
 g.gruvbox_italic = 1
 g.gruvbox_bold = 1

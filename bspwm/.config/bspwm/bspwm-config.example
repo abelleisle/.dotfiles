@@ -1,0 +1,52 @@
+#! /bin/bash
+
+source "${HOME}/.cache/wal/colors.sh"
+
+##############
+#  COMMANDS  #
+##############
+BSPWM_COMPOSITOR_COMMAND="picom --experimental-backends --vsync &"
+BSPWM_MONITOR_SETUP="ws_setup"
+BSPWM_AUTOSTART="ws_autostart"
+
+############
+#  COLORS  #
+############
+BSPWM_COLOR_BORDER_NORM="$color0"
+BSPWM_COLOR_BORDER_FOCUS="$color7"
+BSPWM_COLOR_PRESELECT="$color1"
+
+###############
+#  FUNCTIONS  #
+###############
+ws_setup () {
+    # If HDMI monitor is connected, create two polybar instances and place monitors
+    if [ "$(cat /sys/class/drm/card0-HDMI-A-1/status)" == "connected" ];
+    then
+        xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off
+        bspc monitor HDMI-1 -d 1 2 3 4 5 6 7 8
+        bspc monitor eDP-1 -d 9 10
+
+        source "${HOME}/.cache/wal/colors.sh"
+
+        feh --bg-fill $wallpaper
+
+        export MONITOR1=HDMI-1
+        export MONITOR2=eDP-1
+
+        pkill -9 polybar
+
+        polybar mainbar -r 2>&1 | tee -a /tmp/polybar1.log & disown
+        polybar secondbar -r 2>&1 | tee -a /tmp/polybar2.log & disown
+    else
+        bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+        polybar mainbar -r 2>&1 | tee -a /tmp/polybar1.log & disown
+    fi
+
+    xinput map-to-output 10 eDP-1
+
+}
+
+ws_autostart() {
+    #seafile-applet &
+}

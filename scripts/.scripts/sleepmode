@@ -1,3 +1,0 @@
-#!/bin/sh
-
-xtrlock & sleep 1 && sudo zzz

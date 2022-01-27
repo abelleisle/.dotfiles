@@ -1,0 +1,30 @@
+#!/bin/bash
+
+XRANDR=$(which xrandr)
+
+MONITORS=( $( ${XRANDR} | awk '( $2 == "connected" ){ print $1 }' ) )
+NUM_MONITORS=${#MONITORS[@]}
+
+PRESETS=()
+
+rofi_command="rofi -dmenu -no-fixed-num-lines -yoffset -100 -i -p"
+
+declare -i index=0
+
+for preset in ${HOME}/.screenlayout/*
+do
+    PRESETS[$index]=$preset
+    index+=1
+done
+
+function list_options()
+{
+    echo arandr
+    for a in $PRESETS
+    do
+        echo $a
+    done
+}
+
+execute="$(list_options | $rofi_command "Monitor")"
+exec $execute

@@ -35,7 +35,7 @@ M.config = function()
         buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
         buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
         buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-        buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+        buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
         buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
         buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
         buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
@@ -50,16 +50,21 @@ M.config = function()
 
     -- lspInstall + lspconfig stuff
 
-    local function setup_servers()
-        require "lspinstall".setup()
+    --local function setup_servers()
+        local lsp_installer = require("nvim-lsp-installer")
 
-        local lspconf = require("lspconfig")
-        local servers = require "lspinstall".installed_servers()
+        local servers = require "nvim-lsp-installer.servers"
         local util    = require("lspconfig/util")
-        local coq     = require("coq")
         
         local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
         capabilities.textDocument.completion.completionItem.snippetSupport = true
+        capabilities.textDocument.completion.completionItem.preselectSupport = true
+        capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+        capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+        capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+        capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+        capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
         capabilities.textDocument.completion.completionItem.resolveSupport = {
             properties = {
                 'documentation',
@@ -67,73 +72,104 @@ M.config = function()
                 'additionalTextEdits',
             }
         }
+        capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
+        servers = {
+            "ccls", "sumneko_lua", "ltex", "jedi_language_server", "zls"
+        }
 
         for _, lang in pairs(servers) do
-            lspconf[lang].setup(coq.lsp_ensure_capabilities({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                root_dir = vim.loop.cwd,
-                flags = {
-                    debounce_text_changes = 150
-                }
-            }))
+            local server_available, requested_server = require('nvim-lsp-installer.servers').get_server(lang)
+            if server_available then
+                requested_server:on_ready(function ()
+                    local client_opts = {}
+                    local opts = {
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+                        root_dir = vim.loop.cwd,
+                        launch = true,
+                        flags = {
+                            debounce_text_changes = 150
+                        },
+                        handlers = {
+                            ["textDocument/publishDiagnostics"] = vim.lsp.with(
+                                vim.lsp.diagnostic.on_publish_diagnostics, {
+                                    virtual_text = true,
+                                    underline = true,
+                                    signs = true,
+                                    update_in_insert = true,
+                                }
+                            )
+                        }
+                    }
+
+                    if lang == "ccls" then
+                        client_opts = vim.tbl_deep_extend("keep", opts, {
+                            init_options = {
+                                compilationDatabaseDirectory = "build";
+                                index = {
+                                threads = 0;
+                                };
+                                cache = {
+                                directory = "/tmp/ccls"
+                                };
+                                highlight = {
+                                    lsRangers = true;
+                                };
+                            },
+                            cmd = { "ccls" },
+                            filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                            --root_dir = vim.loop.cwd,
+                            root_dir = function(fname)
+                                return util.root_pattern('compile_commands.json',
+                                                        'compile_flags.txt',
+                                                        '.git',
+                                                        '.ccls')(fname) or util.path.dirname(fname)
+                            end
+                            -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+                        })
+                    end
+
+                    if lang == "sumneko_lua" then
+                        client_opts = vim.tbl_deep_extend("keep", opts, {
+                            settings = {
+                                Lua = {
+                                    runtime = {
+                                        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                                        version = 'LuaJIT',
+                                    },
+                                    diagnostics = {
+                                        globals = {"vim"}
+                                    },
+                                    workspace = {
+                                        library = {
+                                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                                            --library = vim.api.nvim_get_runtime_file("", true),
+                                        },
+                                        maxPreload = 100000,
+                                        preloadFileSize = 10000
+                                    },
+                                    telemetry = {
+                                        enable = false
+                                    }
+                                }
+                            }
+                        })
+                    end
+
+                    requested_server:setup(client_opts)
+                end)
+                if not requested_server:is_installed() then
+                    print("Installing " .. lang)
+                    requested_server:install()
+                end
+            else
+                print("Installing " .. lang)
+                lsp_installer.install(lang)
+            end
         end
 
-        lspconf.lua.setup(coq.lsp_ensure_capabilities({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = {
-                Lua = {
-                    runtime = {
-                        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                        version = 'LuaJIT',
-                    },
-                    diagnostics = {
-                        globals = {"vim"}
-                    },
-                    workspace = {
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                            --library = vim.api.nvim_get_runtime_file("", true),
-                        },
-                        maxPreload = 100000,
-                        preloadFileSize = 10000
-                    },
-                    telemetry = {
-                        enable = false
-                    }
-                }
-            }
-        }))
-
-        lspconf.ccls.setup(coq.lsp_ensure_capabilities({
-          on_attach = on_attach,
-          capabilities = capabilities,
-          init_options = {
-            compilationDatabaseDirectory = "build";
-            index = {
-              threads = 0;
-            };
-            cache = {
-              directory = "/tmp/ccls"
-            };
-            highlight = {
-                lsRangers = true;
-            };
-          },
-          cmd = { "ccls" },
-          filetypes = { "c", "cpp", "objc", "objcpp", "cuda"},
-          --root_dir = vim.loop.cwd,
-          root_dir = function(fname)
-              return util.root_pattern('compile_commands.json',
-                                       'compile_flags.txt',
-                                       '.git',
-                                       '.ccls')(fname) or util.path.dirname(fname)
-          end
-          -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
-        }))
-        
         -- adds a check to see if any of the active clients have the capability
         -- textDocument/documentHighlight. without the check it was causing constant
         -- errors when servers didn't have that capability
@@ -145,15 +181,15 @@ M.config = function()
                 break -- only add the autocmds once
             end
         end
-    end -- fn setup_servers()
+    --end -- fn setup_servers()
 
-    setup_servers()
+    --setup_servers()
 
     -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-    require "lspinstall".post_install_hook = function()
-        setup_servers() -- reload installed servers
-        vim.cmd("bufdo e") -- triggers FileType autocmd that starts the server
-    end
+    --require "lspinstall".post_install_hook = function()
+    --    setup_servers() -- reload installed servers
+    --    vim.cmd("bufdo e") -- triggers FileType autocmd that starts the server
+    --end
 
     -- replace the default lsp diagnostic letters with prettier symbols
     vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
@@ -161,14 +197,7 @@ M.config = function()
     vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
     vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
 
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics, {
-            virtual_text = true,
-            underline = true,
-            signs = true,
-        }
-    )
-    vim.cmd("autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()")
+    vim.cmd("autocmd CursorHold * lua vim.diagnostic.open_float()")
     vim.cmd("autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()")
 
 end -- fn M.config

@@ -51,7 +51,7 @@ M.config = function()
       FileIcon = {
         provider = 'FileIcon',
         condition = buffer_not_empty,
-        highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.darkblue},
+        highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color,colors.darkblue},
       },
     }
     gls.left[4] = {
@@ -75,7 +75,7 @@ M.config = function()
       GitBranch = {
         provider = function()
             if require("galaxyline.condition").check_git_workspace() then
-                return require("galaxyline.provider_vcs").get_git_branch()
+                return require("galaxyline.providers.vcs").get_git_branch()
             else
                 return 'N/A'
             end
