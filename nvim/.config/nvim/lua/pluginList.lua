@@ -371,7 +371,7 @@ return require('packer').startup(function(use)
         --event = "BufRead",
         config = function()
             require('nvim-ts-autotag').setup({
-                filetypes = { "html" , "xml" },
+                filetypes = { "html" , "xml", "php" },
             })
         end
     }

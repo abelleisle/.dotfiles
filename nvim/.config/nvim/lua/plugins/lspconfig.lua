@@ -50,7 +50,7 @@ M.config = function()
 
     -- lspInstall + lspconfig stuff
 
-    --local function setup_servers()
+    local function setup_servers()
         local lsp_installer = require("nvim-lsp-installer")
 
         local servers = require "nvim-lsp-installer.servers"
@@ -181,9 +181,9 @@ M.config = function()
                 break -- only add the autocmds once
             end
         end
-    --end -- fn setup_servers()
+    end -- fn setup_servers()
 
-    --setup_servers()
+    setup_servers()
 
     -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
     --require "lspinstall".post_install_hook = function()
