@@ -171,6 +171,22 @@ M.config = function()
         highlight = {colors.grey,colors.darkblue},
       }
     }
+    gls.right[4] = {
+        FileTypeName = {
+            provider= 'FileTypeName',
+            condition = buffer_not_empty,
+            separator = ' ',
+            separator_highlight = {colors.darkblue,colors.purple},
+            highlight = {colors.blue,colors.purple}
+        }
+    }
+    gls.right[5] = {
+      LastElement = {
+        condition = buffer_not_empty,
+        provider = function() return '▋' end,
+        highlight = {colors.purple,colors.purple}
+      },
+    }
 
     gls.short_line_left[1] = {
       SmallFirst = {
@@ -189,13 +205,21 @@ M.config = function()
     }
 
     gls.short_line_right[1] = {
-      FileTypeName = {
+      SmallFileTypeName = {
         provider= 'FileTypeName',
         condition = buffer_not_empty,
-        separator = '',
+        separator = '█',
         separator_highlight = {colors.purple,colors.bg},
-        highlight = {colors.grey,colors.purple}
+        highlight = {colors.red,colors.purple}
       }
+    }
+
+    gls.short_line_right[2] = {
+      SmallLastElement = {
+        condition = buffer_not_empty,
+        provider = function() return '▋' end,
+        highlight = {colors.purple,colors.purple}
+      },
     }
 
 end
