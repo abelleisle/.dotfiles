@@ -117,7 +117,7 @@ return require('packer').startup(function(use)
         "onsails/lspkind-nvim",
         event = "BufRead",
         config = function()
-            require("lspkind").init()
+            require("lspkind").init(require("plugins.lspkind_icons"))
         end
     }
 

@@ -1,5 +1,7 @@
 local M = {}
 
+M.mode = 'text_symbol'
+
 M.icons = {
    Text = "",
    Method = "",

@@ -14,8 +14,12 @@ M.config = function()
             "python",
             "lua",
             "html",
+            "php",
             "css",
-            "cuda"
+            "cuda",
+            "rust",
+            "zig",
+            "glsl"
         },
         highlight = {
             enable = true,

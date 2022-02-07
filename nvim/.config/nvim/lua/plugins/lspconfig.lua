@@ -75,7 +75,7 @@ M.config = function()
         capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
         servers = {
-            "ccls", "sumneko_lua", "ltex", "jedi_language_server", "zls"
+            "ccls", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer"
         }
 
         for _, lang in pairs(servers) do
