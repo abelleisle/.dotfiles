@@ -2,6 +2,8 @@ local M = {}
 
 M.config = function()
     function on_attach(client, bufnr)
+        --vim.lsp.set_log_level("debug")
+
         local function buf_set_keymap(...)
             vim.api.nvim_buf_set_keymap(bufnr, ...)
         end
@@ -108,10 +110,10 @@ M.config = function()
                             init_options = {
                                 compilationDatabaseDirectory = "build";
                                 index = {
-                                threads = 0;
+                                    threads = 0;
                                 };
                                 cache = {
-                                directory = "/tmp/ccls"
+                                    directory = "/tmp/ccls"
                                 };
                                 highlight = {
                                     lsRangers = true;
