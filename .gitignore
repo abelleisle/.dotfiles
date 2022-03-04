@@ -2,7 +2,6 @@ swap/
 undo/
 plugged/
 nvim/.config/nvim/plugin/
-env/bin/zephyr-sdk/
 
 bspwm/.config/bspwm/bspwm-config
 ncspot/.config/ncspot/userstate.cbor

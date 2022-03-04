@@ -40,4 +40,22 @@ if [ -d "$HOME/.zig" ] ; then
     PATH="$HOME/.zig:$PATH"
 fi
 
+# If the ESP toolchain is installed, create a function to access it
+idf() {
+    if [ -d "$HOME/bin/esp/esp-idf" ] && [ -d "$HOME/bin/esp/toolchain" ] ; then
+        export IDF_TOOLS_PATH=$HOME/bin/esp/toolchain
+        if ! command -v idf.py &> /dev/null
+        then
+            . "$HOME/bin/esp/esp-idf/export.sh"
+        fi
+
+        idf.py "${@:1}"
+    else
+        echo "ESP-IDF is not installed.\n"
+        echo "Please install the IDF to: $HOME/bin/esp/esp-idf\n"
+        echo "Next, set IDF_TOOLS_PATH to: $HOME/bin/esp/toolchain"
+        echo " and run $HOME/bin/esp/esp-idf/install.sh"
+    fi
+}
+
 export _JAVA_AWT_WM_NONREPARENTING=1
