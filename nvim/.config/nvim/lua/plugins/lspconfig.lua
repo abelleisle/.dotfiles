@@ -113,11 +113,17 @@ M.config = function()
                                     threads = 0;
                                 };
                                 cache = {
-                                    directory = "/tmp/ccls"
+                                    directory = "/tmp/ccls";
                                 };
                                 highlight = {
                                     lsRangers = true;
                                 };
+                                clang = {
+                                    excludeArgs = {
+                                        "-mlongcalls",
+                                        "-Wno-frame-address"
+                                    };
+                                }
                             },
                             cmd = { "ccls" },
                             filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
@@ -160,6 +166,17 @@ M.config = function()
                         })
                     end
 
+                    if lang == "ltex" then
+                        client_opts = vim.tbl_deep_extend("keep", opts, {
+                            settings = {
+                                ltex = {
+                                    dictionary = {
+                                        ['en-US'] = require("spell").userdict()
+                                    }
+                                }
+                            }
+                        })
+                    end
                     requested_server:setup(client_opts)
                 end)
                 if not requested_server:is_installed() then

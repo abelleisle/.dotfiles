@@ -287,7 +287,7 @@ return require('packer').startup(function(use)
 
     use { -- File manager/browser
         "kyazdani42/nvim-tree.lua",
-        cmd = "NvimTreeToggle",
+        --cmd = "NvimTreeToggle",
         config = function()
             require("plugins.nvimtree").config()
         end

@@ -1,11 +1,4 @@
-local opt = vim.opt
-
-opt.wrap = true
-opt.linebreak = true
-opt.list = false
-opt.textwidth = 0
-opt.colorcolumn = ""
-opt.spell = true
+require("spell").init()
 
 vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true})
 vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true})
