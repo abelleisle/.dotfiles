@@ -108,6 +108,9 @@ M.config = function()
                     if lang == "ccls" then
                         client_opts = vim.tbl_deep_extend("keep", opts, {
                             init_options = {
+                                client = {
+                                    snippetSupport = true
+                                },
                                 compilationDatabaseDirectory = "build";
                                 index = {
                                     threads = 0;
@@ -121,15 +124,19 @@ M.config = function()
                                 clang = {
                                     excludeArgs = {
                                         "-mlongcalls",
-                                        "-Wno-frame-address"
-                                    };
+                                        "-Wno-frame-address",
+                                        "-fstrict-volatile-bitfields",
+                                        "-fno-tree-switch-conversion",
+                                        "-mtext-section-literals",
+                                    },
                                 }
                             },
                             cmd = { "ccls" },
                             filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
                             --root_dir = vim.loop.cwd,
                             root_dir = function(fname)
-                                return util.root_pattern('compile_commands.json',
+                                return util.root_pattern(--'build/compile_commands.json',
+                                                        'compile_commands.json',
                                                         'compile_flags.txt',
                                                         '.git',
                                                         '.ccls')(fname) or util.path.dirname(fname)

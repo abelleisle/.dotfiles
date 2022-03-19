@@ -282,7 +282,16 @@ return require('packer').startup(function(use)
     }
 
     use { -- Easily align text
-        "junegunn/vim-easy-align"
+        "junegunn/vim-easy-align",
+        config = function()
+            vim.g.easy_align_delimiters = {
+                ['/'] = {
+                    pattern = '//\\+',
+                    delimiter_align = 'l',
+                    ignore_groups = {'!Comment'}
+                }
+            }
+        end
     }
 
     use { -- File manager/browser
