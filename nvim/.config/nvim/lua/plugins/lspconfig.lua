@@ -77,7 +77,7 @@ M.config = function()
         capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
         servers = {
-            "ccls", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer"
+            "clangd", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer"
         }
 
         for _, lang in pairs(servers) do
@@ -104,6 +104,47 @@ M.config = function()
                             )
                         }
                     }
+
+                    if lang == "clangd" then
+                        client_opts = vim.tbl_deep_extend("keep", opts, {
+                            single_file_support = true,
+                            init_options = {
+                                client = {
+                                    snippetSupport = true
+                                },
+                                compilationDatabaseDirectory = "build";
+                                index = {
+                                    threads = 0;
+                                };
+                                cache = {
+                                    directory = "/tmp/ccls";
+                                };
+                                highlight = {
+                                    lsRangers = true;
+                                };
+                                clang = {
+                                    excludeArgs = {
+                                        "-mlongcalls",
+                                        "-Wno-frame-address",
+                                        "-fstrict-volatile-bitfields",
+                                        "-fno-tree-switch-conversion",
+                                        "-mtext-section-literals",
+                                    },
+                                }
+                            },
+                            cmd = { "clangd" },
+                            filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                            --root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')
+                            --root_dir = vim.loop.cwd,
+                            root_dir = function(fname)
+                                return util.root_pattern(--'build/compile_commands.json',
+                                                        'compile_commands.json',
+                                                        'compile_flags.txt',
+                                                        '.git')(fname) or util.path.dirname(fname)
+                            end
+                            -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+                        })
+                    end
 
                     if lang == "ccls" then
                         client_opts = vim.tbl_deep_extend("keep", opts, {
@@ -133,15 +174,17 @@ M.config = function()
                             },
                             cmd = { "ccls" },
                             filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                            root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git'),
                             --root_dir = vim.loop.cwd,
-                            root_dir = function(fname)
-                                return util.root_pattern(--'build/compile_commands.json',
-                                                        'compile_commands.json',
-                                                        'compile_flags.txt',
-                                                        '.git',
-                                                        '.ccls')(fname) or util.path.dirname(fname)
-                            end
+                            -- root_dir = function(fname)
+                            --     return util.root_pattern(--'build/compile_commands.json',
+                            --                             'compile_commands.json',
+                            --                             'compile_flags.txt',
+                            --                             '.git',
+                            --                             '.ccls')(fname) or util.path.dirname(fname)
+                            -- end
                             -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+                            single_file_support = true,
                         })
                     end
 
