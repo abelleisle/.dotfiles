@@ -60,6 +60,10 @@ return require('packer').startup(function(use)
         requires = {"rktjmp/lush.nvim"}
     }
 
+    use { -- Wal theme
+        "dylanaraps/wal.vim"
+    }
+
     use { -- Highlight hex colors
         "norcalli/nvim-colorizer.lua",
         event = "BufRead",
@@ -397,10 +401,10 @@ return require('packer').startup(function(use)
     }
 
     use {
-        "romgrk/nvim-treesitter-context",
+        "nvim-treesitter/nvim-treesitter-context",
         after = "nvim-treesitter",
         config = function()
-            require'treesitter-context.config'.setup{
+            require'treesitter-context'.setup{
                 enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
             }
         end
