@@ -59,3 +59,18 @@ idf() {
 }
 
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+case `uname` in
+    Darwin)
+        if [ -d "$HOME/Library/Python/3.8/bin" ] ; then
+            PATH="$HOME/Library/Python/3.8/bin:$PATH"
+        fi
+
+        # Source homebrew
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        export LANG='en_US.UTF-8'
+
+        ;;
+    Linux)
+        ;;
+esac
