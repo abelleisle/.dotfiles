@@ -5,15 +5,23 @@
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM=$HOME/.custom-zsh
 
-if [ -f ~/.profile ]; then
-    source ~/.profile
+# ~/.zprofile will source ~/.profile, so we don't need to here
+#if [ -f ~/.profile ]; then
+#    source ~/.profile
+#fi
+
+# Source our custom functions
+if [ -d ~/.zsh ]; then
+    for file in ~/.zsh/**; do
+        source $file;
+    done
 fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="a"
+ZSH_THEME="passion"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
