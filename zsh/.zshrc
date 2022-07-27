@@ -6,9 +6,9 @@ export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM=$HOME/.custom-zsh
 
 # ~/.zprofile will source ~/.profile, so we don't need to here
-#if [ -f ~/.profile ]; then
-#    source ~/.profile
-#fi
+if [ -f ~/.profile ]; then
+    source ~/.profile
+fi
 
 # Source our custom functions
 if [ -d ~/.zsh ]; then

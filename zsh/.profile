@@ -64,7 +64,7 @@ case `uname` in
     Darwin)
 
         if [ $(sysctl -n sysctl.proc_translated) = '0' ]; then
-            echo 'Running natively (arm64)'
+            #echo 'Running natively (arm64)'
 
             eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -78,7 +78,7 @@ case `uname` in
             fi
 
         else
-            echo 'Running through Rosetta (x86_64)'
+            #echo 'Running through Rosetta (x86_64)'
 
             eval "$(/usr/local/bin/brew shellenv)"
 
