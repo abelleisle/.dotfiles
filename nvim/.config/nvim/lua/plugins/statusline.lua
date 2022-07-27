@@ -25,6 +25,13 @@ M.config = function()
       return false
     end
 
+    local filename_and_parent = function()
+        if buffer_not_empty() then
+            return vim.fn.expand("%:p:h:t") .. "/" .. vim.fn.expand('%:t') .. " "
+        end
+        return ""
+    end
+
     gls.left[1] = {
       FirstElement = {
         provider = function() return '▋' end,
@@ -56,7 +63,11 @@ M.config = function()
     }
     gls.left[4] = {
       FileName = {
-        provider = {'FileName','FileSize'},
+        --provider = {'FileName','FileSize'},
+        provider = {
+                filename_and_parent,
+                'FileSize'
+            },
         condition = buffer_not_empty,
         separator = '',
         separator_highlight = {colors.purple,colors.darkblue},
@@ -197,7 +208,8 @@ M.config = function()
 
     gls.short_line_left[2] = {
       SmallFileName = {
-        provider = 'FileName',
+        condition = buffer_not_empty,
+        provider = filename_and_parent,
         separator = '',
         separator_highlight = {colors.purple,colors.bg},
         highlight = {colors.grey,colors.purple}
