@@ -207,16 +207,24 @@ TRAPALRM() {
 }
 
 function cpu_prompt_info {
-  local cpu_info=$(sysctl -n machdep.cpu.brand_string)
-  local arch_name=$(arch)
-  # Warn if we're on an M1, but using an Intel shell
-  if [[ "${cpu_info[@]:0:7}" = "Apple M" ]] && [[ "$arch_name" != "arm64" ]]; then
-    echo "%{$fg[red]%}[INTEL]%F{reset} "
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    local cpu_info=$(sysctl -n machdep.cpu.brand_string)
+    local arch_name=$(arch)
+    # Warn if we're on an M1, but using an Intel shell
+    if [[ "${cpu_info[@]:0:7}" = "Apple M" ]] && [[ "$arch_name" != "arm64" ]]; then
+        echo "%{$fg[red]%}[INTEL]%F{reset} "
+    fi
   fi
+}
+
+function ssh_prompt_info {
+    if [[ -n $SSH_CONNECTION ]]; then
+        echo "%{$fg[yellow]%}[SSH]%F{reset} "
+    fi
 }
 
 # prompt
 # PROMPT='$(real_time) $(login_info) $(directory) $(git_status)$(command_status) ';
 PROMPT='
 $(real_time) $(directory) 
-$(cpu_prompt_info)$(git_status)$(command_status) ';
+$(ssh_prompt_info)$(cpu_prompt_info)$(git_status)$(command_status) ';
