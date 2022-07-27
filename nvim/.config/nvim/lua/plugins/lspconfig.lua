@@ -227,6 +227,19 @@ M.config = function()
                             }
                         })
                     end
+
+                    if lang == "rust_hdl" then
+                        client_opts = vim.tbl_deep_extend("keep", opts, {
+                            default_config = {
+                            cmd = {"vhdl_ls"};
+                            filetypes = { "vhdl" };
+                            root_dir = function(fname)
+                                return util.root_pattern('vhdl_ls.toml')(fname)
+                            end;
+                            settings = {};
+                            };
+                        })
+                    end
                     requested_server:setup(client_opts)
                 end)
                 if not requested_server:is_installed() then

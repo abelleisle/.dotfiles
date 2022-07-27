@@ -32,7 +32,10 @@ M.config = function()
         },
 
         indent = {
-            enable = true
+            enable = true,
+            disable = {
+                'cpp'
+            }
         }
     }
 end
