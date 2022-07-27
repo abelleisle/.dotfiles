@@ -5,3 +5,5 @@ nvim/.config/nvim/plugin/
 
 bspwm/.config/bspwm/bspwm-config
 ncspot/.config/ncspot/userstate.cbor
+
+zsh/.zsh/*.local

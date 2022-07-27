@@ -59,3 +59,42 @@ idf() {
 }
 
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+case `uname` in
+    Darwin)
+
+        if [ $(sysctl -n sysctl.proc_translated) = '0' ]; then
+            #echo 'Running natively (arm64)'
+
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+
+            export PYENV_ROOT="$HOME/.pyenv_arm"
+            PATH="$HOME/.pyenv_arm/shims:$PATH"
+
+            export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib
+
+            if [ -d "$HOME/Library/Python/3.9/bin" ] ; then
+                PATH="$HOME/Library/Python/3.9/bin:$PATH"
+            fi
+
+        else
+            #echo 'Running through Rosetta (x86_64)'
+
+            eval "$(/usr/local/bin/brew shellenv)"
+
+            export PYENV_ROOT="$HOME/.pyenv_intel"
+            PATH="$HOME/.pyenv_intel/shims:$PATH"
+
+            if [ -d "$HOME/Library/Python/3.9/bin" ] ; then
+                PATH="$HOME/Library/Python/3.9/bin:$PATH"
+            fi
+        fi
+
+        eval "$(pyenv init -)"
+
+        export LANG='en_US.UTF-8'
+
+        ;;
+    Linux)
+        ;;
+esac
