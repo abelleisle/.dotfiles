@@ -31,8 +31,14 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # set PATH so it includes user's cargo bin if it exists
-if [ -d "$HOME/.cargo/bin" ] ; then
-    PATH="$HOME/.cargo/bin:$PATH"
+if [ -d "$HOME/.cargo" ] ; then
+    if [ -d "$HOME/.cargo/bin" ] ; then
+        PATH="$HOME/.cargo/bin:$PATH"
+    fi
+
+    if [ -f "$HOME/.cargo/env" ] ; then
+        . "$HOME/.cargo/env"
+    fi
 fi
 
 # set PATH so it includes user's zig bin if it exists

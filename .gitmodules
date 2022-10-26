@@ -4,9 +4,9 @@
 [submodule "zsh/.oh-my-zsh"]
 	path = zsh/.oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
-[submodule "zsh/.custom-zsh/plugins/fast-syntax-highlighting"]
-	path = zsh/.custom-zsh/plugins/fast-syntax-highlighting
-	url = https://github.com/zdharma/fast-syntax-highlighting.git
 [submodule "zsh/.custom-zsh/plugins/zsh-autopair"]
 	path = zsh/.custom-zsh/plugins/zsh-autopair
 	url = https://github.com/hlissner/zsh-autopair
+[submodule "zsh/.custom-zsh/plugins/zsh-syntax-highlighting"]
+	path = zsh/.custom-zsh/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
