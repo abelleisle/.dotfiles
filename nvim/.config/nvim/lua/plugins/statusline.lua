@@ -32,6 +32,25 @@ M.config = function()
         return ""
     end
 
+    local checkwidth = function()
+      local current_win = vim.fn.winnr();
+      if current_win == -1 then
+        current_win = 0
+      end
+      local squeeze_width  = vim.fn.winwidth(current_win) / 2
+      if squeeze_width > 50 then
+        return true
+      end
+      return false
+    end
+
+    local buffer_wide = function()
+        if buffer_not_empty() then
+            return checkwidth()
+        end
+        return false
+    end
+
     gls.left[1] = {
       FirstElement = {
         provider = function() return '▋' end,
@@ -74,11 +93,10 @@ M.config = function()
         highlight = {colors.magenta,colors.darkblue}
       }
     }
-
     gls.left[5] = {
       GitIcon = {
         provider = function() return '  ' end,
-        condition = buffer_not_empty,
+        condition = buffer_wide,
         highlight = {colors.orange,colors.purple},
       }
     }
@@ -91,21 +109,12 @@ M.config = function()
                 return 'N/A'
             end
         end,
-        condition = buffer_not_empty,
+        condition = buffer_wide,
         separator = ' ',
         separator_highlight = {colors.purple, colors.purple},
         highlight = {colors.grey,colors.purple},
       }
     }
-
-    local checkwidth = function()
-      local squeeze_width  = vim.fn.winwidth(0) / 2
-      if squeeze_width > 40 then
-        return true
-      end
-      return false
-    end
-
     gls.left[7] = {
       DiffAdd = {
         provider = 'DiffAdd',

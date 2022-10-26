@@ -74,10 +74,11 @@ M.config = function()
                 'additionalTextEdits',
             }
         }
-        capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+        capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
         servers = {
-            "clangd", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer"
+            "clangd", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer",
+            "cmake"
         }
 
         for _, lang in pairs(servers) do

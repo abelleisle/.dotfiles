@@ -18,10 +18,13 @@ M.hideStuff = function()
         [[
    au BufEnter term://* setlocal nonumber
    au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
-   au BufEnter term://* set laststatus=0 
+   au BufEnter term://* set laststatus=0
 ]],
         false
     )
 end
+
+M.hsluv  = require("utils.hsluv")
+M.colors = require("utils.colors")
 
 return M

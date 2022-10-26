@@ -1,24 +1,16 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 
-require("packer").init {
-    display = {
-        open_fn = function()
-            return require("packer.util").float {border = "single"}
-        end
-    },
-    git = {
-        clone_timeout = 600, -- Timeout, in seconds, for git clones
-
-        subcommands = {
-            update = 'pull --ff-only --progress --rebase=false --allow-unrelated-histories',
-        }
-
-    }
-}
+local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
@@ -59,6 +51,16 @@ return require('packer').startup(function(use)
         "ellisonleao/gruvbox.nvim",
         requires = {"rktjmp/lush.nvim"}
     }
+
+    -- use {
+    --     "pwntester/nautilus.nvim",
+    --     config = function()
+    --         require("nautilus").load {
+    --             transparent = true,
+    --             mode = "octonauts"
+    --         }
+    --     end
+    -- }
 
     use { -- Wal theme
         "dylanaraps/wal.vim"
@@ -171,14 +173,14 @@ return require('packer').startup(function(use)
     --         "honza/vim-snippets"
     --     }
     -- }
-    
+
 --         Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 --         " 9000+ Snippets
 --         Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
--- 
+--
 --         " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
 --         " Need to **configure separately**
--- 
+--
 --         Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
     --[[
@@ -328,6 +330,23 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        "tpope/vim-fugitive",
+        "tpope/vim-rhubarb"
+    }
+
+    use {
+        'pwntester/octo.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
+        config = function ()
+            require("plugins.octo").config()
+        end
+    }
+
     use { -- Automatically add ending pairs
         "windwp/nvim-autopairs",
         --after = "coq_nvim",
@@ -394,7 +413,8 @@ return require('packer').startup(function(use)
         after = "nvim-treesitter",
         config = function()
             require('spellsitter').setup({
-                hl = 'SpellBad',
+                --hl = 'SpellBad',
+                enable = true,
                 captures = {}
             })
         end
@@ -493,6 +513,11 @@ return require('packer').startup(function(use)
     }
 
     use {
+        'jdhao/whitespace.nvim',
+        event = 'VimEnter',
+    }
+
+    use {
         "lervag/vimtex",
         ft = {'tex'},
     }
@@ -509,5 +534,20 @@ return require('packer').startup(function(use)
 
     if packer_bootstrap then
         require('packer').sync()
+        require("packer").init {
+            display = {
+                open_fn = function()
+                    return require("packer.util").float {border = "single"}
+                end
+            },
+            git = {
+                clone_timeout = 600, -- Timeout, in seconds, for git clones
+        
+                subcommands = {
+                    update = 'pull --ff-only --progress --rebase=false --allow-unrelated-histories',
+                }
+        
+            }
+        }
     end
 end)
