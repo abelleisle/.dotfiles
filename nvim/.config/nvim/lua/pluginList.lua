@@ -12,6 +12,31 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+---------------------
+--  Packer Config  --
+---------------------
+
+if not packer_bootstrap then
+    require("packer").init {
+        display = {
+            open_fn = function()
+                return require("packer.util").float {border = "single"}
+            end
+        },
+        git = {
+            clone_timeout = 600, -- Timeout, in seconds, for git clones
+
+            subcommands = {
+                -- Use this one normally
+                update = 'pull --ff-only --progress --rebase=true --allow-unrelated-histories',
+                -- Use this one if plugin fails to fast foward
+                --update = 'pull --rebase=true',
+            }
+
+        }
+    }
+end
+
 return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
 
@@ -534,20 +559,5 @@ return require('packer').startup(function(use)
 
     if packer_bootstrap then
         require('packer').sync()
-        require("packer").init {
-            display = {
-                open_fn = function()
-                    return require("packer.util").float {border = "single"}
-                end
-            },
-            git = {
-                clone_timeout = 600, -- Timeout, in seconds, for git clones
-        
-                subcommands = {
-                    update = 'pull --ff-only --progress --rebase=false --allow-unrelated-histories',
-                }
-        
-            }
-        }
     end
 end)
