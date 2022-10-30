@@ -71,6 +71,11 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 --                              DISPLAY                               --
 ------------------------------------------------------------------------
 
+-----------------------
+--  HIDE HIGHLIGHTS  --
+-----------------------
+map("n", "<Leader>n", ":noh<CR>", opt)
+
 ---------------
 --  TRUEZEN  --
 ---------------
@@ -198,12 +203,14 @@ map("n", "<C-s>s", [[<Cmd> SessionSave<CR>]], opt)
 
 map("n", "<Leader>gt", [[<Cmd> Telescope git_status <CR>]], opt)
 map("n", "<Leader>cm", [[<Cmd> Telescope git_commits <CR>]], opt)
-map("n", "<C-p>", [[<Cmd> Telescope find_files <CR>]], opt)
-map("i", "<C-p>", [[<Cmd> Telescope find_files <CR>]], opt)
+map("n", "<C-p>", [[<Cmd> Telescope find_files find_command=rg,--ignore,--hidden,--files <CR>]], opt)
+map("i", "<C-p>", [[<Cmd> Telescope find_files find_command=rg,--ignore,--hidden,--files <CR>]], opt)
 map("n", "<Leader>fp", [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]], opt)
 map("n", "<Leader>fb", [[<Cmd>Telescope buffers<CR>]], opt)
 map("n", "<Leader>fh", [[<Cmd>Telescope help_tags<CR>]], opt)
 map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], opt)
+map("n", "<Leader>fk", [[<Cmd>Telescope keymaps<CR>]], opt)
+map("n", "<Leader>f#", [[<Cmd>Telescope grep_string<CR>]], opt)
 
 ----------------------------------
 --  BURN ARROWS and PGUP/PGDWN  --

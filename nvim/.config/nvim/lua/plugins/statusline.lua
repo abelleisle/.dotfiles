@@ -25,6 +25,32 @@ M.config = function()
       return false
     end
 
+    local filename_and_parent = function()
+        if buffer_not_empty() then
+            return vim.fn.expand("%:p:h:t") .. "/" .. vim.fn.expand('%:t') .. " "
+        end
+        return ""
+    end
+
+    local checkwidth = function()
+      local current_win = vim.fn.winnr();
+      if current_win == -1 then
+        current_win = 0
+      end
+      local squeeze_width  = vim.fn.winwidth(current_win) / 2
+      if squeeze_width > 50 then
+        return true
+      end
+      return false
+    end
+
+    local buffer_wide = function()
+        if buffer_not_empty() then
+            return checkwidth()
+        end
+        return false
+    end
+
     gls.left[1] = {
       FirstElement = {
         provider = function() return '▋' end,
@@ -56,18 +82,21 @@ M.config = function()
     }
     gls.left[4] = {
       FileName = {
-        provider = {'FileName','FileSize'},
+        --provider = {'FileName','FileSize'},
+        provider = {
+                filename_and_parent,
+                'FileSize'
+            },
         condition = buffer_not_empty,
         separator = '',
         separator_highlight = {colors.purple,colors.darkblue},
         highlight = {colors.magenta,colors.darkblue}
       }
     }
-
     gls.left[5] = {
       GitIcon = {
         provider = function() return '  ' end,
-        condition = buffer_not_empty,
+        condition = buffer_wide,
         highlight = {colors.orange,colors.purple},
       }
     }
@@ -80,21 +109,12 @@ M.config = function()
                 return 'N/A'
             end
         end,
-        condition = buffer_not_empty,
+        condition = buffer_wide,
         separator = ' ',
         separator_highlight = {colors.purple, colors.purple},
         highlight = {colors.grey,colors.purple},
       }
     }
-
-    local checkwidth = function()
-      local squeeze_width  = vim.fn.winwidth(0) / 2
-      if squeeze_width > 40 then
-        return true
-      end
-      return false
-    end
-
     gls.left[7] = {
       DiffAdd = {
         provider = 'DiffAdd',
@@ -197,7 +217,8 @@ M.config = function()
 
     gls.short_line_left[2] = {
       SmallFileName = {
-        provider = 'FileName',
+        condition = buffer_not_empty,
+        provider = filename_and_parent,
         separator = '',
         separator_highlight = {colors.purple,colors.bg},
         highlight = {colors.grey,colors.purple}

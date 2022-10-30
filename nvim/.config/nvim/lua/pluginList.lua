@@ -1,24 +1,41 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 
-require("packer").init {
-    display = {
-        open_fn = function()
-            return require("packer.util").float {border = "single"}
-        end
-    },
-    git = {
-        clone_timeout = 600, -- Timeout, in seconds, for git clones
+local packer_bootstrap = ensure_packer()
 
-        subcommands = {
-            update = 'pull --ff-only --progress --rebase=false --allow-unrelated-histories',
+---------------------
+--  Packer Config  --
+---------------------
+
+if not packer_bootstrap then
+    require("packer").init {
+        display = {
+            open_fn = function()
+                return require("packer.util").float {border = "single"}
+            end
+        },
+        git = {
+            clone_timeout = 600, -- Timeout, in seconds, for git clones
+
+            subcommands = {
+                -- Use this one normally
+                update = 'pull --ff-only --progress --rebase=true --allow-unrelated-histories',
+                -- Use this one if plugin fails to fast foward
+                --update = 'pull --rebase=true',
+            }
+
         }
-
     }
-}
+end
 
 return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
@@ -58,6 +75,20 @@ return require('packer').startup(function(use)
     use { -- Gruvbox theme
         "ellisonleao/gruvbox.nvim",
         requires = {"rktjmp/lush.nvim"}
+    }
+
+    -- use {
+    --     "pwntester/nautilus.nvim",
+    --     config = function()
+    --         require("nautilus").load {
+    --             transparent = true,
+    --             mode = "octonauts"
+    --         }
+    --     end
+    -- }
+
+    use { -- Wal theme
+        "dylanaraps/wal.vim"
     }
 
     use { -- Highlight hex colors
@@ -167,14 +198,14 @@ return require('packer').startup(function(use)
     --         "honza/vim-snippets"
     --     }
     -- }
-    
+
 --         Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 --         " 9000+ Snippets
 --         Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
--- 
+--
 --         " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
 --         " Need to **configure separately**
--- 
+--
 --         Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
     --[[
@@ -282,7 +313,16 @@ return require('packer').startup(function(use)
     }
 
     use { -- Easily align text
-        "junegunn/vim-easy-align"
+        "junegunn/vim-easy-align",
+        config = function()
+            vim.g.easy_align_delimiters = {
+                ['/'] = {
+                    pattern = '//\\+',
+                    delimiter_align = 'l',
+                    ignore_groups = {'!Comment'}
+                }
+            }
+        end
     }
 
     use { -- File manager/browser
@@ -312,6 +352,23 @@ return require('packer').startup(function(use)
         event = "BufRead",
         config = function()
             require("plugins.gitsigns").config()
+        end
+    }
+
+    use {
+        "tpope/vim-fugitive",
+        "tpope/vim-rhubarb"
+    }
+
+    use {
+        'pwntester/octo.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
+        config = function ()
+            require("plugins.octo").config()
         end
     }
 
@@ -381,17 +438,18 @@ return require('packer').startup(function(use)
         after = "nvim-treesitter",
         config = function()
             require('spellsitter').setup({
-                hl = 'SpellBad',
+                --hl = 'SpellBad',
+                enable = true,
                 captures = {}
             })
         end
     }
 
     use {
-        "romgrk/nvim-treesitter-context",
+        "nvim-treesitter/nvim-treesitter-context",
         after = "nvim-treesitter",
         config = function()
-            require'treesitter-context.config'.setup{
+            require'treesitter-context'.setup{
                 enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
             }
         end
@@ -477,6 +535,11 @@ return require('packer').startup(function(use)
             vim.cmd [[highlight IndentBlanklineContextChar guifg=gray]]
             -- IndentBlanklineContextChar
         end
+    }
+
+    use {
+        'jdhao/whitespace.nvim',
+        event = 'VimEnter',
     }
 
     use {

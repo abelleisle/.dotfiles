@@ -14,6 +14,7 @@ case $class in
     (Spotify) echo desktop=9;;
     (discord) echo desktop=9;;
     (Steam) echo desktop=8 follow=no;;
+    (zoom) echo state=floating;;
 
     # Project Stuff
     (main) echo state=floating;;

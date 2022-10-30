@@ -2,3 +2,4 @@ notify = true
 bitrate = 320
 shuffle = true
 initial_screen = "library"
+use_nerdfont = true

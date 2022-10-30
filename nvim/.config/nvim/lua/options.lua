@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+vim.g.mapleader = " "
+vim.g.auto_save = false
+
 opt.ruler = true
 opt.hidden = true
 opt.ignorecase = true
@@ -29,6 +32,9 @@ opt.wrap = true
 opt.linebreak = true
 opt.breakindent = true
 vim.cmd('au TextYankPost * lua vim.highlight.on_yank {on_visual = false}')  -- disabled in visual mode
+opt.autoread = true
+vim.cmd('autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != \'c\' | checktime | endif')
+vim.cmd('autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None')
 
 -- Numbers
 opt.number = true
@@ -43,7 +49,7 @@ opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftround = true
 
-vim.o.completeopt = "menuone,noinsert,noselect"
+opt.completeopt = "menuone,noinsert,noselect"
 
 -- Caching
 opt.backupdir:remove(".")

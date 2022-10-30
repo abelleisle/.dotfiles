@@ -5,15 +5,23 @@
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM=$HOME/.custom-zsh
 
+# ~/.zprofile will source ~/.profile, so we don't need to here
 if [ -f ~/.profile ]; then
     source ~/.profile
+fi
+
+# Source our custom functions
+if [ -d ~/.zsh ]; then
+    for file in ~/.zsh/**; do
+        source $file;
+    done
 fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="a"
+ZSH_THEME="passion"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -81,11 +89,19 @@ compinit #-d ~/.cache/zsh/zcompdump-$ZSH_VERSION
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
+# Plugin Settings
+VI_MODE_SET_CURSOR=true
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+MODE_INDICATOR="%F{white}[N]%f"
+INSERT_MODE_INDICATOR="%F{yellow}[I]%f"
+
 plugins=(
-    git
-    fast-syntax-highlighting
+    gitfast
+    zsh-syntax-highlighting
     sudo
     zsh-autopair
+    vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -126,3 +142,7 @@ export VISUAL="$EDITOR"
 
 cat ~/.cache/wal/sequences
 source ~/.cache/wal/colors-tty.sh
+
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
+

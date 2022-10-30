@@ -30,7 +30,7 @@ M.config = function()
         buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
         buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
         buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-        buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+        buf_set_keymap("n", "<space>k", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
         buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
         buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
         buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
@@ -74,10 +74,11 @@ M.config = function()
                 'additionalTextEdits',
             }
         }
-        capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+        capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
         servers = {
-            "ccls", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer"
+            "clangd", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer",
+            "cmake"
         }
 
         for _, lang in pairs(servers) do
@@ -105,9 +106,53 @@ M.config = function()
                         }
                     }
 
+                    if lang == "clangd" then
+                        client_opts = vim.tbl_deep_extend("keep", opts, {
+                            single_file_support = true,
+                            init_options = {
+                                client = {
+                                    snippetSupport = true
+                                },
+                                compilationDatabaseDirectory = "build";
+                                index = {
+                                    threads = 0;
+                                };
+                                cache = {
+                                    directory = "/tmp/clangd/";
+                                };
+                                highlight = {
+                                    lsRangers = true;
+                                };
+                                clang = {
+                                    excludeArgs = {
+                                        "-mlongcalls",
+                                        "-Wno-frame-address",
+                                        "-fstrict-volatile-bitfields",
+                                        "-fno-tree-switch-conversion",
+                                        "-mtext-section-literals",
+                                    },
+                                }
+                            },
+                            cmd = { "clangd" },
+                            filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                            --root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')
+                            --root_dir = vim.loop.cwd,
+                            root_dir = function(fname)
+                                return util.root_pattern(--'build/compile_commands.json',
+                                                        'compile_commands.json',
+                                                        'compile_flags.txt',
+                                                        '.git')(fname) or util.path.dirname(fname)
+                            end
+                            -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+                        })
+                    end
+
                     if lang == "ccls" then
                         client_opts = vim.tbl_deep_extend("keep", opts, {
                             init_options = {
+                                client = {
+                                    snippetSupport = true
+                                },
                                 compilationDatabaseDirectory = "build";
                                 index = {
                                     threads = 0;
@@ -121,21 +166,26 @@ M.config = function()
                                 clang = {
                                     excludeArgs = {
                                         "-mlongcalls",
-                                        "-Wno-frame-address"
-                                    };
+                                        "-Wno-frame-address",
+                                        "-fstrict-volatile-bitfields",
+                                        "-fno-tree-switch-conversion",
+                                        "-mtext-section-literals",
+                                    },
                                 }
                             },
                             cmd = { "ccls" },
                             filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                            root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git'),
                             --root_dir = vim.loop.cwd,
-                            root_dir = function(fname)
-                                return util.root_pattern('compile_commands.json',
-                                                        'build/compile_commands.json',
-                                                        'compile_flags.txt',
-                                                        '.git',
-                                                        '.ccls')(fname) or util.path.dirname(fname)
-                            end
+                            -- root_dir = function(fname)
+                            --     return util.root_pattern(--'build/compile_commands.json',
+                            --                             'compile_commands.json',
+                            --                             'compile_flags.txt',
+                            --                             '.git',
+                            --                             '.ccls')(fname) or util.path.dirname(fname)
+                            -- end
                             -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+                            single_file_support = true,
                         })
                     end
 
@@ -176,6 +226,19 @@ M.config = function()
                                     }
                                 }
                             }
+                        })
+                    end
+
+                    if lang == "rust_hdl" then
+                        client_opts = vim.tbl_deep_extend("keep", opts, {
+                            default_config = {
+                            cmd = {"vhdl_ls"};
+                            filetypes = { "vhdl" };
+                            root_dir = function(fname)
+                                return util.root_pattern('vhdl_ls.toml')(fname)
+                            end;
+                            settings = {};
+                            };
                         })
                     end
                     requested_server:setup(client_opts)
