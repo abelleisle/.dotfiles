@@ -46,6 +46,15 @@ XF86AudioLowerVolume
 XF86Display
     arandr
 
+XF86AudioPlay
+    playerctl play-pause
+
+XF86AudioNext
+    playerctl next
+
+XF86AudioPrev
+    playerctl previous
+
 # open ranger
 super + r
    kitty ranger

@@ -130,6 +130,7 @@ M.config = function()
                             --root_dir = vim.loop.cwd,
                             root_dir = function(fname)
                                 return util.root_pattern('compile_commands.json',
+                                                        'build/compile_commands.json',
                                                         'compile_flags.txt',
                                                         '.git',
                                                         '.ccls')(fname) or util.path.dirname(fname)

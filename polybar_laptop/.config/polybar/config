@@ -92,7 +92,7 @@ font-3 = Siji:pixelsize=11;1
 
 modules-left = bspwm backlight-acpi pulseaudio bluetooth
 modules-center = date
-modules-right = memory cpu temperature wlan eth battery powermenu
+modules-right = vpn memory cpu temperature wlan eth ethusb battery powermenu
 
 tray-position = right
 tray-padding = 2
@@ -245,7 +245,7 @@ card = intel_backlight
 [module/bluetooth]
 type = custom/script
 exec = ~/.config/polybar/scripts/rofi-bluetooth --status
-interval = 1
+interval = 5
 format-underline = ${colors.blue-alt}
 click-left = ~/.config/polybar/scripts/rofi-bluetooth &
 
@@ -264,6 +264,13 @@ format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.cyan}
 label = %percentage_used:2%%
+
+[module/vpn]
+type = custom/script
+exec = ~/.config/polybar/scripts/vpn --status
+interval = 3
+format-prefix = ""
+format-underline = ${colors.magenta-alt}
 
 [module/wlan]
 type = internal/network
@@ -298,6 +305,22 @@ animation-packetloss-1-background = ${colors.background}
 [module/eth]
 type = internal/network
 interface = enp4s0
+interval = 3.0
+
+format-connected-underline = ${colors.green-alt}
+format-connected-prefix = "e "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/ethusb]
+type = internal/network
+interface = enxe8ea6a8230fc
 interval = 3.0
 
 format-connected-underline = ${colors.green-alt}
@@ -439,6 +462,11 @@ ramp-2 = 
 ramp-3 = 
 ramp-4 = 
 ramp-foreground = ${colors.foreground-alt}
+
+[module/lock]
+type = custom/text
+content = 
+click-left = xtrlock
 
 [module/powermenu]
 type = custom/menu

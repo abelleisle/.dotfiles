@@ -5,7 +5,8 @@ if [ "$EUID" -ne 0 ] ; then
     exit
 fi
 
-dev="$(ip route get 8.8.8.8 | awk '{ print $5; exit }')"
+#dev="$(ip route get 8.8.8.8 | awk '{ print $5; exit }')"
+dev="wlp0s20f3"
 
 ip link set down $dev
 macchanger -r $dev

@@ -52,9 +52,9 @@ case $1 in
         #Toggle mic mic
         amixer -D pulse set Capture 1+ toggle > /dev/null
     if is_mic_mute ; then
-        dunstify -i audio-mic-muted -t 1250 -r 2593 -u normal "µ Muted"
+        dunstify -i audio-mic-muted -t 1250 -r 2593 -u normal " Muted"
     else
-        dunstify -i audio-mic-muted -t 1250 -r 2593 -u normal "µ Unmuted"
+        dunstify -i audio-mic-muted -t 1250 -r 2593 -u normal " Unmuted"
     fi
     ;;
 esac
