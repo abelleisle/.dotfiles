@@ -189,7 +189,6 @@ map("n", "<Leader>fm", [[<Cmd> Neoformat<CR>]], opt)
 --  DASHBOARD  --
 -----------------
 
-map("n", "<Leader>fw", [[<Cmd> Telescope live_grep<CR>]], opt)
 map("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], opt)
 map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
 map("n", "<Leader>fn", [[<Cmd> DashboardNewFile<CR>]], opt)
@@ -201,16 +200,31 @@ map("n", "<C-s>s", [[<Cmd> SessionSave<CR>]], opt)
 --  TELESCOPE  --
 -----------------
 
-map("n", "<Leader>gt", [[<Cmd> Telescope git_status <CR>]], opt)
-map("n", "<Leader>cm", [[<Cmd> Telescope git_commits <CR>]], opt)
-map("n", "<C-p>", [[<Cmd> Telescope find_files find_command=rg,--ignore,--hidden,--files <CR>]], opt)
-map("i", "<C-p>", [[<Cmd> Telescope find_files find_command=rg,--ignore,--hidden,--files <CR>]], opt)
-map("n", "<Leader>fp", [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]], opt)
-map("n", "<Leader>fb", [[<Cmd>Telescope buffers<CR>]], opt)
-map("n", "<Leader>fh", [[<Cmd>Telescope help_tags<CR>]], opt)
-map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], opt)
-map("n", "<Leader>fk", [[<Cmd>Telescope keymaps<CR>]], opt)
-map("n", "<Leader>f#", [[<Cmd>Telescope grep_string<CR>]], opt)
+local ts = {
+    builtin    = require('telescope.builtin'),
+    extensions = require('telescope').extensions,
+    grep_fuzzy = function()
+        require('telescope.builtin').grep_string({
+            shorten_path = true,
+            word_match = "-w",
+            only_sort_text = true,
+            search = ''
+        })
+    end
+}
+
+--map("n", "<Leader>fw", [[<Cmd> Telescope live_grep<CR>]], opt)
+vim.keymap.set('n', '<Leader>fw',   ts.grep_fuzzy, opt)
+vim.keymap.set('n', '<Leader>gt',   ts.builtin.git_status, opt)
+vim.keymap.set('n', '<Leader>cm',   ts.builtin.git_commits, opt)
+vim.keymap.set('n', '<C-p>',        ts.builtin.find_files, opt)
+vim.keymap.set('i', '<C-p>',        ts.builtin.find_files, opt)
+vim.keymap.set('n', '<Leader>fp',   ts.extensions.media_files.media_files, opt)
+vim.keymap.set('n', '<Leader>fb',   ts.builtin.buffers, opt)
+vim.keymap.set('n', '<Leader>fh',   ts.builtin.help_tags, opt)
+vim.keymap.set('n', '<Leader>fo',   ts.builtin.oldfiles, opt)
+vim.keymap.set('n', '<Leader>fk',   ts.builtin.keymaps, opt)
+vim.keymap.set('n', '<Leader>f#',   ts.builtin.grep_string, opt)
 
 ----------------------------------
 --  BURN ARROWS and PGUP/PGDWN  --

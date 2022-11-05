@@ -63,6 +63,19 @@ M.config = function()
                 filetypes = {"png", "webp", "jpg", "jpeg"},
                 find_cmd = "rg" -- find command (defaults to `fd`)
             }
+        },
+        pickers = {
+            --grep_string = {
+            --    shorten_path = true,
+            --    word_match = "-w",
+            --    only_sort_text = true,
+            --    search = ''
+            --},
+            find_files = {
+                find_command = {
+                    "rg", "--ignore", "--hidden", "--files"
+                }
+            }
         }
     }
 
