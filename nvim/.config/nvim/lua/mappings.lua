@@ -205,6 +205,7 @@ local ts = {
     extensions = require('telescope').extensions,
     grep_fuzzy = function()
         require('telescope.builtin').grep_string({
+            prompt_title = "Fuzzy Find",
             shorten_path = true,
             word_match = "-w",
             only_sort_text = true,
@@ -214,17 +215,18 @@ local ts = {
 }
 
 --map("n", "<Leader>fw", [[<Cmd> Telescope live_grep<CR>]], opt)
-vim.keymap.set('n', '<Leader>fw',   ts.grep_fuzzy, opt)
-vim.keymap.set('n', '<Leader>gt',   ts.builtin.git_status, opt)
-vim.keymap.set('n', '<Leader>cm',   ts.builtin.git_commits, opt)
-vim.keymap.set('n', '<C-p>',        ts.builtin.find_files, opt)
-vim.keymap.set('i', '<C-p>',        ts.builtin.find_files, opt)
-vim.keymap.set('n', '<Leader>fp',   ts.extensions.media_files.media_files, opt)
-vim.keymap.set('n', '<Leader>fb',   ts.builtin.buffers, opt)
-vim.keymap.set('n', '<Leader>fh',   ts.builtin.help_tags, opt)
-vim.keymap.set('n', '<Leader>fo',   ts.builtin.oldfiles, opt)
-vim.keymap.set('n', '<Leader>fk',   ts.builtin.keymaps, opt)
-vim.keymap.set('n', '<Leader>f#',   ts.builtin.grep_string, opt)
+vim.keymap.set('n', '<Leader>fw', ts.builtin.live_grep,                  opt)
+vim.keymap.set('n', '<Leader>fz', ts.grep_fuzzy,                         opt)
+vim.keymap.set('n', '<Leader>gt', ts.builtin.git_status,                 opt)
+vim.keymap.set('n', '<Leader>cm', ts.builtin.git_commits,                opt)
+vim.keymap.set('n', '<C-p>',      ts.builtin.find_files,                 opt)
+vim.keymap.set('i', '<C-p>',      ts.builtin.find_files,                 opt)
+vim.keymap.set('n', '<Leader>fp', ts.extensions.media_files.media_files, opt)
+vim.keymap.set('n', '<Leader>fb', ts.builtin.buffers,                    opt)
+vim.keymap.set('n', '<Leader>fh', ts.builtin.help_tags,                  opt)
+vim.keymap.set('n', '<Leader>fo', ts.builtin.oldfiles,                   opt)
+vim.keymap.set('n', '<Leader>fk', ts.builtin.keymaps,                    opt)
+vim.keymap.set('n', '<Leader>f#', ts.builtin.grep_string,                opt)
 
 ----------------------------------
 --  BURN ARROWS and PGUP/PGDWN  --

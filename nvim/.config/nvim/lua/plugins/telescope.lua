@@ -38,7 +38,8 @@ M.config = function()
                 "%.vim/*"
             },
             generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
-            path_display = shorten,
+            --path_display = {"smart", "shorten"}, -- TODO: truncate when required by shortening path
+            dynamic_preview_title = true,
             winblend = 0,
             border = {},
             borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
