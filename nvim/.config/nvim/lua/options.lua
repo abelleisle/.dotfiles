@@ -52,17 +52,9 @@ opt.shiftround = true
 opt.completeopt = "menuone,noinsert,noselect"
 
 -- Caching
-opt.backupdir:remove(".")
-opt.backupdir:append("~/.config/nvim/.backup")
-opt.backupdir:append("/tmp//")
-
-opt.undodir:remove(".")
-opt.undodir:append("~/.config/nvim/.undo")
-opt.undodir:append("/tmp//")
-
-opt.directory:remove(".")
-opt.directory:append("~/.config/nvim/.swap")
-opt.directory:append("/tmp//")
+opt.backupdir = {"/tmp/nvim/backup"}
+opt.undodir = {"/tmp/nvim/undo"}
+opt.directory = {"/tmp/nvim/swap"}
 
 opt.undofile = true
 opt.confirm = true

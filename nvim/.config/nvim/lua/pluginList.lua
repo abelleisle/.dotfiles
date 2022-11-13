@@ -1,3 +1,7 @@
+-- Use this to change pack location for architecture
+-- local packloc, packloc_count = vim.opt.packpath._value:gsub("/site", "/site_arm")
+-- print(packloc)
+
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -65,6 +69,13 @@ return require('packer').startup(function(use)
         requires = {"kyazdani42/nvim-web-devicons"},
         config = function()
             require("plugins.statusline").config()
+        end
+    }
+
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            require("which-key").setup{}
         end
     }
 

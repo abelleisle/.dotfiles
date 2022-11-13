@@ -27,7 +27,25 @@ M.config = function()
 
     local filename_and_parent = function()
         if buffer_not_empty() then
-            return vim.fn.expand("%:p:h:t") .. "/" .. vim.fn.expand('%:t') .. " "
+            -- return vim.fn.expand("%:p:h:t") .. "/" .. vim.fn.expand('%:t') .. " "
+            local file = vim.fn.expand("%:.")
+            local t = {}
+            local entries = 0
+            local sep = "/"
+            for str in string.gmatch(file, "([^"..sep.."]+)") do
+                table.insert(t, str)
+                entries = entries + 1
+            end
+
+            local pr = ""
+            for k,v in pairs(t) do
+                if k > entries - 2 then
+                    pr = pr .. "/" .. v
+                else
+                    pr = pr .. "/" .. v:sub(0,1)
+                end
+            end
+            return pr:sub(2) .. " "
         end
         return ""
     end
@@ -38,7 +56,7 @@ M.config = function()
         current_win = 0
       end
       local squeeze_width  = vim.fn.winwidth(current_win) / 2
-      if squeeze_width > 50 then
+      if squeeze_width > 60 then
         return true
       end
       return false

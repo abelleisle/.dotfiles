@@ -43,9 +43,9 @@ M.config = function()
         buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
         -- Set some keybinds conditional on server capabilities
-        if client.resolved_capabilities.document_formatting then
+        if client.server_capabilities.document_formatting then
             buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-        elseif client.resolved_capabilities.document_range_formatting then
+        elseif client.server_capabilities.document_range_formatting then
             buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
         end
     end -- fn on_attach()
@@ -257,7 +257,7 @@ M.config = function()
         -- textDocument/documentHighlight. without the check it was causing constant
         -- errors when servers didn't have that capability
         for _,client in ipairs(vim.lsp.get_active_clients()) do
-            if client.resolved_capabilities.document_highlight then
+            if client.server_capabilities.document_highlight then
                 vim.cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
                 vim.cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
                 vim.cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
