@@ -57,7 +57,7 @@ M.config = function()
 
         local servers = require "nvim-lsp-installer.servers"
         local util    = require("lspconfig/util")
-        
+
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
         capabilities.textDocument.completion.completionItem.snippetSupport = true

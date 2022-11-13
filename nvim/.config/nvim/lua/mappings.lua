@@ -40,12 +40,12 @@ map('n', "<A-p>", "<CMD>lua require('Navigator').previous()<CR>", opt)
 -----------------------
 --  MODE NAVIGATION  --
 -----------------------
-vim.cmd("inoremap jk <Esc>")
+--vim.cmd("inoremap jk <Esc>")
+map('i', "jk", "<Esc>", opt)
 
 ------------------------
 --  SPLIT NAVIGATION  --
 ------------------------
-
 map('n', "<Leader>%", ":vsplit<CR>", opt)
 map('n', "<Leader>\"", ":split<CR>", opt)
 
@@ -76,104 +76,15 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 -----------------------
 map("n", "<Leader>n", ":noh<CR>", opt)
 
----------------
---  TRUEZEN  --
----------------
-map("n", "<leader>zz", ":TZAtaraxis<CR>", opt)
-map("n", "<leader>zm", ":TZMinimalist<CR>", opt)
-map("n", "<leader>zf", ":TZFocus<CR>", opt)
-
---map("n", "<C-s>", ":w <CR>", opt)
-
 ----------------
 --  COMMENTS  --
 ----------------
-map("n", "<leader>/", ":CommentToggle<CR>", opt)
-map("v", "<leader>/", ":CommentToggle<CR>", opt)
+-- This is mapped in the Comment setups
 
 ------------------
 --  COMPLETION  --
 ------------------
-
--- local remap = vim.api.nvim_set_keymap
--- local npairs = require('nvim-autopairs')
--- 
--- npairs.setup({ map_bs = false })
--- 
--- vim.g.coq_settings = { keymap = { recommended = false } }
--- 
--- -- these mappings are coq recommended mappings unrelated to nvim-autopairs
--- remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
--- remap('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
--- remap('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
--- remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
--- 
--- -- skip it, if you use another global object
--- _G.MUtils= {}
--- 
--- MUtils.CR = function()
---   if vim.fn.pumvisible() ~= 0 then
---     if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
---       return npairs.esc('<c-y>')
---     else
---       return npairs.esc('<c-e>') .. npairs.autopairs_cr()
---     end
---   else
---     return npairs.autopairs_cr()
---   end
--- end
--- remap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
--- 
--- MUtils.BS = function()
---   if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
---     return npairs.esc('<c-e>') .. npairs.autopairs_bs()
---   else
---     return npairs.autopairs_bs()
---   end
--- end
--- remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
-
--- local remap = vim.api.nvim_set_keymap
--- local npairs = require('nvim-autopairs')
--- 
--- vim.g.completion_confirm_key = ""
--- 
--- _G.newl=function()
---     return npairs.autopairs_cr()
--- end
--- 
--- remap('i' , '<CR>','v:lua.newl()', {expr = true , noremap = true})
--- 
--- local t = function(str)
---     return vim.api.nvim_replace_termcodes(str, true, true, true)
--- end
--- 
--- _G.expand_tab = function()
---   if vim.fn.pumvisible() == 1 then
---     if vim.fn.complete_info({"selected"})["selected"] == -1 then
---       return t "<C-n><Plug>(completion_confirm_completion)"
---     else
---       return t "<Plug>(completion_confirm_completion)"
---     end
---   elseif vim.api.nvim_eval([[ UltiSnips#CanJumpForwards() ]]) == 1 then
---       return t "<cmd>call UltiSnips#JumpForwards()<CR>"
---   else
---     return t "<Tab>"
---   end
--- end
--- 
--- _G.s_expand_tab = function()
---     if vim.api.nvim_eval([[ UltiSnips#CanJumpBackwards() ]]) == 1 then
---         return t "<cmd>call UltiSnips#JumpBackwards()<CR>"
---     else
---         return t "<S-Tab>"
---     end
--- end
--- 
--- vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.expand_tab()", {expr = true})
--- vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.expand_tab()", {expr = true})
--- vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_expand_tab()", {expr = true})
--- vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_expand_tab()", {expr = true})
+-- This is mapped in plugins.cmp
 
 -----------------
 --  NVIM TREE  --
@@ -183,7 +94,7 @@ map("n", "<Leader>t", ":NvimTreeToggle<CR>", opt)
 --------------
 --  FORMAT  --
 --------------
-map("n", "<Leader>fm", [[<Cmd> Neoformat<CR>]], opt)
+map("n", "<Leader>fm", ":Neoformat<CR>", opt)
 
 -----------------
 --  DASHBOARD  --

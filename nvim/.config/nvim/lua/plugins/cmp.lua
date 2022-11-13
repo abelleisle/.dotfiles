@@ -1,15 +1,23 @@
 local M = {}
-local present, cmp = pcall(require, "cmp")
+
 
 M.config = function()
+    local cmp_present, cmp = pcall(require, "cmp")
+    local lua_present, luasnip = pcall(require, "luasnip")
+
     vim.opt.completeopt = "menu,menuone,noselect"
+
+    local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
 
     -- nvim-cmp setup
     cmp.setup {
         snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
-                vim.fn["UltiSnips#Anon"](args.body)
+                -- vim.fn["UltiSnips#Anon"](args.body)
             end,
         },
         formatting = {
@@ -41,29 +49,50 @@ M.config = function()
                 select = false,
             },
             ["<Tab>"] = cmp.mapping(function(fallback)
-                if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-                    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#ExpandSnippet()<CR>", true, true, true), "")
-                elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<ESC>:call UltiSnips#JumpForwards()<CR>", true, true, true), "")
-                elseif require("luasnip").expand_or_jumpable() then
-                    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-                elseif cmp.visible() then
+                if cmp.visible() then
                     cmp.select_next_item()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                elseif has_words_before() then
+                    cmp.complete()
                 else
                     fallback()
                 end
-            end, {"i", "s"}),
+            end, { "i", "s" }),
+
             ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-                    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#JumpBackwards()<CR>", true, true, true), "")
-                elseif require("luasnip").jumpable(-1) then
-                    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
-                elseif cmp.visible() then
+                if cmp.visible() then
                     cmp.select_prev_item()
+                elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
                 else
                     fallback()
                 end
-            end, {"i", "s"})
+            end, { "i", "s" }),
+            -- ["<Tab>"] = cmp.mapping(function(fallback)
+            --     -- if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+            --     --     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#ExpandSnippet()<CR>", true, true, true), "")
+            --     -- elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+            --     --     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<ESC>:call UltiSnips#JumpForwards()<CR>", true, true, true), "")
+            --     if require("luasnip").expand_or_jumpable() then
+            --         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+            --     elseif cmp.visible() then
+            --         cmp.select_next_item()
+            --     else
+            --         fallback()
+            --     end
+            -- end, {"i", "s"}),
+            -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+            --     -- if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+            --     --     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#JumpBackwards()<CR>", true, true, true), "")
+            --     if require("luasnip").jumpable(-1) then
+            --         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+            --     elseif cmp.visible() then
+            --         cmp.select_prev_item()
+            --     else
+            --         fallback()
+            --     end
+            -- end, {"i", "s"})
         },
         sources = cmp.config.sources {
             { name = "nvim_lsp" },
@@ -71,7 +100,7 @@ M.config = function()
             { name = "buffer" },
             { name = "nvim_lua" },
             { name = "path" },
-            { name = "ultisnips" },
+            -- { name = "ultisnips" },
         },
     } -- cmp.setup
 
@@ -92,8 +121,9 @@ M.config = function()
 end
 
 M.luasnip = function()
-    local present, luasnip = pcall(require, "luasnip")
-    if not present then
+    local lua_present, luasnip = pcall(require, "luasnip")
+
+    if not lua_present then
         return
     end
 
@@ -101,7 +131,14 @@ M.luasnip = function()
         history = true,
         updateevents = "TextChanged,TextChangedI",
     }
-    --require("luasnip/loaders/from_vscode").load { path = { chadrc_config.plugins.options.luasnip.snippet_path } }
+
+    require('luasnip.loaders.from_vscode').lazy_load()
+    require('luasnip.loaders.from_snipmate').lazy_load({
+        paths = {
+            vim.fn.stdpath('data')..'/site/pack/packer/start/vim-snippets/snippets/',
+            '~/.config/nvim/snippets/'
+        }
+    })
 end
 
 return M

@@ -74,18 +74,9 @@ return require('packer').startup(function(use)
 
     use { -- Gruvbox theme
         "ellisonleao/gruvbox.nvim",
-        requires = {"rktjmp/lush.nvim"}
+        commit = 'cb7a8a867cfaa7f0e8ded57eb931da88635e7007',
+        requires = {"rktjmp/lush.nvim"},
     }
-
-    -- use {
-    --     "pwntester/nautilus.nvim",
-    --     config = function()
-    --         require("nautilus").load {
-    --             transparent = true,
-    --             mode = "octonauts"
-    --         }
-    --     end
-    -- }
 
     use { -- Wal theme
         "dylanaraps/wal.vim"
@@ -102,13 +93,11 @@ return require('packer').startup(function(use)
 
     use {
         "folke/todo-comments.nvim",
+        branch = "neovim-pre-0.8.0",
         requires = "nvim-lua/plenary.nvim",
         config = function()
             require("todo-comments").setup {
                 signs = false,
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
             }
         end
     }
@@ -119,25 +108,15 @@ return require('packer').startup(function(use)
     use { -- Treesitter front end
         "nvim-treesitter/nvim-treesitter",
         run = ':TSUpdate',
-        --event = "BufRead",
+        event = "BufRead",
         config = function()
             require("plugins.treesitter").config()
         end
     }
 
-    -- use {
-    --     "williamboman/nvim-lsp-installer"
-    -- }
-
     use { -- Neovim Language Server
         "neovim/nvim-lspconfig",
         event = "BufRead",
-        --setup = function()
-        --    --require("plugins.lspconfig").config()
-        --    vim.defer_fn(function()
-        --        vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
-        --    end, 0)
-        --end,
         config = function()
             require("plugins.lspconfig").config()
         end,
@@ -152,110 +131,22 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- load compe in insert mode only
-    -- use {
-    --     "hrsh7th/nvim-compe",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("plugins.compe").config()
-    --     end,
-    --     -- wants = {"LuaSnip"},
-    --     requires = {
-    --         -- {
-    --         --     "L3MON4D3/LuaSnip",
-    --         --     wants = "friendly-snippets",
-    --         --     event = "InsertCharPre",
-    --         --     config = function()
-    --         --         require("plugins.compe").snippets()
-    --         --     end
-    --         -- },
-    --         -- "rafamadriz/friendly-snippets",
-    --         "ray-x/lsp_signature.nvim",
-    --         "SirVer/ultisnips",
-    --         "honza/vim-snippets"
-    --     }
-    -- }
-
-    -- use { -- Completion Plugin
-    --     "nvim-lua/completion-nvim",
-    --     after = "nvim-lspconfig",
-    --     event = "BufRead",
-    --     config = function()
-    --         vim.g.completion_enable_auto_popup = 1
-    --         vim.g.completion_enable_snippet = 'UltiSnips'
-    --         -- vim.cmd("autocmd BufEnter * lua require'completion'.on_attach()")
-    --     end,
-    --     requires = {
-    --         {
-    --             "SirVer/ultisnips",
-    --             config = function()
-    --                 vim.g.UltiSnipsExpandTrigger="<Nop>"
-    --                 vim.g.UltiSnipsJumpForwardTrigger="<Nop>"
-    --                 vim.g.UltiSnipsJumpBackwardTrigger="<Nop>"
-    --                 vim.g.UltiSnipsSnippetDirectories={"UltiSnips"}
-    --             end
-    --         },
-    --         "honza/vim-snippets"
-    --     }
-    -- }
-
---         Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
---         " 9000+ Snippets
---         Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
---
---         " lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
---         " Need to **configure separately**
---
---         Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
-
-    --[[
     use {
-        "ms-jpq/coq_nvim",
-        branch = 'coq',
-
-        requires = {
-            {
-                'ms-jpq/coq.artifacts',
-                branch = 'artifacts'
-            },
-            {
-                'ms-jpq/coq.thirdparty',
-                branch = '3p'
-            }
-        },
-
-        config = function()
-            vim.g.coq_settings = {
-                auto_start = 'shut-up',
-                keymap = {
-                    jump_to_mark = '<C-q>',
-                    bigger_preview = nil
-                }
-            }
-        end
+        "honza/vim-snippets", rtp = '.',
+        event = "BufRead"
     }
-    --]]
 
     use {
         "rafamadriz/friendly-snippets",
-        event = "InsertEnter",
-    }
-
-    use {
-        "hrsh7th/nvim-cmp",
-        module = "cmp",
-        after = "friendly-snippets",
-        config = function()
-            require("plugins.cmp").config()
-        end
+        event = "BufRead"
     }
 
     use {
         "L3MON4D3/LuaSnip",
         wants = "friendly-snippets",
-        after = "nvim-cmp",
         config = function()
             require("plugins.cmp").luasnip()
+            require("snippets").config()
         end
     }
 
@@ -265,51 +156,25 @@ return require('packer').startup(function(use)
     }
 
     use {
-        "hrsh7th/cmp-nvim-lua",
-        --after = "cmp_luasnip",
-    }
-
-    use {
-        "hrsh7th/cmp-nvim-lsp",
-        --module = "cmp_nvim_lsp",
-        --after = "nvim-lspconfig",
+        "hrsh7th/nvim-cmp",
+        module = "cmp",
+        after = "LuaSnip",
+        config = function()
+            require("plugins.cmp").config()
+        end
     }
 
     use {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
-    }
-
-    -- UltiSnips
-    use {
-        "honza/vim-snippets", rtp = '.',
-    }
-    use {
-        "SirVer/ultisnips",
-        config = function()
-            vim.g.UltiSnipsExpandTrigger="<Nop>"
-            vim.g.UltiSnipsJumpForwardTrigger="<Nop>"
-            vim.g.UltiSnipsJumpBackwardTrigger="<Nop>"
-            vim.g.UltiSnipsSnippetDirectories={"UltiSnips"}
-            vim.g.UltiSnipsRemoveSelectModeMappings = 0
-        end,
-        requires = {
-            "quangnguyen30192/cmp-nvim-ultisnips",
-            config = function()
-                -- optional call to setup (see customization section)
-                require("cmp_nvim_ultisnips").setup{
-                    -- filetype_source = "treesitter",
-                    -- show_snippets = "all",
-                    -- documentation = function(snippet)
-                    --     return snippet.description
-                    -- end
-                }
-            end,
-        }
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lua",
+        after = "nvim-cmp"
     }
 
     use { -- Automatically format files
-        "sbdchd/neoformat", cmd = "Neoformat"
+        "sbdchd/neoformat", cmd = "Neoformat",
+        event = "BufRead",
     }
 
     use { -- Easily align text
@@ -470,11 +335,22 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { -- Comment lines easily
-        "terrortylor/nvim-comment",
-        cmd = "CommentToggle",
+    -- use { -- Comment lines easily
+    --     "terrortylor/nvim-comment",
+    --     cmd = "CommentToggle",
+    --     config = function()
+    --         require("nvim_comment").setup()
+    --     end
+    -- }
+    use {
+        'numToStr/Comment.nvim',
         config = function()
-            require("nvim_comment").setup()
+            require('Comment').setup({
+                toggler = {
+                    ---Line-comment toggle keymap
+                    line = '<Leader>/',
+                },
+            })
         end
     }
 
@@ -498,9 +374,9 @@ return require('packer').startup(function(use)
     }
 
     use { -- Auto-save
-        "Pocco81/AutoSave.nvim",
+        "Pocco81/auto-save.nvim",
         config = function()
-            require("plugins.zenmode").autoSave()
+            require("plugins.autosave").config()
         end,
         cond = function() -- Only enable if auto save is enabled
             return vim.g.auto_save == true
@@ -515,14 +391,6 @@ return require('packer').startup(function(use)
     --         require("neoscroll").setup()
     --     end
     -- }
-
-    use { -- Distraction-free editing
-        "Pocco81/TrueZen.nvim",
-        cmd = {"TZAtaraxis", "TZMinimalist", "TZFocus"},
-        config = function()
-            require("plugins.zenmode").config()
-        end
-    }
 
     use { -- Add indent lines
         "lukas-reineke/indent-blankline.nvim",
