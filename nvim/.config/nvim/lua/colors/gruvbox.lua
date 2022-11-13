@@ -20,6 +20,13 @@ M.config = function ()
         inverse              = true, -- invert background for search, diffs, statuslines and errors
         contrast             = "hard", -- can be "hard", "soft" or empty string
         overrides            = {
+            -- Popup (lsp_signature)
+            NormalFloat = {fg = "",
+                        bg = bg,
+                        reverse = false},
+            -- Signature Popup (current parameter)
+            LspSignatureActiveParameter = {fg = palette.bright_purple,
+                                           bg = bg},
             -- Lines that were added
             DiffAdd     = {fg = "",
                         bg = utils.colors.darken(palette.faded_blue, 0.15, bg),

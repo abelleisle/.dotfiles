@@ -281,7 +281,7 @@ M.config = function()
     vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
 
     vim.cmd("autocmd CursorHold * lua vim.diagnostic.open_float()")
-    vim.cmd("autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()")
+    -- vim.cmd("autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()")
 
 end -- fn M.config
 
