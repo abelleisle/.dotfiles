@@ -6,7 +6,7 @@ require "options"
 --require "highlights"
 require "mappings"
 
-require("utils").hideStuff()
+--require("utils").hideStuff()
 
 -- Call local nvim configs
 pcall(require, "local")

@@ -9,7 +9,7 @@ local snippets = function()
     -- Add all the snippets from sources
     for s = 1,#sources do
         for i = 1,#sources[s] do
-            table.insert(snips, sources[i])
+            table.insert(snips, sources[s][i])
         end
     end
 

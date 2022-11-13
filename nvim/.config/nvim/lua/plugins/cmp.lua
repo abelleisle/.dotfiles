@@ -17,7 +17,6 @@ M.config = function()
         snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
-                -- vim.fn["UltiSnips#Anon"](args.body)
             end,
         },
         formatting = {
@@ -69,30 +68,6 @@ M.config = function()
                     fallback()
                 end
             end, { "i", "s" }),
-            -- ["<Tab>"] = cmp.mapping(function(fallback)
-            --     -- if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-            --     --     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#ExpandSnippet()<CR>", true, true, true), "")
-            --     -- elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-            --     --     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<ESC>:call UltiSnips#JumpForwards()<CR>", true, true, true), "")
-            --     if require("luasnip").expand_or_jumpable() then
-            --         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-            --     elseif cmp.visible() then
-            --         cmp.select_next_item()
-            --     else
-            --         fallback()
-            --     end
-            -- end, {"i", "s"}),
-            -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-            --     -- if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-            --     --     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=UltiSnips#JumpBackwards()<CR>", true, true, true), "")
-            --     if require("luasnip").jumpable(-1) then
-            --         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
-            --     elseif cmp.visible() then
-            --         cmp.select_prev_item()
-            --     else
-            --         fallback()
-            --     end
-            -- end, {"i", "s"})
         },
         sources = cmp.config.sources {
             { name = "nvim_lsp" },
@@ -100,23 +75,24 @@ M.config = function()
             { name = "buffer" },
             { name = "nvim_lua" },
             { name = "path" },
-            -- { name = "ultisnips" },
         },
     } -- cmp.setup
 
-    cmp.setup.cmdline ('/', {
+    cmp.setup.cmdline ({'/', '?'}, {
+        mapping = cmp.mapping.preset.cmdline(),
         sources = {
             {name = 'buffer'},
             {name = 'path'}
         }
     })
 
-    -- cmp.setup.cmdline (':', {
-    --     sources = cmp.config.sources({
-    --         {name = 'path'},
-    --         {name = 'cmdline'}
-    --     })
-    -- })
+    cmp.setup.cmdline (':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            {name = 'path'},
+            {name = 'cmdline'}
+        })
+    })
 
 end
 
@@ -136,7 +112,6 @@ M.luasnip = function()
     require('luasnip.loaders.from_snipmate').lazy_load({
         paths = {
             vim.fn.stdpath('data')..'/site/pack/packer/start/vim-snippets/snippets/',
-            '~/.config/nvim/snippets/'
         }
     })
 end

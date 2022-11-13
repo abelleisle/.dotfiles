@@ -59,6 +59,6 @@ local function create_box(opts)
 end
 
 return {
-    s({trig = 'box'}, create_box{ padding_length = 8 }),
+    s({trig = 'box'}, create_box{ padding_length = 2 }),
     s({trig = 'bbox'}, create_box{ padding_length = 20 })
 }

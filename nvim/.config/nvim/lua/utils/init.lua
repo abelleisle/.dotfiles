@@ -12,16 +12,20 @@ M.blankline = function()
     vim.g.indent_blankline_show_first_indent_level = false
 end
 
--- hide line numbers , statusline in specific buffers!
 M.hideStuff = function()
-    vim.api.nvim_exec(
-        [[
-   au BufEnter term://* setlocal nonumber
-   au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
-   au BufEnter term://* set laststatus=0
-]],
-        false
-    )
+    vim.api.nvim_create_autocmd(
+       {"BufEnter", "BufWinEnter", "WinEnter", "CmdwinEnter"},
+       {
+           callback = function()
+                local bufname = vim.fn.bufname('%')
+                if string.sub(bufname, 1, string.len("NvimTree")) == "NvimTree" then
+                    vim.opt.laststatus = 0
+                else
+                    vim.opt.laststatus = 2
+                end
+           end,
+       }
+   )
 end
 
 M.hsluv  = require("utils.hsluv")

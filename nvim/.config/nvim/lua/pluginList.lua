@@ -48,7 +48,6 @@ return require('packer').startup(function(use)
     --  NAVIGATION  --
     ------------------
 
-
     use { -- Ctrl-<hjkl> navigation with TMUX
         "numToStr/Navigator.nvim",
         config = function()
@@ -72,10 +71,31 @@ return require('packer').startup(function(use)
         end
     }
 
-    use {
+    use { -- Keybind Help
         "folke/which-key.nvim",
         config = function()
             require("which-key").setup{}
+        end
+    }
+
+    use { -- File manager/browser
+        "kyazdani42/nvim-tree.lua",
+        --cmd = "NvimTreeToggle",
+        config = function()
+            require("plugins.nvimtree").config()
+        end
+    }
+
+    use { -- Fuzzy search
+        "nvim-telescope/telescope.nvim",
+        requires = {
+            {"nvim-lua/popup.nvim"},
+            {"nvim-lua/plenary.nvim"},
+            {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+            {"nvim-telescope/telescope-media-files.nvim"}
+        },
+        config = function()
+            require("plugins.telescope").config()
         end
     }
 
@@ -102,13 +122,19 @@ return require('packer').startup(function(use)
         end
     }
 
-    use {
+    use { -- Highlight TODO comments
         "folke/todo-comments.nvim",
         branch = "neovim-pre-0.8.0",
         requires = "nvim-lua/plenary.nvim",
         config = function()
             require("todo-comments").setup {
                 signs = false,
+                highlight = {
+                    pattern = [[.*<(KEYWORDS)\s*]],
+                },
+                search = {
+                    pattern = [[\b(KEYWORDS)\b]],
+                },
             }
         end
     }
@@ -119,7 +145,6 @@ return require('packer').startup(function(use)
     use { -- Treesitter front end
         "nvim-treesitter/nvim-treesitter",
         run = ':TSUpdate',
-        event = "BufRead",
         config = function()
             require("plugins.treesitter").config()
         end
@@ -141,6 +166,10 @@ return require('packer').startup(function(use)
             require("lspkind").init(require("plugins.lspkind_icons"))
         end
     }
+
+    ---------------------------
+    --  SNIPPETS/COMPLETION  --
+    ---------------------------
 
     use {
         "honza/vim-snippets", rtp = '.',
@@ -183,6 +212,39 @@ return require('packer').startup(function(use)
         after = "nvim-cmp"
     }
 
+    ---------------
+    --  VCS/Git  --
+    ---------------
+
+    use { -- Git modification signs
+        "lewis6991/gitsigns.nvim",
+        event = "BufRead",
+        config = function()
+            require("plugins.gitsigns").config()
+        end
+    }
+
+    use { -- Git commands within Neovim
+        "tpope/vim-fugitive",
+        "tpope/vim-rhubarb"
+    }
+
+    use { -- Github PRs in Neovim
+        'pwntester/octo.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'kyazdani42/nvim-web-devicons',
+        },
+        config = function ()
+            require("plugins.octo").config()
+        end
+    }
+
+    ------------------
+    --  FORMATTING  --
+    ------------------
+
     use { -- Automatically format files
         "sbdchd/neoformat", cmd = "Neoformat",
         event = "BufRead",
@@ -201,60 +263,12 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { -- File manager/browser
-        "kyazdani42/nvim-tree.lua",
-        --cmd = "NvimTreeToggle",
-        config = function()
-            require("plugins.nvimtree").config()
-        end
-    }
-
-    use { -- Fuzzy search
-        "nvim-telescope/telescope.nvim",
-        requires = {
-            {"nvim-lua/popup.nvim"},
-            {"nvim-lua/plenary.nvim"},
-            {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
-            {"nvim-telescope/telescope-media-files.nvim"}
-        },
-        --cmd = "Telescope",
-        config = function()
-            require("plugins.telescope").config()
-        end
-    }
-
-    use { -- Git modification signs
-        "lewis6991/gitsigns.nvim",
-        event = "BufRead",
-        config = function()
-            require("plugins.gitsigns").config()
-        end
-    }
-
-    use {
-        "tpope/vim-fugitive",
-        "tpope/vim-rhubarb"
-    }
-
-    use {
-        'pwntester/octo.nvim',
-        requires = {
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope.nvim',
-            'kyazdani42/nvim-web-devicons',
-        },
-        config = function ()
-            require("plugins.octo").config()
-        end
-    }
-
     use { -- Automatically add ending pairs
         "windwp/nvim-autopairs",
-        --after = "coq_nvim",
         config = function()
             local npairs = require("nvim-autopairs")
-            local ts_conds = require("nvim-autopairs.ts-conds")
-            local rule = require("nvim-autopairs.rule")
+            --local ts_conds = require("nvim-autopairs.ts-conds")
+            --local rule = require("nvim-autopairs.rule")
             npairs.setup({
                 check_ts = true,
                 ts_config = {
@@ -263,21 +277,7 @@ return require('packer').startup(function(use)
                 map_cr = true,
                 enable_check_bracket_line = false
             })
-            -- npairs.add_rules({
-            --     rule("%", "%", "lua")
-            --         :with_pair(ts_conds.is_ts_node({'string','comment'})),
-            --     rule("$", "$", "lua")
-            --         :with_pair(ts_conds.is_not_ts_node({'function'}))
-            -- })
-            --
-            -- require("nvim-autopairs.completion.compe").setup(
-            --     {
-            --         map_cr = true,
-            --         map_complete = true -- insert () func completion
-            --     }
-            -- )
-            -- you need setup cmp first put this after cmp.setup()
-            --require("nvim-autopairs.completion.cmp").setup({
+
             require("cmp").setup({
                 map_cr = true, --  map <CR> on insert mode
                 map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
@@ -288,15 +288,6 @@ return require('packer').startup(function(use)
             })
         end
     }
-
-    --[[
-    use {
-        "steelsojka/pears.nvim",
-        config = function ()
-            require('pears').setup()
-        end
-    }
-    --]]
 
     use { -- Automatically close HTML/XML tags
         "windwp/nvim-ts-autotag",
@@ -309,28 +300,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    use {
-        "lewis6991/spellsitter.nvim",
-        after = "nvim-treesitter",
-        config = function()
-            require('spellsitter').setup({
-                --hl = 'SpellBad',
-                enable = true,
-                captures = {}
-            })
-        end
-    }
-
-    use {
-        "nvim-treesitter/nvim-treesitter-context",
-        after = "nvim-treesitter",
-        config = function()
-            require'treesitter-context'.setup{
-                enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-            }
-        end
-    }
-
     use { -- Easy navigation between pairs
         "andymass/vim-matchup",
         event = "CursorMoved",
@@ -340,44 +309,27 @@ return require('packer').startup(function(use)
                     enable = true,
                 }
             }
-            --vim.g.matchup_matchparen_deferred = 1
-            --vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-            --vim.g.matchup_honor_rnu = 1
+
+            vim.g.matchup_matchparen_deferred = 0
+            vim.g.matchup_matchparen_offscreen = {}--{ method = 'popup' }
         end
     }
 
-    -- use { -- Comment lines easily
-    --     "terrortylor/nvim-comment",
-    --     cmd = "CommentToggle",
-    --     config = function()
-    --         require("nvim_comment").setup()
-    --     end
-    -- }
-    use {
+    use { -- Easily toggle comments
         'numToStr/Comment.nvim',
         config = function()
-            require('Comment').setup({
-                toggler = {
-                    ---Line-comment toggle keymap
-                    line = '<Leader>/',
-                },
-            })
+            require('Comment').setup()
         end
     }
 
-    use { -- VIM Startup dashboard
-        "glepnir/dashboard-nvim",
-        cmd = {
-            "Dashboard",
-            "DashboardNewFile",
-            "DashboardJumpMarks",
-            "SessionLoad",
-            "SessionSave"
-        },
-        setup = function()
-            require("plugins.dashboard").config()
-        end
+    use { -- Highlight end-of-line spaces
+        'jdhao/whitespace.nvim',
+        event = 'VimEnter',
     }
+
+    -----------------
+    --  UTILITIES  --
+    -----------------
 
     use { -- Benchmark Neovim startup
         "tweekmonster/startuptime.vim",
@@ -394,47 +346,59 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- smooth scroll
-    -- use {
-    --     "karb94/neoscroll.nvim",
-    --     event = "WinScrolled",
-    --     config = function()
-    --         require("neoscroll").setup()
-    --     end
-    -- }
-
-    use { -- Add indent lines
-        "lukas-reineke/indent-blankline.nvim",
-        event = "BufRead",
-        setup = function()
-            require("utils").blankline()
-            vim.g.indent_blankline_show_first_indent_level = true
-            vim.g.indent_blankline_show_current_context = true
-            vim.g.indent_blankline_show_trailing_blankline_indent = false
-            vim.cmd [[highlight IndentBlanklineContextChar guifg=gray]]
-            -- IndentBlanklineContextChar
+    use { -- Show current function/class context
+        "nvim-treesitter/nvim-treesitter-context",
+        after = "nvim-treesitter",
+        config = function()
+            require'treesitter-context'.setup{
+                enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+            }
         end
     }
 
-    use {
-        'jdhao/whitespace.nvim',
-        event = 'VimEnter',
+    use { -- Add indent lines
+        "lukas-reineke/indent-blankline.nvim",
+        after = "nvim-treesitter",
+        event = "BufRead",
+        config = function()
+            require("indent_blankline").setup({
+                char = "▏",
+                filetype_exclude = {
+                    "help", "terminal", "NvimTree",
+                    "TelescopePrompt", "TelescopeResults"
+                },
+                buftype_exclude = {"terminal"},
+
+                show_first_indent_level = true,
+                show_trailing_blankline_indent = false,
+
+                space_char_blankline = " ",
+                show_current_context = true,
+                show_current_context_start = false,
+            })
+
+            vim.cmd [[highlight IndentBlanklineContextChar guifg=gray]]
+        end
     }
 
-    use {
+    --------------------
+    --  LANG HELPERS  --
+    --------------------
+
+    use { -- Automatically compile (la)tex
         "lervag/vimtex",
         ft = {'tex'},
     }
 
-    use {
+    use { -- Preview markdown
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn['mkdp#util#install']() end,
         ft = {'markdown'}
     }
 
-    use {
-        "lambdalisue/suda.vim"
-    }
+    --------------
+    --  PACKER  --
+    --------------
 
     if packer_bootstrap then
         require('packer').sync()
