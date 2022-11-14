@@ -268,9 +268,12 @@ return require('packer').startup(function(use)
     }
 
     use { -- Easily toggle comments
-        'numToStr/Comment.nvim',
+        "numToStr/Comment.nvim",
         config = function()
-            require('Comment').setup()
+            require("Comment").setup()
+
+            local ft = require("Comment.ft")
+            ft.set("vhdl", {"--%s", "/*%s*/"})
         end
     }
 
