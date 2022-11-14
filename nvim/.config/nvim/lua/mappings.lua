@@ -67,6 +67,18 @@ vim.cmd("nmap ga <Plug>(EasyAlign)")
 -- copy whole file content
 map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 
+------------
+--  LEAP  --
+------------
+local mini = {
+    jump2d = require('mini.jump2d'),
+    jump2d_char = function()
+        local mj = require('mini.jump2d')
+        return mj.start(mj.builtin_opts.single_character)
+    end
+}
+vim.keymap.set({"n", "v"}, "<cr>", mini.jump2d_char,opt)
+
 ------------------------------------------------------------------------
 --                              DISPLAY                               --
 ------------------------------------------------------------------------

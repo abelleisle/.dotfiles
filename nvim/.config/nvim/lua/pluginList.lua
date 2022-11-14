@@ -55,14 +55,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { -- Easy sneaking motion
-        "justinmk/vim-sneak"
-    }
-
-    use { -- Motion across file
-        "easymotion/vim-easymotion"
-    }
-
     use { -- Statusline
         "NTBBloodbath/galaxyline.nvim",
         requires = {"kyazdani42/nvim-web-devicons"},
@@ -122,10 +114,11 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { -- Highlight TODO comments
+    use { -- Highlight todo comments
         "folke/todo-comments.nvim",
         branch = "neovim-pre-0.8.0",
         requires = "nvim-lua/plenary.nvim",
+        after = "telescope.nvim",
         config = function()
             require("todo-comments").setup {
                 signs = false,
@@ -145,6 +138,7 @@ return require('packer').startup(function(use)
     use { -- Treesitter front end
         "nvim-treesitter/nvim-treesitter",
         run = ':TSUpdate',
+        event = "BufRead",
         config = function()
             require("plugins.treesitter").config()
         end
@@ -187,17 +181,14 @@ return require('packer').startup(function(use)
 
     use {
         "honza/vim-snippets", rtp = '.',
-        event = "BufRead"
     }
 
     use {
         "rafamadriz/friendly-snippets",
-        event = "BufRead"
     }
 
     use {
         "L3MON4D3/LuaSnip",
-        wants = "friendly-snippets",
         config = function()
             require("plugins.cmp").luasnip()
             require("snippets").config()
@@ -205,20 +196,16 @@ return require('packer').startup(function(use)
     }
 
     use {
-        "saadparwaiz1/cmp_luasnip",
-        after = "LuaSnip",
-    }
-
-    use {
         "hrsh7th/nvim-cmp",
-        module = "cmp",
         after = "LuaSnip",
+        module = "cmp",
         config = function()
             require("plugins.cmp").config()
         end
     }
 
     use {
+        "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lsp",
@@ -264,59 +251,14 @@ return require('packer').startup(function(use)
         event = "BufRead",
     }
 
-    use { -- Easily align text
-        "junegunn/vim-easy-align",
-        config = function()
-            vim.g.easy_align_delimiters = {
-                ['/'] = {
-                    pattern = '//\\+',
-                    delimiter_align = 'l',
-                    ignore_groups = {'!Comment'}
-                }
-            }
-        end
-    }
-
-    use { -- Automatically add ending pairs
-        "windwp/nvim-autopairs",
-        config = function()
-            local npairs = require("nvim-autopairs")
-            --local ts_conds = require("nvim-autopairs.ts-conds")
-            --local rule = require("nvim-autopairs.rule")
-            npairs.setup({
-                check_ts = true,
-                ts_config = {
-
-                },
-                map_cr = true,
-                enable_check_bracket_line = false
-            })
-
-            require("cmp").setup({
-                map_cr = true, --  map <CR> on insert mode
-                map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
-                auto_select = true, -- automatically select the first item
-                insert = false, -- use insert confirm behavior instead of replace
-                map_char = { -- modifies the function or method delimiter by filetypes
-                }
-            })
-        end
-    }
-
     use { -- Automatically close HTML/XML tags
         "windwp/nvim-ts-autotag",
         after = "nvim-treesitter",
-        --event = "BufRead",
-        config = function()
-            require('nvim-ts-autotag').setup({
-                filetypes = { "html" , "xml", "php" },
-            })
-        end
     }
 
     use { -- Easy navigation between pairs
         "andymass/vim-matchup",
-        event = "CursorMoved",
+        after = "nvim-treesitter",
         config = function()
             require('nvim-treesitter.configs').setup {
                 matchup = {
@@ -336,11 +278,6 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { -- Highlight end-of-line spaces
-        'jdhao/whitespace.nvim',
-        event = 'VimEnter',
-    }
-
     -----------------
     --  UTILITIES  --
     -----------------
@@ -352,6 +289,7 @@ return require('packer').startup(function(use)
 
     use { -- Auto-save
         "Pocco81/auto-save.nvim",
+        event = "BufRead",
         config = function()
             require("plugins.autosave").config()
         end,
@@ -373,7 +311,6 @@ return require('packer').startup(function(use)
     use { -- Add indent lines
         "lukas-reineke/indent-blankline.nvim",
         after = "nvim-treesitter",
-        event = "BufRead",
         config = function()
             require("indent_blankline").setup({
                 char = "▏",
@@ -395,6 +332,14 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        "echasnovski/mini.nvim",
+        branch = 'main',
+        config = function()
+            require("plugins.mini").config()
+        end
+    }
+
     --------------------
     --  LANG HELPERS  --
     --------------------
@@ -407,7 +352,7 @@ return require('packer').startup(function(use)
     use { -- Preview markdown
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn['mkdp#util#install']() end,
-        ft = {'markdown'}
+        ft = {'markdown'},
     }
 
     --------------

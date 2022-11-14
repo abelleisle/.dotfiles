@@ -20,6 +20,10 @@ M.config = function ()
         inverse              = true, -- invert background for search, diffs, statuslines and errors
         contrast             = "hard", -- can be "hard", "soft" or empty string
         overrides            = {
+            -- mini.jump2d jump spots
+            MiniJump2dSpot = {fg = "",
+                        bg = bg,
+                        reverse = true},
             -- Popup (lsp_signature)
             NormalFloat = {fg = "",
                         bg = bg,

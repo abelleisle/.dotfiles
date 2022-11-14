@@ -26,9 +26,13 @@ M.config = function()
             use_languagetree = true,
             --additional_vim_regex_highlighting = true,
         },
-        -- windwp/nvim-autopairs
-        autopairs = {
+        autopairs = { -- windwp/nvim-autopairs
             enable = true,
+        },
+
+        autotag = { -- windwp/nvim-ts-autotag
+            enable = true,
+            filetypes = { "html" , "xml", "php" },
         },
 
         indent = {

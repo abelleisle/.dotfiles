@@ -5,6 +5,10 @@ M.config = function()
     local cmp_present, cmp = pcall(require, "cmp")
     local lua_present, luasnip = pcall(require, "luasnip")
 
+    if not lua_present then
+        vim.notify([[luasnip is not present!]])
+    end
+
     vim.opt.completeopt = "menu,menuone,noselect"
 
     local has_words_before = function()
@@ -16,7 +20,7 @@ M.config = function()
     cmp.setup {
         snippet = {
             expand = function(args)
-                require("luasnip").lsp_expand(args.body)
+                luasnip.lsp_expand(args.body)
             end,
         },
         formatting = {
