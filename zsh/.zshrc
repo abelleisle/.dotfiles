@@ -106,6 +106,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+bindkey -v
+bindkey jk vi-cmd-mode
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
