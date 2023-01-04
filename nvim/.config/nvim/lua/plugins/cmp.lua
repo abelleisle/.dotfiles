@@ -5,8 +5,14 @@ M.config = function()
     local cmp_present, cmp = pcall(require, "cmp")
     local lua_present, luasnip = pcall(require, "luasnip")
 
+    if not cmp_present then
+        vim.notify("cmp.config(): nvim_cmp is not present!", vim.log.levels.ERROR)
+        return
+    end
+
     if not lua_present then
-        vim.notify([[luasnip is not present!]])
+        vim.notify("cmp.config(): luasnip is not present!", vim.log.levels.ERROR)
+        return
     end
 
     vim.opt.completeopt = "menu,menuone,noselect"
@@ -104,6 +110,7 @@ M.luasnip = function()
     local lua_present, luasnip = pcall(require, "luasnip")
 
     if not lua_present then
+        vim.notify("cmp.luasnip(): luasnip is not present!", vim.log.levels.ERROR)
         return
     end
 
@@ -112,12 +119,12 @@ M.luasnip = function()
         updateevents = "TextChanged,TextChangedI",
     }
 
+    -- Extend honza/vim-snippets "all" to LuaSnip all
+    luasnip.filetype_extend("all", { "_" })
+
     require('luasnip.loaders.from_vscode').lazy_load()
-    require('luasnip.loaders.from_snipmate').lazy_load({
-        paths = {
-            vim.fn.stdpath('data')..'/site/pack/packer/start/vim-snippets/snippets/',
-        }
-    })
+    require('luasnip.loaders.from_snipmate').lazy_load()
+    require('luasnip.loaders.from_lua').lazy_load()
 end
 
 return M

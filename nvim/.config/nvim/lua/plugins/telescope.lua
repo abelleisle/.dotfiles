@@ -32,12 +32,12 @@ M.config = function()
                 height = 0.80,
                 preview_cutoff = 120
             },
-            file_sorter = require "telescope.sorters".get_fuzzy_file,
+            --file_sorter = require "telescope.sorters".get_fuzzy_file,
             file_ignore_patterns = {
                 "%.git/*",
                 "%.vim/*"
             },
-            generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
+            --generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
             --path_display = {"smart", "shorten"}, -- TODO: truncate when required by shortening path
             dynamic_preview_title = true,
             winblend = 0,
@@ -55,7 +55,7 @@ M.config = function()
         extensions = {
             fzf = {
                 fuzzy = true, -- false will only do exact matching
-                override_generic_sorter = false, -- override the generic sorter
+                override_generic_sorter = true, -- override the generic sorter
                 override_file_sorter = true, -- override the file sorter
                 case_mode = "smart_case" -- or "ignore_case" or "respect_case"
                 -- the default case_mode is "smart_case"

@@ -22,7 +22,7 @@ M.config = function()
         write_all_buffers = true,
         on_off_commands = true,
         clean_command_line_interval = 2500,
-        debounce_delay = 5000,
+        debounce_delay = 15000,
     })
 end
 

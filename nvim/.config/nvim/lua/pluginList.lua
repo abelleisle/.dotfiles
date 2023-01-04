@@ -179,23 +179,19 @@ return require('packer').startup(function(use)
     --  SNIPPETS/COMPLETION  --
     ---------------------------
 
-    use {
-        "honza/vim-snippets", rtp = '.',
-    }
-
-    use {
+    use { -- Snippet sources
+        "honza/vim-snippets",
         "rafamadriz/friendly-snippets",
     }
 
-    use {
+    use { -- Snippet engine
         "L3MON4D3/LuaSnip",
         config = function()
             require("plugins.cmp").luasnip()
-            require("snippets").config()
         end
     }
 
-    use {
+    use { -- Completion engine
         "hrsh7th/nvim-cmp",
         after = "LuaSnip",
         module = "cmp",
@@ -204,7 +200,7 @@ return require('packer').startup(function(use)
         end
     }
 
-    use {
+    use { -- Completion engine plugins
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -272,9 +268,12 @@ return require('packer').startup(function(use)
     }
 
     use { -- Easily toggle comments
-        'numToStr/Comment.nvim',
+        "numToStr/Comment.nvim",
         config = function()
-            require('Comment').setup()
+            require("Comment").setup()
+
+            local ft = require("Comment.ft")
+            ft.set("vhdl", {"--%s", "/*%s*/"})
         end
     }
 
