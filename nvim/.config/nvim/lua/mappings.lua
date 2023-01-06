@@ -150,6 +150,9 @@ vim.keymap.set('n', '<Leader>fh', ts.builtin.help_tags,                  opt)
 vim.keymap.set('n', '<Leader>fo', ts.builtin.oldfiles,                   opt)
 vim.keymap.set('n', '<Leader>fk', ts.builtin.keymaps,                    opt)
 vim.keymap.set('n', '<Leader>f#', ts.builtin.grep_string,                opt)
+vim.keymap.set('n', '<Leader>fs', function()
+    ts.builtin.grep_string({ search = vim.fn.input("Grep > ")})
+end, opt)
 
 ----------------------------------
 --  BURN ARROWS and PGUP/PGDWN  --

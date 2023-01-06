@@ -123,10 +123,10 @@ return require('packer').startup(function(use)
             require("todo-comments").setup {
                 signs = false,
                 highlight = {
-                    pattern = [[.*<(KEYWORDS)\s*]],
+                    pattern = [[(.*\@*<(KEYWORDS)(\s*|:))]],
                 },
                 search = {
-                    pattern = [[\b(KEYWORDS)\b]],
+                    pattern = [[@*\b(KEYWORDS)(\s|:)]],
                 },
             }
         end
