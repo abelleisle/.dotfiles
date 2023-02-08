@@ -21,9 +21,9 @@ M.config = function ()
         contrast             = "hard", -- can be "hard", "soft" or empty string
         overrides            = {
             -- mini.jump2d jump spots
-            MiniJump2dSpot = {fg = "",
-                        bg = bg,
-                        reverse = true},
+            MiniJump2dSpot = {fg = bg,
+                        bg = palette.bright_red,
+                        reverse = false},
             -- Popup (lsp_signature)
             NormalFloat = {fg = "",
                         bg = bg,
