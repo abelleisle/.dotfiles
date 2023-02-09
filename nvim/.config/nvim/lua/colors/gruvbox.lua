@@ -23,9 +23,9 @@ M.config = function ()
             -- TS Context
             TreesitterContext = {underline = true},
             -- mini.jump2d jump spots
-            MiniJump2dSpot = {fg = "",
-                              bg = bg,
-                              reverse = true},
+            MiniJump2dSpot = {fg = bg,
+                              bg = palette.bright_red,
+                              reverse = false},
             -- Popup (lsp_signature)
             NormalFloat    = {fg = "",
                               bg = bg,

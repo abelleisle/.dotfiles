@@ -35,7 +35,9 @@ M.config = function()
             --file_sorter = require "telescope.sorters".get_fuzzy_file,
             file_ignore_patterns = {
                 "%.git/*",
-                "%.vim/*"
+                "%.vim/*",
+                "docs/doxygen/*",
+                "doxygen/*"
             },
             --generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
             --path_display = {"smart", "shorten"}, -- TODO: truncate when required by shortening path

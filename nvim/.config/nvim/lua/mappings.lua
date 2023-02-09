@@ -75,9 +75,26 @@ local mini = {
     jump2d_char = function()
         local mj = require('mini.jump2d')
         return mj.start(mj.builtin_opts.single_character)
+    end,
+    jump2d_start = function()
+        local mj = require("mini.jump2d")
+        return mj.start(mj.builtin_opts.default)
+    end,
+    jump2d_line = function()
+        local mj = require("mini.jump2d")
+        return mj.start(mj.builtin_opts.line_start)
+    end,
+    jump2d_word = function()
+        local mj = require("mini.jump2d")
+        return mj.start(mj.builtin_opts.word_start)
     end
 }
-vim.keymap.set({"n", "v"}, "<cr>", mini.jump2d_char,opt)
+
+vim.keymap.set({"n", "v"}, "s", mini.jump2d_char,opt)
+vim.keymap.set({"n", "v"}, "<Leader><Leader>s", mini.jump2d_char , opt)
+vim.keymap.set({"n", "v"}, "<Leader><Leader>f", mini.jump2d_start, opt)
+vim.keymap.set({"n", "v"}, "<Leader><Leader>l", mini.jump2d_line , opt)
+vim.keymap.set({"n", "v"}, "<Leader><Leader>w", mini.jump2d_word , opt)
 
 ------------------------------------------------------------------------
 --                              DISPLAY                               --
@@ -113,11 +130,11 @@ map("n", "<Leader>fm", ":Neoformat<CR>", opt)
 -----------------
 
 map("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], opt)
-map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
-map("n", "<Leader>fn", [[<Cmd> DashboardNewFile<CR>]], opt)
-map("n", "<Leader>bm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
-map("n", "<C-s>l", [[<Cmd> SessionLoad<CR>]], opt)
-map("n", "<C-s>s", [[<Cmd> SessionSave<CR>]], opt)
+-- map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
+-- map("n", "<Leader>fn", [[<Cmd> DashboardNewFile<CR>]], opt)
+-- map("n", "<Leader>bm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
+-- map("n", "<C-s>l", [[<Cmd> SessionLoad<CR>]], opt)
+-- map("n", "<C-s>s", [[<Cmd> SessionSave<CR>]], opt)
 
 -----------------
 --  TELESCOPE  --
