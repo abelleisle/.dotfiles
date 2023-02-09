@@ -20,55 +20,57 @@ M.config = function ()
         inverse              = true, -- invert background for search, diffs, statuslines and errors
         contrast             = "hard", -- can be "hard", "soft" or empty string
         overrides            = {
+            -- TS Context
+            TreesitterContext = {underline = true},
             -- mini.jump2d jump spots
             MiniJump2dSpot = {fg = "",
-                        bg = bg,
-                        reverse = true},
+                              bg = bg,
+                              reverse = true},
             -- Popup (lsp_signature)
-            NormalFloat = {fg = "",
-                        bg = bg,
-                        reverse = false},
+            NormalFloat    = {fg = "",
+                              bg = bg,
+                              reverse = false},
             -- Signature Popup (current parameter)
             LspSignatureActiveParameter = {fg = palette.bright_purple,
                                            bg = bg},
             -- Lines that were added
             DiffAdd     = {fg = "",
-                        bg = utils.colors.darken(palette.faded_blue, 0.15, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.faded_blue, 0.15, bg),
+                           reverse = false},
             -- Lines that were added
             DiffAdded   = {fg = "",
-                        bg = utils.colors.darken(palette.faded_blue, 0.15, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.faded_blue, 0.15, bg),
+                           reverse = false},
             DiffNewFile = {fg = palette.neutral_green,
-                        bg = utils.colors.darken(palette.faded_blue, 0.15, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.faded_blue, 0.15, bg),
+                           reverse = false},
 
             -- Differing lines
             DiffChange  = {fg = "",
-                        bg = utils.colors.darken(palette.faded_blue, 0.15, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.faded_blue, 0.15, bg),
+                           reverse = false},
             -- Text that differs on changed lines
             DiffText    = {fg = "",
-                        bg = utils.colors.darken(palette.faded_blue, 0.4, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.faded_blue, 0.4, bg),
+                           reverse = false},
 
             -- Lines that were deleted
             DiffDelete  = {fg = palette.neutral_red,
-                        bg = utils.colors.darken(palette.faded_red, 0.2, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.faded_red, 0.2, bg),
+                           reverse = false},
             -- Lines that were deleted
             DiffRemoved = {fg = palette.neutral_red,
-                        bg = utils.colors.darken(palette.faded_red, 0.2, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.faded_red, 0.2, bg),
+                           reverse = false},
 
             -- File diffs
             DiffFile    = {fg = "",
-                        bg = utils.colors.darken(palette.neutral_orange, 0.4, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.neutral_orange, 0.4, bg),
+                           reverse = false},
             -- Lines that are diffed in diff
             DiffLine    = {fg = "",
-                        bg = utils.colors.darken(palette.neutral_aqua,   0.4, bg),
-                        reverse = false},
+                           bg = utils.colors.darken(palette.neutral_aqua,   0.4, bg),
+                           reverse = false},
 
             -- Sign column (left of numbers)
             SignColumn  = {bg = bg},
