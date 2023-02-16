@@ -10,7 +10,6 @@ ansi = [
     '{color6}',
     '{color7}'
 ]
-background = '{background}'
 brights = [
     '{color8}',
     '{color9}',
@@ -22,18 +21,17 @@ brights = [
     '{color15}'
 ]
 
-wallpaper = '{wallpaper}'
-
 # Special
-cursor_bg = '{cursor}'
-cusor_border = '{cursor}'
-cursor_fg = '{cursor}'
-foreground = '{foreground}'
-selection_bg = '{foreground}'
-selection_fg = '{background}'
+cursor_bg     = '{cursor}'
+cursor_fg     = '{cursor}'
+cursor_border = '{cursor}'
+background    = '{background}'
+foreground    = '{foreground}'
+selection_bg  = '{foreground}'
+selection_fg  = '{background}'
 
 [colors.indexed]
 
 [metadata]
-name = 'Wal Generated Theme'
+name       = 'Wal Generated Theme'
 origin_url = 'https://github.com/dylanaraps/pywal'
