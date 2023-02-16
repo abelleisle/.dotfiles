@@ -277,6 +277,16 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        "lukelbd/vim-toggle",
+        config = function()
+            -- vim.g.toggle_map            = '<Leader>b'
+            vim.g.toggle_chars_on       = true
+            vim.g.toggle_words_on       = true
+            vim.g.toggle_consecutive_on = true
+        end
+    }
+
     -----------------
     --  UTILITIES  --
     -----------------
