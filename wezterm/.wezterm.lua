@@ -1,7 +1,8 @@
 -----------------------------------------------------
 --                    LIBRARIES                    --
 -----------------------------------------------------
-local wezterm = require('wezterm')
+local wezterm   = require('wezterm')
+local wezaction = wezterm.action
 
 -----------------
 --  VARIABLES  --
@@ -49,4 +50,23 @@ return {
         },
     },
     font_size = 14,
+
+    -------------------
+    --  KEYBINDINGS  --
+    -------------------
+    keys = {
+        --
+        -- Fix some mac bindings
+        --
+        { -- Move one tab to the left
+            key    = "LeftArrow",
+            mods   = "CMD|ALT",
+            action = wezaction.ActivateTabRelative(-1)
+        },
+        { -- Move one tab to the right
+            key    = "RightArrow",
+            mods   = "CMD|ALT",
+            action = wezaction.ActivateTabRelative(1)
+        }
+    },
 }
