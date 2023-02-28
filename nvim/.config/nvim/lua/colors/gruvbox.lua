@@ -20,6 +20,8 @@ M.config = function ()
         inverse              = true, -- invert background for search, diffs, statuslines and errors
         contrast             = "hard", -- can be "hard", "soft" or empty string
         overrides            = {
+            -- General
+            Operator = {italic = false},
             -- TS Context
             TreesitterContext = {underline = true},
             -- mini.jump2d jump spots
