@@ -16,7 +16,7 @@ M.config = function()
         events = {"InsertLeave", "TextChanged"},
         conditions = {
             exists = true,
-            filetype_is_not = {},
+            filetype_is_not = {"tex"},
             modifiable = true
         },
         write_all_buffers = true,

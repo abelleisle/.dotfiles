@@ -70,6 +70,7 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 ------------
 --  LEAP  --
 ------------
+
 local mini = {
     jump2d = require('mini.jump2d'),
     jump2d_char = function()
@@ -87,10 +88,33 @@ local mini = {
     jump2d_word = function()
         local mj = require("mini.jump2d")
         return mj.start(mj.builtin_opts.word_start)
+    end,
+    jump2d_twochar = function()
+        local gettwocharstr = function()
+            local _, char0 = pcall(vim.fn.getcharstr)
+            local _, char1 = pcall(vim.fn.getcharstr)
+
+            return char0..char1
+        end
+        local pattern = vim.pesc(gettwocharstr())
+
+        local mj = require("mini.jump2d")
+        return mj.start({
+            spotter = mj.gen_pattern_spotter(pattern),
+            allowed_lines   = {
+                cursor_before = true,
+                cursor_after = true,
+                blank = false,
+                fold = false,
+            },
+            allowed_windows = {
+                not_current = false
+            }
+        })
     end
 }
 
-vim.keymap.set({"n", "v"}, "s", mini.jump2d_char,opt)
+vim.keymap.set({"n", "v"}, "s", mini.jump2d_twochar,opt)
 vim.keymap.set({"n", "v"}, "<Leader><Leader>s", mini.jump2d_char , opt)
 vim.keymap.set({"n", "v"}, "<Leader><Leader>f", mini.jump2d_start, opt)
 vim.keymap.set({"n", "v"}, "<Leader><Leader>l", mini.jump2d_line , opt)

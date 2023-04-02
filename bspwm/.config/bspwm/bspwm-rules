@@ -29,6 +29,7 @@ case $class in
 
     # Terminals
     (kitty) echo state=floating;;
+    (org.wezfurlong.wezterm) echo state=floating;;
 
     # Programs in which the class isn't set at startup, e.g.: Spotify
     ('')

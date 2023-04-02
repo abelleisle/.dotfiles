@@ -22,6 +22,9 @@ local packer_bootstrap = ensure_packer()
 
 if not packer_bootstrap then
     require("packer").init {
+        snapshot = 'dotfiles',
+        snapshot_path = vim.fn.stdpath('config')..'/packer.nvim/',
+        --compile_path = vim.fn.stdpath('cache')..'/plugin/packer.nvim',
         display = {
             open_fn = function()
                 return require("packer.util").float {border = "single"}

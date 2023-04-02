@@ -103,7 +103,7 @@ return {
             "onum = 0",     -- 0123456789
         },
     },
-    font_size = 14,
+    font_size = 12,
 
     -------------------
     --  KEYBINDINGS  --
@@ -121,6 +121,15 @@ return {
             key    = "RightArrow",
             mods   = "CMD|ALT",
             action = wezaction.ActivateTabRelative(1)
-        }
+        },
+
+        --
+        -- Fix some Linux bindings
+        --
+        --[[ { -- Create new tab
+            key    = "T",
+            mods   = "CTRL",
+            action = wezaction.SpawnTab('CurrentPaneDomain')
+        } ]]
     },
 }

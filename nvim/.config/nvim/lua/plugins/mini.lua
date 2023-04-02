@@ -9,6 +9,8 @@ local mini = {
 }
 
 M.config = function ()
+    ---------------------------------
+    -- A,I
     mini.ai.setup({
         -- Use `''` (empty string) to disable one.
         mappings = {
@@ -28,6 +30,8 @@ M.config = function ()
         },
     })
 
+    ---------------------------------
+    -- Align
     mini.align.setup({
         mappings = {
             start = 'ga',
@@ -35,13 +39,17 @@ M.config = function ()
         }
     })
 
-     mini.jump2d.setup({
+    ---------------------------------
+    -- Jump 2D
+    mini.jump2d.setup({
         mappings = {
             start_jumping = '', -- This is mapped in mappings.lua
         },
         hooks = {}
     })
 
+    ---------------------------------
+    -- Pairs
     mini.pairs.setup({
         modes = {
             insert = true,
@@ -63,7 +71,18 @@ M.config = function ()
         },
     })
 
-    mini.trailspace.setup()
+    ---------------------------------
+    -- Trailspace
+    mini.trailspace.setup({
+        only_in_normal_buffers = true
+    })
+    vim.api.nvim_create_user_command(
+        'TrimWhitespace',
+        function()
+            mini.trailspace.trim()
+        end,
+        {desc = "Trim all trailing whitespace"}
+    )
 end
 
 return M

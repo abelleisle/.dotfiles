@@ -4,7 +4,8 @@
 
 # Terminal emulator
 super + Return
-    kitty
+    wezterm-gui
+    #kitty
     #alacritty
 
 # Program launcher
@@ -38,10 +39,10 @@ XF86AudioMute
     volume mute
 
 XF86AudioRaiseVolume
-    volume up
+    playerctl volume 0.05+
 
 XF86AudioLowerVolume
-    volume down
+    playerctl volume 0.05-
 
 XF86Display
     arandr

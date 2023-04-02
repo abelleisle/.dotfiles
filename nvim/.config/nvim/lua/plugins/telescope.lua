@@ -37,7 +37,9 @@ M.config = function()
                 "%.git/*",
                 "%.vim/*",
                 "docs/doxygen/*",
-                "doxygen/*"
+                "doxygen/*",
+                "zig-cache/*",
+                "zig-out/*"
             },
             --generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
             --path_display = {"smart", "shorten"}, -- TODO: truncate when required by shortening path
