@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function ()
     local utils   = require("utils")
-    local palette = require("gruvbox.palette");
+    local palette = require("gruvbox.palette").colors; -- TODO: change to get_base_colors()
     local bg      = palette.dark0_hard;
 
     -- setup must be called before loading the colorscheme
@@ -11,7 +11,11 @@ M.config = function ()
         undercurl            = true,
         underline            = true,
         bold                 = true,
-        italic               = true,
+        italic               = {
+            strings   = true,
+            comments  = true,
+            operators = false,
+        },
         strikethrough        = true,
         invert_selection     = false,
         invert_signs         = false,
@@ -20,8 +24,6 @@ M.config = function ()
         inverse              = true, -- invert background for search, diffs, statuslines and errors
         contrast             = "hard", -- can be "hard", "soft" or empty string
         overrides            = {
-            -- General
-            Operator = {italic = false},
             -- TS Context
             TreesitterContext = {underline = true},
             -- mini.jump2d jump spots

@@ -100,7 +100,7 @@ return require('packer').startup(function(use)
 
     use { -- Gruvbox theme
         "ellisonleao/gruvbox.nvim",
-        commit = 'cb7a8a867cfaa7f0e8ded57eb931da88635e7007',
+        commit = 'fc66cfbadaf926bc7c2a5e0616d7b8e64f8bd00c',
         requires = {"rktjmp/lush.nvim"},
     }
 
