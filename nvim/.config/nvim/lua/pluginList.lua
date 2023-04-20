@@ -280,13 +280,19 @@ return require('packer').startup(function(use)
         end
     }
 
-    use {
+    use { -- Toggle True/False, Yes/No, etc..
         "lukelbd/vim-toggle",
         config = function()
             -- vim.g.toggle_map            = '<Leader>b'
             vim.g.toggle_chars_on       = true
             vim.g.toggle_words_on       = true
             vim.g.toggle_consecutive_on = true
+        end
+    }
+
+    use {
+        "tpope/vim-sleuth",
+        config = function()
         end
     }
 

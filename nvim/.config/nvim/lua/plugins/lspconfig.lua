@@ -11,14 +11,22 @@ M.config = function()
             vim.api.nvim_buf_set_option(bufnr, ...)
         end
 
+        -- local cfg = {
+        --     bind = true,
+        --     floating_window = true,
+        --     hint_enable = true,
+        --     fix_pos = true
+        -- }
+
         local cfg = {
             bind = true,
-            floating_window = true,
-            hint_enable = true,
-            fix_pos = true
+            handler_opts = {
+                border = "rounded"
+            },
+            hint_enable = false
         }
 
-        --require "lsp_signature".on_attach(cfg)
+        require("lsp_signature").on_attach(cfg, bufnr)
         --require'completion'.on_attach()
 
         buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")

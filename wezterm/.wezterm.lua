@@ -87,7 +87,7 @@ return {
         style = "Normal",
         harfbuzz_features = {
             -- Font Feature Notes/Testing:
-            "zero = 0",     -- 0
+            "zero = 1",     -- 0
             "ss02 = 1",     -- <= >=
             "ss03 = 0",     -- &
             "ss04 = 1",     -- $
