@@ -3,7 +3,13 @@ local function map(mode, lhs, rhs, opts)
     if opts then
         options = vim.tbl_extend("force", options, opts)
     end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    if type(lhs) == "string" then
+        vim.keymap.set(mode, lhs, rhs, options)
+    elseif type(lhs) == "table" then
+        for _,key in pairs(lhs) do
+            vim.keymap.set(mode, key, rhs, options)
+        end
+    end
 end
 
 local opt = {noremap = true, silent = true}
@@ -31,11 +37,11 @@ require('Navigator').setup({
     disable_on_zoom = true
 })
 
-map('n', "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opt)
-map('n', "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opt)
-map('n', "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opt)
-map('n', "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opt)
-map('n', "<A-p>", "<CMD>lua require('Navigator').previous()<CR>", opt)
+map({'n','t'}, {"<C-h>", "<C-Left>"},  "<CMD>lua require('Navigator').left()<CR>", opt)
+map({'n','t'}, {"<C-k>", "<C-Up>"},    "<CMD>lua require('Navigator').up()<CR>", opt)
+map({'n','t'}, {"<C-l>", "<C-Right>"}, "<CMD>lua require('Navigator').right()<CR>", opt)
+map({'n','t'}, {"<C-j>", "<C-Down>"},  "<CMD>lua require('Navigator').down()<CR>", opt)
+map({'n','t'}, "<A-p>",                "<CMD>lua require('Navigator').previous()<CR>", opt)
 
 -----------------------
 --  MODE NAVIGATION  --
@@ -198,17 +204,17 @@ end, opt)
 ----------------------------------
 --  BURN ARROWS and PGUP/PGDWN  --
 ----------------------------------
-map("n", "<Up>", "<Nop>", {})
-map("n", "<Left>", "<Nop>", {})
-map("n", "<Right>", "<Nop>", {})
-map("n", "<Down>", "<Nop>", {})
+-- map("n", "<Up>", "<Nop>", {})
+-- map("n", "<Left>", "<Nop>", {})
+-- map("n", "<Right>", "<Nop>", {})
+-- map("n", "<Down>", "<Nop>", {})
 map("n", "<PageUp>", "<Nop>", {})
 map("n", "<PageDown>", "<Nop>", {})
-
-map("i", "<Up>", "<Nop>", {})
-map("i", "<Left>", "<Nop>", {})
-map("i", "<Right>", "<Nop>", {})
-map("i", "<Down>", "<Nop>", {})
+--
+-- map("i", "<Up>", "<Nop>", {})
+-- map("i", "<Left>", "<Nop>", {})
+-- map("i", "<Right>", "<Nop>", {})
+-- map("i", "<Down>", "<Nop>", {})
 map("i", "<PageUp>", "<Nop>", {})
 map("i", "<PageDown>", "<Nop>", {})
 
