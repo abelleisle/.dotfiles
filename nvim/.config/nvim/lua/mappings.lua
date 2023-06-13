@@ -48,6 +48,7 @@ map({'n','t'}, "<A-p>",                "<CMD>lua require('Navigator').previous()
 -----------------------
 --vim.cmd("inoremap jk <Esc>")
 map('i', "jk", "<Esc>", opt)
+map('i', "zx", "<Esc>", opt)
 
 ------------------------
 --  SPLIT NAVIGATION  --

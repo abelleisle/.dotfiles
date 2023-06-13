@@ -104,6 +104,11 @@ return require('packer').startup(function(use)
         requires = {"rktjmp/lush.nvim"},
     }
 
+    use { -- Catppuccin
+        "catppuccin/nvim",
+        as = "catppuccin"
+    }
+
     use { -- Wal theme
         "dylanaraps/wal.vim"
     }
@@ -207,6 +212,7 @@ return require('packer').startup(function(use)
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
         after = "nvim-cmp"
