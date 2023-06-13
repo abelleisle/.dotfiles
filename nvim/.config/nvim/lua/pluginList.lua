@@ -61,9 +61,9 @@ return require('packer').startup(function(use)
     use { -- Statusline
         "NTBBloodbath/galaxyline.nvim",
         requires = {"kyazdani42/nvim-web-devicons"},
-        config = function()
-            require("plugins.statusline").config()
-        end
+        -- config = function()
+            -- require("plugins.statusline").config()
+        -- end
     }
 
     use { -- Keybind Help

@@ -96,10 +96,15 @@ local function isViProcess(pane)
     -- return pane:get_title():find("n?vim") ~= nil
 end
 
+local function isTmuxProcess(pane)
+    -- see: isViProcess
+    return pane:get_foreground_process_name():find('tmux') ~= nil
+end
+
 local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
-    if isViProcess(pane) then
+    if isViProcess(pane) or isTmuxProcess(pane) then
         window:perform_action(
-            -- This should match the keybinds you set in Neovim.
+            -- This should match the keybinds set in Neovim and tmux.
             wezaction.SendKey({ key = vim_direction, mods = 'CTRL' }),
             pane
         )
@@ -208,7 +213,9 @@ return {
         } ]]
 
         --
-        -- nvim Navigator bindings
+        -- nvim/tmux Navigator bindings
+        --
+        -- Note: These MUST match the bindings in nvim/tmux for it to work properly
         --
         { key = 'h', mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-left') },
         { key = 'j', mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-down') },

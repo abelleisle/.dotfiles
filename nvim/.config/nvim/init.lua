@@ -3,7 +3,6 @@
 require "pluginList"
 require "options"
 
---require "highlights"
 require "mappings"
 
 --require("utils").hideStuff()
@@ -15,3 +14,6 @@ if local_exists then
 else
     print("No local configs... Using global")
 end
+
+-- Call this after local config sets colors
+require "highlights"

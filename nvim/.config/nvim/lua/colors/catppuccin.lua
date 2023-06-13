@@ -1,8 +1,9 @@
 local M = {}
 
 M.config = function ()
+    local flavour = "macchiato" -- latte, frappe, macchiato, mocha
     require("catppuccin").setup({
-        flavour = "macchiato", -- latte, frappe, macchiato, mocha
+        flavour = flavour,
         background = { -- :h background
             light = "latte",
             dark = "mocha",
@@ -44,6 +45,23 @@ M.config = function ()
             -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
     })
+
+    local palette = require("catppuccin.palettes").get_palette(flavour);
+
+    vim.g.colors = {
+      bg      = palette.base,
+      fg      = palette.text,
+      magenta = palette.muave,
+      red     = palette.red,
+      orange  = palette.peach,
+      yellow  = palette.yellow,
+      green   = palette.green,
+      cyan    = palette.sky,
+      blue    = palette.blue,
+      grey0   = palette.surface0,
+      grey1   = palette.overlay1,
+      grey2   = palette.subtext1,
+    }
 
     -- setup must be called before loading
     vim.cmd.colorscheme "catppuccin"
