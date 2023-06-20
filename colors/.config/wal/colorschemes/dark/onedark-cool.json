@@ -1,0 +1,29 @@
+{
+    "wallpaper": "/home/andy/.wallpapers/maze.png",
+    "alpha": "100",
+
+    "special": {
+        "background": "#242b38",
+        "foreground": "#a5b0c5",
+        "cursor": "#a5b0c5"
+    },
+    "colors": {
+        "color0": "#151820",
+        "color1": "#ef5f6b",
+        "color2": "#97ca72",
+        "color3": "#ebc275",
+        "color4": "#5ab0f6",
+        "color5": "#ca72e4",
+        "color6": "#4dbdcb",
+        "color7": "#546178",
+
+        "color8": "#1e242e",
+        "color9": "#a13131",
+        "color10": "#303d27",
+        "color11": "#9a6b16",
+        "color12": "#18344c",
+        "color13": "#8f36a9",
+        "color14": "#25747d",
+        "color15": "#7d899f"
+    }
+}

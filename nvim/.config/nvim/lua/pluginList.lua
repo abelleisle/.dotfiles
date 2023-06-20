@@ -109,6 +109,11 @@ return require('packer').startup(function(use)
         as = "catppuccin"
     }
 
+    use { -- OneDark
+        "navarasu/onedark.nvim",
+        as = "onedark"
+    }
+
     use { -- Wal theme
         "dylanaraps/wal.vim"
     }
