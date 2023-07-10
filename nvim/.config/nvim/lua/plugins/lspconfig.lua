@@ -153,9 +153,7 @@ M.config = function()
                             end
                             -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
                         })
-                    end
-
-                    if lang == "ccls" then
+                    elseif lang == "ccls" then
                         client_opts = vim.tbl_deep_extend("keep", opts, {
                             init_options = {
                                 client = {
@@ -195,9 +193,7 @@ M.config = function()
                             -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
                             single_file_support = true,
                         })
-                    end
-
-                    if lang == "sumneko_lua" then
+                    elseif lang == "sumneko_lua" then
                         client_opts = vim.tbl_deep_extend("keep", opts, {
                             settings = {
                                 Lua = {
@@ -223,9 +219,7 @@ M.config = function()
                                 }
                             }
                         })
-                    end
-
-                    if lang == "ltex" then
+                    elseif lang == "ltex" then
                         client_opts = vim.tbl_deep_extend("keep", opts, {
                             settings = {
                                 ltex = {
@@ -235,9 +229,7 @@ M.config = function()
                                 }
                             }
                         })
-                    end
-
-                    if lang == "rust_hdl" then
+                    elseif lang == "rust_hdl" then
                         client_opts = vim.tbl_deep_extend("keep", opts, {
                             default_config = {
                             cmd = {"vhdl_ls"};
@@ -248,6 +240,8 @@ M.config = function()
                             settings = {};
                             };
                         })
+                    else
+                        client_opts = opts
                     end
                     requested_server:setup(client_opts)
                 end)

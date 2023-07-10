@@ -9,20 +9,19 @@ M.config = function()
         execution_message = {
             message = function()
                 return "Auto-saved at : " .. vim.fn.strftime("%H:%M:%S")
+
             end,
             dim = 0.18,
             cleaning_interval = 1250
         },
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filetype_is_not = {"tex"},
-            modifiable = true
-        },
-        write_all_buffers = true,
-        on_off_commands = true,
-        clean_command_line_interval = 2500,
-        debounce_delay = 15000,
+        events = {"FocusLost", "BufLeave", "BufUnload", "UILeave", "TabLeave", "VimSuspend", "WinLeave"},
+        -- conditions = {
+        --     exists = true,
+        --     filetype_is_not = {"tex"},
+        --     modifiable = true
+        -- },
+        write_all_buffers = false,
+        debounce_delay = 1000,
     })
 end
 

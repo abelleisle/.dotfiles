@@ -316,16 +316,16 @@ return require('packer').startup(function(use)
         cmd = "StartupTime"
     }
 
-    use { -- Auto-save
-        "Pocco81/auto-save.nvim",
-        event = "BufRead",
-        config = function()
-            require("plugins.autosave").config()
-        end,
-        cond = function() -- Only enable if auto save is enabled
-            return vim.g.auto_save == true
-        end
-    }
+    -- use { -- Auto-save
+    --     "Pocco81/auto-save.nvim",
+    --     event = "BufRead",
+    --     config = function()
+    --         require("plugins.autosave").config()
+    --     end,
+    --     cond = function() -- Only enable if auto save is enabled
+    --         return false
+    --     end
+    -- }
 
     use { -- Show current function/class context
         "nvim-treesitter/nvim-treesitter-context",
