@@ -178,7 +178,7 @@ return {
             font = font_rule_set("Light", "Normal"),
         },
     },
-    font_size = 14,
+    font_size = 13,
 
     -------------------
     --  KEYBINDINGS  --

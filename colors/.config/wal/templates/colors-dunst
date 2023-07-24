@@ -33,7 +33,7 @@
     origin = top-right
 
     # Offset from the origin
-    offset = 20x45
+    offset = 17x16
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -86,7 +86,7 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 3
+    frame_width = 2
 
     # Defines color of the frame around the notification window.
     frame_color = "{color7}"
@@ -197,7 +197,9 @@
 
     # Paths to default icons.
     #icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-    icon_path = /usr/share/icons/candy-icons/apps/scalable/:/usr/share/icons/candy-icons/devices/scalable/
+    #icon_path = /usr/share/icons/candy-icons/apps/scalable/:/usr/share/icons/candy-icons/devices/scalable/
+
+    icon_corner_radius = 20
 
     ### History ###
 
@@ -230,7 +232,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 0
+    corner_radius = 20
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -243,7 +245,7 @@
 
     # Uncomment this if you want to let notications appear under fullscreen
     # applications (default: overlay)
-    # layer = top
+    layer = top
 
     # Set this to true to use X11 output on Wayland.
     force_xwayland = false

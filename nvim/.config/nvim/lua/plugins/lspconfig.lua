@@ -86,7 +86,7 @@ M.config = function()
 
         servers = {
             "clangd", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer",
-            "cmake"
+            "cmake", "rnix"
         }
 
         for _, lang in pairs(servers) do
@@ -246,6 +246,14 @@ M.config = function()
                                 return util.root_pattern('vhdl_ls.toml')(fname)
                             end;
                             settings = {};
+                            };
+                        })
+                    end
+
+                    if lang == "rnix" then
+                        client_opts = vim.tbl_deep_extend("keep", opts, {
+                            default_config = {
+                                settings = {};
                             };
                         })
                     end

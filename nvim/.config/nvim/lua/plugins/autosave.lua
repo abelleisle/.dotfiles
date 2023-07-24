@@ -13,7 +13,7 @@ M.config = function()
             dim = 0.18,
             cleaning_interval = 1250
         },
-        events = {"InsertLeave", "TextChanged"},
+        events = {"InsertLeave"},
         conditions = {
             exists = true,
             filetype_is_not = {"tex"},

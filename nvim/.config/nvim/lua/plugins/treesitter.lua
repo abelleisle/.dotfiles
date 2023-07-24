@@ -19,7 +19,8 @@ M.config = function()
             "cuda",
             "rust",
             "zig",
-            "glsl"
+            "glsl",
+            "nix"
         },
         highlight = {
             enable = true,

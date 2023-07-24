@@ -1,7 +1,9 @@
 local opt = vim.opt
 
 vim.g.mapleader = " "
-vim.g.auto_save = true
+vim.g.auto_save = false
+opt.autowrite = true
+opt.autowriteall = true
 
 opt.ruler = true
 opt.hidden = true

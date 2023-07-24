@@ -113,7 +113,7 @@ M.config = function()
     }
     gls.left[5] = {
       GitIcon = {
-        provider = function() return '  ' end,
+        provider = function() return '  ' end,
         condition = buffer_wide,
         highlight = {colors.orange,colors.purple},
       }
