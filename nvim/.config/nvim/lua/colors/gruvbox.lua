@@ -88,7 +88,22 @@ M.config = function ()
         },
     })
 
-    vim.cmd("colorscheme gruvbox")
+    vim.g.colors = {
+      bg      = bg,
+      fg      = palette.light0_hard,
+      magenta = palette.bright_purple,
+      red     = palette.bright_red,
+      orange  = palette.bright_orange,
+      yellow  = palette.bright_yellow,
+      green   = palette.bright_green,
+      cyan    = palette.neutral_aqua,
+      blue    = palette.neutral_blue,
+      grey0   = palette.dark1,
+      grey1   = palette.dark2,
+      grey2   = '#c0c0c0',
+    }
+
+    vim.cmd.colorscheme "gruvbox"
 end
 
 return M

@@ -5,19 +5,11 @@ M.config = function()
     local gls = gl.section
     gl.short_line_list = {'LuaTree','vista','dbui'}
 
-    local colors = {
-      bg = '#1d2021',
-      yellow = '#fabd2f',
-      cyan = '#008080',
-      darkblue = '#504945',
-      green = '#afd700',
-      orange = '#FF8800',
-      purple = '#3c3836',
-      magenta = '#d16d9e',
-      grey = '#c0c0c0',
-      blue = '#0087d7',
-      red = '#ec5f67'
-    }
+    local colors = vim.g.colors
+    if colors == nil then
+      print("Error: StatusLine vim.g.colors are not set")
+      return
+    end
 
     local buffer_not_empty = function()
       if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
@@ -72,7 +64,7 @@ M.config = function()
     gls.left[1] = {
       FirstElement = {
         provider = function() return '▋' end,
-        highlight = {colors.blue,colors.purple}
+        highlight = {colors.blue,colors.grey0}
       },
     }
     gls.left[2] = {
@@ -82,20 +74,20 @@ M.config = function()
           return alias[vim.fn.mode()]
         end,
         separator = '',
-        separator_highlight = {colors.purple,function()
+        separator_highlight = {colors.grey0,function()
           if not buffer_not_empty() then
-            return colors.purple
+            return colors.grey0
           end
-          return colors.darkblue
+          return colors.grey1
         end},
-        highlight = {colors.yellow,colors.purple,'bold'},
+        highlight = {colors.yellow,colors.grey0,'bold'},
       },
     }
     gls.left[3] ={
       FileIcon = {
         provider = 'FileIcon',
         condition = buffer_not_empty,
-        highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color,colors.darkblue},
+        highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color,colors.grey1},
       },
     }
     gls.left[4] = {
@@ -107,15 +99,15 @@ M.config = function()
             },
         condition = buffer_not_empty,
         separator = '',
-        separator_highlight = {colors.purple,colors.darkblue},
-        highlight = {colors.magenta,colors.darkblue}
+        separator_highlight = {colors.grey0,colors.grey1},
+        highlight = {colors.magenta,colors.grey1}
       }
     }
     gls.left[5] = {
       GitIcon = {
         provider = function() return '  ' end,
         condition = buffer_wide,
-        highlight = {colors.orange,colors.purple},
+        highlight = {colors.orange,colors.grey0},
       }
     }
     gls.left[6] = {
@@ -129,8 +121,8 @@ M.config = function()
         end,
         condition = buffer_wide,
         separator = ' ',
-        separator_highlight = {colors.purple, colors.purple},
-        highlight = {colors.grey,colors.purple},
+        separator_highlight = {colors.grey0, colors.grey0},
+        highlight = {colors.grey2,colors.grey0},
       }
     }
     gls.left[7] = {
@@ -138,7 +130,7 @@ M.config = function()
         provider = 'DiffAdd',
         condition = checkwidth,
         icon = ' ',
-        highlight = {colors.green,colors.purple},
+        highlight = {colors.green,colors.grey0},
       }
     }
     gls.left[8] = {
@@ -146,7 +138,7 @@ M.config = function()
         provider = 'DiffModified',
         condition = checkwidth,
         icon = ' ',
-        highlight = {colors.orange,colors.purple},
+        highlight = {colors.orange,colors.grey0},
       }
     }
     gls.left[9] = {
@@ -154,15 +146,15 @@ M.config = function()
         provider = 'DiffRemove',
         condition = checkwidth,
         icon = ' ',
-        highlight = {colors.red,colors.purple},
+        highlight = {colors.red,colors.grey0},
       }
     }
     gls.left[10] = {
       LeftEnd = {
         provider = function() return '' end,
         separator = '',
-        separator_highlight = {colors.purple,colors.bg},
-        highlight = {colors.purple,colors.purple}
+        separator_highlight = {colors.grey0,colors.bg},
+        highlight = {colors.grey0,colors.grey0}
       }
     }
     gls.left[11] = {
@@ -189,47 +181,47 @@ M.config = function()
       FileFormat = {
         provider = 'FileFormat',
         separator = ' ',
-        separator_highlight = {colors.bg,colors.purple},
-        highlight = {colors.grey,colors.purple},
+        separator_highlight = {colors.bg,colors.grey0},
+        highlight = {colors.grey2,colors.grey0},
       }
     }
     gls.right[2] = {
       LineInfo = {
         provider = 'LineColumn',
         separator = ' | ',
-        separator_highlight = {colors.darkblue,colors.purple},
-        highlight = {colors.grey,colors.purple},
+        separator_highlight = {colors.grey1,colors.grey0},
+        highlight = {colors.grey2,colors.grey0},
       },
     }
     gls.right[3] = {
       PerCent = {
         provider = 'LinePercent',
         separator = '',
-        separator_highlight = {colors.darkblue,colors.purple},
-        highlight = {colors.grey,colors.darkblue},
+        separator_highlight = {colors.grey1,colors.grey0},
+        highlight = {colors.grey2,colors.grey1},
       }
     }
     gls.right[4] = {
-        FileTypeName = {
-            provider= 'FileTypeName',
-            condition = buffer_not_empty,
-            separator = ' ',
-            separator_highlight = {colors.darkblue,colors.purple},
-            highlight = {colors.blue,colors.purple}
-        }
+      FileTypeName = {
+          provider= 'FileTypeName',
+          condition = buffer_not_empty,
+          separator = ' ',
+          separator_highlight = {colors.grey1,colors.grey0},
+          highlight = {colors.blue,colors.grey0}
+      }
     }
     gls.right[5] = {
       LastElement = {
         condition = buffer_not_empty,
         provider = function() return '▋' end,
-        highlight = {colors.purple,colors.purple}
+        highlight = {colors.grey0,colors.grey0}
       },
     }
 
     gls.short_line_left[1] = {
       SmallFirst = {
         provider = function() return '▋' end,
-        highlight = {colors.red,colors.purple}
+        highlight = {colors.red,colors.grey0}
       }
     }
 
@@ -238,8 +230,8 @@ M.config = function()
         condition = buffer_not_empty,
         provider = filename_and_parent,
         separator = '',
-        separator_highlight = {colors.purple,colors.bg},
-        highlight = {colors.grey,colors.purple}
+        separator_highlight = {colors.grey0,colors.bg},
+        highlight = {colors.grey2,colors.grey0}
       }
     }
 
@@ -248,8 +240,8 @@ M.config = function()
         provider= 'FileTypeName',
         condition = buffer_not_empty,
         separator = '█',
-        separator_highlight = {colors.purple,colors.bg},
-        highlight = {colors.red,colors.purple}
+        separator_highlight = {colors.grey0,colors.bg},
+        highlight = {colors.red,colors.grey0}
       }
     }
 
@@ -257,7 +249,7 @@ M.config = function()
       SmallLastElement = {
         condition = buffer_not_empty,
         provider = function() return '▋' end,
-        highlight = {colors.purple,colors.purple}
+        highlight = {colors.grey0,colors.grey0}
       },
     }
 

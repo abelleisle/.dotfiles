@@ -14,18 +14,18 @@ local theme_file = wezterm.home_dir.."/.cache/wal/colors-wez.toml"
 local scheme_colors, _ = wezterm.color.load_scheme(theme_file)
 
 local bar_colors = {
-    bg       = scheme_colors.background,
-    fg       = "#C0C0C0",
-    red      = '#EC5F67',
-    orange   = '#FF8800',
-    yellow   = '#FABD2F',
-    green    = '#AFD700',
-    blue     = '#0087D7',
-    cyan     = '#008080',
-    purple   = '#3C3836',
-    darkblue = '#504945',
-    magenta  = '#D16D9E',
-    grey     = '#C0C0C0',
+    bg      = scheme_colors.background,
+    fg      = scheme_colors.foreground,
+    magenta = scheme_colors.ansi[6],
+    red     = scheme_colors.ansi[2],
+    orange  = scheme_colors.brights[4],
+    yellow  = scheme_colors.ansi[4],
+    green   = scheme_colors.ansi[3],
+    blue    = scheme_colors.ansi[5],
+    cyan    = scheme_colors.ansi[7],
+    grey0   = scheme_colors.brights[1],
+    grey1   = scheme_colors.ansi[1],
+    grey2   = scheme_colors.foreground,
 }
 
 -- Tab bar colors
@@ -33,12 +33,12 @@ local tab_colors = {
     tab_bar = {
         background = scheme_colors.background,
         active_tab = {
-            bg_color = bar_colors.darkblue,
+            bg_color = bar_colors.grey1,
             fg_color = bar_colors.yellow,
         },
         inactive_tab = {
-            bg_color = bar_colors.purple,
-            fg_color = bar_colors.grey,
+            bg_color = bar_colors.grey0,
+            fg_color = bar_colors.grey2,
         },
         new_tab = {
             bg_color = bar_colors.bg,
@@ -96,10 +96,15 @@ local function isViProcess(pane)
     -- return pane:get_title():find("n?vim") ~= nil
 end
 
+local function isTmuxProcess(pane)
+    -- see: isViProcess
+    return pane:get_foreground_process_name():find('tmux') ~= nil
+end
+
 local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
-    if isViProcess(pane) then
+    if isViProcess(pane) or isTmuxProcess(pane) then
         window:perform_action(
-            -- This should match the keybinds you set in Neovim.
+            -- This should match the keybinds set in Neovim and tmux.
             wezaction.SendKey({ key = vim_direction, mods = 'CTRL' }),
             pane
         )
@@ -208,7 +213,9 @@ return {
         } ]]
 
         --
-        -- nvim Navigator bindings
+        -- nvim/tmux Navigator bindings
+        --
+        -- Note: These MUST match the bindings in nvim/tmux for it to work properly
         --
         { key = 'h', mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-left') },
         { key = 'j', mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-down') },

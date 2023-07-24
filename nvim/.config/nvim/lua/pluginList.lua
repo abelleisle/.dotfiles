@@ -61,9 +61,9 @@ return require('packer').startup(function(use)
     use { -- Statusline
         "NTBBloodbath/galaxyline.nvim",
         requires = {"kyazdani42/nvim-web-devicons"},
-        config = function()
-            require("plugins.statusline").config()
-        end
+        -- config = function()
+            -- require("plugins.statusline").config()
+        -- end
     }
 
     use { -- Keybind Help
@@ -102,6 +102,16 @@ return require('packer').startup(function(use)
         "ellisonleao/gruvbox.nvim",
         commit = 'fc66cfbadaf926bc7c2a5e0616d7b8e64f8bd00c',
         requires = {"rktjmp/lush.nvim"},
+    }
+
+    use { -- Catppuccin
+        "catppuccin/nvim",
+        as = "catppuccin"
+    }
+
+    use { -- OneDark
+        "navarasu/onedark.nvim",
+        as = "onedark"
     }
 
     use { -- Wal theme
@@ -207,6 +217,7 @@ return require('packer').startup(function(use)
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
         after = "nvim-cmp"
@@ -305,16 +316,16 @@ return require('packer').startup(function(use)
         cmd = "StartupTime"
     }
 
-    use { -- Auto-save
-        "Pocco81/auto-save.nvim",
-        event = "BufRead",
-        config = function()
-            require("plugins.autosave").config()
-        end,
-        cond = function() -- Only enable if auto save is enabled
-            return vim.g.auto_save == true
-        end
-    }
+    -- use { -- Auto-save
+    --     "Pocco81/auto-save.nvim",
+    --     event = "BufRead",
+    --     config = function()
+    --         require("plugins.autosave").config()
+    --     end,
+    --     cond = function() -- Only enable if auto save is enabled
+    --         return false
+    --     end
+    -- }
 
     use { -- Show current function/class context
         "nvim-treesitter/nvim-treesitter-context",
