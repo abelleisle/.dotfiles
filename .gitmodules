@@ -10,3 +10,9 @@
 [submodule "zsh/.custom-zsh/plugins/zsh-syntax-highlighting"]
 	path = zsh/.custom-zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "zsh/.custom-zsh/plugins/zsh-nix-shell"]
+	path = zsh/.custom-zsh/plugins/zsh-nix-shell
+	url = https://github.com/chisui/zsh-nix-shell.git
+[submodule "zsh/.custom-zsh/plugins/nix-shell"]
+	path = zsh/.custom-zsh/plugins/nix-shell
+	url = https://github.com/chisui/zsh-nix-shell.git

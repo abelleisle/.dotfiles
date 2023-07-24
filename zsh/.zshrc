@@ -102,12 +102,14 @@ plugins=(
     sudo
     zsh-autopair
     vi-mode
+    nix-shell
 )
 
 source $ZSH/oh-my-zsh.sh
 
 bindkey -v
 bindkey jk vi-cmd-mode
+bindkey zx vi-cmd-mode
 
 # User configuration
 
@@ -143,8 +145,10 @@ export VISUAL="$EDITOR"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-cat ~/.cache/wal/sequences
-source ~/.cache/wal/colors-tty.sh
+if [ -d ~/.cache/wal ]; then
+    cat ~/.cache/wal/sequences
+    source ~/.cache/wal/colors-tty.sh
+fi
 
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc

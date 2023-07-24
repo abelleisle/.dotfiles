@@ -223,8 +223,14 @@ function ssh_prompt_info {
     fi
 }
 
+function nix_prompt_info {
+    if [[ -n $IN_NIX_SHELL ]]; then
+        echo "%{$fg[blue]%}[nix]%F{reset} "
+    fi
+}
+
 # prompt
 # PROMPT='$(real_time) $(login_info) $(directory) $(git_status)$(command_status) ';
 PROMPT='
-$(real_time) $(directory) 
-$(ssh_prompt_info)$(cpu_prompt_info)$(git_status)$(command_status) ';
+$(real_time) $(directory)
+$(ssh_prompt_info)$(nix_prompt_info)$(cpu_prompt_info)$(git_status)$(command_status) ';
