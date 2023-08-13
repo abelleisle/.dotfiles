@@ -102,8 +102,14 @@ plugins=(
     sudo
     zsh-autopair
     vi-mode
-    nix-shell
 )
+
+# If we aren't running MacOS add nix-shell plugin.
+# We can't use this on MacOS because Apple refuses to use
+# a bash version >4 due to GPLv3 licensing.
+if [[ $(uname) != "Darwin" ]]; then
+    plugins+=(nix-shell)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
