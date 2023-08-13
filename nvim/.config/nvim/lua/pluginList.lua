@@ -44,6 +44,12 @@ if not packer_bootstrap then
     }
 end
 
+---------------------
+--  Plugin Config  --
+---------------------
+-- BufEnter is kinda not lazy
+local lazy_events = {"BufRead", "BufWinEnter", "BufNewFile"}
+
 return require('packer').startup(function(use)
     use "wbthomason/packer.nvim"
 
@@ -120,7 +126,7 @@ return require('packer').startup(function(use)
 
     use { -- Highlight hex colors
         "norcalli/nvim-colorizer.lua",
-        event = "BufRead",
+        event = lazy_events,
         config = function()
             require("colorizer").setup()
             vim.cmd("ColorizerReloadAllBuffers")
@@ -151,7 +157,7 @@ return require('packer').startup(function(use)
     use { -- Treesitter front end
         "nvim-treesitter/nvim-treesitter",
         run = ':TSUpdate',
-        event = "BufRead",
+        event = lazy_events,
         config = function()
             require("plugins.treesitter").config()
         end
@@ -159,7 +165,7 @@ return require('packer').startup(function(use)
 
     use { -- Neovim Language Server
         "neovim/nvim-lspconfig",
-        event = "BufRead",
+        event = lazy_events,
         config = function()
             require("plugins.lspconfig").config()
         end,
@@ -168,7 +174,7 @@ return require('packer').startup(function(use)
 
     use { -- Images inside neovim LSP completion menu
         "onsails/lspkind-nvim",
-        event = "BufRead",
+        event = lazy_events,
         config = function()
             require("lspkind").init(require("plugins.lspkind_icons"))
         end
@@ -176,7 +182,7 @@ return require('packer').startup(function(use)
 
     use {
         "ray-x/lsp_signature.nvim",
-        event = "BufRead",
+        event = lazy_events,
         config = function()
             require("lsp_signature").setup({
                 bind = true,
@@ -229,7 +235,7 @@ return require('packer').startup(function(use)
 
     use { -- Git modification signs
         "lewis6991/gitsigns.nvim",
-        event = "BufRead",
+        event = lazy_events,
         config = function()
             require("plugins.gitsigns").config()
         end
@@ -258,7 +264,7 @@ return require('packer').startup(function(use)
 
     use { -- Automatically format files
         "sbdchd/neoformat", cmd = "Neoformat",
-        event = "BufRead",
+        event = lazy_events,
     }
 
     use { -- Automatically close HTML/XML tags
@@ -318,7 +324,7 @@ return require('packer').startup(function(use)
 
     -- use { -- Auto-save
     --     "Pocco81/auto-save.nvim",
-    --     event = "BufRead",
+    --     event = lazy_events,
     --     config = function()
     --         require("plugins.autosave").config()
     --     end,

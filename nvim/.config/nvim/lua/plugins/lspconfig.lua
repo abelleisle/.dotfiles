@@ -85,173 +85,189 @@ M.config = function()
         capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
         servers = {
-            "clangd", "sumneko_lua", "ltex", "jedi_language_server", "zls", "rust_analyzer",
+            "clangd", "sumneko_lua", "ltex", "jedi_language_server", "rust_analyzer",
             "cmake", "rnix"
         }
 
+        local system_servers = {
+            "zls"
+        }
+
+        local on_ready_func = function(server, lang)
+            local client_opts = {}
+            local opts = {
+                autostart = true,
+                on_attach = on_attach,
+                capabilities = capabilities,
+                root_dir = vim.loop.cwd,
+                launch = true,
+                flags = {
+                    debounce_text_changes = 150
+                },
+                handlers = {
+                    ["textDocument/publishDiagnostics"] = vim.lsp.with(
+                        vim.lsp.diagnostic.on_publish_diagnostics, {
+                            virtual_text = true,
+                            underline = true,
+                            signs = true,
+                            update_in_insert = true,
+                        }
+                    )
+                }
+            }
+
+            if lang == "clangd" then
+                client_opts = vim.tbl_deep_extend("force", opts, {
+                    single_file_support = true,
+                    init_options = {
+                        client = {
+                            snippetSupport = true
+                        },
+                        compilationDatabaseDirectory = "build";
+                        index = {
+                            threads = 0;
+                        };
+                        cache = {
+                            directory = "/tmp/clangd/";
+                        };
+                        highlight = {
+                            lsRangers = true;
+                        };
+                        clang = {
+                            excludeArgs = {
+                                "-mlongcalls",
+                                "-Wno-frame-address",
+                                "-fstrict-volatile-bitfields",
+                                "-fno-tree-switch-conversion",
+                                "-mtext-section-literals",
+                            },
+                        }
+                    },
+                    cmd = { "clangd" },
+                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                    --root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')
+                    --root_dir = vim.loop.cwd,
+                    root_dir = function(fname)
+                        return util.root_pattern(--'build/compile_commands.json',
+                                                'compile_commands.json',
+                                                'compile_flags.txt',
+                                                '.git')(fname) or util.path.dirname(fname)
+                    end
+                    -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+                })
+            elseif lang == "ccls" then
+                client_opts = vim.tbl_deep_extend("force", opts, {
+                    init_options = {
+                        client = {
+                            snippetSupport = true
+                        },
+                        compilationDatabaseDirectory = "build";
+                        index = {
+                            threads = 0;
+                        };
+                        cache = {
+                            directory = "/tmp/ccls";
+                        };
+                        highlight = {
+                            lsRangers = true;
+                        };
+                        clang = {
+                            excludeArgs = {
+                                "-mlongcalls",
+                                "-Wno-frame-address",
+                                "-fstrict-volatile-bitfields",
+                                "-fno-tree-switch-conversion",
+                                "-mtext-section-literals",
+                            },
+                        }
+                    },
+                    cmd = { "ccls" },
+                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                    root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git'),
+                    --root_dir = vim.loop.cwd,
+                    -- root_dir = function(fname)
+                    --     return util.root_pattern(--'build/compile_commands.json',
+                    --                             'compile_commands.json',
+                    --                             'compile_flags.txt',
+                    --                             '.git',
+                    --                             '.ccls')(fname) or util.path.dirname(fname)
+                    -- end
+                    -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+                    single_file_support = true,
+                })
+            elseif lang == "sumneko_lua" then
+                client_opts = vim.tbl_deep_extend("force", opts, {
+                    settings = {
+                        Lua = {
+                            runtime = {
+                                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                                version = 'LuaJIT',
+                            },
+                            diagnostics = {
+                                globals = {"vim"}
+                            },
+                            workspace = {
+                                library = {
+                                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                                    --library = vim.api.nvim_get_runtime_file("", true),
+                                },
+                                maxPreload = 100000,
+                                preloadFileSize = 10000
+                            },
+                            telemetry = {
+                                enable = false
+                            }
+                        }
+                    }
+                })
+            elseif lang == "ltex" then
+                client_opts = vim.tbl_deep_extend("force", opts, {
+                    settings = {
+                        ltex = {
+                            dictionary = {
+                                ['en-US'] = require("spell").userdict()
+                            }
+                        }
+                    }
+                })
+            elseif lang == "rust_hdl" then
+                client_opts = vim.tbl_deep_extend("force", opts, {
+                    default_config = {
+                        cmd = {"vhdl_ls"};
+                        filetypes = { "vhdl" };
+                        root_dir = function(fname)
+                            return util.root_pattern('vhdl_ls.toml')(fname)
+                        end;
+                        settings = {};
+                    };
+                })
+            elseif lang == "rnix" then
+                client_opts = vim.tbl_deep_extend("force", opts, {
+                    default_config = {
+                        settings = {};
+                    };
+                })
+            elseif lang == "zls" then
+                client_opts = vim.tbl_deep_extend("force", opts, {
+                    cmd = {"zls"},
+                    filetypes = {"zig", "zir"},
+                    root_dir = util.root_pattern("zls.json", ".git"),
+                    single_file_support = false
+                })
+            else
+                client_opts = opts
+            end
+
+            server:setup(client_opts)
+        end
+
+        -- Configure "installable" servers
         for _, lang in pairs(servers) do
             local server_available, requested_server = require('nvim-lsp-installer.servers').get_server(lang)
             if server_available then
                 requested_server:on_ready(function ()
-                    local client_opts = {}
-                    local opts = {
-                        on_attach = on_attach,
-                        capabilities = capabilities,
-                        root_dir = vim.loop.cwd,
-                        launch = true,
-                        flags = {
-                            debounce_text_changes = 150
-                        },
-                        handlers = {
-                            ["textDocument/publishDiagnostics"] = vim.lsp.with(
-                                vim.lsp.diagnostic.on_publish_diagnostics, {
-                                    virtual_text = true,
-                                    underline = true,
-                                    signs = true,
-                                    update_in_insert = true,
-                                }
-                            )
-                        }
-                    }
-
-                    if lang == "clangd" then
-                        client_opts = vim.tbl_deep_extend("keep", opts, {
-                            single_file_support = true,
-                            init_options = {
-                                client = {
-                                    snippetSupport = true
-                                },
-                                compilationDatabaseDirectory = "build";
-                                index = {
-                                    threads = 0;
-                                };
-                                cache = {
-                                    directory = "/tmp/clangd/";
-                                };
-                                highlight = {
-                                    lsRangers = true;
-                                };
-                                clang = {
-                                    excludeArgs = {
-                                        "-mlongcalls",
-                                        "-Wno-frame-address",
-                                        "-fstrict-volatile-bitfields",
-                                        "-fno-tree-switch-conversion",
-                                        "-mtext-section-literals",
-                                    },
-                                }
-                            },
-                            cmd = { "clangd" },
-                            filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-                            --root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')
-                            --root_dir = vim.loop.cwd,
-                            root_dir = function(fname)
-                                return util.root_pattern(--'build/compile_commands.json',
-                                                        'compile_commands.json',
-                                                        'compile_flags.txt',
-                                                        '.git')(fname) or util.path.dirname(fname)
-                            end
-                            -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
-                        })
-                    elseif lang == "ccls" then
-                        client_opts = vim.tbl_deep_extend("keep", opts, {
-                            init_options = {
-                                client = {
-                                    snippetSupport = true
-                                },
-                                compilationDatabaseDirectory = "build";
-                                index = {
-                                    threads = 0;
-                                };
-                                cache = {
-                                    directory = "/tmp/ccls";
-                                };
-                                highlight = {
-                                    lsRangers = true;
-                                };
-                                clang = {
-                                    excludeArgs = {
-                                        "-mlongcalls",
-                                        "-Wno-frame-address",
-                                        "-fstrict-volatile-bitfields",
-                                        "-fno-tree-switch-conversion",
-                                        "-mtext-section-literals",
-                                    },
-                                }
-                            },
-                            cmd = { "ccls" },
-                            filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-                            root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git'),
-                            --root_dir = vim.loop.cwd,
-                            -- root_dir = function(fname)
-                            --     return util.root_pattern(--'build/compile_commands.json',
-                            --                             'compile_commands.json',
-                            --                             'compile_flags.txt',
-                            --                             '.git',
-                            --                             '.ccls')(fname) or util.path.dirname(fname)
-                            -- end
-                            -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
-                            single_file_support = true,
-                        })
-                    elseif lang == "sumneko_lua" then
-                        client_opts = vim.tbl_deep_extend("keep", opts, {
-                            settings = {
-                                Lua = {
-                                    runtime = {
-                                        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                                        version = 'LuaJIT',
-                                    },
-                                    diagnostics = {
-                                        globals = {"vim"}
-                                    },
-                                    workspace = {
-                                        library = {
-                                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                                            --library = vim.api.nvim_get_runtime_file("", true),
-                                        },
-                                        maxPreload = 100000,
-                                        preloadFileSize = 10000
-                                    },
-                                    telemetry = {
-                                        enable = false
-                                    }
-                                }
-                            }
-                        })
-                    elseif lang == "ltex" then
-                        client_opts = vim.tbl_deep_extend("keep", opts, {
-                            settings = {
-                                ltex = {
-                                    dictionary = {
-                                        ['en-US'] = require("spell").userdict()
-                                    }
-                                }
-                            }
-                        })
-                    elseif lang == "rust_hdl" then
-                        client_opts = vim.tbl_deep_extend("keep", opts, {
-                            default_config = {
-                            cmd = {"vhdl_ls"};
-                            filetypes = { "vhdl" };
-                            root_dir = function(fname)
-                                return util.root_pattern('vhdl_ls.toml')(fname)
-                            end;
-                            settings = {};
-                            };
-                        })
-                    else
-                        client_opts = opts
-                    end
-
-                    if lang == "rnix" then
-                        client_opts = vim.tbl_deep_extend("keep", opts, {
-                            default_config = {
-                                settings = {};
-                            };
-                        })
-                    end
-                    requested_server:setup(client_opts)
+                    on_ready_func(requested_server, lang)
                 end)
                 if not requested_server:is_installed() then
                     print("Installing " .. lang)
@@ -261,6 +277,14 @@ M.config = function()
                 print("Installing " .. lang)
                 lsp_installer.install(lang)
             end
+        end
+
+        -- Configure system-wide servers.
+        --  These are installed via the system package manager, or exist in
+        --  per project paths, e.g. nix, python venv
+        for _, lang in pairs(system_servers) do
+            local requested_server = require('lspconfig')[lang]
+            on_ready_func(requested_server, lang)
         end
 
         -- adds a check to see if any of the active clients have the capability
