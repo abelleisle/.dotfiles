@@ -61,11 +61,6 @@ M.config = function()
     -- lspInstall + lspconfig stuff
 
     local function setup_servers()
-        local lsp_installer = require("nvim-lsp-installer")
-
-        local servers = require "nvim-lsp-installer.servers"
-        local util    = require("lspconfig/util")
-
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
         capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -84,14 +79,21 @@ M.config = function()
         }
         capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-        servers = {
-            "clangd", "sumneko_lua", "ltex", "jedi_language_server", "rust_analyzer",
+        local servers = {
+            "clangd", "lua_ls", "ltex", "jedi_language_server", "rust_analyzer",
             "cmake", "rnix"
+        }
+
+        require("mason").setup()
+        require("mason-lspconfig").setup {
+            -- ensure_installed = servers
         }
 
         local system_servers = {
             "zls"
         }
+
+        local util = require("lspconfig/util")
 
         local on_ready_func = function(server, lang)
             local client_opts = {}
@@ -264,20 +266,25 @@ M.config = function()
 
         -- Configure "installable" servers
         for _, lang in pairs(servers) do
-            local server_available, requested_server = require('nvim-lsp-installer.servers').get_server(lang)
-            if server_available then
-                requested_server:on_ready(function ()
-                    on_ready_func(requested_server, lang)
-                end)
-                if not requested_server:is_installed() then
-                    print("Installing " .. lang)
-                    requested_server:install()
-                end
-            else
-                print("Installing " .. lang)
-                lsp_installer.install(lang)
-            end
+            local requested_server = require('lspconfig')[lang]
+            on_ready_func(requested_server, lang)
         end
+        -- for _, lang in pairs(servers) do
+        --     local server_available, requested_server = require('nvim-lsp-installer.servers').get_server(lang)
+        --     if server_available then
+        --         requested_server:on_ready(function ()
+        --             on_ready_func(requested_server, lang)
+        --         end)
+        --         if not requested_server:is_installed() then
+        --             print("Installing " .. lang)
+        --             requested_server:install()
+        --         end
+        --     else
+        --         print("Installing " .. lang)
+        --         print("This shouldn't be running...")
+        --         -- lsp_installer.install(lang)
+        --     end
+        -- end
 
         -- Configure system-wide servers.
         --  These are installed via the system package manager, or exist in

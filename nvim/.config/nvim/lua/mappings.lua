@@ -13,6 +13,12 @@ local function map(mode, lhs, rhs, opts)
 end
 
 local opt = {noremap = true, silent = true}
+local function Opt(desc)
+    local opt_desc = vim.tbl_extend("force", opt, {
+        desc = desc
+    })
+    return opt_desc
+end
 
 -- dont copy any deleted text , this is disabled by default so uncomment the below mappings if you want them
 
@@ -190,8 +196,8 @@ vim.keymap.set('n', '<Leader>fw', ts.builtin.live_grep,                  opt)
 vim.keymap.set('n', '<Leader>fz', ts.grep_fuzzy,                         opt)
 vim.keymap.set('n', '<Leader>gt', ts.builtin.git_status,                 opt)
 vim.keymap.set('n', '<Leader>cm', ts.builtin.git_commits,                opt)
-vim.keymap.set('n', '<C-p>',      ts.builtin.find_files,                 opt)
-vim.keymap.set('i', '<C-p>',      ts.builtin.find_files,                 opt)
+vim.keymap.set('n', '<C-p>',      ts.builtin.find_files,                 Opt("Telescope: Fuzzy file finder"))
+vim.keymap.set('i', '<C-p>',      ts.builtin.find_files,                 Opt("Telescope: Fuzzy file finder"))
 vim.keymap.set('n', '<Leader>fp', ts.extensions.media_files.media_files, opt)
 vim.keymap.set('n', '<Leader>fb', ts.builtin.buffers,                    opt)
 vim.keymap.set('n', '<Leader>fh', ts.builtin.help_tags,                  opt)
@@ -201,6 +207,18 @@ vim.keymap.set('n', '<Leader>f#', ts.builtin.grep_string,                opt)
 vim.keymap.set('n', '<Leader>fs', function()
     ts.builtin.grep_string({ search = vim.fn.input("Grep > ")})
 end, opt)
+
+-----------------
+--  GIT SIGNS  --
+-----------------
+
+-- vim.keymap.set("n", "]c",         {expr = true, '&diff ? \']c\' : \'<cmd>lua require"gitsigns".next_hunk()<CR>\''}, opt)
+-- vim.keymap.set("n", "[c",         {expr = true, '&diff ? \'[c\' : \'<cmd>lua require"gitsigns".prev_hunk()<CR>\''}, opt)
+vim.keymap.set("n", "<leader>hs", '<cmd>lua require"gitsigns".stage_hunk()<CR>',      opt)
+vim.keymap.set("n", "<leader>hu", '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>', opt)
+vim.keymap.set("n", "<leader>hr", '<cmd>lua require"gitsigns".reset_hunk()<CR>',      opt)
+vim.keymap.set("n", "<leader>hp", '<cmd>lua require"gitsigns".preview_hunk()<CR>',    opt)
+vim.keymap.set("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line()<CR>',      opt)
 
 ----------------------------------
 --  BURN ARROWS and PGUP/PGDWN  --

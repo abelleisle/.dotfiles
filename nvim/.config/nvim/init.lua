@@ -17,3 +17,5 @@ end
 
 -- Call this after local config sets colors
 require "highlights"
+
+require "plugins.lspconfig".config()

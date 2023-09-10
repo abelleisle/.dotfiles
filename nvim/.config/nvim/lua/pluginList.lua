@@ -2,47 +2,23 @@
 -- local packloc, packloc_count = vim.opt.packpath._value:gsub("/site", "/site_arm")
 -- print(packloc)
 
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+----------------------
+--  LAZY BOOTSTRAP  --
+----------------------
 
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
----------------------
---  Packer Config  --
----------------------
-
-if not packer_bootstrap then
-    require("packer").init {
-        snapshot = 'dotfiles',
-        snapshot_path = vim.fn.stdpath('config')..'/packer.nvim/',
-        --compile_path = vim.fn.stdpath('cache')..'/plugin/packer.nvim',
-        display = {
-            open_fn = function()
-                return require("packer.util").float {border = "single"}
-            end
-        },
-        git = {
-            clone_timeout = 600, -- Timeout, in seconds, for git clones
-
-            subcommands = {
-                -- Use this one normally
-                update = 'pull --ff-only --progress --rebase=true --allow-unrelated-histories',
-                -- Use this one if plugin fails to fast foward
-                --update = 'pull --rebase=true',
-            }
-
-        }
-    }
-end
 
 ---------------------
 --  Plugin Config  --
@@ -50,94 +26,94 @@ end
 -- BufEnter is kinda not lazy
 local lazy_events = {"BufRead", "BufWinEnter", "BufNewFile"}
 
-return require('packer').startup(function(use)
-    use "wbthomason/packer.nvim"
-
+return require('lazy').setup({
     ------------------
     --  NAVIGATION  --
     ------------------
 
-    use { -- Ctrl-<hjkl> navigation with TMUX
+    { -- Ctrl-<hjkl> navigation with TMUX
         "numToStr/Navigator.nvim",
         config = function()
             require("Navigator").setup()
         end
-    }
+    },
 
-    use { -- Statusline
+    { -- Statusline
         "NTBBloodbath/galaxyline.nvim",
-        requires = {"kyazdani42/nvim-web-devicons"},
+        dependencies = {"kyazdani42/nvim-web-devicons"},
         -- config = function()
             -- require("plugins.statusline").config()
         -- end
-    }
+    },
 
-    use { -- Keybind Help
+    { -- Keybind Help
         "folke/which-key.nvim",
         config = function()
             require("which-key").setup{}
         end
-    }
+    },
 
-    use { -- File manager/browser
+    { -- File manager/browser
         "kyazdani42/nvim-tree.lua",
-        --cmd = "NvimTreeToggle",
+        cmd = "NvimTreeToggle",
         config = function()
             require("plugins.nvimtree").config()
         end
-    }
+    },
 
-    use { -- Fuzzy search
+    { -- Fuzzy search
         "nvim-telescope/telescope.nvim",
-        requires = {
+        dependencies = {
             {"nvim-lua/popup.nvim"},
             {"nvim-lua/plenary.nvim"},
-            {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+            {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
             {"nvim-telescope/telescope-media-files.nvim"}
         },
         config = function()
             require("plugins.telescope").config()
         end
-    }
+    },
 
     --------------
     --  COLORS  --
     --------------
 
-    use { -- Gruvbox theme
+    { -- Gruvbox theme
         "ellisonleao/gruvbox.nvim",
         commit = 'fc66cfbadaf926bc7c2a5e0616d7b8e64f8bd00c',
-        requires = {"rktjmp/lush.nvim"},
-    }
+        dependencies = {"rktjmp/lush.nvim"},
+    },
 
-    use { -- Catppuccin
+    { -- Catppuccin
         "catppuccin/nvim",
-        as = "catppuccin"
-    }
+        name = "catppuccin"
+    },
 
-    use { -- OneDark
+    { -- OneDark
         "navarasu/onedark.nvim",
-        as = "onedark"
-    }
+        name = "onedark"
+    },
 
-    use { -- Wal theme
+    { -- Wal theme
         "dylanaraps/wal.vim"
-    }
+    },
 
-    use { -- Highlight hex colors
+    { -- Highlight hex colors
         "norcalli/nvim-colorizer.lua",
         event = lazy_events,
         config = function()
             require("colorizer").setup()
             vim.cmd("ColorizerReloadAllBuffers")
         end
-    }
+    },
 
-    use { -- Highlight todo comments
+    { -- Highlight todo comments
         "folke/todo-comments.nvim",
         branch = "neovim-pre-0.8.0",
-        requires = "nvim-lua/plenary.nvim",
-        after = "telescope.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "telescope.nvim"
+        },
         config = function()
             require("todo-comments").setup {
                 signs = false,
@@ -149,38 +125,41 @@ return require('packer').startup(function(use)
                 },
             }
         end
-    }
+    },
     -----------------------
     --  LANGUAGE SERVER  --
     -----------------------
 
-    use { -- Treesitter front end
+    { -- Treesitter front end
         "nvim-treesitter/nvim-treesitter",
-        run = ':TSUpdate',
+        build = ':TSUpdate',
         event = lazy_events,
         config = function()
             require("plugins.treesitter").config()
         end
-    }
+    },
 
-    use { -- Neovim Language Server
+    { -- Neovim Language Server
         "neovim/nvim-lspconfig",
-        event = lazy_events,
+        -- event = lazy_events,
         config = function()
             require("plugins.lspconfig").config()
         end,
-        requires = "williamboman/nvim-lsp-installer"
-    }
+        dependencies = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim"
+        }
+    },
 
-    use { -- Images inside neovim LSP completion menu
+    { -- Images inside neovim LSP completion menu
         "onsails/lspkind-nvim",
         event = lazy_events,
         config = function()
             require("lspkind").init(require("plugins.lspkind_icons"))
         end
-    }
+    },
 
-    use {
+    {
         "ray-x/lsp_signature.nvim",
         event = lazy_events,
         config = function()
@@ -192,63 +171,63 @@ return require('packer').startup(function(use)
                 hint_enable = false
             })
         end
-    }
+    },
 
     ---------------------------
     --  SNIPPETS/COMPLETION  --
     ---------------------------
 
-    use { -- Snippet sources
+    { -- Snippet sources
         "honza/vim-snippets",
         "rafamadriz/friendly-snippets",
-    }
+    },
 
-    use { -- Snippet engine
+    { -- Snippet engine
         "L3MON4D3/LuaSnip",
         config = function()
             require("plugins.cmp").luasnip()
         end
-    }
+    },
 
-    use { -- Completion engine
+    { -- Completion engine
         "hrsh7th/nvim-cmp",
-        after = "LuaSnip",
+        dependencies = "LuaSnip",
         module = "cmp",
         config = function()
             require("plugins.cmp").config()
         end
-    }
+    },
 
-    use { -- Completion engine plugins
+    { -- Completion engine plugins
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
-        after = "nvim-cmp"
-    }
+        dependencies = "nvim-cmp"
+    },
 
     ---------------
     --  VCS/Git  --
     ---------------
 
-    use { -- Git modification signs
+    { -- Git modification signs
         "lewis6991/gitsigns.nvim",
         event = lazy_events,
         config = function()
             require("plugins.gitsigns").config()
         end
-    }
+    },
 
-    use { -- Git commands within Neovim
+    { -- Git commands within Neovim
         "tpope/vim-fugitive",
         "tpope/vim-rhubarb"
-    }
+    },
 
-    use { -- Github PRs in Neovim
+    { -- Github PRs in Neovim
         'pwntester/octo.nvim',
-        requires = {
+        dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope.nvim',
             'kyazdani42/nvim-web-devicons',
@@ -256,25 +235,25 @@ return require('packer').startup(function(use)
         config = function ()
             require("plugins.octo").config()
         end
-    }
+    },
 
     ------------------
     --  FORMATTING  --
     ------------------
 
-    use { -- Automatically format files
+    { -- Automatically format files
         "sbdchd/neoformat", cmd = "Neoformat",
         event = lazy_events,
-    }
+    },
 
-    use { -- Automatically close HTML/XML tags
+    { -- Automatically close HTML/XML tags
         "windwp/nvim-ts-autotag",
-        after = "nvim-treesitter",
-    }
+        dependencies = "nvim-treesitter",
+    },
 
-    use { -- Easy navigation between pairs
+    { -- Easy navigation between pairs
         "andymass/vim-matchup",
-        after = "nvim-treesitter",
+        dependencies = "nvim-treesitter",
         config = function()
             require('nvim-treesitter.configs').setup {
                 matchup = {
@@ -285,9 +264,9 @@ return require('packer').startup(function(use)
             vim.g.matchup_matchparen_deferred = 0
             vim.g.matchup_matchparen_offscreen = {}--{ method = 'popup' }
         end
-    }
+    },
 
-    use { -- Easily toggle comments
+    { -- Easily toggle comments
         "numToStr/Comment.nvim",
         config = function()
             require("Comment").setup()
@@ -295,9 +274,9 @@ return require('packer').startup(function(use)
             local ft = require("Comment.ft")
             ft.set("vhdl", {"--%s", "/*%s*/"})
         end
-    }
+    },
 
-    use { -- Toggle True/False, Yes/No, etc..
+    { -- Toggle True/False, Yes/No, etc..
         "lukelbd/vim-toggle",
         config = function()
             -- vim.g.toggle_map            = '<Leader>b'
@@ -305,26 +284,26 @@ return require('packer').startup(function(use)
             vim.g.toggle_words_on       = true
             vim.g.toggle_consecutive_on = true
         end
-    }
+    },
 
-    use {
+    {
         "tpope/vim-sleuth",
         config = function()
         end
-    }
+    },
 
     -----------------
     --  UTILITIES  --
     -----------------
 
-    use { -- Benchmark Neovim startup
+    { -- Benchmark Neovim startup
         "tweekmonster/startuptime.vim",
         cmd = "StartupTime"
-    }
+    },
 
-    use {
+    {
         "anuvyklack/windows.nvim",
-        requires = {
+        dependencies = {
             "anuvyklack/middleclass",
             "anuvyklack/animation.nvim"
         },
@@ -352,9 +331,9 @@ return require('packer').startup(function(use)
                 }
             })
         end
-    }
+    },
 
-    -- use { -- Auto-save
+    -- { -- Auto-save
     --     "Pocco81/auto-save.nvim",
     --     event = lazy_events,
     --     config = function()
@@ -363,21 +342,21 @@ return require('packer').startup(function(use)
     --     cond = function() -- Only enable if auto save is enabled
     --         return false
     --     end
-    -- }
+    -- },
 
-    use { -- Show current function/class context
+    { -- Show current function/class context
         "nvim-treesitter/nvim-treesitter-context",
-        after = "nvim-treesitter",
+        dependencies = "nvim-treesitter",
         config = function()
             require'treesitter-context'.setup{
                 enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
             }
         end
-    }
+    },
 
-    use { -- Add indent lines
+    { -- Add indent lines
         "lukas-reineke/indent-blankline.nvim",
-        after = "nvim-treesitter",
+        dependencies = "nvim-treesitter",
         config = function()
             require("indent_blankline").setup({
                 char = "▏",
@@ -398,36 +377,28 @@ return require('packer').startup(function(use)
 
             vim.cmd [[highlight IndentBlanklineContextChar guifg=gray]]
         end
-    }
+    },
 
-    use {
+    {
         "echasnovski/mini.nvim",
         branch = 'main',
         config = function()
             require("plugins.mini").config()
         end
-    }
+    },
 
     --------------------
     --  LANG HELPERS  --
     --------------------
 
-    use { -- Automatically compile (la)tex
+    { -- Automatically compile (la)tex
         "lervag/vimtex",
         ft = {'tex'},
-    }
+    },
 
-    use { -- Preview markdown
+    { -- Preview markdown
         "iamcco/markdown-preview.nvim",
-        run = function() vim.fn['mkdp#util#install']() end,
+        build = function() vim.fn['mkdp#util#install']() end,
         ft = {'markdown'},
     }
-
-    --------------
-    --  PACKER  --
-    --------------
-
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-end)
+})

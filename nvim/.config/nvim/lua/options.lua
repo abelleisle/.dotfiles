@@ -186,6 +186,12 @@ end
 vim.api.nvim_create_user_command("FixTabs2", function() retab_buf(2) end, {})
 vim.api.nvim_create_user_command("FixTabs3", function() retab_buf(3) end, {})
 
+vim.api.nvim_create_user_command("DebugVar", function()
+    local buf = vim.fn.bufnr()
+    local bvr = vim.fn.getbufvar(buf, "&");
+    require("utils").print_variable(bvr)
+end, {})
+
 ------------------------
 --  HELPER FUNCTIONS  --
 ------------------------
