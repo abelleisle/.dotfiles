@@ -357,6 +357,7 @@ return require('lazy').setup({
     { -- Add indent lines
         "lukas-reineke/indent-blankline.nvim",
         dependencies = "nvim-treesitter",
+        event = lazy_events,
         config = function()
             require("indent_blankline").setup({
                 char = "▏",
@@ -375,6 +376,8 @@ return require('lazy').setup({
                 show_current_context_start = false,
             })
 
+            vim.opt.list = true
+            vim.opt.listchars:append "eol:"
             vim.cmd [[highlight IndentBlanklineContextChar guifg=gray]]
         end
     },
@@ -382,6 +385,7 @@ return require('lazy').setup({
     {
         "echasnovski/mini.nvim",
         branch = 'main',
+        event = lazy_events,
         config = function()
             require("plugins.mini").config()
         end
