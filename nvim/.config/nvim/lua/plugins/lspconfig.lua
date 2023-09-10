@@ -1,313 +1,330 @@
 local M = {}
 
-M.config = function()
-    function on_attach(client, bufnr)
-        --vim.lsp.set_log_level("debug")
-
-        local function buf_set_keymap(...)
-            vim.api.nvim_buf_set_keymap(bufnr, ...)
-        end
-        local function buf_set_option(...)
-            vim.api.nvim_buf_set_option(bufnr, ...)
-        end
-
-        -- local cfg = {
-        --     bind = true,
-        --     floating_window = true,
-        --     hint_enable = true,
-        --     fix_pos = true
-        -- }
-
-        local cfg = {
-            bind = true,
-            handler_opts = {
-                border = "rounded"
-            },
-            hint_enable = false
-        }
-
-        require("lsp_signature").on_attach(cfg, bufnr)
-        --require'completion'.on_attach()
-
-        buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-        -- Mappings.
-        local opts = {noremap = true, silent = true}
-
-        buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-        buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-        buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-        buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-        buf_set_keymap("n", "<space>k", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-        buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-        buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-        buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-        buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-        buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-        buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-        buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-        buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-        buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-        buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-
-        -- Set some keybinds conditional on server capabilities
-        if client.server_capabilities.document_formatting then
-            buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-        elseif client.server_capabilities.document_range_formatting then
-            buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-        end
-    end -- fn on_attach()
-
-    -- lspInstall + lspconfig stuff
-
-    local function setup_servers()
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-        capabilities.textDocument.completion.completionItem.preselectSupport = true
-        capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-        capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-        capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-        capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-        capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-        capabilities.textDocument.completion.completionItem.resolveSupport = {
-            properties = {
-                'documentation',
-                'detail',
-                'additionalTextEdits',
-            }
-        }
-        capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-        local servers = {
-            "clangd", "lua_ls", "ltex", "jedi_language_server", "rust_analyzer",
-            "cmake", "rnix"
-        }
-
-        require("mason").setup()
-        require("mason-lspconfig").setup {
-            -- ensure_installed = servers
-        }
-
-        local system_servers = {
-            "zls"
-        }
-
-        local util = require("lspconfig/util")
-
-        local on_ready_func = function(server, lang)
-            local client_opts = {}
-            local opts = {
-                autostart = true,
-                on_attach = on_attach,
-                capabilities = capabilities,
-                root_dir = vim.loop.cwd,
-                launch = true,
-                flags = {
-                    debounce_text_changes = 150
-                },
-                handlers = {
-                    ["textDocument/publishDiagnostics"] = vim.lsp.with(
-                        vim.lsp.diagnostic.on_publish_diagnostics, {
-                            virtual_text = true,
-                            underline = true,
-                            signs = true,
-                            update_in_insert = true,
+local get_capabilities = function()
+    local default_capabilities = vim.lsp.protocol.make_client_capabilities()
+    local modified_capabilities = {
+        textDocument = {
+            completion = {
+                completionItem = {
+                    documentationFormat = { "markdown", "plaintext" },
+                    snippetSupport = true,
+                    preselectSupport = true,
+                    insertReplaceSupport = true,
+                    labelDetailsSupport = true,
+                    deprecatedSupport = true,
+                    commitCharactersSupport = true,
+                    tagSupport = { valueSet = { 1 } },
+                    resolveSupport = {
+                        properties = {
+                            'documentation',
+                            'detail',
+                            'additionalTextEdits',
                         }
-                    )
+                    }
                 }
             }
+        }
+    }
+    local merged_capabilities = vim.tbl_deep_extend("force", default_capabilities, modified_capabilities)
 
-            if lang == "clangd" then
-                client_opts = vim.tbl_deep_extend("force", opts, {
-                    single_file_support = true,
-                    init_options = {
-                        client = {
-                            snippetSupport = true
-                        },
-                        compilationDatabaseDirectory = "build";
-                        index = {
-                            threads = 0;
-                        };
-                        cache = {
-                            directory = "/tmp/clangd/";
-                        };
-                        highlight = {
-                            lsRangers = true;
-                        };
-                        clang = {
-                            excludeArgs = {
-                                "-mlongcalls",
-                                "-Wno-frame-address",
-                                "-fstrict-volatile-bitfields",
-                                "-fno-tree-switch-conversion",
-                                "-mtext-section-literals",
-                            },
-                        }
+    return require("cmp_nvim_lsp").default_capabilities(merged_capabilities)
+end -- fn get_capabilities
+
+
+local get_options = function()
+    local opts = {
+        autostart = true,
+        on_attach = M.on_attach,
+        capabilities = get_capabilities(),
+        root_dir = vim.loop.cwd,
+        launch = true,
+        flags = {
+            debounce_text_changes = 150
+        },
+        handlers = {
+            ["textDocument/publishDiagnostics"] = vim.lsp.with(
+                vim.lsp.diagnostic.on_publish_diagnostics, {
+                    virtual_text = true,
+                    underline = true,
+                    signs = true,
+                    update_in_insert = true,
+                }
+            )
+        }
+    }
+    return opts
+end -- fn get_options
+
+M.servers = {
+    clang = "clangd",
+    ccls = "ccls",
+    lua = "lua_ls",
+    latex = "ltex",
+    python = "jedi_language_server",
+    rust = "rust_analyzer",
+    vhdl = "rust_hdl",
+    cmake = "cmake",
+    nix = "rnix",
+    zig = "zls"
+}
+
+M.on_attach = function(client, bufnr)
+    --vim.lsp.set_log_level("debug")
+
+    local function buf_set_keymap(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+    end
+    local function buf_set_option(...)
+        vim.api.nvim_buf_set_option(bufnr, ...)
+    end
+
+    -- local cfg = {
+    --     bind = true,
+    --     floating_window = true,
+    --     hint_enable = true,
+    --     fix_pos = true
+    -- }
+
+    local cfg = {
+        bind = true,
+        handler_opts = {
+            border = "rounded"
+        },
+        hint_enable = false
+    }
+
+    require("lsp_signature").on_attach(cfg, bufnr)
+    --require'completion'.on_attach()
+
+    buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+    -- Mappings.
+    local opts = function(desc)
+        return {
+            noremap = true,
+            silent = true,
+            desc = "LSP: " .. desc
+        }
+    end
+
+    buf_set_keymap("n", "gD",        "<Cmd>lua vim.lsp.buf.declaration()<CR>",                                opts("goto declaration"))
+    buf_set_keymap("n", "gd",        "<Cmd>lua vim.lsp.buf.definition()<CR>",                                 opts("goto definition"))
+    buf_set_keymap("n", "gi",        "<cmd>lua vim.lsp.buf.implementation()<CR>",                             opts("goto implementation"))
+    buf_set_keymap("n", "<space>D",  "<cmd>lua vim.lsp.buf.type_definition()<CR>",                            opts("goto type definition"))
+    buf_set_keymap("n", "[d",        "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",                           opts("goto previous use"))
+    buf_set_keymap("n", "]d",        "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",                           opts("goto next use"))
+    buf_set_keymap("n", "K",         "<Cmd>lua vim.lsp.buf.hover()<CR>",                                      opts("start hover ???"))
+    buf_set_keymap("n", "<space>k",  "<cmd>lua vim.lsp.buf.signature_help()<CR>",                             opts("signature"))
+    buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",                       opts("add workspace folder"))
+    buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",                    opts("remove workspace folder"))
+    buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts("list workspace folders"))
+    buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>",                                     opts("rename LSP object"))
+    buf_set_keymap("n", "gr",        "<cmd>lua vim.lsp.buf.references()<CR>",                                 opts("see all object references"))
+    buf_set_keymap("n", "<space>e",  "<cmd>lua vim.diagnostic.open_float()<CR>",                              opts("open diagnostic float (window)"))
+    buf_set_keymap("n", "<space>q",  "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>",                         opts("set the location list ???"))
+
+    -- Set some keybinds conditional on server capabilities
+    if client.server_capabilities.document_formatting then
+        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>",       opts("format buffer"))
+    elseif client.server_capabilities.document_range_formatting then
+        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts("format range"))
+    end
+end -- fn M.on_attach()
+
+M.config = function()
+    local mason = require("mason")
+    local mason_lspconfig = require("mason-lspconfig")
+    local lspconfig = require("lspconfig")
+    local lspconfig_util = require("lspconfig/util")
+    local opts = get_options()
+
+    mason.setup()
+    mason_lspconfig.setup {
+        ensure_installed = {
+            M.servers.clang,
+            M.servers.lua,
+            M.servers.latex,
+            M.servers.python,
+            M.servers.rust,
+            M.servers.cmake,
+            M.servers.nix,
+        }
+    }
+
+    mason_lspconfig.setup_handlers {
+        function(server_name)
+            lspconfig[server_name].setup(opts)
+        end,
+        [M.servers.clang] = function()
+            local clang_opts = vim.tbl_deep_extend("force", opts, {
+                single_file_support = true,
+                init_options = {
+                    client = {
+                        snippetSupport = true
                     },
-                    cmd = { "clangd" },
-                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-                    --root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')
-                    --root_dir = vim.loop.cwd,
+                    compilationDatabaseDirectory = "build";
+                    index = {
+                        threads = 0;
+                    };
+                    cache = {
+                        directory = "/tmp/clangd/";
+                    };
+                    highlight = {
+                        lsRangers = true;
+                    };
+                    clang = {
+                        excludeArgs = {
+                            "-mlongcalls",
+                            "-Wno-frame-address",
+                            "-fstrict-volatile-bitfields",
+                            "-fno-tree-switch-conversion",
+                            "-mtext-section-literals",
+                        },
+                    }
+                },
+                cmd = { "clangd" },
+                filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                --root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')
+                --root_dir = vim.loop.cwd,
+                root_dir = function(fname)
+                    return lspconfig_util.root_pattern(--'build/compile_commands.json',
+                                            'compile_commands.json',
+                                            'compile_flags.txt',
+                                            '.git')(fname) or lspconfig_util.path.dirname(fname)
+                end
+                -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+            })
+            lspconfig[M.servers.clang].setup(clang_opts)
+        end,
+        [M.servers.lua] = function()
+            local lua_opts = vim.tbl_deep_extend("force", opts, {
+                settings = {
+                    Lua = {
+                        runtime = {
+                            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                            version = 'LuaJIT',
+                        },
+                        diagnostics = {
+                            globals = {"vim"}
+                        },
+                        workspace = {
+                            library = {
+                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                                --library = vim.api.nvim_get_runtime_file("", true),
+                            },
+                            maxPreload = 100000,
+                            preloadFileSize = 10000
+                        },
+                        telemetry = {
+                            enable = false
+                        }
+                    }
+                }
+            })
+            lspconfig[M.servers.lua].setup(lua_opts)
+        end,
+        [M.servers.latex] = function()
+            local latex_opts = vim.tbl_deep_extend("force", opts, {
+                settings = {
+                    ltex = {
+                        dictionary = {
+                            ['en-US'] = require("spell").userdict()
+                        }
+                    }
+                }
+            })
+            lspconfig[M.servers.latex].setup(latex_opts)
+        end,
+        [M.servers.nix] = function()
+            local nix_opts = vim.tbl_deep_extend("force", opts, {
+                default_config = {
+                    settings = {};
+                };
+            })
+            lspconfig[M.servers.nix].setup(nix_opts)
+        end,
+        [M.servers.zig] = function()
+            local zig_opts = vim.tbl_deep_extend("force", opts, {
+                cmd = {"zls"},
+                filetypes = {"zig", "zir"},
+                root_dir = lspconfig_util.root_pattern("zls.json", ".git"),
+                single_file_support = false
+            })
+            lspconfig[M.servers.zig].setup(zig_opts)
+        end,
+        --[[
+        [M.servers.vhdl] = function()
+            local vhdl_opts = vim.tbl_deep_extend("force", opts, {
+                default_config = {
+                    cmd = {"vhdl_ls"};
+                    filetypes = { "vhdl" };
                     root_dir = function(fname)
-                        return util.root_pattern(--'build/compile_commands.json',
-                                                'compile_commands.json',
-                                                'compile_flags.txt',
-                                                '.git')(fname) or util.path.dirname(fname)
-                    end
-                    -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
-                })
-            elseif lang == "ccls" then
-                client_opts = vim.tbl_deep_extend("force", opts, {
-                    init_options = {
-                        client = {
-                            snippetSupport = true
-                        },
-                        compilationDatabaseDirectory = "build";
-                        index = {
-                            threads = 0;
-                        };
-                        cache = {
-                            directory = "/tmp/ccls";
-                        };
-                        highlight = {
-                            lsRangers = true;
-                        };
-                        clang = {
-                            excludeArgs = {
-                                "-mlongcalls",
-                                "-Wno-frame-address",
-                                "-fstrict-volatile-bitfields",
-                                "-fno-tree-switch-conversion",
-                                "-mtext-section-literals",
-                            },
-                        }
+                        return lspconfig_util.root_pattern('vhdl_ls.toml')(fname)
+                    end;
+                    settings = {};
+                };
+            })
+            lspconfig[M.servers.vhdl].setup(vhdl_opts)
+        end,
+        --]]
+        --[[
+        [M.servers.ccls] = function()
+            local ccls_opts = vim.tbl_deep_extend("force", opts, {
+                init_options = {
+                    client = {
+                        snippetSupport = true
                     },
-                    cmd = { "ccls" },
-                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-                    root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git'),
-                    --root_dir = vim.loop.cwd,
-                    -- root_dir = function(fname)
-                    --     return util.root_pattern(--'build/compile_commands.json',
-                    --                             'compile_commands.json',
-                    --                             'compile_flags.txt',
-                    --                             '.git',
-                    --                             '.ccls')(fname) or util.path.dirname(fname)
-                    -- end
-                    -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
-                    single_file_support = true,
-                })
-            elseif lang == "sumneko_lua" then
-                client_opts = vim.tbl_deep_extend("force", opts, {
-                    settings = {
-                        Lua = {
-                            runtime = {
-                                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                                version = 'LuaJIT',
-                            },
-                            diagnostics = {
-                                globals = {"vim"}
-                            },
-                            workspace = {
-                                library = {
-                                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                                    --library = vim.api.nvim_get_runtime_file("", true),
-                                },
-                                maxPreload = 100000,
-                                preloadFileSize = 10000
-                            },
-                            telemetry = {
-                                enable = false
-                            }
-                        }
-                    }
-                })
-            elseif lang == "ltex" then
-                client_opts = vim.tbl_deep_extend("force", opts, {
-                    settings = {
-                        ltex = {
-                            dictionary = {
-                                ['en-US'] = require("spell").userdict()
-                            }
-                        }
-                    }
-                })
-            elseif lang == "rust_hdl" then
-                client_opts = vim.tbl_deep_extend("force", opts, {
-                    default_config = {
-                        cmd = {"vhdl_ls"};
-                        filetypes = { "vhdl" };
-                        root_dir = function(fname)
-                            return util.root_pattern('vhdl_ls.toml')(fname)
-                        end;
-                        settings = {};
+                    compilationDatabaseDirectory = "build";
+                    index = {
+                        threads = 0;
                     };
-                })
-            elseif lang == "rnix" then
-                client_opts = vim.tbl_deep_extend("force", opts, {
-                    default_config = {
-                        settings = {};
+                    cache = {
+                        directory = "/tmp/ccls";
                     };
-                })
-            elseif lang == "zls" then
-                client_opts = vim.tbl_deep_extend("force", opts, {
-                    cmd = {"zls"},
-                    filetypes = {"zig", "zir"},
-                    root_dir = util.root_pattern("zls.json", ".git"),
-                    single_file_support = false
-                })
-            else
-                client_opts = opts
-            end
+                    highlight = {
+                        lsRangers = true;
+                    };
+                    clang = {
+                        excludeArgs = {
+                            "-mlongcalls",
+                            "-Wno-frame-address",
+                            "-fstrict-volatile-bitfields",
+                            "-fno-tree-switch-conversion",
+                            "-mtext-section-literals",
+                        },
+                    }
+                },
+                cmd = { "ccls" },
+                filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                root_dir = lspconfig_util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git'),
+                --root_dir = vim.loop.cwd,
+                -- root_dir = function(fname)
+                --     return util.root_pattern(--'build/compile_commands.json',
+                --                             'compile_commands.json',
+                --                             'compile_flags.txt',
+                --                             '.git',
+                --                             '.ccls')(fname) or util.path.dirname(fname)
+                -- end
+                -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
+                single_file_support = true,
+            })
+            lspconfig[M.servers.ccls].setup(ccls_opts)
+        end,
+        --]]
+    } -- mason_lspconfig.setup_handlers
 
-            server:setup(client_opts)
+    -- adds a check to see if any of the active clients have the capability
+    -- textDocument/documentHighlight. without the check it was causing constant
+    -- errors when servers didn't have that capability
+    for _,client in ipairs(vim.lsp.get_active_clients()) do
+        if client.server_capabilities.document_highlight then
+            vim.cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+            vim.cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+            vim.cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
+            break -- only add the autocmds once
         end
-
-        -- Configure "installable" servers
-        for _, lang in pairs(servers) do
-            local requested_server = require('lspconfig')[lang]
-            on_ready_func(requested_server, lang)
-        end
-        -- for _, lang in pairs(servers) do
-        --     local server_available, requested_server = require('nvim-lsp-installer.servers').get_server(lang)
-        --     if server_available then
-        --         requested_server:on_ready(function ()
-        --             on_ready_func(requested_server, lang)
-        --         end)
-        --         if not requested_server:is_installed() then
-        --             print("Installing " .. lang)
-        --             requested_server:install()
-        --         end
-        --     else
-        --         print("Installing " .. lang)
-        --         print("This shouldn't be running...")
-        --         -- lsp_installer.install(lang)
-        --     end
-        -- end
-
-        -- Configure system-wide servers.
-        --  These are installed via the system package manager, or exist in
-        --  per project paths, e.g. nix, python venv
-        for _, lang in pairs(system_servers) do
-            local requested_server = require('lspconfig')[lang]
-            on_ready_func(requested_server, lang)
-        end
-
-        -- adds a check to see if any of the active clients have the capability
-        -- textDocument/documentHighlight. without the check it was causing constant
-        -- errors when servers didn't have that capability
-        for _,client in ipairs(vim.lsp.get_active_clients()) do
-            if client.server_capabilities.document_highlight then
-                vim.cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-                vim.cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
-                vim.cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
-                break -- only add the autocmds once
-            end
-        end
-    end -- fn setup_servers()
-
-    setup_servers()
+    end
 
     -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
     --require "lspinstall".post_install_hook = function()
