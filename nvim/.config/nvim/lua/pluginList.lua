@@ -141,7 +141,7 @@ return require('lazy').setup({
 
     { -- Neovim Language Server
         "neovim/nvim-lspconfig",
-        -- event = lazy_events,
+        event = lazy_events,
         config = function()
             require("plugins.lspconfig").config()
         end,
@@ -385,7 +385,7 @@ return require('lazy').setup({
     {
         "echasnovski/mini.nvim",
         branch = 'main',
-        event = lazy_events,
+        -- event = lazy_events,
         config = function()
             require("plugins.mini").config()
         end
@@ -404,5 +404,10 @@ return require('lazy').setup({
         "iamcco/markdown-preview.nvim",
         build = function() vim.fn['mkdp#util#install']() end,
         ft = {'markdown'},
+    }
+},
+{
+    defaults = {
+        lazy = true,
     }
 })
