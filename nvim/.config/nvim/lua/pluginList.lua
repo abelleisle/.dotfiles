@@ -26,6 +26,14 @@ vim.opt.rtp:prepend(lazypath)
 -- BufEnter is kinda not lazy
 local lazy_events = {"BufRead", "BufWinEnter", "BufNewFile"}
 
+local Events = {
+    OpenFile = {"BufReadPost", "BufNewFile"},
+    InsertMode = {"InsertEnter"},
+    EnterWindow = {"BufEnter"},
+    CursorMove = {"CursorMoved"},
+    Modified = {"TextChanged", "TextChangedI"}
+}
+
 return require('lazy').setup({
     ------------------
     --  NAVIGATION  --
@@ -66,12 +74,17 @@ return require('lazy').setup({
         dependencies = {
             {"nvim-lua/popup.nvim"},
             {"nvim-lua/plenary.nvim"},
-            {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
-            {"nvim-telescope/telescope-media-files.nvim"}
         },
+        event = Events.EnterWindow,
         config = function()
             require("plugins.telescope").config()
         end
+    },
+
+    { -- Telescope plugins
+        {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
+        {"nvim-telescope/telescope-media-files.nvim"},
+        lazy = true,
     },
 
     --------------
@@ -82,25 +95,29 @@ return require('lazy').setup({
         "ellisonleao/gruvbox.nvim",
         commit = 'fc66cfbadaf926bc7c2a5e0616d7b8e64f8bd00c',
         dependencies = {"rktjmp/lush.nvim"},
+        lazy = true,
     },
 
     { -- Catppuccin
         "catppuccin/nvim",
-        name = "catppuccin"
+        name = "catppuccin",
+        lazy = true,
     },
 
     { -- OneDark
         "navarasu/onedark.nvim",
-        name = "onedark"
+        name = "onedark",
+        lazy = true,
     },
 
     { -- Wal theme
-        "dylanaraps/wal.vim"
+        "dylanaraps/wal.vim",
+        lazy = true,
     },
 
     { -- Highlight hex colors
         "norcalli/nvim-colorizer.lua",
-        event = lazy_events,
+        event = Events.OpenFile,
         config = function()
             require("colorizer").setup()
             vim.cmd("ColorizerReloadAllBuffers")
@@ -114,6 +131,7 @@ return require('lazy').setup({
             "nvim-lua/plenary.nvim",
             "telescope.nvim"
         },
+        event = Events.OpenFile,
         config = function()
             require("todo-comments").setup {
                 signs = false,
@@ -133,7 +151,7 @@ return require('lazy').setup({
     { -- Treesitter front end
         "nvim-treesitter/nvim-treesitter",
         build = ':TSUpdate',
-        event = lazy_events,
+        event = Events.OpenFile,
         config = function()
             require("plugins.treesitter").config()
         end
@@ -141,7 +159,7 @@ return require('lazy').setup({
 
     { -- Neovim Language Server
         "neovim/nvim-lspconfig",
-        event = lazy_events,
+        event = Events.OpenFile,
         config = function()
             require("plugins.lspconfig").config()
         end,
@@ -153,7 +171,7 @@ return require('lazy').setup({
 
     { -- Images inside neovim LSP completion menu
         "onsails/lspkind-nvim",
-        event = lazy_events,
+        event = Events.InsertMode,
         config = function()
             require("lspkind").init(require("plugins.lspkind_icons"))
         end
@@ -161,7 +179,7 @@ return require('lazy').setup({
 
     {
         "ray-x/lsp_signature.nvim",
-        event = lazy_events,
+        event = Events.OpenFile,
         config = function()
             require("lsp_signature").setup({
                 bind = true,
@@ -180,10 +198,12 @@ return require('lazy').setup({
     { -- Snippet sources
         "honza/vim-snippets",
         "rafamadriz/friendly-snippets",
+        event = Events.InsertMode,
     },
 
     { -- Snippet engine
         "L3MON4D3/LuaSnip",
+        event = Events.InsertMode,
         config = function()
             require("plugins.cmp").luasnip()
         end
@@ -193,6 +213,7 @@ return require('lazy').setup({
         "hrsh7th/nvim-cmp",
         dependencies = "LuaSnip",
         module = "cmp",
+        event = Events.InsertMode,
         config = function()
             require("plugins.cmp").config()
         end
@@ -205,7 +226,8 @@ return require('lazy').setup({
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
-        dependencies = "nvim-cmp"
+        dependencies = "nvim-cmp",
+        event = Events.InsertMode,
     },
 
     ---------------
@@ -214,7 +236,7 @@ return require('lazy').setup({
 
     { -- Git modification signs
         "lewis6991/gitsigns.nvim",
-        event = lazy_events,
+        event = Events.OpenFile,
         config = function()
             require("plugins.gitsigns").config()
         end
@@ -222,17 +244,20 @@ return require('lazy').setup({
 
     { -- Git commands within Neovim
         "tpope/vim-fugitive",
-        "tpope/vim-rhubarb"
+        "tpope/vim-rhubarb",
+        evend = Events.EnterWindow
     },
 
     { -- Github PRs in Neovim
         'pwntester/octo.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope.nvim',
+            'telescope.nvim',
             'kyazdani42/nvim-web-devicons',
         },
+        cmd = "Octo",
         config = function ()
+            vim.notify("Loading octo")
             require("plugins.octo").config()
         end
     },
@@ -242,18 +267,20 @@ return require('lazy').setup({
     ------------------
 
     { -- Automatically format files
-        "sbdchd/neoformat", cmd = "Neoformat",
-        event = lazy_events,
+        "sbdchd/neoformat",
+        cmd = "Neoformat",
     },
 
     { -- Automatically close HTML/XML tags
         "windwp/nvim-ts-autotag",
         dependencies = "nvim-treesitter",
+        event = Events.InsertMode,
     },
 
     { -- Easy navigation between pairs
         "andymass/vim-matchup",
         dependencies = "nvim-treesitter",
+        event = Events.OpenFile,
         config = function()
             require('nvim-treesitter.configs').setup {
                 matchup = {
@@ -268,6 +295,7 @@ return require('lazy').setup({
 
     { -- Easily toggle comments
         "numToStr/Comment.nvim",
+        event = Events.Modified,
         config = function()
             require("Comment").setup()
 
@@ -278,18 +306,18 @@ return require('lazy').setup({
 
     { -- Toggle True/False, Yes/No, etc..
         "lukelbd/vim-toggle",
+        key = '<Leader>b',
         config = function()
-            -- vim.g.toggle_map            = '<Leader>b'
+            vim.g.toggle_map            = '<Leader>b'
             vim.g.toggle_chars_on       = true
             vim.g.toggle_words_on       = true
             vim.g.toggle_consecutive_on = true
         end
     },
 
-    {
+    { -- Automatically set buffer settings based on text
         "tpope/vim-sleuth",
-        config = function()
-        end
+        event = Events.OpenFile
     },
 
     -----------------
@@ -307,6 +335,7 @@ return require('lazy').setup({
             "anuvyklack/middleclass",
             "anuvyklack/animation.nvim"
         },
+        event = Events.EnterWindow,
         config = function()
             -- vim.o.winwidth = 10
             -- vim.o.winminwidth = 10
@@ -347,6 +376,7 @@ return require('lazy').setup({
     { -- Show current function/class context
         "nvim-treesitter/nvim-treesitter-context",
         dependencies = "nvim-treesitter",
+        event = Events.OpenFile,
         config = function()
             require'treesitter-context'.setup{
                 enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -357,7 +387,7 @@ return require('lazy').setup({
     { -- Add indent lines
         "lukas-reineke/indent-blankline.nvim",
         dependencies = "nvim-treesitter",
-        event = lazy_events,
+        event = Events.OpenFile,
         config = function()
             require("indent_blankline").setup({
                 char = "▏",
@@ -369,7 +399,7 @@ return require('lazy').setup({
 
                 show_first_indent_level = true,
                 show_trailing_blankline_indent = false,
-                show_end_of_line = true,
+                show_end_of_line = false,
 
                 space_char_blankline = " ",
                 show_current_context = true,
@@ -385,7 +415,7 @@ return require('lazy').setup({
     {
         "echasnovski/mini.nvim",
         branch = 'main',
-        -- event = lazy_events,
+        event = Events.OpenFile,
         config = function()
             require("plugins.mini").config()
         end
@@ -407,7 +437,7 @@ return require('lazy').setup({
     }
 },
 {
-    defaults = {
-        lazy = true,
-    }
+    -- defaults = {
+    --     lazy = false,
+    -- }
 })

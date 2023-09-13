@@ -168,8 +168,8 @@ map("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], Opt("Display: Show all TODOs
 -----------------
 
 local ts = {
-    builtin    = require('telescope.builtin'),
-    extensions = require('telescope').extensions,
+    builtin    = function() return require('telescope.builtin') end,
+    extensions = function() return require('telescope').extensions end,
     grep_fuzzy = function()
         require('telescope.builtin').grep_string({
             prompt_title = "Fuzzy Find",
@@ -185,19 +185,19 @@ local ts = {
 }
 
 --map("n", "<Leader>fw", [[<Cmd> Telescope live_grep<CR>]], opt)
-vim.keymap.set('n', '<Leader>fw', ts.builtin.live_grep,                  Opt("Telescope: Live grep"))
-vim.keymap.set('n', '<Leader>fz', ts.grep_fuzzy,                         Opt("Telescope: Fuzzy finder"))
-vim.keymap.set('n', '<Leader>gt', ts.builtin.git_status,                 Opt("Telescope: Git status"))
-vim.keymap.set('n', '<Leader>cm', ts.builtin.git_commits,                Opt("Telescope: Git commits"))
-vim.keymap.set('n', '<C-p>',      ts.builtin.find_files,                 Opt("Telescope: Fuzzy file finder"))
-vim.keymap.set('i', '<C-p>',      ts.builtin.find_files,                 Opt("Telescope: Fuzzy file finder"))
-vim.keymap.set('n', '<Leader>fp', ts.extensions.media_files.media_files, Opt("Telescope: Show media files"))
-vim.keymap.set('n', '<Leader>fb', ts.builtin.buffers,                    Opt("Telescope: Show active buffers"))
-vim.keymap.set('n', '<Leader>fh', ts.builtin.help_tags,                  Opt("Telescope: interactive help menu"))
-vim.keymap.set('n', '<Leader>fo', ts.builtin.oldfiles,                   Opt("Telescope: Previously edited files"))
-vim.keymap.set('n', '<Leader>fk', ts.builtin.keymaps,                    Opt("Telescope: Show all keybinds"))
-vim.keymap.set('n', '<Leader>f#', ts.builtin.grep_string,                Opt("Telescope: Find word under cursor"))
-vim.keymap.set('n', '<Leader>fs', ts.grep_string,                        Opt("Telescope: Grep string using statusline"))
+vim.keymap.set('n', '<Leader>fw', ts.builtin().live_grep,                  Opt("Telescope: Live grep"))
+vim.keymap.set('n', '<Leader>fz', ts.grep_fuzzy,                           Opt("Telescope: Fuzzy finder"))
+vim.keymap.set('n', '<Leader>gt', ts.builtin().git_status,                 Opt("Telescope: Git status"))
+vim.keymap.set('n', '<Leader>cm', ts.builtin().git_commits,                Opt("Telescope: Git commits"))
+vim.keymap.set('n', '<C-p>',      ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
+vim.keymap.set('i', '<C-p>',      ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
+vim.keymap.set('n', '<Leader>fp', ts.extensions().media_files.media_files, Opt("Telescope: Show media files"))
+vim.keymap.set('n', '<Leader>fb', ts.builtin().buffers,                    Opt("Telescope: Show active buffers"))
+vim.keymap.set('n', '<Leader>fh', ts.builtin().help_tags,                  Opt("Telescope: interactive help menu"))
+vim.keymap.set('n', '<Leader>fo', ts.builtin().oldfiles,                   Opt("Telescope: Previously edited files"))
+vim.keymap.set('n', '<Leader>fk', ts.builtin().keymaps,                    Opt("Telescope: Show all keybinds"))
+vim.keymap.set('n', '<Leader>f#', ts.builtin().grep_string,                Opt("Telescope: Find word under cursor"))
+vim.keymap.set('n', '<Leader>fs', ts.grep_string,                          Opt("Telescope: Grep string using statusline"))
 
 -----------------
 --  GIT SIGNS  --
