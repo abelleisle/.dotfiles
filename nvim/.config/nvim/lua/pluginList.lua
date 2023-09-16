@@ -49,9 +49,7 @@ return require('lazy').setup({
     { -- Statusline
         "NTBBloodbath/galaxyline.nvim",
         dependencies = {"kyazdani42/nvim-web-devicons"},
-        -- config = function()
-            -- require("plugins.statusline").config()
-        -- end
+        -- This is configured in the `highlights.lua` module
     },
 
     { -- Keybind Help
@@ -389,7 +387,7 @@ return require('lazy').setup({
         dependencies = "nvim-treesitter",
         event = Events.OpenFile,
         config = function()
-            require("indent_blankline").setup({
+            local blank_line_opts = {
                 char = "▏",
                 filetype_exclude = {
                     "help", "terminal", "NvimTree",
@@ -404,10 +402,22 @@ return require('lazy').setup({
                 space_char_blankline = " ",
                 show_current_context = true,
                 show_current_context_start = false,
-            })
+            }
+            require("indent_blankline").setup(blank_line_opts)
 
-            vim.opt.list = true
-            vim.opt.listchars:append "eol:"
+            -- Enabled these for endline
+            -- TODO: set these options and `show_end_of_line` by setting an eol char in local
+            -- options. If no char is set, disable eol chars.
+            -- Example:
+            --   vim.g.eolchar = '' -- Or if it's not set
+            --   OR
+            --   vim.g.eolchar = ''
+            if blank_line_opts.show_end_of_line then
+                vim.opt.list = true
+                vim.opt.listchars:append "eol:" -- Option 1
+                -- vim.opt.listchars:append "eol:↴" -- Option 2
+            end
+            -- Indent line colors
             vim.cmd [[highlight IndentBlanklineContextChar guifg=gray]]
         end
     },
