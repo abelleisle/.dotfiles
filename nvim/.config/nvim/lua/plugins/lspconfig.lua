@@ -55,18 +55,42 @@ local get_options = function()
     return opts
 end -- fn get_options
 
+local lsp_entry = function(server_name, auto_install)
+    if auto_install == nil then
+        auto_install = true
+    end
+
+    return {
+        lsp = server_name,
+        auto_install = auto_install,
+    }
+end --fn create_lsp_entry
+
 M.servers = {
-    clang = "clangd",
-    ccls = "ccls",
-    lua = "lua_ls",
-    latex = "ltex",
-    python = "jedi_language_server",
-    rust = "rust_analyzer",
-    vhdl = "rust_hdl",
-    cmake = "cmake",
-    nix = "rnix",
-    zig = "zls"
+    clang  = lsp_entry("clangd"                     ),
+    lua    = lsp_entry("lua_ls"                     ),
+    latex  = lsp_entry("ltex"                       ),
+    python = lsp_entry("jedi_language_server"       ),
+    rust   = lsp_entry("rust_analyzer"              ),
+    cmake  = lsp_entry("cmake"                      ),
+    nix    = lsp_entry("rnix"                       ),
+    ccls   = lsp_entry("ccls"                , false),
+    vhdl   = lsp_entry("rust_hdl"            , false),
+    zig    = lsp_entry("zls"                 , false),
 }
+
+local get_lsp_auto_install = function(auto_install)
+    if auto_install == nil then auto_install = true end
+
+    local t = {}
+    for _,v in pairs(M.servers) do
+        if v.auto_install == auto_install then
+            t[v.lsp] = v.lsp
+        end
+    end
+
+    return t
+end -- fn get_lsp_auto_install
 
 M.on_attach = function(client, bufnr)
     --vim.lsp.set_log_level("debug")
@@ -140,22 +164,15 @@ M.config = function()
 
     mason.setup()
     mason_lspconfig.setup {
-        ensure_installed = {
-            M.servers.clang,
-            M.servers.lua,
-            M.servers.latex,
-            M.servers.python,
-            M.servers.rust,
-            M.servers.cmake,
-            M.servers.nix,
-        }
+        ensure_installed = get_lsp_auto_install(true),
+        automatic_installation = false,
     }
 
     mason_lspconfig.setup_handlers {
         function(server_name)
             lspconfig[server_name].setup(opts)
         end,
-        [M.servers.clang] = function()
+        [M.servers.clang.lsp] = function()
             local clang_opts = vim.tbl_deep_extend("force", opts, {
                 single_file_support = true,
                 init_options = {
@@ -194,9 +211,9 @@ M.config = function()
                 end
                 -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
             })
-            lspconfig[M.servers.clang].setup(clang_opts)
+            lspconfig[M.servers.clang.lsp].setup(clang_opts)
         end,
-        [M.servers.lua] = function()
+        [M.servers.lua.lsp] = function()
             local lua_opts = vim.tbl_deep_extend("force", opts, {
                 settings = {
                     Lua = {
@@ -222,9 +239,9 @@ M.config = function()
                     }
                 }
             })
-            lspconfig[M.servers.lua].setup(lua_opts)
+            lspconfig[M.servers.lua.lsp].setup(lua_opts)
         end,
-        [M.servers.latex] = function()
+        [M.servers.latex.lsp] = function()
             local latex_opts = vim.tbl_deep_extend("force", opts, {
                 settings = {
                     ltex = {
@@ -234,27 +251,34 @@ M.config = function()
                     }
                 }
             })
-            lspconfig[M.servers.latex].setup(latex_opts)
+            lspconfig[M.servers.latex.lsp].setup(latex_opts)
         end,
-        [M.servers.nix] = function()
+        [M.servers.nix.lsp] = function()
             local nix_opts = vim.tbl_deep_extend("force", opts, {
                 default_config = {
                     settings = {};
                 };
             })
-            lspconfig[M.servers.nix].setup(nix_opts)
+            lspconfig[M.servers.nix.lsp].setup(nix_opts)
         end,
-        [M.servers.zig] = function()
+    } -- mason_lspconfig.setup_handlers
+
+    local manual_setup_handlers = {
+        function(server_name)
+            lspconfig[server_name].setup(opts)
+        end,
+
+        [M.servers.zig.lsp] = function()
             local zig_opts = vim.tbl_deep_extend("force", opts, {
                 cmd = {"zls"},
                 filetypes = {"zig", "zir"},
                 root_dir = lspconfig_util.root_pattern("zls.json", ".git"),
                 single_file_support = false
             })
-            lspconfig[M.servers.zig].setup(zig_opts)
+            lspconfig[M.servers.zig.lsp].setup(zig_opts)
         end,
+        [M.servers.vhdl.lsp] = function()
         --[[
-        [M.servers.vhdl] = function()
             local vhdl_opts = vim.tbl_deep_extend("force", opts, {
                 default_config = {
                     cmd = {"vhdl_ls"};
@@ -266,10 +290,10 @@ M.config = function()
                 };
             })
             lspconfig[M.servers.vhdl].setup(vhdl_opts)
-        end,
         --]]
+        end,
+        [M.servers.ccls.lsp] = function()
         --[[
-        [M.servers.ccls] = function()
             local ccls_opts = vim.tbl_deep_extend("force", opts, {
                 init_options = {
                     client = {
@@ -310,9 +334,20 @@ M.config = function()
                 single_file_support = true,
             })
             lspconfig[M.servers.ccls].setup(ccls_opts)
-        end,
         --]]
-    } -- mason_lspconfig.setup_handlers
+        end,
+    } -- manual_setup_handlers
+
+    -- Setup manually configured LSPs
+    for server in pairs(get_lsp_auto_install(false)) do
+        if manual_setup_handlers[server] ~= nil then
+            manual_setup_handlers[server]() -- Setup the server
+        else
+            if manual_setup_handlers[1] ~= nil then
+                manual_setup_handlers[1](server)
+            end
+        end
+    end
 
     -- adds a check to see if any of the active clients have the capability
     -- textDocument/documentHighlight. without the check it was causing constant
