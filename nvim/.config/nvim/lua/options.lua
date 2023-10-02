@@ -121,6 +121,8 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     group    = 'bufcheck',
     pattern  = '*',
     callback = function()
+        local fn = vim.fn.expand("%t")
+        if fn:find(".git") then return end -- Don't restore cursor on git files
         if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
             vim.fn.setpos('.', vim.fn.getpos("'\""))
             vim.api.nvim_feedkeys('zz', 'n', true)
@@ -146,6 +148,43 @@ vim.api.nvim_create_autocmd({'FocusLost', 'BufLeave'}, {
         end
     end
 })
+
+-- Fix indent-blankline from showing on horizontal move
+vim.api.nvim_create_augroup('IndentBlankLineFix', {})
+vim.api.nvim_create_autocmd('WinScrolled', {
+  group = 'IndentBlankLineFix',
+  callback = function()
+    if vim.v.event.all.leftcol ~= 0 then
+      vim.cmd('silent! IndentBlanklineRefresh')
+    end
+  end,
+})
+
+-----------------
+--  FUNCTIONS  --
+-----------------
+
+local retab_buf = function(old)
+    local bet = opt.expandtab
+    local bsw = opt.shiftwidth
+    local bts = opt.tabstop
+    local bst = opt.softtabstop
+
+    opt.expandtab = false
+    opt.shiftwidth = old
+    opt.tabstop = old
+    opt.softtabstop = old
+    vim.cmd[[retab!]]
+
+    opt.expandtab = bet
+    opt.shiftwidth = bsw
+    opt.tabstop = bts
+    opt.softtabstop = bst
+    vim.cmd[[retab]]
+end
+
+vim.api.nvim_create_user_command("FixTabs2", function() retab_buf(2) end, {})
+vim.api.nvim_create_user_command("FixTabs3", function() retab_buf(3) end, {})
 
 ------------------------
 --  HELPER FUNCTIONS  --

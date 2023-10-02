@@ -322,6 +322,38 @@ return require('packer').startup(function(use)
         cmd = "StartupTime"
     }
 
+    use {
+        "anuvyklack/windows.nvim",
+        requires = {
+            "anuvyklack/middleclass",
+            "anuvyklack/animation.nvim"
+        },
+        config = function()
+            -- vim.o.winwidth = 10
+            -- vim.o.winminwidth = 10
+            -- vim.o.equalalways = false
+            require("windows").setup({
+                autowidth = {
+                    enable = true,
+                    winwidth = 10,
+                    filetype = {
+                        help = 2,
+                    },
+                },
+                ignore = {
+                    buftype = { "quickfix" },
+                    filetype = { "NvimTree", "neo-tree", "undotree", "gundo", "fzf", "TelescopePrompt", "TelescopeResults" }
+                },
+                animation = {
+                    enable = true,
+                    duration = 300,
+                    fps = 30,
+                    easing = "in_out_sine"
+                }
+            })
+        end
+    }
+
     -- use { -- Auto-save
     --     "Pocco81/auto-save.nvim",
     --     event = lazy_events,
@@ -357,6 +389,7 @@ return require('packer').startup(function(use)
 
                 show_first_indent_level = true,
                 show_trailing_blankline_indent = false,
+                show_end_of_line = true,
 
                 space_char_blankline = " ",
                 show_current_context = true,

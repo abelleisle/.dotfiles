@@ -85,6 +85,17 @@ local font_rule_set = function(weight, style)
     return config
 end
 
+local get_font_size = function()
+    local tt = wezterm.target_triple
+    if string.find(tt, "darwin") then
+        -- MacOS has different font rendering. Use slightly larger font
+        return 13.5
+    else
+        return 13
+    end
+end
+local font_size_OS = get_font_size()
+
 ---------------------------------------------------
 --                    ACTIONS                    --
 ---------------------------------------------------
@@ -183,7 +194,7 @@ return {
             font = font_rule_set("Light", "Normal"),
         },
     },
-    font_size = 13,
+    font_size = font_size_OS,
 
     -------------------
     --  KEYBINDINGS  --
