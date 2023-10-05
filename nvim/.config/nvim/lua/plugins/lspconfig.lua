@@ -74,6 +74,7 @@ M.servers = {
     rust   = lsp_entry("rust_analyzer"              ),
     cmake  = lsp_entry("cmake"                      ),
     nix    = lsp_entry("rnix"                       ),
+ -- yaml   = lsp_entry("yaml-language-server", false),
     ccls   = lsp_entry("ccls"                , false),
     vhdl   = lsp_entry("rust_hdl"            , false),
     zig    = lsp_entry("zls"                 , false),

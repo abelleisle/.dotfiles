@@ -23,6 +23,7 @@ M.config = function()
             "nix",
             "markdown",
             "markdown_inline",
+            "yaml"
         },
         highlight = {
             enable = true,
