@@ -20,7 +20,9 @@ M.config = function()
             "rust",
             "zig",
             "glsl",
-            "nix"
+            "nix",
+            "markdown",
+            "markdown_inline",
         },
         highlight = {
             enable = true,

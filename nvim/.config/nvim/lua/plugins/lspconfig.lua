@@ -272,7 +272,7 @@ M.config = function()
             local zig_opts = vim.tbl_deep_extend("force", opts, {
                 cmd = {"zls"},
                 filetypes = {"zig", "zir"},
-                root_dir = lspconfig_util.root_pattern("zls.json", ".git"),
+                root_dir = lspconfig_util.root_pattern("zls.json", ".git", "build.zig"),
                 single_file_support = false
             })
             lspconfig[M.servers.zig.lsp].setup(zig_opts)
