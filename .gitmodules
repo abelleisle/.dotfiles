@@ -16,3 +16,6 @@
 [submodule "zsh/.custom-zsh/plugins/nix-shell"]
 	path = zsh/.custom-zsh/plugins/nix-shell
 	url = https://github.com/chisui/zsh-nix-shell.git
+[submodule "zsh/.custom-zsh/plugins/zsh-autosuggestions"]
+	path = zsh/.custom-zsh/plugins/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git

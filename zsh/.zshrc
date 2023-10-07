@@ -1,9 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export ZSH_CUSTOM=$HOME/.custom-zsh
 
 # ~/.zprofile will source ~/.profile, so we don't need to here
 if [ -f ~/.profile ]; then
@@ -17,17 +13,11 @@ if [ -d ~/.zsh ]; then
     done
 fi
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# Set name of the ZSH theme to load
 ZSH_THEME="passion"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Disable OMZ update reminders
+zstyle ':omz:update' mode disabled  # disable automatic updates
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -35,14 +25,6 @@ ZSH_THEME="passion"
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -67,28 +49,18 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
+# ZSH History Settings
 HIST_STAMPS="mm/dd/yyyy"
 #HISTFILE=~/.cache/zsh/zsh_histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
+# Start completions
 autoload -Uz compinit
 compinit #-d ~/.cache/zsh/zcompdump-$ZSH_VERSION
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Extra plugins and themes
+export ZSH_CUSTOM=$HOME/.custom-zsh
 
 # Plugin Settings
 VI_MODE_SET_CURSOR=true
@@ -96,9 +68,10 @@ VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 MODE_INDICATOR="%F{white}[N]%f"
 INSERT_MODE_INDICATOR="%F{yellow}[I]%f"
 
+# Load the plugins
 plugins=(
-    gitfast
-    zsh-syntax-highlighting
+    zsh-autosuggestions
+    # gitfast
     sudo
     zsh-autopair
     vi-mode
@@ -111,51 +84,38 @@ if [[ $(uname) != "Darwin" ]]; then
     plugins+=(nix-shell)
 fi
 
+# This plugin needs to be loaded last
+plugins+=(zsh-syntax-highlighting)
+
+# Load OMZ
 source $ZSH/oh-my-zsh.sh
 
+# Set VIM mode bindings
 bindkey -v
 bindkey jk vi-cmd-mode
 bindkey zx vi-cmd-mode
 
 # User configuration
-
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# sets the EDITOR env variable. Used for git commits and the like
+# Sets the EDITOR env variable. Used for git commits and the like
 if [[ -n $(command -v nvim) ]]; then
     export EDITOR=nvim
 elif [[ -n $(command -v vim) ]]; then
     export EDITOR=vim
+elif [[ -n $(command -v vi) ]]; then
+    export EDITOR=vi
 fi
 export VISUAL="$EDITOR"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
+# If wal is used, source the wal colors
 if [ -d ~/.cache/wal ]; then
     cat ~/.cache/wal/sequences
     source ~/.cache/wal/colors-tty.sh
 fi
 
-zstyle ':completion:*' menu select
+# ZSH Completions
+#zstyle ':completion:*' menu select
+zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
 fpath+=~/.zfunc
-
