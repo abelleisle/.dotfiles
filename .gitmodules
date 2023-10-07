@@ -20,3 +20,6 @@
 	path = zsh/.custom-zsh/plugins/fzf-zsh-plugin
 	url = https://github.com/unixorn/fzf-zsh-plugin.git
 	shallow = true
+[submodule "zsh/.custom-zsh/plugins/zsh-autosuggestions"]
+	path = zsh/.custom-zsh/plugins/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
