@@ -117,7 +117,11 @@ return require('lazy').setup({
         "norcalli/nvim-colorizer.lua",
         event = Events.OpenFile,
         config = function()
-            require("colorizer").setup()
+            require("colorizer").setup({
+                ['*'] = {
+                    rgb_fn = true;
+                },
+            })
             vim.cmd("ColorizerReloadAllBuffers")
         end
     },
