@@ -1,7 +1,7 @@
 #!/bin/sh
 # Bootstraps my dotfiles from scratch
 
-set -u
+set -e
 
 DOTFILES_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 DOTFILES_USER=$(whoami)
