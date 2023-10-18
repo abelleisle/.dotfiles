@@ -6,12 +6,12 @@ set -e
 DOTFILES_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 DOTFILES_USER=$(whoami)
 
-TEXT_BOLD=$(tput bold)
-TEXT_NORM=$(tput sgr0)
-TEXT_RED=$(tput setf 4)
-TEXT_WARN=$(tput setf 6)
-TEXT_INFO=$(tput setf 1)
-TEXT_HEAD=$(tput setf 3)
+TEXT_BOLD=$(tput -T xterm bold)
+TEXT_NORM=$(tput -T xterm sgr0)
+TEXT_RED=$(tput -T xterm setf 4)
+TEXT_WARN=$(tput -T xterm setf 6)
+TEXT_INFO=$(tput -T xterm setf 1)
+TEXT_HEAD=$(tput -T xterm setf 3)
 
 exists()
 {
