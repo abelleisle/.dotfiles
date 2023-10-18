@@ -49,7 +49,19 @@ return require('lazy').setup({
     { -- Statusline
         "NTBBloodbath/galaxyline.nvim",
         dependencies = {"kyazdani42/nvim-web-devicons"},
-        -- This is configured in the `highlights.lua` module
+        config = function()
+            require("nvim-web-devicons").setup({
+                -- your personnal icons can go here (to override)
+                -- you can specify color or cterm_color instead of specifying both of them
+                -- DevIcon will be appended to `name`
+                override = {
+                    tcl = {
+                        icon = "",
+                        name = "tcl"
+                    }
+                }
+            })
+        end
     },
 
     { -- Keybind Help

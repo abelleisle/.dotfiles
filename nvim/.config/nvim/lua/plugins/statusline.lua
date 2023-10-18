@@ -1,7 +1,12 @@
 local M = {}
 
 M.config = function()
-    local gl = require('galaxyline')
+    local gle, gl = pcall(require, 'galaxyline')
+
+    if not gle then
+      return
+    end
+
     local gls = gl.section
     gl.short_line_list = {'LuaTree','vista','dbui'}
 

@@ -138,6 +138,15 @@ STOW_CMD="stow -t ${HOME} -d ${DOTFILES_DIR}"
 ######################
 header "Installing neovim configs"
 run ${STOW_CMD} nvim
+info "Syncing neovim plugins (this may take a while)"
+NVIM_VERSION=$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')
+NVIM_REQUIRE="0.8.0"
+if [ "$(printf '%s\n' "$NVIM_REQUIRE" "$NVIM_VERSION" | sort -V | head -n1)" = "$NVIM_REQUIRE" ]; then
+    info "Installed Neovim version: v$NVIM_VERSION"
+    nvim --headless "+Lazy! sync" +qa
+else
+    warn "Neovim is not at least v$NVIM_REQUIRE, plugins won't install"
+fi
 
 ###################
 #  CONFIGURE ZSH  #
