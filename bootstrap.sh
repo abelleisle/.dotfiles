@@ -15,9 +15,10 @@ if command -v sudo ; then
     echo "Some commands in this script require root permissions."
     echo "    Authenticating this script with sudo. You may have"
     echo "    to enter your password here:"
-    sudo -v
+    # sudo -v
 else
     echo "Sudo isn't found. Please install sudo for certain commands."
+    exit 1
 fi
 
 ######################
