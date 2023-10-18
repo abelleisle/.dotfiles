@@ -26,8 +26,8 @@ fi
 ######################
 
 echo "Installing base packages"
-case "$OSTYPE" in
-    darwin*)
+case $(uname) in
+    Darwin)
         echo "Using MacOS.. Installing the following programs with homebrew:";
         if command -v brew &> /dev/null ; then
             # We check MacOS first because for some reason it defines 'apt'. Dumb. I know.
@@ -38,7 +38,7 @@ case "$OSTYPE" in
             echo "Homebrew not installed! Please install it."
             exit 1
         fi;;
-    linux*)
+    Linux)
         echo "Using Linux! :)"
         if command -v apt &> /dev/null ; then
             echo "Using apt.. Installing the following programs:"
@@ -48,7 +48,7 @@ case "$OSTYPE" in
             echo "Unsupported Linux Distribution"
             exit 1
         fi;;
-    *) echo "Unknown OS: $OSTYPE" ;;
+    *) echo "Unknown OS: $(uname)" ;;
 esac
 
 ###########################
