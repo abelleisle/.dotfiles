@@ -33,7 +33,7 @@ case $(uname) in
             # We check MacOS first because for some reason it defines 'apt'. Dumb. I know.
             brew upgrade;
             # MacOS doesn't need zsh or bc because they are installed by default
-            brew install stow neovim ripgrep fzf;
+            brew install stow neovim ripgrep fzf curl;
         else
             echo "Homebrew not installed! Please install it."
             exit 1
@@ -43,7 +43,7 @@ case $(uname) in
         if command -v apt &> /dev/null ; then
             echo "Using apt.. Installing the following programs:"
             sudo apt update;
-            sudo apt install -y stow neovim zsh ripgrep fzf bc;
+            sudo apt install -y stow neovim zsh ripgrep fzf curl bc;
         else
             echo "Unsupported Linux Distribution"
             exit 1
@@ -55,9 +55,9 @@ esac
 #  CONFIGURE DIRECTORIES  #
 ###########################
 echo "Creating ~/.config/ directory"
-if [ -n "${XDG_CONFIG_HOME}" ]; then
+if [ -n "${XDG_CONFIG_HOME+set}" ]; then
     mkdir -p $XDG_CONFIG_HOME;
-elif [ -n "${HOME}" ]; then
+elif [ -n "${HOME+set}" ]; then
     mkdir -p ${HOME}/.config/
 else
     echo "Neither XDG_CONFIG_HOME or HOME are defined.."
@@ -76,6 +76,10 @@ eval ${STOW_CMD} nvim
 #  CONFIGURE ZSH  #
 ###################
 echo "Installing zsh configs"
+if [ -f ${HOME}/.profile ]; then
+    echo "~/.profile already exists. Renaming to .profile.old"
+    mv ${HOME}/.profile ${HOME}/.profile.old
+fi
 eval ${STOW_CMD} zsh
 echo "Setting zsh as default shell"
 sudo chsh -s $(which zsh) ${DOTFILES_USER}
