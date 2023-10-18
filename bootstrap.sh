@@ -6,12 +6,15 @@ set -e
 DOTFILES_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 DOTFILES_USER=$(whoami)
 
-TEXT_BOLD=$(tput -T xterm bold)
-TEXT_NORM=$(tput -T xterm sgr0)
-TEXT_RED=$(tput -T xterm setf 4)
-TEXT_WARN=$(tput -T xterm setf 6)
-TEXT_INFO=$(tput -T xterm setf 1)
-TEXT_HEAD=$(tput -T xterm setf 3)
+# TERMTYPE=${TERM:-"xterm"}
+TERMTYPE="xterm"
+
+TEXT_BOLD=$(tput -T ${TERMTYPE} bold)
+TEXT_NORM=$(tput -T ${TERMTYPE} sgr0)
+TEXT_RED=$(tput -T ${TERMTYPE} setf 4)
+TEXT_WARN=$(tput -T ${TERMTYPE} setf 6)
+TEXT_INFO=$(tput -T ${TERMTYPE} setf 1)
+TEXT_HEAD=$(tput -T ${TERMTYPE} setf 3)
 
 exists()
 {
@@ -60,6 +63,13 @@ else
     error "Sudo isn't found. Please install sudo for certain commands."
 fi
 
+################
+#  SUBMODULES  #
+################
+header "Pulling git submodules"
+cd ${DOTFILES_DIR}
+run git submodule update --init
+
 ######################
 #  INSTALL PACKAGES  #
 ######################
@@ -98,7 +108,7 @@ case `uname` in
                 x86_64)
                     warn "Apt usually has an outdated neovim. Installing directly from github.";
                     mkdir -p ${HOME}/bin
-                    run curl -o ${HOME}/bin/nvim https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+                    run curl -Lo ${HOME}/bin/nvim https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
                     chmod u+x ${HOME}/bin/nvim;;
                 *) error "Unsupported arch: $(uname -m)"
             esac
