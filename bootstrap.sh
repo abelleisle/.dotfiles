@@ -29,11 +29,11 @@ if command -v brew &> /dev/null ; then
     # We check MacOS first because for some reason it defines 'apt'. Dumb. I know.
     echo "Using MacOS.. Installing the following programs with homebrew:"
     brew upgrade;
-    brew install stow neovim zsh ripgrep fzf;
+    brew install stow neovim zsh ripgrep fzf bc;
 elif command -v apt &> /dev/null ; then
     echo "Using apt.. Installing the following programs:"
     sudo apt update;
-    sudo apt install -y stow neovim zsh ripgrep fzf;
+    sudo apt install -y stow neovim zsh ripgrep fzf bc;
 fi
 
 ###########################
