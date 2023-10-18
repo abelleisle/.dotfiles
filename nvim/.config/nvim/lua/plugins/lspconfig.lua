@@ -56,13 +56,14 @@ local get_options = function()
 end -- fn get_options
 
 local lsp_entry = function(server_name, auto_install)
-    if auto_install == nil then
-        auto_install = true
+    local auto_install_setting = false
+    if auto_install ~= false then
+        auto_install_setting = true
     end
 
     return {
         lsp = server_name,
-        auto_install = auto_install,
+        auto_install = auto_install_setting,
     }
 end --fn create_lsp_entry
 
@@ -73,7 +74,7 @@ M.servers = {
     python = lsp_entry("jedi_language_server"       ),
     rust   = lsp_entry("rust_analyzer"              ),
     cmake  = lsp_entry("cmake"                      ),
-    nix    = lsp_entry("rnix"                       ),
+    nix    = lsp_entry("rnix"                , false),
  -- yaml   = lsp_entry("yaml-language-server", false),
     ccls   = lsp_entry("ccls"                , false),
     vhdl   = lsp_entry("rust_hdl"            , false),
@@ -86,7 +87,7 @@ local get_lsp_auto_install = function(auto_install)
     local t = {}
     for _,v in pairs(M.servers) do
         if v.auto_install == auto_install then
-            t[v.lsp] = v.lsp
+            table.insert(t, v.lsp)
         end
     end
 
@@ -254,14 +255,6 @@ M.config = function()
             })
             lspconfig[M.servers.latex.lsp].setup(latex_opts)
         end,
-        [M.servers.nix.lsp] = function()
-            local nix_opts = vim.tbl_deep_extend("force", opts, {
-                default_config = {
-                    settings = {};
-                };
-            })
-            lspconfig[M.servers.nix.lsp].setup(nix_opts)
-        end,
     } -- mason_lspconfig.setup_handlers
 
     local manual_setup_handlers = {
@@ -277,6 +270,14 @@ M.config = function()
                 single_file_support = false
             })
             lspconfig[M.servers.zig.lsp].setup(zig_opts)
+        end,
+        [M.servers.nix.lsp] = function()
+            local nix_opts = vim.tbl_deep_extend("force", opts, {
+                default_config = {
+                    settings = {};
+                };
+            })
+            lspconfig[M.servers.nix.lsp].setup(nix_opts)
         end,
         [M.servers.vhdl.lsp] = function()
         --[[
@@ -340,12 +341,13 @@ M.config = function()
     } -- manual_setup_handlers
 
     -- Setup manually configured LSPs
-    for server in pairs(get_lsp_auto_install(false)) do
-        if manual_setup_handlers[server] ~= nil then
-            manual_setup_handlers[server]() -- Setup the server
+    local manual_install_list = get_lsp_auto_install(false)
+    for _,s in ipairs(manual_install_list) do
+        if manual_setup_handlers[s] ~= nil then
+            manual_setup_handlers[s]() -- Setup the server
         else
             if manual_setup_handlers[1] ~= nil then
-                manual_setup_handlers[1](server)
+                manual_setup_handlers[1](s)
             end
         end
     end
