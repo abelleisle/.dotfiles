@@ -75,6 +75,7 @@ plugins=(
     sudo
     zsh-autopair
     vi-mode
+    fzf-zsh-plugin
 )
 
 # If we aren't running MacOS add nix-shell plugin.

@@ -13,6 +13,12 @@ local function map(mode, lhs, rhs, opts)
 end
 
 local opt = {noremap = true, silent = true}
+local function Opt(desc)
+    local opt_desc = vim.tbl_extend("force", opt, {
+        desc = desc
+    })
+    return opt_desc
+end
 
 -- dont copy any deleted text , this is disabled by default so uncomment the below mappings if you want them
 
@@ -32,47 +38,37 @@ map("v", "x", [=[ "_x ]=], opt)
 -----------------
 --  NAVIGATOR  --
 -----------------
-require('Navigator').setup({
+local navigator = require('Navigator')
+navigator.setup({
     auto_save = 'nil',
     disable_on_zoom = true
 })
 
-map({'n','t'}, {"<C-h>", "<C-Left>"},  "<CMD>lua require('Navigator').left()<CR>", opt)
-map({'n','t'}, {"<C-k>", "<C-Up>"},    "<CMD>lua require('Navigator').up()<CR>", opt)
-map({'n','t'}, {"<C-l>", "<C-Right>"}, "<CMD>lua require('Navigator').right()<CR>", opt)
-map({'n','t'}, {"<C-j>", "<C-Down>"},  "<CMD>lua require('Navigator').down()<CR>", opt)
-map({'n','t'}, "<A-p>",                "<CMD>lua require('Navigator').previous()<CR>", opt)
+map({'n','t'}, {"<C-h>", "<C-Left>"},  navigator.left,     Opt("Navigation: Left a window"))
+map({'n','t'}, {"<C-k>", "<C-Up>"},    navigator.up,       Opt("Navigation: Up a window"))
+map({'n','t'}, {"<C-l>", "<C-Right>"}, navigator.right,    Opt("Navigation: Right a window"))
+map({'n','t'}, {"<C-j>", "<C-Down>"},  navigator.down,     Opt("Navigation: Down a window"))
+map({'n','t'}, "<A-p>",                navigator.previous, Opt("Navigation: Go to previous window"))
 
 -----------------------
 --  MODE NAVIGATION  --
 -----------------------
 --vim.cmd("inoremap jk <Esc>")
-map('i', "jk", "<Esc>", opt)
-map('i', "zx", "<Esc>", opt)
+map('i', "jk", "<Esc>", Opt("Navigation: Exit insert mode"))
+map('i', "zx", "<Esc>", Opt("Navigation: Exit insert mode"))
 
 ------------------------
 --  SPLIT NAVIGATION  --
 ------------------------
-map('n', "<Leader>%", ":vsplit<CR>", opt)
-map('n', "<Leader>\"", ":split<CR>", opt)
-
-------------------
---  EASY ALIGN  --
-------------------
---Start interactive EasyAlign in visual mode (e.g. vipga)
-vim.cmd("xmap ga <Plug>(EasyAlign)")
---map("x", "ga", "<Plug>(EasyAlign)", opt)
-
---Start interactive EasyAlign for a motion/text object (e.g. gaip)
-vim.cmd("nmap ga <Plug>(EasyAlign)")
---map("n", "ga", "<Plug>(EasyAlign)", opt)
+map('n', "<Leader>%", ":vsplit<CR>", Opt("Navigation: Vertical Split"))
+map('n', "<Leader>\"", ":split<CR>", Opt("Navigation: Horizontal Split"))
 
 -----------------
 --  CLIPBOARD  --
 -----------------
 
 -- copy whole file content
-map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
+map("n", "<C-a>", [[ <Cmd> %y+<CR>]], Opt("Navigation: Copy entire file to clipboard"))
 
 ------------
 --  LEAP  --
@@ -121,11 +117,11 @@ local mini = {
     end
 }
 
-vim.keymap.set({"n", "v"}, "s", mini.jump2d_twochar,opt)
-vim.keymap.set({"n", "v"}, "<Leader><Leader>s", mini.jump2d_char , opt)
-vim.keymap.set({"n", "v"}, "<Leader><Leader>f", mini.jump2d_start, opt)
-vim.keymap.set({"n", "v"}, "<Leader><Leader>l", mini.jump2d_line , opt)
-vim.keymap.set({"n", "v"}, "<Leader><Leader>w", mini.jump2d_word , opt)
+vim.keymap.set({"n", "v"}, "s",                 mini.jump2d_twochar, Opt("Navigation: Jump to a 2-char pair"))
+vim.keymap.set({"n", "v"}, "<Leader><Leader>s", mini.jump2d_char,    Opt("Navigation: Jump to a single character"))
+vim.keymap.set({"n", "v"}, "<Leader><Leader>f", mini.jump2d_start,   Opt("Navigation: Jump to any object"))
+vim.keymap.set({"n", "v"}, "<Leader><Leader>l", mini.jump2d_line ,   Opt("Navigation: Jump to any line on screen"))
+vim.keymap.set({"n", "v"}, "<Leader><Leader>w", mini.jump2d_word ,   Opt("Navigation: Jump to any word"))
 
 ------------------------------------------------------------------------
 --                              DISPLAY                               --
@@ -134,7 +130,7 @@ vim.keymap.set({"n", "v"}, "<Leader><Leader>w", mini.jump2d_word , opt)
 -----------------------
 --  HIDE HIGHLIGHTS  --
 -----------------------
-map("n", "<Leader>n", ":noh<CR>", opt)
+map("n", "<Leader>n", ":noh<CR>", Opt("Display: Hide \"find\" highlight"))
 
 ----------------
 --  COMMENTS  --
@@ -149,18 +145,18 @@ map("n", "<Leader>n", ":noh<CR>", opt)
 -----------------
 --  NVIM TREE  --
 -----------------
-map("n", "<Leader>t", ":NvimTreeToggle<CR>", opt)
+map("n", "<Leader>t", ":NvimTreeToggle<CR>", Opt("Display: Show the file tree"))
 
 --------------
 --  FORMAT  --
 --------------
-map("n", "<Leader>fm", ":Neoformat<CR>", opt)
+map("n", "<Leader>fm", ":Neoformat<CR>", Opt("Display: Format the current file"))
 
 -----------------
 --  DASHBOARD  --
 -----------------
 
-map("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], opt)
+map("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], Opt("Display: Show all TODOs in current project"))
 -- map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
 -- map("n", "<Leader>fn", [[<Cmd> DashboardNewFile<CR>]], opt)
 -- map("n", "<Leader>bm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
@@ -172,8 +168,8 @@ map("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], opt)
 -----------------
 
 local ts = {
-    builtin    = require('telescope.builtin'),
-    extensions = require('telescope').extensions,
+    builtin    = function() return require('telescope.builtin') end,
+    extensions = function() return require('telescope').extensions end,
     grep_fuzzy = function()
         require('telescope.builtin').grep_string({
             prompt_title = "Fuzzy Find",
@@ -182,25 +178,38 @@ local ts = {
             only_sort_text = true,
             search = ''
         })
+    end,
+    grep_string = function()
+        require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ")})
     end
 }
 
 --map("n", "<Leader>fw", [[<Cmd> Telescope live_grep<CR>]], opt)
-vim.keymap.set('n', '<Leader>fw', ts.builtin.live_grep,                  opt)
-vim.keymap.set('n', '<Leader>fz', ts.grep_fuzzy,                         opt)
-vim.keymap.set('n', '<Leader>gt', ts.builtin.git_status,                 opt)
-vim.keymap.set('n', '<Leader>cm', ts.builtin.git_commits,                opt)
-vim.keymap.set('n', '<C-p>',      ts.builtin.find_files,                 opt)
-vim.keymap.set('i', '<C-p>',      ts.builtin.find_files,                 opt)
-vim.keymap.set('n', '<Leader>fp', ts.extensions.media_files.media_files, opt)
-vim.keymap.set('n', '<Leader>fb', ts.builtin.buffers,                    opt)
-vim.keymap.set('n', '<Leader>fh', ts.builtin.help_tags,                  opt)
-vim.keymap.set('n', '<Leader>fo', ts.builtin.oldfiles,                   opt)
-vim.keymap.set('n', '<Leader>fk', ts.builtin.keymaps,                    opt)
-vim.keymap.set('n', '<Leader>f#', ts.builtin.grep_string,                opt)
-vim.keymap.set('n', '<Leader>fs', function()
-    ts.builtin.grep_string({ search = vim.fn.input("Grep > ")})
-end, opt)
+vim.keymap.set('n', '<Leader>fw', ts.builtin().live_grep,                  Opt("Telescope: Live grep"))
+vim.keymap.set('n', '<Leader>fz', ts.grep_fuzzy,                           Opt("Telescope: Fuzzy finder"))
+vim.keymap.set('n', '<Leader>gt', ts.builtin().git_status,                 Opt("Telescope: Git status"))
+vim.keymap.set('n', '<Leader>cm', ts.builtin().git_commits,                Opt("Telescope: Git commits"))
+vim.keymap.set('n', '<C-p>',      ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
+vim.keymap.set('i', '<C-p>',      ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
+vim.keymap.set('n', '<Leader>fp', ts.extensions().media_files.media_files, Opt("Telescope: Show media files"))
+vim.keymap.set('n', '<Leader>fb', ts.builtin().buffers,                    Opt("Telescope: Show active buffers"))
+vim.keymap.set('n', '<Leader>fh', ts.builtin().help_tags,                  Opt("Telescope: interactive help menu"))
+vim.keymap.set('n', '<Leader>fo', ts.builtin().oldfiles,                   Opt("Telescope: Previously edited files"))
+vim.keymap.set('n', '<Leader>fk', ts.builtin().keymaps,                    Opt("Telescope: Show all keybinds"))
+vim.keymap.set('n', '<Leader>f#', ts.builtin().grep_string,                Opt("Telescope: Find word under cursor"))
+vim.keymap.set('n', '<Leader>fs', ts.grep_string,                          Opt("Telescope: Grep string using statusline"))
+
+-----------------
+--  GIT SIGNS  --
+-----------------
+
+-- vim.keymap.set("n", "]c",         {expr = true, '&diff ? \']c\' : \'<cmd>lua require"gitsigns".next_hunk()<CR>\''}, opt)
+-- vim.keymap.set("n", "[c",         {expr = true, '&diff ? \'[c\' : \'<cmd>lua require"gitsigns".prev_hunk()<CR>\''}, opt)
+vim.keymap.set("n", "<leader>hs", '<cmd>lua require"gitsigns".stage_hunk()<CR>',      opt)
+vim.keymap.set("n", "<leader>hu", '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>', opt)
+vim.keymap.set("n", "<leader>hr", '<cmd>lua require"gitsigns".reset_hunk()<CR>',      opt)
+vim.keymap.set("n", "<leader>hp", '<cmd>lua require"gitsigns".preview_hunk()<CR>',    opt)
+vim.keymap.set("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line()<CR>',      opt)
 
 ----------------------------------
 --  BURN ARROWS and PGUP/PGDWN  --

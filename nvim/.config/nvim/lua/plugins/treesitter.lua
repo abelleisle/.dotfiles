@@ -22,7 +22,8 @@ M.config = function()
             "glsl",
             "nix",
             "markdown",
-            "markdown_inline"
+            "markdown_inline",
+            "yaml"
         },
         highlight = {
             enable = true,
