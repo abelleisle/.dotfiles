@@ -25,16 +25,30 @@ fi
 ######################
 
 echo "Installing base packages"
-if command -v brew &> /dev/null ; then
-    # We check MacOS first because for some reason it defines 'apt'. Dumb. I know.
-    echo "Using MacOS.. Installing the following programs with homebrew:"
-    brew upgrade;
-    brew install stow neovim zsh ripgrep fzf bc;
-elif command -v apt &> /dev/null ; then
-    echo "Using apt.. Installing the following programs:"
-    sudo apt update;
-    sudo apt install -y stow neovim zsh ripgrep fzf bc;
-fi
+case "$OSTYPE" in
+    darwin*)
+        echo "Using MacOS.. Installing the following programs with homebrew:";
+        if command -v brew &> /dev/null ; then
+            # We check MacOS first because for some reason it defines 'apt'. Dumb. I know.
+            brew upgrade;
+            # MacOS doesn't need zsh or bc because they are installed by default
+            brew install stow neovim ripgrep fzf;
+        else
+            echo "Homebrew not installed! Please install it."
+            exit 1
+        fi;;
+    linux*)
+        echo "Using Linux! :)"
+        if command -v apt &> /dev/null ; then
+            echo "Using apt.. Installing the following programs:"
+            sudo apt update;
+            sudo apt install -y stow neovim zsh ripgrep fzf bc;
+        else
+            echo "Unsupported Linux Distribution"
+            exit 1
+        fi;;
+    *) echo "Unknown OS: $OSTYPE" ;;
+esac
 
 ###########################
 #  CONFIGURE DIRECTORIES  #
