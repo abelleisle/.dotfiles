@@ -143,7 +143,7 @@ NVIM_VERSION=$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')
 NVIM_REQUIRE="0.8.0"
 if [ "$(printf '%s\n' "$NVIM_REQUIRE" "$NVIM_VERSION" | sort -V | head -n1)" = "$NVIM_REQUIRE" ]; then
     info "Installed Neovim version: v$NVIM_VERSION"
-    nvim --headless "+Lazy! sync" +qa
+    run nvim --headless "+Lazy! install" +qa
 else
     warn "Neovim is not at least v$NVIM_REQUIRE, plugins won't install"
 fi

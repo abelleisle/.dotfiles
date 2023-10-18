@@ -38,17 +38,25 @@ map("v", "x", [=[ "_x ]=], opt)
 -----------------
 --  NAVIGATOR  --
 -----------------
-local navigator = require('Navigator')
-navigator.setup({
-    auto_save = 'nil',
-    disable_on_zoom = true
-})
+local has_navigator, navigator = pcall(require, 'Navigator')
+if has_navigator then
+    navigator.setup({
+        auto_save = 'nil',
+        disable_on_zoom = true
+    })
 
-map({'n','t'}, {"<C-h>", "<C-Left>"},  navigator.left,     Opt("Navigation: Left a window"))
-map({'n','t'}, {"<C-k>", "<C-Up>"},    navigator.up,       Opt("Navigation: Up a window"))
-map({'n','t'}, {"<C-l>", "<C-Right>"}, navigator.right,    Opt("Navigation: Right a window"))
-map({'n','t'}, {"<C-j>", "<C-Down>"},  navigator.down,     Opt("Navigation: Down a window"))
-map({'n','t'}, "<A-p>",                navigator.previous, Opt("Navigation: Go to previous window"))
+    map({'n','t'}, {"<C-h>", "<C-Left>"},  navigator.left,     Opt("Navigation: Left a window"))
+    map({'n','t'}, {"<C-k>", "<C-Up>"},    navigator.up,       Opt("Navigation: Up a window"))
+    map({'n','t'}, {"<C-l>", "<C-Right>"}, navigator.right,    Opt("Navigation: Right a window"))
+    map({'n','t'}, {"<C-j>", "<C-Down>"},  navigator.down,     Opt("Navigation: Down a window"))
+    map({'n','t'}, "<A-p>",                navigator.previous, Opt("Navigation: Go to previous window"))
+else
+    map({'n','t'}, {"<C-h>", "<C-Left>"},  "<C-w>h",           Opt("Navigation: Left a window"))
+    map({'n','t'}, {"<C-k>", "<C-Up>"},    "<C-w>k",           Opt("Navigation: Up a window"))
+    map({'n','t'}, {"<C-l>", "<C-Right>"}, "<C-w>l",           Opt("Navigation: Right a window"))
+    map({'n','t'}, {"<C-j>", "<C-Down>"},  "<C-w>j",           Opt("Navigation: Down a window"))
+    map({'n','t'}, "<A-p>",                "<C-w>p",           Opt("Navigation: Go to previous window"))
+end
 
 -----------------------
 --  MODE NAVIGATION  --

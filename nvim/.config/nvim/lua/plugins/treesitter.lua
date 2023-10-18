@@ -25,6 +25,7 @@ M.config = function()
             "markdown_inline",
             "yaml"
         },
+        sync_install = true, -- Wait while parsers install
         highlight = {
             enable = true,
             use_languagetree = true,
