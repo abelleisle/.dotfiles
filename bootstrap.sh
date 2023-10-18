@@ -1,9 +1,10 @@
 #!/bin/sh
 # Bootstraps my dotfiles from scratch
 
-set -eu
+set -u
 
 DOTFILES_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+DOTFILES_USER=$(whoami)
 
 echo "Bootstapping dotfiles!!"
 
@@ -39,9 +40,9 @@ fi
 #  CONFIGURE DIRECTORIES  #
 ###########################
 echo "Creating ~/.config/ directory"
-if [[ -n "${XDG_CONFIG_HOME}" ]]; then
+if [ -n "${XDG_CONFIG_HOME}" ]; then
     mkdir -p $XDG_CONFIG_HOME;
-elif [[ -n "${HOME}" ]]; then
+elif [ -n "${HOME}" ]; then
     mkdir -p ${HOME}/.config/
 else
     echo "Neither XDG_CONFIG_HOME or HOME are defined.."
@@ -53,10 +54,13 @@ STOW_CMD="stow -t ${HOME} -d ${DOTFILES_DIR}"
 ######################
 #  CONFIGURE NEOVIM  #
 ######################
+echo "Installing neovim configs"
 eval ${STOW_CMD} nvim
 
 ###################
 #  CONFIGURE ZSH  #
 ###################
+echo "Installing zsh configs"
 eval ${STOW_CMD} zsh
-sudo chsh -s $(which zsh)
+echo "Setting zsh as default shell"
+sudo chsh -s $(which zsh) ${DOTFILES_USER}
