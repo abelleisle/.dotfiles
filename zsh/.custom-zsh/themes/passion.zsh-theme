@@ -229,8 +229,14 @@ function nix_prompt_info {
     fi
 }
 
+function docker_prompt_info {
+    if [ -f /.dockerenv ]; then
+        echo "%{$fg[magenta]%}[Docker]%F{reset} "
+    fi
+}
+
 # prompt
 # PROMPT='$(real_time) $(login_info) $(directory) $(git_status)$(command_status) ';
 PROMPT='
 $(real_time) $(directory)
-$(ssh_prompt_info)$(nix_prompt_info)$(cpu_prompt_info)$(git_status)$(command_status) ';
+$(ssh_prompt_info)$(docker_prompt_info)$(nix_prompt_info)$(cpu_prompt_info)$(git_status)$(command_status) ';
