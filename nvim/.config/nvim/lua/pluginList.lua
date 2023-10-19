@@ -19,6 +19,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- If we can't install plugins, don't bother
+vim.g.plugins_installed = vim.fn.has("nvim-0.8.0")
+if not vim.g.plugins_installed then
+    return
+end
 
 ---------------------
 --  Plugin Config  --
@@ -402,39 +407,80 @@ return require('lazy').setup({
         "lukas-reineke/indent-blankline.nvim",
         dependencies = "nvim-treesitter",
         event = Events.OpenFile,
+        main = "ibl",
+        opts = {},
         config = function()
-            local blank_line_opts = {
-                char = "▏",
-                filetype_exclude = {
-                    "help", "terminal", "NvimTree",
-                    "TelescopePrompt", "TelescopeResults"
-                },
-                buftype_exclude = {"terminal"},
-
-                show_first_indent_level = true,
-                show_trailing_blankline_indent = false,
-                show_end_of_line = false,
-
-                space_char_blankline = " ",
-                show_current_context = true,
-                show_current_context_start = false,
+            local ibl = require("ibl")
+            local hooks = require("ibl.hooks")
+            local indent_chars = {
+                "▏",
+                "▎",
+                "▍",
+                "▌",
+                "▋",
+                "▊",
+                "▉",
+                "█",
+                "│",
+                "┃",
+                "┆",
+                "┇",
+                "┊",
+                "┋",
             }
-            require("indent_blankline").setup(blank_line_opts)
+
+            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+                -- Indent line colors
+                -- Indent scope colors
+                local colorutils = require("utils.colors")
+                local sc_hl = vim.api.nvim_get_hl(0, { name = "Normal"} )
+                local sc_hl_bg = colorutils.hl_to_hex(sc_hl.bg)
+                local sc_hl_fg = colorutils.hl_to_hex(sc_hl.fg)
+
+                local gray = colorutils.blend(sc_hl_fg, sc_hl_bg, 0.50)
+                local spaces = colorutils.blend(sc_hl_fg, sc_hl_bg, 0.10)
+
+                vim.api.nvim_set_hl(0, "IblScope",      { fg=gray })
+                vim.api.nvim_set_hl(0, "IblWhitespace", { fg=spaces })
+            end)
+            local blank_line_opts = {
+                indent = {
+                    char = indent_chars[9],
+                    smart_indent_cap = true,
+                    highlight = "IblIndent",
+                },
+                whitespace = {
+                    highlight = "IblWhitespace",
+                },
+                exclude = {
+                    filetypes = {
+                        "help", "terminal", "NvimTree",
+                        "TelescopePrompt", "TelescopeResults"
+                    },
+                    buftypes = {
+                        "terminal"
+                    },
+                },
+                scope = {
+                    enabled = true,
+                    char = indent_chars[10],
+                    show_start = false,
+                    show_end = false,
+                    highlight = "IblScope",
+                },
+            }
 
             -- Enabled these for endline
-            -- TODO: set these options and `show_end_of_line` by setting an eol char in local
-            -- options. If no char is set, disable eol chars.
-            -- Example:
-            --   vim.g.eolchar = '' -- Or if it's not set
-            --   OR
-            --   vim.g.eolchar = ''
-            if blank_line_opts.show_end_of_line then
-                vim.opt.list = true
-                vim.opt.listchars:append "eol:" -- Option 1
-                -- vim.opt.listchars:append "eol:↴" -- Option 2
-            end
-            -- Indent line colors
-            vim.cmd [[highlight IndentBlanklineContextChar guifg=gray]]
+            vim.opt.list = true
+            vim.opt.listchars = {
+                -- eol = "" -- Option 1
+                -- eol = "↴" -- Option 2
+                tab = "   ",
+                lead= "∙",
+                -- leadmultispace = "⋅˙",
+            }
+
+            ibl.setup(blank_line_opts)
         end
     },
 

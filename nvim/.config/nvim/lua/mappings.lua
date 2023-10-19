@@ -1,8 +1,12 @@
+-- TODO: consolidate these functions
+local default_key_options = {noremap = true, silent = true}
+
 local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
+    local options = default_key_options
     if opts then
         options = vim.tbl_extend("force", options, opts)
     end
+
     if type(lhs) == "string" then
         vim.keymap.set(mode, lhs, rhs, options)
     elseif type(lhs) == "table" then
@@ -12,11 +16,21 @@ local function map(mode, lhs, rhs, opts)
     end
 end
 
-local opt = {noremap = true, silent = true}
+local function pmap(mode, lhs, rhs, opts)
+    if vim.g.plugins_installed then
+        map(mode, lhs, rhs, opts)
+    end
+end
+
 local function Opt(desc)
-    local opt_desc = vim.tbl_extend("force", opt, {
-        desc = desc
-    })
+    local opt_desc = default_key_options
+
+    if desc then
+        opt_desc = vim.tbl_extend("force", default_key_options, {
+            desc = desc
+        })
+    end
+
     return opt_desc
 end
 
@@ -24,7 +38,7 @@ end
 
 --map("n", "dd", [=[ "_dd ]=], opt)
 --map("v", "dd", [=[ "_dd ]=], opt)
-map("v", "x", [=[ "_x ]=], opt)
+map("v", "x", [=[ "_x ]=])
 
 -- OPEN TERMINALS --
 --map("n", "<C-l>", [[<Cmd>vnew term://bash <CR>]], opt) -- term over right
@@ -82,54 +96,56 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], Opt("Navigation: Copy entire file to clipb
 --  LEAP  --
 ------------
 
-local mini = {
-    jump2d = require('mini.jump2d'),
-    jump2d_char = function()
-        local mj = require('mini.jump2d')
-        return mj.start(mj.builtin_opts.single_character)
-    end,
-    jump2d_start = function()
-        local mj = require("mini.jump2d")
-        return mj.start(mj.builtin_opts.default)
-    end,
-    jump2d_line = function()
-        local mj = require("mini.jump2d")
-        return mj.start(mj.builtin_opts.line_start)
-    end,
-    jump2d_word = function()
-        local mj = require("mini.jump2d")
-        return mj.start(mj.builtin_opts.word_start)
-    end,
-    jump2d_twochar = function()
-        local gettwocharstr = function()
-            local _, char0 = pcall(vim.fn.getcharstr)
-            local _, char1 = pcall(vim.fn.getcharstr)
+if vim.g.plugins_installed then
+    local mini = {
+        jump2d = require('mini.jump2d'),
+        jump2d_char = function()
+            local mj = require('mini.jump2d')
+            return mj.start(mj.builtin_opts.single_character)
+        end,
+        jump2d_start = function()
+            local mj = require("mini.jump2d")
+            return mj.start(mj.builtin_opts.default)
+        end,
+        jump2d_line = function()
+            local mj = require("mini.jump2d")
+            return mj.start(mj.builtin_opts.line_start)
+        end,
+        jump2d_word = function()
+            local mj = require("mini.jump2d")
+            return mj.start(mj.builtin_opts.word_start)
+        end,
+        jump2d_twochar = function()
+            local gettwocharstr = function()
+                local _, char0 = pcall(vim.fn.getcharstr)
+                local _, char1 = pcall(vim.fn.getcharstr)
 
-            return char0..char1
+                return char0..char1
+            end
+            local pattern = vim.pesc(gettwocharstr())
+
+            local mj = require("mini.jump2d")
+            return mj.start({
+                spotter = mj.gen_pattern_spotter(pattern),
+                allowed_lines   = {
+                    cursor_before = true,
+                    cursor_after = true,
+                    blank = false,
+                    fold = false,
+                },
+                allowed_windows = {
+                    not_current = false
+                }
+            })
         end
-        local pattern = vim.pesc(gettwocharstr())
+    }
 
-        local mj = require("mini.jump2d")
-        return mj.start({
-            spotter = mj.gen_pattern_spotter(pattern),
-            allowed_lines   = {
-                cursor_before = true,
-                cursor_after = true,
-                blank = false,
-                fold = false,
-            },
-            allowed_windows = {
-                not_current = false
-            }
-        })
-    end
-}
-
-vim.keymap.set({"n", "v"}, "s",                 mini.jump2d_twochar, Opt("Navigation: Jump to a 2-char pair"))
-vim.keymap.set({"n", "v"}, "<Leader><Leader>s", mini.jump2d_char,    Opt("Navigation: Jump to a single character"))
-vim.keymap.set({"n", "v"}, "<Leader><Leader>f", mini.jump2d_start,   Opt("Navigation: Jump to any object"))
-vim.keymap.set({"n", "v"}, "<Leader><Leader>l", mini.jump2d_line ,   Opt("Navigation: Jump to any line on screen"))
-vim.keymap.set({"n", "v"}, "<Leader><Leader>w", mini.jump2d_word ,   Opt("Navigation: Jump to any word"))
+    vim.keymap.set({"n", "v"}, "s",                 mini.jump2d_twochar, Opt("Navigation: Jump to a 2-char pair"))
+    vim.keymap.set({"n", "v"}, "<Leader><Leader>s", mini.jump2d_char,    Opt("Navigation: Jump to a single character"))
+    vim.keymap.set({"n", "v"}, "<Leader><Leader>f", mini.jump2d_start,   Opt("Navigation: Jump to any object"))
+    vim.keymap.set({"n", "v"}, "<Leader><Leader>l", mini.jump2d_line ,   Opt("Navigation: Jump to any line on screen"))
+    vim.keymap.set({"n", "v"}, "<Leader><Leader>w", mini.jump2d_word ,   Opt("Navigation: Jump to any word"))
+end -- vim.g.plugins_installed
 
 ------------------------------------------------------------------------
 --                              DISPLAY                               --
@@ -153,18 +169,18 @@ map("n", "<Leader>n", ":noh<CR>", Opt("Display: Hide \"find\" highlight"))
 -----------------
 --  NVIM TREE  --
 -----------------
-map("n", "<Leader>t", ":NvimTreeToggle<CR>", Opt("Display: Show the file tree"))
+pmap("n", "<Leader>t", ":NvimTreeToggle<CR>", Opt("Display: Show the file tree"))
 
 --------------
 --  FORMAT  --
 --------------
-map("n", "<Leader>fm", ":Neoformat<CR>", Opt("Display: Format the current file"))
+pmap("n", "<Leader>fm", ":Neoformat<CR>", Opt("Display: Format the current file"))
 
 -----------------
 --  DASHBOARD  --
 -----------------
 
-map("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], Opt("Display: Show all TODOs in current project"))
+pmap("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], Opt("Display: Show all TODOs in current project"))
 -- map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
 -- map("n", "<Leader>fn", [[<Cmd> DashboardNewFile<CR>]], opt)
 -- map("n", "<Leader>bm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
@@ -175,37 +191,39 @@ map("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], Opt("Display: Show all TODOs
 --  TELESCOPE  --
 -----------------
 
-local ts = {
-    builtin    = function() return require('telescope.builtin') end,
-    extensions = function() return require('telescope').extensions end,
-    grep_fuzzy = function()
-        require('telescope.builtin').grep_string({
-            prompt_title = "Fuzzy Find",
-            shorten_path = true,
-            word_match = "-w",
-            only_sort_text = true,
-            search = ''
-        })
-    end,
-    grep_string = function()
-        require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ")})
-    end
-}
+if vim.g.plugins_installed then
+    local ts = {
+        builtin    = function() return require('telescope.builtin') end,
+        extensions = function() return require('telescope').extensions end,
+        grep_fuzzy = function()
+            require('telescope.builtin').grep_string({
+                prompt_title = "Fuzzy Find",
+                shorten_path = true,
+                word_match = "-w",
+                only_sort_text = true,
+                search = ''
+            })
+        end,
+        grep_string = function()
+            require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ")})
+        end
+    }
 
---map("n", "<Leader>fw", [[<Cmd> Telescope live_grep<CR>]], opt)
-vim.keymap.set('n', '<Leader>fw', ts.builtin().live_grep,                  Opt("Telescope: Live grep"))
-vim.keymap.set('n', '<Leader>fz', ts.grep_fuzzy,                           Opt("Telescope: Fuzzy finder"))
-vim.keymap.set('n', '<Leader>gt', ts.builtin().git_status,                 Opt("Telescope: Git status"))
-vim.keymap.set('n', '<Leader>cm', ts.builtin().git_commits,                Opt("Telescope: Git commits"))
-vim.keymap.set('n', '<C-p>',      ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
-vim.keymap.set('i', '<C-p>',      ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
-vim.keymap.set('n', '<Leader>fp', ts.extensions().media_files.media_files, Opt("Telescope: Show media files"))
-vim.keymap.set('n', '<Leader>fb', ts.builtin().buffers,                    Opt("Telescope: Show active buffers"))
-vim.keymap.set('n', '<Leader>fh', ts.builtin().help_tags,                  Opt("Telescope: interactive help menu"))
-vim.keymap.set('n', '<Leader>fo', ts.builtin().oldfiles,                   Opt("Telescope: Previously edited files"))
-vim.keymap.set('n', '<Leader>fk', ts.builtin().keymaps,                    Opt("Telescope: Show all keybinds"))
-vim.keymap.set('n', '<Leader>f#', ts.builtin().grep_string,                Opt("Telescope: Find word under cursor"))
-vim.keymap.set('n', '<Leader>fs', ts.grep_string,                          Opt("Telescope: Grep string using statusline"))
+    --map("n", "<Leader>fw", [[<Cmd> Telescope live_grep<CR>]], opt)
+    vim.keymap.set('n', '<Leader>fw', ts.builtin().live_grep,                  Opt("Telescope: Live grep"))
+    vim.keymap.set('n', '<Leader>fz', ts.grep_fuzzy,                           Opt("Telescope: Fuzzy finder"))
+    vim.keymap.set('n', '<Leader>gt', ts.builtin().git_status,                 Opt("Telescope: Git status"))
+    vim.keymap.set('n', '<Leader>cm', ts.builtin().git_commits,                Opt("Telescope: Git commits"))
+    vim.keymap.set('n', '<C-p>',      ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
+    vim.keymap.set('i', '<C-p>',      ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
+    vim.keymap.set('n', '<Leader>fp', ts.extensions().media_files.media_files, Opt("Telescope: Show media files"))
+    vim.keymap.set('n', '<Leader>fb', ts.builtin().buffers,                    Opt("Telescope: Show active buffers"))
+    vim.keymap.set('n', '<Leader>fh', ts.builtin().help_tags,                  Opt("Telescope: interactive help menu"))
+    vim.keymap.set('n', '<Leader>fo', ts.builtin().oldfiles,                   Opt("Telescope: Previously edited files"))
+    vim.keymap.set('n', '<Leader>fk', ts.builtin().keymaps,                    Opt("Telescope: Show all keybinds"))
+    vim.keymap.set('n', '<Leader>f#', ts.builtin().grep_string,                Opt("Telescope: Find word under cursor"))
+    vim.keymap.set('n', '<Leader>fs', ts.grep_string,                          Opt("Telescope: Grep string using statusline"))
+end
 
 -----------------
 --  GIT SIGNS  --
@@ -213,11 +231,11 @@ vim.keymap.set('n', '<Leader>fs', ts.grep_string,                          Opt("
 
 -- vim.keymap.set("n", "]c",         {expr = true, '&diff ? \']c\' : \'<cmd>lua require"gitsigns".next_hunk()<CR>\''}, opt)
 -- vim.keymap.set("n", "[c",         {expr = true, '&diff ? \'[c\' : \'<cmd>lua require"gitsigns".prev_hunk()<CR>\''}, opt)
-vim.keymap.set("n", "<leader>hs", '<cmd>lua require"gitsigns".stage_hunk()<CR>',      opt)
-vim.keymap.set("n", "<leader>hu", '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>', opt)
-vim.keymap.set("n", "<leader>hr", '<cmd>lua require"gitsigns".reset_hunk()<CR>',      opt)
-vim.keymap.set("n", "<leader>hp", '<cmd>lua require"gitsigns".preview_hunk()<CR>',    opt)
-vim.keymap.set("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line()<CR>',      opt)
+pmap("n", "<leader>hs", '<cmd>lua require"gitsigns".stage_hunk()<CR>')
+pmap("n", "<leader>hu", '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>')
+pmap("n", "<leader>hr", '<cmd>lua require"gitsigns".reset_hunk()<CR>')
+pmap("n", "<leader>hp", '<cmd>lua require"gitsigns".preview_hunk()<CR>')
+pmap("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line()<CR>')
 
 ----------------------------------
 --  BURN ARROWS and PGUP/PGDWN  --

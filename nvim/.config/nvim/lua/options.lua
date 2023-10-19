@@ -149,17 +149,6 @@ vim.api.nvim_create_autocmd({'FocusLost', 'BufLeave'}, {
     end
 })
 
--- Fix indent-blankline from showing on horizontal move
-vim.api.nvim_create_augroup('IndentBlankLineFix', {})
-vim.api.nvim_create_autocmd('WinScrolled', {
-  group = 'IndentBlankLineFix',
-  callback = function()
-    if vim.v.event.all.leftcol ~= 0 then
-      vim.cmd('silent! IndentBlanklineRefresh')
-    end
-  end,
-})
-
 -----------------
 --  FUNCTIONS  --
 -----------------
