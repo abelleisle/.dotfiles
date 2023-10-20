@@ -159,5 +159,7 @@ fi
 run ${STOW_CMD} zsh
 
 header "Setting zsh as default shell"
-sudo chsh -s $(which zsh) ${DOTFILES_USER}
+run sudo chsh -s $(which zsh) ${DOTFILES_USER}
 
+header "Sourcing .zshrc to install deps"
+zsh -c "source ~/.zshrc"
