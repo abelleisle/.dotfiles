@@ -21,7 +21,7 @@ function M.tbl_deep_extend(...)
 end
 
 function M.hl_to_hex(hl_num)
-  return string.format("#%X", hl_num)
+  return string.format("#%06X", hl_num)
 end
 
 function M.hex_to_rgb(hex_str)
