@@ -110,6 +110,9 @@ elif [[ -n $(command -v vi) ]]; then
 fi
 export VISUAL="$EDITOR"
 
+# Sets the SHELL env variable so tmux opens the correct shell
+export SHELL="$(which zsh)"
+
 # If wal is used, source the wal colors
 if [ -d ~/.cache/wal ]; then
     cat ~/.cache/wal/sequences
