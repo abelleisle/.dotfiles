@@ -83,7 +83,7 @@ case `uname` in
             # We check MacOS first because for some reason it defines 'apt'. Dumb. I know.
             run brew upgrade;
             # MacOS doesn't need zsh or bc because they are installed by default
-            run brew install stow neovim ripgrep fzf curl;
+            run brew install stow neovim ripgrep fzf curl tmux;
         else
             error "Homebrew not installed! Please install it."
         fi;;
@@ -94,7 +94,7 @@ case `uname` in
         if exists apt; then
             info "Using apt.. Installing the following programs:"
             run sudo apt update;
-            run sudo apt install -y stow zsh ripgrep fzf curl bc;
+            run sudo apt install -y stow zsh ripgrep fzf curl bc tmux;
             header "Installing neovim"
             case `uname -m` in
                 # ARM CPU
@@ -163,3 +163,9 @@ run sudo chsh -s $(which zsh) ${DOTFILES_USER}
 
 header "Sourcing .zshrc to install deps"
 zsh -c "source ~/.zshrc"
+
+####################
+#  CONFIGURE TMUX  #
+####################
+header "Installing tmux configs"
+run ${STOW_CMD} tmux
