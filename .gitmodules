@@ -23,3 +23,6 @@
 [submodule "zsh/.custom-zsh/plugins/fast-syntax-highlighting"]
 	path = zsh/.custom-zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting
+[submodule "tmux/.tmux/plugins/tpm"]
+	path = tmux/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
