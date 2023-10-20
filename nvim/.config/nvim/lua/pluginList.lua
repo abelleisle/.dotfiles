@@ -20,7 +20,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- If we can't install plugins, don't bother
-vim.g.plugins_installed = vim.fn.has("nvim-0.8.0")
+vim.g.plugins_installed = vim.fn.has("nvim-0.8.0") ~= 0
 if not vim.g.plugins_installed then
     return
 end

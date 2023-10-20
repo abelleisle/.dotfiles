@@ -103,8 +103,9 @@ local function isViProcess(pane)
     -- get_foreground_process_name On Linux, macOS and Windows,
     -- the process can be queried to determine this path. Other operating systems
     -- (notably, FreeBSD and other unix systems) are not currently supported
-    return pane:get_foreground_process_name():find('n?vim') ~= nil
-    -- return pane:get_title():find("n?vim") ~= nil
+    local process_is_nvim = (nil ~= pane:get_foreground_process_name():find('n?vim'))
+    local pane_is_nvim    = (nil ~= pane:get_title():find("n?vim"))
+    return process_is_nvim or pane_is_nvim
 end
 
 local function isTmuxProcess(pane)
