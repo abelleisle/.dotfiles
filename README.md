@@ -2,7 +2,7 @@
 
 This is a stub mirror. The full source code for this commit is at:
 
-https://git.bitcicle.com/andy/.dotfiles/src/commit/8653a1c0573fa758656bee9af4e1a82c6087d8f7
+https://git.bitcicle.com/andy/.dotfiles/src/commit/1bda5df8951b16a314fc5f26707121fd3b2b75a4
 
 To browse or clone the full repository, visit:
 
