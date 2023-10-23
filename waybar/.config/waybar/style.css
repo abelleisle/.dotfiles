@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-    background-image: linear-gradient(0.25turn, transparent, @color8, transparent);
+    /* background-image: linear-gradient(0.25turn, transparent, @color8, transparent); */
     background-color: transparent;
     /* border-image: linear-gradient(to right, @color7, @color8) 5; */
     /* border-bottom: 3px solid; */
@@ -99,6 +99,7 @@ button {
 #network,
 #tray,
 #idle_inhibitor,
+#window,
 #mpd {
     color: @foreground;
     margin-top: 4px;
@@ -112,6 +113,11 @@ button {
 
 #clock {
     background-color: @color8;
+}
+
+#window {
+    color: @background;
+    background-color: @color7;
 }
 
 label:focus {

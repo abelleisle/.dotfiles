@@ -381,17 +381,6 @@ return require('lazy').setup({
         end
     },
 
-    -- { -- Auto-save
-    --     "Pocco81/auto-save.nvim",
-    --     event = lazy_events,
-    --     config = function()
-    --         require("plugins.autosave").config()
-    --     end,
-    --     cond = function() -- Only enable if auto save is enabled
-    --         return false
-    --     end
-    -- },
-
     { -- Show current function/class context
         "nvim-treesitter/nvim-treesitter-context",
         dependencies = "nvim-treesitter",
