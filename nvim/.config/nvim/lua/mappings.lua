@@ -180,7 +180,7 @@ pmap("n", "<Leader>fm", ":Neoformat<CR>", Opt("Display: Format the current file"
 --  DASHBOARD  --
 -----------------
 
-pmap("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], Opt("Display: Show all TODOs in current project"))
+-- pmap("n", "<Leader>ft", [[<Cmd> TodoTelescope<CR>]], Opt("Display: Show all TODOs in current project"))
 -- map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
 -- map("n", "<Leader>fn", [[<Cmd> DashboardNewFile<CR>]], opt)
 -- map("n", "<Leader>bm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
@@ -223,6 +223,7 @@ if vim.g.plugins_installed then
     vim.keymap.set('n', '<Leader>fk', ts.builtin().keymaps,                    Opt("Telescope: Show all keybinds"))
     vim.keymap.set('n', '<Leader>f#', ts.builtin().grep_string,                Opt("Telescope: Find word under cursor"))
     vim.keymap.set('n', '<Leader>fs', ts.grep_string,                          Opt("Telescope: Grep string using statusline"))
+    vim.keymap.set('n', '<Leader>ft', ts.builtin().lsp_document_symbols,       Opt("Telescope: Show LSP symbols in current file"))
 end
 
 -----------------
