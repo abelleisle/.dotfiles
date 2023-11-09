@@ -11,6 +11,7 @@ M.config = function()
             "latex",
             "bash",
             "json",
+            "jsonc",
             "python",
             "lua",
             "html",

@@ -348,7 +348,7 @@ return require('lazy').setup({
         cmd = "StartupTime"
     },
 
-    {
+    { -- Auto buffer resizing
         "anuvyklack/windows.nvim",
         dependencies = {
             "anuvyklack/middleclass",
@@ -473,13 +473,22 @@ return require('lazy').setup({
         end
     },
 
-    {
+    { -- Various small utilies
         "echasnovski/mini.nvim",
         branch = 'main',
         event = Events.OpenFile,
         config = function()
             require("plugins.mini").config()
         end
+    },
+
+    { -- Devcontainer support
+        "https://codeberg.org/esensar/nvim-dev-container",
+        config = function()
+            require("devcontainer").setup {
+            }
+        end
+
     },
 
     --------------------
