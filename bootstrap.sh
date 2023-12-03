@@ -83,7 +83,7 @@ case `uname` in
             # We check MacOS first because for some reason it defines 'apt'. Dumb. I know.
             run brew upgrade;
             # MacOS doesn't need zsh or bc because they are installed by default
-            run brew install stow neovim ripgrep fzf curl tmux make cmake;
+            run brew install stow neovim ripgrep fzf curl tmux make cmake gcc g++;
         else
             error "Homebrew not installed! Please install it."
         fi;;
@@ -94,7 +94,7 @@ case `uname` in
         if exists apt; then
             info "Using apt.. Installing the following programs:"
             run sudo apt update;
-            run sudo apt install -y stow zsh ripgrep fzf curl bc tmux make cmake;
+            run sudo apt install -y stow zsh ripgrep fzf curl bc tmux make cmake gcc g++;
             header "Installing neovim"
             case `uname -m` in
                 # ARM CPU
@@ -107,9 +107,11 @@ case `uname` in
                 # x86
                 x86_64)
                     warn "Apt usually has an outdated neovim. Installing directly from github.";
+                    run sudo apt install fuse -y
                     mkdir -p ${HOME}/bin
                     run curl -Lo ${HOME}/bin/nvim https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-                    chmod u+x ${HOME}/bin/nvim;;
+                    chmod u+x ${HOME}/bin/nvim
+                    PATH=${HOME}/bin:${PATH};;
                 *) error "Unsupported arch: $(uname -m)"
             esac
         # Not apt
