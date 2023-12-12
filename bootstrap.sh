@@ -82,7 +82,7 @@ case `uname` in
         if exists brew; then
             # We check MacOS first because for some reason it defines 'apt'. Dumb. I know.
             run brew upgrade;
-            # MacOS doesn't need zsh or bc because they are installed by default
+            # MacOS doesn't need zsh, bc, or unzip because they are installed by default
             run brew install stow neovim ripgrep fzf curl tmux make cmake gcc g++;
         else
             error "Homebrew not installed! Please install it."
@@ -94,7 +94,7 @@ case `uname` in
         if exists apt; then
             info "Using apt.. Installing the following programs:"
             run sudo apt update;
-            run sudo apt install -y stow zsh ripgrep fzf curl bc tmux make cmake gcc g++;
+            run sudo apt install -y stow zsh ripgrep fzf curl bc tmux make cmake gcc g++ unzip;
             header "Installing neovim"
             case `uname -m` in
                 # ARM CPU
