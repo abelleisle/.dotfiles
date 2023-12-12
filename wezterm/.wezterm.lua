@@ -110,7 +110,9 @@ end
 
 local function isTmuxProcess(pane)
     -- see: isViProcess
-    return pane:get_foreground_process_name():find('tmux') ~= nil
+    local process_is_tmux = (nil ~= pane:get_foreground_process_name():find('tmux'))
+    local pane_is_tmux    = (nil ~= pane:get_title():find("tmux"))
+    return process_is_tmux or pane_is_tmux
 end
 
 local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
