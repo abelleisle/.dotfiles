@@ -23,13 +23,13 @@
 
   outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs: let
     # Overlays is the list of overlays we want to apply from flake inputs.
-    # overlays = [
+    overlays = [
     #   inputs.neovim-nightly-overlay.overlay
     #   inputs.zig.overlays.default
-    # ];
+    ];
 
     mkSystem = import ./lib/mksystem.nix {
-      inherit nixpkgs inputs; # overlays;
+      inherit nixpkgs overlays inputs;
     };
   in {
     nixosConfigurations.Eowyn = mkSystem "Eowyn" {
