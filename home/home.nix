@@ -1,6 +1,12 @@
 { config, pkgs, user, ... }:
 
 {
+  config.lib.meta = {
+    configPath = "${config.${users.users.${user}}.home}/.dotfiles";
+    mkMutableSymlink = path: config.lib.file.mkOutOfStoreSymlink
+      (config.lib.meta.configPath + removePrefix (toString inputs.self) (toString path));
+  };
+
   home = {
     packages = [
       fzf
@@ -13,12 +19,9 @@
 
     stateVersion = "23.11";
 
-    xdg = {
-      enable = true;
-      configFile = {
-        "nvim".source = {
-          config.lib.file.mkOutOfStoreSymLink ./nvim/.config/nvim;
-        };
+    file = {
+      ".config/nvim/" = {
+        source = config.lib.meta.mkMutableSymlink ./nvim/.config/nvim;
       };
     };
   };
