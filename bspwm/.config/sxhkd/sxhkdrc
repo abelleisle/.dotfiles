@@ -9,15 +9,15 @@ super + Return
     #alacritty
 
 # Program launcher
-super + d
+super + space
     rofi -modi "drun" -show drun -display-drun ">>>"
 
 # Window Switcher
-super + shift + d
+super + shift + space
     rofi -show window -display-window ">>>"
 
 # Application Launcher
-super + ctrl + d
+super + ctrl + space
     rofi -show run -display-run ">>>"
 
 # Make sxhkd reload its configuration files:

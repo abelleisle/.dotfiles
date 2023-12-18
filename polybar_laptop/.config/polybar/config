@@ -92,7 +92,7 @@ font-3 = Siji:pixelsize=11;1
 
 modules-left = bspwm backlight-acpi pulseaudio bluetooth
 modules-center = date
-modules-right = vpn memory cpu temperature wlan eth ethusb battery powermenu
+modules-right = vpn memory cpu temperature wlan rfkill eth ethusb battery powermenu
 
 tray-position = right
 tray-padding = 2
@@ -301,6 +301,13 @@ animation-packetloss-0-background = ${colors.alert}
 animation-packetloss-1 = 
 animation-packetloss-1-foreground = ${colors.foreground}
 animation-packetloss-1-background = ${colors.background}
+
+[module/rfkill]
+type = custom/script
+exec = ~/.config/polybar/scripts/rfkill
+interval = 10
+format-prefix = ""
+format-underline = ${colors.magenta}
 
 [module/eth]
 type = internal/network
