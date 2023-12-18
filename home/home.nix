@@ -1,17 +1,15 @@
-{ config, pkgs, user, ... }:
-
-{
-  config.lib.meta = {
-    configPath = "${config.${users.users.${user}}.home}/.dotfiles";
+{ config, pkgs, user, lib, inputs, ... }:
+let
+    configPath = "${config.users.user.${user}.home}/.dotfiles";
     mkMutableSymlink = path: config.lib.file.mkOutOfStoreSymlink
-      (config.lib.meta.configPath + removePrefix (toString inputs.self) (toString path));
-  };
-
+      (configPath + lib.string.removePrefix (toString inputs.self) (toString path));
+in
+{
   home = {
-    packages = [
+    packages = with pkgs; [
       fzf
       neovim
-      rg
+      ripgrep
       tmux
       stow
       zsh
@@ -21,7 +19,7 @@
 
     file = {
       ".config/nvim/" = {
-        source = config.lib.meta.mkMutableSymlink ./nvim/.config/nvim;
+        source = mkMutableSymlink ./nvim/.config/nvim;
       };
     };
   };

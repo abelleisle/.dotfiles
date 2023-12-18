@@ -11,7 +11,7 @@ hostname:
 
 let
   # The config files for this system.
-  machineConfig = ../machines/${name}.nix;
+  machineConfig = ../machines/${hostname}.nix;
   userOSConfig = ../users/${user}/${if darwin then "darwin" else "linux" }.nix;
   userHMConfig = ../home/home.nix;
 
@@ -25,7 +25,7 @@ in systemFunc rec {
     # Apply our overlays. Overlays are keyed by system type so we have
     # to go through and apply our system type. We do this first so
     # the overlays are available globally.
-    { nixpkgs.overlays = overlays; }
+    # { nixpkgs.overlays = overlays; }
 
     machineConfig
     userOSConfig
@@ -33,7 +33,6 @@ in systemFunc rec {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${user} = import userHMConfig {
-        isWSL = isWSL;
         inputs = inputs;
       };
     }
@@ -43,7 +42,7 @@ in systemFunc rec {
     {
       config._module.args = {
         currentSystem = system;
-        currentSystemName = name;
+        currentSystemName = hostname;
         currentSystemUser = user;
         inputs = inputs;
       };
