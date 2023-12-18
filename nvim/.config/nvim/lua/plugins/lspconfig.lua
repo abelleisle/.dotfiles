@@ -202,7 +202,7 @@ M.config = function()
                     }
                 },
                 cmd = { "clangd" },
-                filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "arduino" },
                 --root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')
                 --root_dir = vim.loop.cwd,
                 root_dir = function(fname)

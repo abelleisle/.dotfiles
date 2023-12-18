@@ -110,7 +110,9 @@ end
 
 local function isTmuxProcess(pane)
     -- see: isViProcess
-    return pane:get_foreground_process_name():find('tmux') ~= nil
+    local process_is_tmux = (nil ~= pane:get_foreground_process_name():find('tmux'))
+    local pane_is_tmux    = (nil ~= pane:get_title():find("tmux"))
+    return process_is_tmux or pane_is_tmux
 end
 
 local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
@@ -125,6 +127,16 @@ local function conditionalActivatePane(window, pane, pane_direction, vim_directi
     end
 end
 
+local function conditionalActivateTab(window, pane, tab_dirction, tmux_direction)
+    if isTmuxProcess(pane) then
+        -- This should match the keybinds set in tmux. Kinda hacky ngl.
+        window:perform_action(wezaction.SendKey({ key = 'b', mods = 'CTRL' }), pane)
+        window:perform_action(wezaction.SendKey({key = tmux_direction}), pane)
+    else
+        window:perform_action(wezaction.ActivateTabRelative(tab_dirction), pane)
+    end
+end
+
 wezterm.on('ActivatePaneDirection-right', function(window, pane)
     conditionalActivatePane(window, pane, 'Right', 'l')
 end)
@@ -136,6 +148,12 @@ wezterm.on('ActivatePaneDirection-up', function(window, pane)
 end)
 wezterm.on('ActivatePaneDirection-down', function(window, pane)
     conditionalActivatePane(window, pane, 'Down', 'j')
+end)
+wezterm.on('ActivateTabDirection-next', function(window, pane)
+    conditionalActivateTab(window, pane, 1, 'n')
+end)
+wezterm.on('ActivateTabDirection-prev', function(window, pane)
+    conditionalActivateTab(window, pane, -1, 'p')
 end)
 
 ----------------------------------------------------
@@ -229,9 +247,11 @@ return {
         --
         -- Note: These MUST match the bindings in nvim/tmux for it to work properly
         --
-        { key = 'h', mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-left') },
-        { key = 'j', mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-down') },
-        { key = 'k', mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-up')   },
-        { key = 'l', mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-right')},
+        { key = 'h',        mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-left') },
+        { key = 'j',        mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-down') },
+        { key = 'k',        mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-up')   },
+        { key = 'l',        mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-right')},
+        { key = 'PageDown', mods = 'CTRL', action = wezaction.EmitEvent('ActivateTabDirection-next')  },
+        { key = 'PageUp',   mods = 'CTRL', action = wezaction.EmitEvent('ActivateTabDirection-prev')  },
     },
 }

@@ -114,10 +114,6 @@ M.config = function()
         disable_netrw       = false,
         -- hijack netrw window on startup
         hijack_netrw        = true,
-        -- open the tree when running this setup function
-        open_on_setup       = false,
-        -- will not open on setup if the filetype is in this list
-        ignore_ft_on_setup  = {},
         -- closes neovim automatically when the tree is the last **WINDOW** in the view
         --auto_close          = true,
         -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
