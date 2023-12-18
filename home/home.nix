@@ -1,4 +1,5 @@
-{ config, pkgs, user, lib, inputs, ... }:
+{ user, inputs, ... }:
+{ config, pkgs, lib, ... }:
 let
     configPath = "${config.users.user.${user}.home}/.dotfiles";
     mkMutableSymlink = path: config.lib.file.mkOutOfStoreSymlink
