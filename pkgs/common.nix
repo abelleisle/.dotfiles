@@ -6,7 +6,7 @@
       keep-outputs = true
       keep-derivations = true
     '';
-  }
+  };
 
   environment.systemPackages = with pkgs; [
     git
@@ -18,6 +18,6 @@
     settings = {
         PasswordAuthentication = true;
         PermitRootLogin = "no";
-    }
+    };
   };
 }
