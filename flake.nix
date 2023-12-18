@@ -33,7 +33,7 @@
     ];
 
     mkSystem = import ./lib/mksystem.nix {
-      inherit nixpkgs overlays inputs disko;
+      inherit nixpkgs overlays inputs;
     };
   in {
     nixosConfigurations.Eowyn = mkSystem "Eowyn" {

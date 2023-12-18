@@ -1,28 +1,18 @@
 { pkgs, disko, ... }: {
-  options = {
-    disko.rootDisk = lib.mkOption {
-      type = lib.types.str;
-      default = "/dev/sda";
-      description = "The device to use for the disk";
-    };
-  };
-  config = {
     disko.devices = {
       disk = {
         vdb = {
-          device = config.disko.rootDisk;
+          device = "/dev/vda";
           type = "disk";
           content = {
-            type = "table";
-            format = "gpt";
+            type = "gpt";
             partitions = {
               ESP = {
                 size = "500M";
-                bootable = true;
                 content = {
                   type = "filesystem";
                   format = "vfat";
-                  mountpoint = "/boot";
+                  mountpoint = "/boot/efi";
                 };
               };
               root = {
@@ -38,5 +28,4 @@
         };
       };
     };
-  };
 }
