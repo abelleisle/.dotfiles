@@ -18,8 +18,10 @@ let
   # NixOS vs nix-darwin functionst
   systemFunc = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
   home-manager = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
+
+  nixos-hardware = inputs.nixos-hardware;
 in systemFunc rec {
-  inherit system;
+  inherit system nixos-hardware;
 
   modules = [
     # Apply our overlays. Overlays are keyed by system type so we have

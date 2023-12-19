@@ -14,6 +14,8 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +27,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, darwin, ... }@inputs: let
+  outputs = { self, nixpkgs, disko, nixos-hardware, home-manager, darwin, ... }@inputs: let
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
     #   inputs.neovim-nightly-overlay.overlay

@@ -1,7 +1,8 @@
-{ system, config, pkgs, ... }: {
+{ system, config, pkgs, nixos-hardware, ... }: {
   imports = [
     ../pkgs/common.nix
     # ./Eowyn/disko.nix
+    nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
   ];
 
   system.stateVersion = "23.11";
