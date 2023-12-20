@@ -2,7 +2,8 @@ swap/
 undo/
 plugged/
 
-bspwm/.config/bspwm/bspwm-config
-ncspot/.config/ncspot/userstate.cbor
+config/bspwm/.config/bspwm/bspwm-config
+config/ncspot/.config/ncspot/userstate.cbor
+config/zsh/.zsh/*.local
 
-zsh/.zsh/*.local
+result/

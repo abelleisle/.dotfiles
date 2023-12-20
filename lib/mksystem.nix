@@ -1,6 +1,6 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
-{ nixpkgs, overlays, inputs }:
+{ inputs, ... }:
 
 hostname:
 {
@@ -10,6 +10,17 @@ hostname:
 }:
 
 let
+  inherit
+    (inputs)
+    nixpkgs
+    nixpkgs-unstable
+    flake-registry
+    nixos-hardware
+    nixos-generators
+    disko
+    overlays
+    ;
+
   # The config files for this system.
   machineConfig = ../machines/${hostname}.nix;
   userOSConfig = ../users/${user}/${if darwin then "darwin" else "linux" }.nix;
@@ -19,11 +30,16 @@ let
   systemFunc = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
   home-manager = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
 
-  nixos-hardware = inputs.nixos-hardware;
-in systemFunc rec {
-  inherit system nixos-hardware;
+  commonModules = [
+    {
+      _module.args.inputs = inputs;
+    }
+  ];
 
-  modules = [
+in systemFunc rec {
+  inherit system;
+
+  modules = commonModules // [
     # Apply our overlays. Overlays are keyed by system type so we have
     # to go through and apply our system type. We do this first so
     # the overlays are available globally.

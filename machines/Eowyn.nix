@@ -1,23 +1,25 @@
-{ system, config, pkgs, nixos-hardware, ... }: {
+{
   imports = [
-    ../pkgs/common.nix
-    # ./Eowyn/disko.nix
-    nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
+    ../modules/common.nix
+    # ./Eowyn/hardware.nix
   ];
 
   system.stateVersion = "23.11";
+  networking.hostName = "Eowyn";
 
-  filesystem."/" = {
-    device = "/dev/disk/by-label/root";
-    fstype = "ext4";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/root";
+      fsType = "ext4";
+    };
+
+    "/boot/efi" = {
+      device = "/dev/disk/by-label/boot";
+      fsType = "vfat";
+    };
   };
 
-  filesystem."/boot/efi" = {
-    device = "/dev/disk/by-label/boot";
-    fstype = "vfat";
-  };
-
-  swapdevices = [
+  swapDevices = [
     {
       device = "/dev/disk/by-label/swap";
     }
