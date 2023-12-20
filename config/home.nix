@@ -1,4 +1,9 @@
-{ user, hostname, inputs }: # Inputs for system-specific configs
+{
+  user,
+  hostname,
+  inputs,
+  wezterm ? false,
+}: # Inputs for system-specific configs
 { config, pkgs, lib, ... }: # Standard nixos module inputs
 let
   homeFolder = (baseDir:
@@ -27,6 +32,10 @@ let
     in
       lib.attrsets.mergeAttrsList (lib.lists.flatten (iterDir []))
   );
+
+  weztermMod = import ./wezterm/wezterm.nix {
+      inherit user hostname inputs;
+  };
 in
 {
   home = {
@@ -46,7 +55,12 @@ in
 
   programs = {
     home-manager.enable = true;
+    wezterm.enable = wezterm;
   };
+
+  imports = [
+    weztermMod
+  ];
 
   # home.activation.copyHomeFiles = let
   #   src = config.home-files;

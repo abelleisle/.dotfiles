@@ -54,23 +54,24 @@ in
             hmLinux.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              # home-manager.users."andy" = import ./config/home.nix {
-              #   inputs = self.inputs;
-              #   user = "andy";
-              #   hostname = "Eowyn";
-              # };
-              home-manager.users."andy".imports = [
-                (import ./config/home.nix {
-                  inputs = self.inputs;
-                  user = "andy";
-                  hostname = "Eowyn";
-                })
-                (import ./machines/Eowyn/home.nix {
-                  inputs = self.inputs;
-                  user = "andy";
-                  hostname = "Eowyn";
-                })
-              ];
+              home-manager.users."andy" = import ./config/home.nix {
+                inputs = self.inputs;
+                user = "andy";
+                hostname = "Eowyn";
+                wezterm = true;
+              };
+              # home-manager.users."andy".imports = [
+              #   (import ./config/home.nix {
+              #     inputs = self.inputs;
+              #     user = "andy";
+              #     hostname = "Eowyn";
+              #   })
+              #   (import ./machines/Eowyn/home.nix {
+              #     inputs = self.inputs;
+              #     user = "andy";
+              #     hostname = "Eowyn";
+              #   })
+              # ];
             }
           ];
         system = "x86_64-linux";
