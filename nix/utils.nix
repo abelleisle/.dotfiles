@@ -56,7 +56,7 @@
           nix.package = pkgs.nix;
           home = {
             inherit stateVersion username;
-            homeDirectory = "/home/${username}";
+            homeDirectory = if darwin then "/Users/${username}" else "/home/${username}";
           };
         }
       ];
@@ -66,7 +66,7 @@
   # for nixos
   mkComputer =
     { machineConfig
-    , user ? sensitive.lib.user
+    , user ? "andy"
     , wm ? ""
     , extraModules ? [ ]
     , userConfigs ? [ ]
@@ -74,6 +74,7 @@
     , isDarwin ? false
     }: let
       mkSystem = if isDarwin then darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
+      mkHomeMg = if isDarwin then home-manager.darwinModules else home-manager.nixosModules;
     in mkSystem {
       inherit system pkgs;
       # Arguments to pass to all modules.
@@ -86,7 +87,7 @@
         ./common.nix
 
         # home-manager configuration
-        home-manager.nixosModules.home-manager
+        mkHomeMg.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;

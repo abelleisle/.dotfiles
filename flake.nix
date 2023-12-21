@@ -49,7 +49,11 @@
       in
       rec {
         nixosConfigurations = {
-
+          Eowyn = utils.mkComputer {
+            machineConfig = ./nix/machines/Eowyn.nix;
+            user = "andy";
+            wm = "plasma";
+          };
         };
 
         homeConfigurations = {
