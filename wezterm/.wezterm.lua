@@ -247,11 +247,13 @@ return {
         --
         -- Note: These MUST match the bindings in nvim/tmux for it to work properly
         --
-        { key = 'h',        mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-left') },
-        { key = 'j',        mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-down') },
-        { key = 'k',        mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-up')   },
-        { key = 'l',        mods = 'CTRL', action = wezaction.EmitEvent('ActivatePaneDirection-right')},
-        { key = 'PageDown', mods = 'CTRL', action = wezaction.EmitEvent('ActivateTabDirection-next')  },
-        { key = 'PageUp',   mods = 'CTRL', action = wezaction.EmitEvent('ActivateTabDirection-prev')  },
+        { key = 'h',        mods = 'CTRL',       action = wezaction.EmitEvent('ActivatePaneDirection-left') },
+        { key = 'j',        mods = 'CTRL',       action = wezaction.EmitEvent('ActivatePaneDirection-down') },
+        { key = 'k',        mods = 'CTRL',       action = wezaction.EmitEvent('ActivatePaneDirection-up')   },
+        { key = 'l',        mods = 'CTRL',       action = wezaction.EmitEvent('ActivatePaneDirection-right')},
+        { key = 'PageDown', mods = 'CTRL',       action = wezaction.EmitEvent('ActivateTabDirection-next')  },
+        { key = 'PageUp',   mods = 'CTRL',       action = wezaction.EmitEvent('ActivateTabDirection-prev')  },
+        { key = 'Tab',      mods = 'CTRL',       action = wezaction.EmitEvent('ActivateTabDirection-next')  },
+        { key = 'Tab',      mods = 'CTRL|SHIFT', action = wezaction.EmitEvent('ActivateTabDirection-prev')  },
     },
 }
