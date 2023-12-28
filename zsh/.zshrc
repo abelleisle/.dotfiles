@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -56,8 +58,15 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 # Start completions
+# autoload -Uz compinit
+# compinit #-d ~/.cache/zsh/zcompdump-$ZSH_VERSION
+
+# Start completions and only refresh the comp dump once every 24 hours
 autoload -Uz compinit
-compinit #-d ~/.cache/zsh/zcompdump-$ZSH_VERSION
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 # Extra plugins and themes
 export ZSH_CUSTOM=$HOME/.custom-zsh
@@ -123,3 +132,5 @@ fi
 #zstyle ':completion:*' menu select
 zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
 fpath+=~/.zfunc
+
+# zprof
