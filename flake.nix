@@ -31,43 +31,39 @@
   outputs = { self, nixpkgs, flake-utils, home-manager, darwin, ... } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        stateVersion = "23.11";
-
-        overlays = [];
-
-        # pkgs = nixpkgs.legacyPackages.${system};
         pkgs = import nixpkgs {
-          inherit system overlays;
-
+          inherit system;
         };
+      in{
+      devShells.default =
+        (import ./nix/devshell.nix {
+          inherit pkgs;
+        });
+    }) // (
+    let
+      stateVersion = "23.11";
 
-        utils = import ./nix/utils.nix {
-          inherit inputs self home-manager
-            darwin nixpkgs system
-            pkgs stateVersion;
+      utils = import ./nix/utils.nix {
+        inherit inputs self home-manager
+          darwin nixpkgs stateVersion;
+      };
+    in
+    rec {
+      nixosConfigurations = {
+        Eowyn = (utils "x86_64-linux").mkComputer {
+          machineConfig = ./nix/machines/Eowyn.nix;
+          user = "andy";
+          wm = "plasma";
         };
-      in
-      rec {
-        nixosConfigurations = {
-          Eowyn = utils.mkComputer {
-            machineConfig = ./nix/machines/Eowyn.nix;
-            user = "andy";
-            wm = "plasma";
-          };
-        };
+      };
 
-        homeConfigurations = {
+      homeConfigurations = {
 
-        };
+      };
 
-        lib.utils = utils;
-
-        devShells.default =
-          (import ./nix/devshell.nix {
-            inherit pkgs;
-          });
-      }
-    );
+      lib.utils = utils;
+    }
+  );
 
   # outputs = { flake-parts, ... } @ inputs:
   # (flake-parts.lib.evalFlakeModule { inherit inputs; }

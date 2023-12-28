@@ -3,11 +3,17 @@
 , home-manager
 , nixpkgs
 , darwin
-, sensitive
-, pkgs
-, system
+# , sensitive
 , stateVersion
-}: rec {
+}: system: rec {
+
+  overlays = [];
+
+  # pkgs = nixpkgs.legacyPackages.${system};
+  pkgs = import nixpkgs {
+    inherit system overlays;
+  };
+
 
   # Window managers used by the system
   wms = {
@@ -79,7 +85,7 @@
       inherit system pkgs;
       # Arguments to pass to all modules.
       specialArgs = {
-        inherit system inputs sensitive user self isContainer stateVersion;
+        inherit system inputs /*sensitive*/ user self isContainer stateVersion;
       };
       modules = [
         # System configuration for this host
