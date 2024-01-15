@@ -74,7 +74,7 @@ M.servers = {
     python = lsp_entry("jedi_language_server"       ),
     rust   = lsp_entry("rust_analyzer"              ),
     cmake  = lsp_entry("cmake"                      ),
-    nix    = lsp_entry("rnix"                , false),
+    nix    = lsp_entry("nil_ls"              ,  true),
  -- yaml   = lsp_entry("yaml-language-server", false),
     ccls   = lsp_entry("ccls"                , false),
     vhdl   = lsp_entry("rust_hdl"            , false),
@@ -273,9 +273,8 @@ M.config = function()
         end,
         [M.servers.nix.lsp] = function()
             local nix_opts = vim.tbl_deep_extend("force", opts, {
-                default_config = {
-                    settings = {};
-                };
+                root_dir = lspconfig_util.root_pattern("flake.nix", ".git"),
+                single_file_support = true,
             })
             lspconfig[M.servers.nix.lsp].setup(nix_opts)
         end,
