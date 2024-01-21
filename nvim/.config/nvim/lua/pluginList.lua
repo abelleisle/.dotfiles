@@ -97,7 +97,8 @@ return require('lazy').setup({
     },
 
     { -- Telescope plugins
-        {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
+        {"abelleisle/telescope-fzf-native.nvim", build = "make"}, -- Prod
+        -- {dir = "~/Development/telescope-fzf-native.nvim", build = "make"}, -- Dev
         {"nvim-telescope/telescope-media-files.nvim"},
         lazy = true,
     },

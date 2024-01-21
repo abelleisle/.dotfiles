@@ -54,8 +54,8 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # ZSH History Settings
 HIST_STAMPS="mm/dd/yyyy"
 #HISTFILE=~/.cache/zsh/zsh_histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Start completions
 # autoload -Uz compinit
