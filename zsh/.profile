@@ -46,6 +46,11 @@ if [ -d "$HOME/.zig" ] ; then
     PATH="$HOME/.zig:$PATH"
 fi
 
+# Some systems don't have cmake in the repos, so we can install it locally to ~/.cmake
+if [ -d "$HOME/.cmake/bin" ] ; then
+    PATH="$HOME/.cmake/bin:$PATH"
+fi
+
 # If the ESP toolchain is installed, create a function to access it
 idf() {
     if [ -d "$HOME/bin/esp/esp-idf" ] && [ -d "$HOME/bin/esp/toolchain" ] ; then
