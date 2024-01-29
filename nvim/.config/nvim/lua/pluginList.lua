@@ -335,10 +335,10 @@ return require('lazy').setup({
         end
     },
 
-    { -- Automatically set buffer settings based on text
-        "tpope/vim-sleuth",
-        event = Events.OpenFile
-    },
+    -- { -- Automatically set buffer settings based on text
+    --     "tpope/vim-sleuth",
+    --     event = Events.OpenFile
+    -- },
 
     -----------------
     --  UTILITIES  --
