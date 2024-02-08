@@ -131,9 +131,19 @@ local function conditionalActivateTab(window, pane, tab_dirction, tmux_direction
     if isTmuxProcess(pane) then
         -- This should match the keybinds set in tmux. Kinda hacky ngl.
         window:perform_action(wezaction.SendKey({ key = 'b', mods = 'CTRL' }), pane)
-        window:perform_action(wezaction.SendKey({key = tmux_direction}), pane)
+        window:perform_action(wezaction.SendKey({ key = tmux_direction }),     pane)
     else
         window:perform_action(wezaction.ActivateTabRelative(tab_dirction), pane)
+    end
+end
+
+local function conditionalCreateTab(window, pane)
+    if isTmuxProcess(pane) then
+        -- This should match the keybinds set in tmux. Kinda hacky ngl.
+        window:perform_action(wezaction.SendKey({ key = 'b', mods = 'CTRL' }), pane)
+        window:perform_action(wezaction.SendKey({ key = 'c' }),                pane)
+    else
+        window:perform_action(wezaction.SpawnTab('CurrentPaneDomain'), pane)
     end
 end
 
@@ -154,6 +164,9 @@ wezterm.on('ActivateTabDirection-next', function(window, pane)
 end)
 wezterm.on('ActivateTabDirection-prev', function(window, pane)
     conditionalActivateTab(window, pane, -1, 'p')
+end)
+wezterm.on('SpawnTab', function(window, pane)
+    conditionalCreateTab(window, pane)
 end)
 
 ----------------------------------------------------
@@ -255,5 +268,6 @@ return {
         { key = 'PageUp',   mods = 'CTRL',       action = wezaction.EmitEvent('ActivateTabDirection-prev')  },
         { key = 'Tab',      mods = 'CTRL',       action = wezaction.EmitEvent('ActivateTabDirection-next')  },
         { key = 'Tab',      mods = 'CTRL|SHIFT', action = wezaction.EmitEvent('ActivateTabDirection-prev')  },
+        { key = 't',        mods = 'CMD',        action = wezaction.EmitEvent('SpawnTab')                   },
     },
 }
