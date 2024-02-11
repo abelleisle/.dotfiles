@@ -1,110 +1,144 @@
-{ self, ... }:
+{ self, lib, ... }:
 let
   inherit
     (self.inputs)
     nixpkgs
-    nixpkgs-unstable
     flake-registry
+    nixpkgs-unstable
     nixos-hardware
     nixos-generators
-    home-manager
-    darwin
     disko
+    sops-nix
     ;
 
-  nixosSystem = nixpkgs.lib.nixosSystem;
-  darwinSystem = darwin.lib.darwinSystem;
-  hmLinux = home-manager.nixosModules;
-  hmDarwin = home-manager.darwinModules;
+  overlays = [
+    (final: prev: {
+      wings-pterodactyl = prev.callPackage ./pkgs/wings-pterodactyl {};
+    })
+  ];
+
+  mkSystem = hostname: system:
+    { isBareMetal ? true
+    , isVM ? false
+    , isLXC ? false
+    , user ? "andy"
+    , allowUnfree ? false
+    , extraModules ? []
+    }:
+    assert lib.assertMsg
+      ((isVM != isLXC) != isBareMetal)
+      "System (${hostname}) must be one of: LXC, VM, or baremetal.";
+    let
+
+      commonSettings = {
+        time.timeZone = lib.mkDefault "UTC";
+        nix = {
+          nixPath = [
+            "nixpkgs=${pkgs.path}"
+            "nixpkgs-unstable=${pkgs-unstable.path}"
+          ];
+
+          extraOptions = ''
+            experimental-features = nix-command flakes
+            flake-registry = ${flake-registry}/flake-registry.json
+            keep-outputs = true
+            keep-derivations = true
+          '';
+
+          registry = {
+            nixpkgs.flake = nixpkgs;
+          };
+
+          # Automatically clean the nix store of old derivations every Tuesday
+          # at 10:30 UTC (5:30 EST).
+          gc = {
+            automatic = true;
+            dates = "Tue 10:30";
+            options = "--delete-older-than 30d";
+          };
+
+          # Automatically optimise the nix store an hour after garbage
+          # collection at 11:30 UTC (6:30 EST);
+          optimise = {
+            automatic = true;
+            dates = [
+              "Tue 11:30"
+            ];
+          };
+        };
+      };
+
+      pkgs = import nixpkgs {
+        inherit system overlays;
+        config.allowUnfree = allowUnfree;
+      };
+
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+      };
+
+      specialArgs = {
+        inherit pkgs-unstable;
+      };
+
+    in nixpkgs.lib.nixosSystem
+    {
+      inherit system pkgs specialArgs;
+
+      modules =
+        lib.optionals isVM vmModules ++
+        lib.optionals isLXC lxcModules ++
+        lib.optionals isBareMetal bareMetalModules ++
+        [
+          ./nix/machines/${hostname}/configuration.nix
+        ]
+        ++ [commonSettings]
+        ++ extraModules;
+    };
 
   commonModules = [
     {
       _module.args.self = self;
       _module.args.inputs = self.inputs;
     }
-    # ./modules/users.nix
-    # ./modules/packages.nix
+    ./modules/users/admins.nix
+    ./modules/users/extra-opts.nix
+    ./modules/sshd
+    ./modules/packages.nix
+    ./modules/networking/hosts.nix
+    ./modules/networking/ip.nix
+
+    (import ./modules/sops.nix { inherit sops-nix flake-registry nixpkgs; })
   ];
 
-  linuxCommon =
+  vmModules =
     commonModules
     ++ [
-    ./modules/sshd.nix
+    ./modules/bootloader.nix
+    ./modules/disks/disko-ext4.nix
+    ./modules/vm.nix
+
+    disko.nixosModules.disko
   ];
 
-  darwinCommon =
+  lxcModules =
     commonModules
     ++ [
+    ./modules/lxc.nix
+  ];
+
+  bareMetalModules =
+    commonModules
+    ++ [
+    ./modules/bootloader.nix
   ];
 in
 {
-  flake = {
-    nixosConfigurations = {
-      Eowyn = nixosSystem {
-        modules =
-          linuxCommon
-          ++ [
-            ./machines/Eowyn.nix
-            ./users/andy/linux.nix
+  # VM and host systems
+  flake.nixosConfigurations = {
+    # Eowyn: Dev Laptop
+    Eowyn = mkSystem "Eowyn" "x86_64-linux"
+      { allowUnfree = true; user = "andy"; };
 
-            # There is a bug in nixos-hardware that causes infinite recursion
-            # if placed within a module. So it's placed here..
-            nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
-
-            hmLinux.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users."andy" = import ./dots/home.nix {
-                inputs = self.inputs;
-                user = "andy";
-                hostname = "Eowyn";
-                wezterm = true;
-              };
-              # home-manager.users."andy".imports = [
-              #   (import ./config/home.nix {
-              #     inputs = self.inputs;
-              #     user = "andy";
-              #     hostname = "Eowyn";
-              #   })
-              #   (import ./machines/Eowyn/home.nix {
-              #     inputs = self.inputs;
-              #     user = "andy";
-              #     hostname = "Eowyn";
-              #   })
-              # ];
-            }
-          ];
-        system = "x86_64-linux";
-      };
-
-      Galadriel = nixosSystem {
-        modules =
-          linuxCommon
-          ++ [
-            ./users/andy/linux.nix
-          ];
-        system = "x86_64-linux";
-      };
-
-      Faramir = nixosSystem {
-        modules =
-          linuxCommon
-          ++ [
-            ./nix/users/andy/linux.nix
-          ];
-        system = "x86_64-linux";
-      };
-    };
-
-    darwinConfigurations = {
-      Saruman = darwinSystem {
-        modules =
-          darwinCommon
-          ++ [
-            ./users/abelleisle/darwin.nix
-          ];
-        system = "aarch64-darwin";
-      };
-    };
   };
 }

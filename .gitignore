@@ -6,4 +6,4 @@ config/bspwm/.config/bspwm/bspwm-config
 config/ncspot/.config/ncspot/userstate.cbor
 config/zsh/.zsh/*.local
 
-result/
+result
