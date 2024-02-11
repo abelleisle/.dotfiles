@@ -46,7 +46,7 @@ in
           ++ [
             ./machines/Eowyn.nix
             ./users/andy/linux.nix
-            
+
             # There is a bug in nixos-hardware that causes infinite recursion
             # if placed within a module. So it's placed here..
             nixos-hardware.nixosModules.lenovo-thinkpad-e14-intel
@@ -54,7 +54,7 @@ in
             hmLinux.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users."andy" = import ./config/home.nix {
+              home-manager.users."andy" = import ./dots/home.nix {
                 inputs = self.inputs;
                 user = "andy";
                 hostname = "Eowyn";
@@ -82,6 +82,15 @@ in
           linuxCommon
           ++ [
             ./users/andy/linux.nix
+          ];
+        system = "x86_64-linux";
+      };
+
+      Faramir = nixosSystem {
+        modules =
+          linuxCommon
+          ++ [
+            ./nix/users/andy/linux.nix
           ];
         system = "x86_64-linux";
       };

@@ -4,7 +4,6 @@
 , nixpkgs
 , darwin
 # , sensitive
-, stateVersion
 }: system: rec {
 
   overlays = [];
@@ -13,7 +12,6 @@
   pkgs = import nixpkgs {
     inherit system overlays;
   };
-
 
   # Window managers used by the system
   wms = {
@@ -36,8 +34,8 @@
     { ... }: {
       imports = [ (maybeUserConfig user) ] ++ userConfigs
         ++ (if wms ? "${wm}" then [
-        ./home/display/display.nix
-        (./home/display + "/${wm}.nix")
+        # ./home/display/display.nix
+        # (./home/display + "/${wm}.nix")
       ] else
         [ ]);
     };
@@ -53,7 +51,7 @@
         # Specify the path to your home configuration here
         (import (maybeUserConfig username)
           {
-            inherit inputs system pkgs self stateVersion;
+            inherit inputs system pkgs self ;
           })
 
         # Set home directory
@@ -61,7 +59,7 @@
           # Annoying. Not sure when this started beign required.
           nix.package = pkgs.nix;
           home = {
-            inherit stateVersion username;
+            inherit username;
             homeDirectory = if darwin then "/Users/${username}" else "/home/${username}";
           };
         }
@@ -81,30 +79,34 @@
     }: let
       mkSystem = if isDarwin then darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
       mkHomeMg = if isDarwin then home-manager.darwinModules else home-manager.nixosModules;
+      userConfig = if isDarwin then (./users + "/${user}/darwin.nix") else (./users + "/${user}/linux.nix");
     in mkSystem {
       inherit system pkgs;
       # Arguments to pass to all modules.
       specialArgs = {
-        inherit system inputs /*sensitive*/ user self isContainer stateVersion;
+        inherit system inputs /*sensitive*/ user self isContainer;
       };
       modules = [
         # System configuration for this host
         machineConfig
-        ./common.nix
+        # ./common.nix
+        ./modules/common.nix
+
+        userConfig
 
         # home-manager configuration
         mkHomeMg.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = { inherit inputs self stateVersion; };
+          home-manager.extraSpecialArgs = { inherit inputs self; };
           home-manager.users."${user}" =
             homeConfig user userConfigs wm { inherit inputs system pkgs self; };
         }
       ] ++ extraModules ++ (if !isContainer then [
-        ./common/fonts.nix
-        ./common/getty.nix
-        ./common/head.nix
+        # ./common/fonts.nix
+        # ./common/getty.nix
+        # ./common/head.nix
       ] else
         [ ]) ++ (if wms ? "${wm}" then
         [ (./. + ("/display/" + wms."${wm}") + ".nix") ]

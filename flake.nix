@@ -41,17 +41,20 @@
         });
     }) // (
     let
-      stateVersion = "23.11";
-
       utils = import ./nix/utils.nix {
         inherit inputs self home-manager
-          darwin nixpkgs stateVersion;
+          darwin nixpkgs;
       };
-    in
-    rec {
+    in {
       nixosConfigurations = {
         Eowyn = (utils "x86_64-linux").mkComputer {
           machineConfig = ./nix/machines/Eowyn.nix;
+          user = "andy";
+          wm = "plasma";
+        };
+
+        Faramir = (utils "aarch64-linux").mkComputer {
+          machineConfig = ./nix/machines/Faramir.nix;
           user = "andy";
           wm = "plasma";
         };

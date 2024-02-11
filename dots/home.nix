@@ -39,8 +39,6 @@ let
 in
 {
   home = {
-    stateVersion = "23.11";
-
     packages = with pkgs; [
       fzf
       neovim
