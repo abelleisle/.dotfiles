@@ -54,7 +54,10 @@ M.config = function()
             grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new,
             qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
             -- Developer configurations: Not meant for general override
-            buffer_previewer_maker = require "telescope.previewers".buffer_previewer_maker
+            buffer_previewer_maker = require "telescope.previewers".buffer_previewer_maker,
+            preview = {
+                treesitter = true
+            },
         },
         extensions = {
             fzf = {
@@ -76,11 +79,11 @@ M.config = function()
             --    only_sort_text = true,
             --    search = ''
             --},
-            find_files = {
-                find_command = {
-                    "rg", "--ignore", "--hidden", "--files"
-                }
-            }
+            -- find_files = {
+            --     find_command = {
+            --         "rg", "--ignore", "--hidden", "--files"
+            --     }
+            -- }
         }
     }
 
