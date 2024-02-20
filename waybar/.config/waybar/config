@@ -7,7 +7,7 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["hyprland/workspaces", "keyboard-state"],
     "modules-center": ["hyprland/window"],
     "modules-right": ["idle_inhibitor", "network", "memory", "cpu", "temperature", "clock", "tray"],
     "include": [
@@ -16,7 +16,7 @@
 },
 {
     "name": "vert",
-    "output": ["HDMI-A-1"],
+    "output": ["DP-2"],
     "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 32, // Waybar height (to be removed for auto height)

@@ -111,6 +111,22 @@ button {
     transition: none;
 }
 
+#keyboard-state {
+    background-color: transparent;
+    color: transparent;
+    margin-top: 4px;
+    margin-left: 8px;
+    margin-bottom: 4px;
+    border-radius: 26px;
+    transition: none;
+}
+
+#keyboard-state label.locked {
+    background-color: @color1;
+    border-radius: 26px;
+    color: @background;
+}
+
 #clock {
     background-color: @color8;
 }
