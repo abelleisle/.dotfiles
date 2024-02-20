@@ -140,7 +140,7 @@ if vim.g.plugins_installed then
         end
     }
 
-    vim.keymap.set({"n", "v"}, "s",                 mini.jump2d_twochar, Opt("Navigation: Jump to a 2-char pair"))
+    vim.keymap.set({"n", "v"}, ";",                 mini.jump2d_twochar, Opt("Navigation: Jump to a 2-char pair"))
     vim.keymap.set({"n", "v"}, "<Leader><Leader>s", mini.jump2d_char,    Opt("Navigation: Jump to a single character"))
     vim.keymap.set({"n", "v"}, "<Leader><Leader>f", mini.jump2d_start,   Opt("Navigation: Jump to any object"))
     vim.keymap.set({"n", "v"}, "<Leader><Leader>l", mini.jump2d_line ,   Opt("Navigation: Jump to any line on screen"))

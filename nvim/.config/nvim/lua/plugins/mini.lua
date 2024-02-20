@@ -5,6 +5,7 @@ local mini = {
     align      = require('mini.align'),
     jump2d     = require('mini.jump2d'),
     pairs      = require('mini.pairs'),
+    surround   = require('mini.surround'),
     trailspace = require('mini.trailspace')
 }
 
@@ -68,6 +69,28 @@ M.config = function ()
             ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^\\].', register = { cr = false } },
             ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
             ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
+        },
+    })
+
+    ---------------------------------
+    -- Surround
+    mini.surround.setup({
+        -- Module mappings. Use `''` (empty string) to disable one.
+        mappings = {
+            add = 'sa',            -- Add surrounding in Normal and Visual modes
+                                   --  Works by using visual selection. e.g.
+            --
+            delete = 'sd',         -- Delete surrounding
+            find = 'sf',           -- Find surrounding (to the right)
+            find_left = 'sF',      -- Find surrounding (to the left)
+            highlight = 'sh',      -- Highlight surrounding
+            replace = 'sr',        -- Replace surrounding.
+                                   --  Use by running sr"' for example to replace
+                                   --  surrounding "quotes" with single 'ticks'
+            update_n_lines = 'sn', -- Update `n_lines`
+
+            suffix_last = 'l',     -- Suffix to search with "prev" method
+            suffix_next = 'n',     -- Suffix to search with "next" method
         },
     })
 
