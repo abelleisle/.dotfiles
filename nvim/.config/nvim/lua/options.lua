@@ -46,7 +46,7 @@ opt.relativenumber = true
 
 -- Indenting
 opt.expandtab   = true
-opt.smartindent = true
+opt.smartindent = false
 opt.shiftround  = true
 opt.autoindent  = true
 opt.shiftwidth  = 4
