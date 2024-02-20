@@ -1,0 +1,10 @@
+#+BEGIN_QUERY
+{:title [:b "Future tasks (waiting)"]
+ :query
+    [:find (pull ?b [*])
+     :where
+        (task ?b #{"WAITING"})
+    ]
+ :collapsed? true
+}
+#+END_QUERY
