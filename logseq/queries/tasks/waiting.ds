@@ -8,3 +8,18 @@
  :collapsed? true
 }
 #+END_QUERY
+
+#+BEGIN_QUERY
+{
+  :title
+      [:strong "⏳ Waiting"]
+  :query [
+      :find (pull ?block [*])
+      :where
+          [?block :block/marker ?marker]
+          [(contains? #{"WAITING"} ?marker)]
+  ]
+  :breadcrumb-show? false
+  :collapsed? true
+}
+#+END_QUERY

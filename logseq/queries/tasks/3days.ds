@@ -1,0 +1,44 @@
+#+BEGIN_QUERY
+{:title "📅  NEXT 3 DAYS, NOT TODAY"
+    :query [:find (pull ?h [*])
+            :in $ ?next ?today
+            :where
+            [?h :block/marker ?m]
+            [(contains? #{"LATER" "TODO"} ?m)]
+            (or-join [?h ?d]
+              (and
+                [?h :block/refs ?p]
+                [?p :block/journal-day ?d]
+              )
+              [?h :block/scheduled ?d]
+              [?h :block/deadline ?d]
+            )
+            [(< ?d ?next)]
+            [(> ?d ?today)]
+    ]
+    :inputs [:3d-after :today]
+    :table-view? false
+    :breadcrumb-show? false
+    :collapsed? false
+}
+#+END_QUERY
+
+#+BEGIN_QUERY
+{:title "📅 WITHIN NEXT 3 DAYS"
+    :query [:find (pull ?h [*])
+            :in $ ?next
+            :where
+            [?h :block/marker ?m]
+            [(contains? #{"LATER" "TODO"} ?m)]
+            (or-join [?h ?d]
+              (and
+                [?h :block/ref-pages ?p]
+                [?p :block/journal? true]
+                [?p :block/journal-day ?d])
+              [?h :block/scheduled ?d]
+              [?h :block/deadline ?d])
+            [(< ?d ?next)]]
+    :inputs [:3d-after]
+    :table-view? false
+    :collapsed? true}
+#+END_QUERY

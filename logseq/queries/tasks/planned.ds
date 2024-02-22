@@ -1,0 +1,17 @@
+#+BEGIN_QUERY
+{:title [:h3 "✅ Planned"]
+ :query [:find (pull ?b [*])
+ :where
+   [?b :block/marker ?marker]
+   [(contains? #{"TODO" "LATER"} ?marker)]  ; TODO put in a value list with LATER.
+   (or
+   [?b :block/scheduled ?d]  ; ?b has attribute scheduled with value ?d, ?d is not further specified and so is any value. The same can be accomplish with _
+   [?b :block/deadline ?d]
+   )
+ ]
+ :result-transform (fn [result] (sort-by (fn [r] (get-in r [:block/scheduled])) result)) ; sort the result by the scheduled date
+ :table-view? false
+ :breadcrumb-show? false  ; don't show the parent blocks in the result !important, due to result-transform the grouping is lost, and so you will be left with a simple list of TODO items. having those parents blocks mixed in may make the list more confusing. (setting this to true won't show the page btw!)
+ :collapsed? false
+}
+#+END_QUERY

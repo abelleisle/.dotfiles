@@ -13,7 +13,9 @@
   :result-transform ( fn [result]
       (sort-by
           (fn [d]
-            (get d :block/scheduled) (get d :block/scheduled)
+            (get h :block/priority "Z")) result
+            (get d :block/scheduled)
+            (get d :block/scheduled)
           )
       result)
   )

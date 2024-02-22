@@ -1,0 +1,18 @@
+#+BEGIN_QUERY
+{
+    :title
+        [:strong "🌞 Tomorrow"]
+    :query [
+        :find (pull ?block [*])
+        :in $ ?day
+        :where
+            [?block :block/marker ?m]
+            [(contains? #{"TODO" "LATER"} ?m)]
+            (or [?block :block/scheduled ?d] [?block :block/deadline ?d])
+            [(= ?d ?day)]
+    ]
+    :inputs [:1d-after]
+    :breadcrumb-show? false
+    :collapsed? false
+}
+#+END_QUERY

@@ -1,0 +1,5 @@
+#+BEGIN_QUERY
+{:title "All blocks with tag sprint"
+    :query (and (property :type [[sprint]] ) (not (page [[Templates]] )))
+ }
+ #+END_QUERY
