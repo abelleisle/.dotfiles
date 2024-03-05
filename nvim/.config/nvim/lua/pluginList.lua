@@ -289,6 +289,9 @@ return require('lazy').setup({
     { -- Automatically format files
         "sbdchd/neoformat",
         cmd = "Neoformat",
+        config = function ()
+            vim.g.neoformat_run_all_formatters = 1
+        end
     },
 
     { -- Automatically close HTML/XML tags
