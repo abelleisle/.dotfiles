@@ -85,6 +85,7 @@ plugins=(
     zsh-autopair
     vi-mode
     fzf-zsh-plugin
+    direnv
 )
 
 # If we aren't running MacOS add nix-shell plugin.
