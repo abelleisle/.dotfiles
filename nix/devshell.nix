@@ -21,17 +21,17 @@
         pkgs.jq
       ] ++ pkgs.lib.optional (pkgs.stdenv.isLinux) pkgs.mkpasswd;
 
-      shellHook = ''
-        echo "Lab node development shell"
-        if [ -x "$(command -v zsh)" ]; then
-          echo "ZSH is installed!"
-          echo "Using ZSH for shell"
-          zsh
-          exit
-        else
-          echo "ZSH is not installed.. Using default nix shell"
-        fi
-      '';
+      # shellHook = ''
+      #   echo "Lab node development shell"
+      #   if [ -x "$(command -v zsh)" ]; then
+      #     echo "ZSH is installed!"
+      #     echo "Using ZSH for shell"
+      #     zsh
+      #     exit
+      #   else
+      #     echo "ZSH is not installed.. Using default nix shell"
+      #   fi
+      # '';
     };
   };
 }
