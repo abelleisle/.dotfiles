@@ -25,6 +25,7 @@ opt.cmdheight     = 1
 opt.updatetime    = 750 -- update interval (ms) for gitsigns
 opt.timeoutlen    = 500 -- keybind timeout length (ms)
 opt.clipboard     = opt.clipboard + "unnamedplus"
+opt.clipboard     = opt.clipboard + "unnamed"
 opt.shortmess:append("cI")
 opt.autowrite = true
 opt.autowriteall = true
