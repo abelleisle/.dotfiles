@@ -12,6 +12,7 @@
 
     # System Management
     git
+    stow
     # (neovim.override { vimAlias = true; })
 
     # Networking
