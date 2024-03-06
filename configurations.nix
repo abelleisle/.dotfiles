@@ -101,22 +101,22 @@ let
       _module.args.self = self;
       _module.args.inputs = self.inputs;
     }
-    ./modules/users/admins.nix
-    ./modules/users/extra-opts.nix
-    ./modules/sshd
-    ./modules/packages.nix
-    ./modules/networking/hosts.nix
-    ./modules/networking/ip.nix
+    # ./modules/users/admins.nix
+    # ./modules/users/extra-opts.nix
+    ./nix/modules/sshd.nix
+    ./nix/modules/packages.nix
+    # ./modules/networking/hosts.nix
+    # ./modules/networking/ip.nix
 
-    (import ./modules/sops.nix { inherit sops-nix flake-registry nixpkgs; })
+    # (import ./modules/sops.nix { inherit sops-nix flake-registry nixpkgs; })
   ];
 
   vmModules =
     commonModules
     ++ [
-    ./modules/bootloader.nix
-    ./modules/disks/disko-ext4.nix
-    ./modules/vm.nix
+    ./nix/modules/bootloader.nix
+    # ./modules/disks/disko-ext4.nix
+    ./nix/modules/vm.nix
 
     disko.nixosModules.disko
   ];
@@ -124,13 +124,13 @@ let
   lxcModules =
     commonModules
     ++ [
-    ./modules/lxc.nix
+    # ./modules/lxc.nix
   ];
 
   bareMetalModules =
     commonModules
     ++ [
-    ./modules/bootloader.nix
+    ./nix/modules/bootloader.nix
   ];
 in
 {
@@ -139,6 +139,10 @@ in
     # Eowyn: Dev Laptop
     Eowyn = mkSystem "Eowyn" "x86_64-linux"
       { allowUnfree = true; user = "andy"; };
+
+    # Faramir: Dev VM
+    Faramir = mkSystem "Faramir" "x86_64-linux"
+      { allowUnfree = true; user = "andy"; isVM = true; isBareMetal = false; };
 
   };
 }

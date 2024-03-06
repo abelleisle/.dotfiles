@@ -1,6 +1,6 @@
 {
   imports = [
-    ../modules/common.nix
+    # ../modules/common.nix
     # ./Eowyn/hardware.nix
   ];
 
