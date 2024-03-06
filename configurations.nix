@@ -24,6 +24,7 @@ let
     , user ? "andy"
     , allowUnfree ? false
     , extraModules ? []
+    , darwin ? false
     }:
     assert lib.assertMsg
       ((isVM != isLXC) != isBareMetal)
@@ -81,6 +82,8 @@ let
         inherit pkgs-unstable;
       };
 
+      userOSConfig = ./nix/users/${user}/${if darwin then "darwin" else "linux"}.nix;
+
     in nixpkgs.lib.nixosSystem
     {
       inherit system pkgs specialArgs;
@@ -93,6 +96,7 @@ let
           ./nix/machines/${hostname}/configuration.nix
         ]
         ++ [commonSettings]
+        ++ [userOSConfig]
         ++ extraModules;
     };
 
