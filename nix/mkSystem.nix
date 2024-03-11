@@ -89,6 +89,8 @@ let
         "nixpkgs-unstable=${pkgs-unstable.path}"
       ];
 
+      trusted-users = [ "root" "@wheel" ];
+
       extraOptions = ''
         experimental-features = nix-command flakes
         flake-registry = ${flake-registry}/flake-registry.json
