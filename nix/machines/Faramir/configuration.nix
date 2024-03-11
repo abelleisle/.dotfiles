@@ -31,9 +31,12 @@
       enable = true;
       # wayland.enable = true;
     };
+    # defaultSession = "plasma";
+    desktopManager.plasma5.enable = true;
   };
 
   programs.hyprland.enable = true;
+
 
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
