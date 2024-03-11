@@ -9,6 +9,7 @@ let
     nixos-generators
     disko
     sops-nix
+    home-manager
     ;
 
   overlays = [
@@ -83,6 +84,9 @@ let
       };
 
       userOSConfig = ./nix/users/${user}/${if darwin then "darwin" else "linux"}.nix;
+      hm = if darwin
+        then home-manager.darwinModules
+        else home-manager.nixosModules;
 
     in nixpkgs.lib.nixosSystem
     {
@@ -97,7 +101,14 @@ let
         ]
         ++ [commonSettings]
         ++ [userOSConfig]
-        ++ extraModules;
+        ++ extraModules
+        ++ [
+          hm.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${user} = import ./nix/users/${user}/home.nix;
+          }
+        ];
     };
 
   commonModules = [
