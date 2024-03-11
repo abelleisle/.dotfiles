@@ -14,7 +14,6 @@
       device = "nodev";
     };
 
-    # something is buggy with systemd-boot on our EFI machine yasmin
     systemd-boot.enable = lib.mkDefault (!pkgs.stdenv.isAarch64 && !pkgs.stdenv.hostPlatform.isRiscV);
   };
 }
