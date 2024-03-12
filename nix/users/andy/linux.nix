@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, pkgs-unstable, config, currentHostname, ... }:
 {
   config = {
     programs.zsh.enable = true;
@@ -13,5 +13,14 @@
       #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPj3mSTTXkRf04WU/7D1l+G8j8/fOGoXLdgHJXviXBhg andy"
       # ];
     };
+
+    home-manager.users."andy" = {
+      imports = [
+        ./home.nix
+        ./${currentHostname}.nix
+      ];
+    };
+
   };
+
 }

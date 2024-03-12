@@ -1,16 +1,16 @@
 { self, lib, ... }:
 let
-  inherit
-    (self.inputs)
-    nixpkgs
-    flake-registry
-    nixpkgs-unstable
-    nixos-hardware
-    nixos-generators
-    disko
-    sops-nix
-    home-manager
-    ;
+  # inherit
+  #   (self.inputs)
+  #   nixpkgs
+  #   flake-registry
+  #   nixpkgs-unstable
+  #   nixos-hardware
+  #   nixos-generators
+  #   disko
+  #   sops-nix
+  #   home-manager
+  #   ;
 
   overlays = [
     (final: prev: {
@@ -19,7 +19,7 @@ let
   ];
 
   mkSystem = import ./nix/mkSystem.nix {
-    inherit self lib flake-registry nixpkgs nixpkgs-unstable home-manager disko overlays;
+    inherit self lib overlays;
   };
 
 in

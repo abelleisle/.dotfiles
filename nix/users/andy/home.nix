@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, pkgs-unstable, ...}:
 let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
@@ -10,21 +10,13 @@ in
 
   home = {
     stateVersion = "23.11";
-    packages = [
-      pkgs.bat
-      pkgs.fzf
-      pkgs.jq
-      pkgs.yq
-    ];
+    packages = [];
   };
 
   programs = {
-    zsh = {
+    librewolf = {
       enable = true;
-    };
-
-    direnv = {
-      enable = true;
+      package = pkgs-unstable.librewolf;
     };
   };
 }

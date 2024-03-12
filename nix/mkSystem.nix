@@ -1,12 +1,7 @@
 # NixOS args
 { self
-, lib
-, flake-registry
-, nixpkgs
-, nixpkgs-unstable
-, home-manager
-, disko
 , overlays
+, lib
 }:
 
 # Required args
@@ -26,11 +21,18 @@ assert lib.assertMsg
   "System (${hostname}) must be one of: LXC, VM, or baremetal.";
 let
 
+  inputs = self.inputs;
+
   commonModules = [
     {
-      _module.args.self = self;
-      _module.args.inputs = self.inputs;
+      config._module.args = {
+        self = self;
+        inputs = inputs;
+        currentSystem = system;
+        currentHostname = hostname;
+      };
     }
+
     # ./modules/users/admins.nix
     # ./modules/users/extra-opts.nix
     ./modules/sshd.nix
@@ -48,7 +50,7 @@ let
     # ./modules/disks/disko-ext4.nix
     ./modules/vm.nix
 
-    disko.nixosModules.disko
+    inputs.disko.nixosModules.disko
   ];
 
   lxcModules =
@@ -65,19 +67,22 @@ let
 
   userOSConfig = ./users/${user}/${if darwin then "darwin" else "linux"}.nix;
   hm = if darwin
-    then home-manager.darwinModules
-    else home-manager.nixosModules;
+    then inputs.home-manager.darwinModules
+    else inputs.home-manager.nixosModules;
 
   homeModules = [
     hm.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${user} = {
-        imports = [
-          ./users/${user}/home.nix
-          ./machines/${hostname}/home.nix
-        ];
+      home-manager.extraSpecialArgs = {
+        inherit pkgs-unstable;
       };
+    #   home-manager.users.${user} = {
+    #     imports = [
+    #       ./users/${user}/home.nix
+    #       ./machines/${hostname}/home.nix
+    #     ];
+    #  };
     }
   ];
 
@@ -95,13 +100,13 @@ let
 
       extraOptions = ''
         experimental-features = nix-command flakes
-        flake-registry = ${flake-registry}/flake-registry.json
+        flake-registry = ${inputs.flake-registry}/flake-registry.json
         keep-outputs = true
         keep-derivations = true
       '';
 
       registry = {
-        nixpkgs.flake = nixpkgs;
+        nixpkgs.flake = inputs.nixpkgs;
       };
 
       # Automatically clean the nix store of old derivations every Tuesday
@@ -123,12 +128,12 @@ let
     };
   };
 
-  pkgs = import nixpkgs {
+  pkgs = import inputs.nixpkgs {
     inherit system overlays;
     config.allowUnfree = allowUnfree;
   };
 
-  pkgs-unstable = import nixpkgs-unstable {
+  pkgs-unstable = import inputs.nixpkgs-unstable {
     inherit system;
   };
 
@@ -136,7 +141,7 @@ let
     inherit pkgs-unstable;
   };
 
-in nixpkgs.lib.nixosSystem
+in inputs.nixpkgs.lib.nixosSystem
 {
   inherit system pkgs specialArgs;
 
@@ -145,6 +150,7 @@ in nixpkgs.lib.nixosSystem
     lib.optionals isLXC lxcModules ++
     lib.optionals isBareMetal bareMetalModules ++
     [
+      { networking.hostName = "${hostname}"; } # Force hostname setting
       ./machines/${hostname}/configuration.nix
     ]
     ++ [commonSettings]

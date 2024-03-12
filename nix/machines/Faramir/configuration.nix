@@ -2,7 +2,6 @@
   imports = [];
 
   system.stateVersion = "23.11";
-  networking.hostName = "Faramir";
 
   fileSystems = {
     "/" = {
@@ -10,7 +9,7 @@
       fsType = "ext4";
     };
 
-    "/boot" = {
+    "/boot/efi" = {
       device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
@@ -29,7 +28,7 @@
       # wayland.enable = true;
     };
     # defaultSession = "plasma";
-    desktopManager.plasma5.enable = true;
+    # desktopManager.plasma5.enable = true;
   };
 
   programs.hyprland.enable = true;
