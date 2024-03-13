@@ -1,7 +1,5 @@
 #+BEGIN_QUERY
-{
-    :title
-        [:h2 [:strong "🎯 Today"] [:span " or "] [:span.block-marker.DOING "DOING"]]
+{:title [:h2 "🎯 Today"]
     :query
     [:find (pull ?b [*])
      :in $ ?day
@@ -10,7 +8,7 @@
         [?b :block/page ?p]
         (or
             (and
-                [(contains? #{"TODO"} ?marker)]
+                [(contains? #{"NOW" "LATER" "TODO" "DOING"} ?marker)]
                 [?p :block/journal? true]
                 [?p :block/journal-day ?d]
                 (not [?b :block/scheduled])
@@ -18,15 +16,19 @@
                 [(== ?d ?day)]
             )
             (and
-                [(contains? #{"TODO" "LATER" "WAITING"} ?marker)]
+                [(contains? #{"NOW" "LATER" "TODO" "DOING"} ?marker)]
                 (or
-                    [?b :block/scheduled ?d]
-                    [?b :block/deadline ?d])
+                [?b :block/scheduled ?d]
+                [?b :block/deadline ?d])
                 [(== ?d ?day)]
             )
             (and
-                [(contains? #{"NOW", "DOING"} ?marker)]
-                [?d]
+                [(contains? #{"WAITING"} ?marker)]
+                (or
+                    [?b :block/scheduled ?d]
+                    [?b :block/deadline ?d]
+                )
+                [(== ?d ?day)]
             )
         )
     ]

@@ -8,7 +8,8 @@
         [?b :block/page ?p]
         (or
             (and
-                [(contains? #{"NOW" "LATER" "TODO" "DOING"} ?marker)]
+                [(contains? #{"TODO"} ?marker)]
+                ;(not [(contains? #{"DOING" "NOW"} ?marker)])
                 [?p :block/journal? true]
                 [?p :block/journal-day ?d]
                 (not [?b :block/scheduled])
@@ -16,18 +17,10 @@
                 [(< ?d ?day)]
             )
             (and
-                [(contains? #{"NOW" "LATER" "TODO" "DOING"} ?marker)]
+                [(contains? #{"TODO" "LATER" "WAITING" "DOING" "NOW"} ?marker)]
                 (or
                 [?b :block/scheduled ?d]
                 [?b :block/deadline ?d])
-                [(< ?d ?day)]
-            )
-            (and
-                [(contains? #{"WAITING"} ?marker)]
-                (or
-                    [?b :block/scheduled ?d]
-                    [?b :block/deadline ?d]
-                )
                 [(< ?d ?day)]
             )
         )
