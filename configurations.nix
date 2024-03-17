@@ -1,17 +1,5 @@
 { self, lib, ... }:
 let
-  # inherit
-  #   (self.inputs)
-  #   nixpkgs
-  #   flake-registry
-  #   nixpkgs-unstable
-  #   nixos-hardware
-  #   nixos-generators
-  #   disko
-  #   sops-nix
-  #   home-manager
-  #   ;
-
   overlays = [
     (final: prev: {
       wings-pterodactyl = prev.callPackage ./pkgs/wings-pterodactyl {};

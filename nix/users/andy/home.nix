@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ...}:
+{ pkgs, ... }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
@@ -20,7 +20,6 @@ in
   programs = {
     librewolf = {
       enable = true;
-      package = pkgs-unstable.librewolf;
     };
   };
 }

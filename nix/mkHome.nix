@@ -20,12 +20,12 @@ let
     inherit system overlays;
   };
 
-  pkgs-unstable = import inputs.nixpkgs-unstable {
+  pkgs-stable = import inputs.nixpkgs-stable {
     inherit system overlays;
   };
 
   extraSpecialArgs = {
-    inherit pkgs-unstable;
+    inherit pkgs-stable;
   };
 
 in home-manager.lib.homeManagerConfiguration

@@ -1,8 +1,7 @@
-{ pkgs-unstable, ... }:
+{ ... }:
 {
   programs.helix = {
     enable = true;
-    package = pkgs-unstable.helix;
     settings = {
       theme = "gruvbox_dark_hard";
 

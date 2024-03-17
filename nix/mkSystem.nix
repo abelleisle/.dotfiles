@@ -75,7 +75,7 @@ let
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
-        inherit pkgs-unstable;
+        inherit pkgs-stable;
       };
     }
   ];
@@ -85,7 +85,7 @@ let
     nix = {
       nixPath = [
         "nixpkgs=${pkgs.path}"
-        "nixpkgs-unstable=${pkgs-unstable.path}"
+        "nixpkgs-stable=${pkgs-stable.path}"
       ];
 
       settings = {
@@ -127,12 +127,12 @@ let
     config.allowUnfree = allowUnfree;
   };
 
-  pkgs-unstable = import inputs.nixpkgs-unstable {
+  pkgs-stable = import inputs.nixpkgs-stable {
     inherit system;
   };
 
   specialArgs = {
-    inherit pkgs-unstable;
+    inherit pkgs-stable;
   };
 
 in inputs.nixpkgs.lib.nixosSystem

@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ...}:
+{ pkgs, ... }:
 {
   home.packages = [
     pkgs.ripgrep
@@ -6,7 +6,7 @@
     pkgs.fzf
     pkgs.jq
     pkgs.yq
-    pkgs-unstable.logseq
+    pkgs.logseq
   ];
 
   programs = {
@@ -30,7 +30,6 @@
     wezterm = {
       enable = true;
       enableZshIntegration = true;
-      package = pkgs-unstable.wezterm;
     };
   };
 
