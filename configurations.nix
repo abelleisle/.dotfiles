@@ -31,7 +31,8 @@ in
     # Homes
     homeConfigurations = {
       # TODO: find a way to get host system value instead of hardcoding
-      "andy" = mkHome "andy" "x86_64-linux" {};
+      "andy@Galadriel" = mkHome "andy" "x86_64-linux"
+        { extraImports = [ ./nix/users/andy/Galadriel.nix ]; };
     };
   };
 }

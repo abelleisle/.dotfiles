@@ -8,8 +8,8 @@
 username: system:
 
 # Optional args
-{darwin ? false
-,
+{ darwin ? false
+, extraImports ? []
 }:
 let
   inputs = self.inputs;
@@ -34,6 +34,6 @@ in home-manager.lib.homeManagerConfiguration
 
   modules = [
     ./users/${username}/home.nix
-  ];
+  ] ++ extraImports;
 }
 

@@ -7,7 +7,11 @@
     pkgs.jq
     pkgs.yq
     pkgs.logseq
+  
+    pkgs.fira-code-nerdfont
   ];
+
+  fonts.fontconfig.enable = true;
 
   programs = {
     home-manager = {
