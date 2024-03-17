@@ -30,12 +30,13 @@ let
         inputs = inputs;
         currentSystem = system;
         currentHostname = hostname;
+        inherit isVM isBareMetal isLXC;
       };
     }
 
     # ./modules/users/admins.nix
     # ./modules/users/extra-opts.nix
-    ./modules/sshd.nix
+    ./modules/service/sshd.nix
     ./modules/packages.nix
     # ./modules/networking/hosts.nix
     # ./modules/networking/ip.nix
@@ -46,9 +47,9 @@ let
   vmModules =
     commonModules
     ++ [
-    ./modules/bootloader.nix
+    ./modules/system/bootloader.nix
     # ./modules/disks/disko-ext4.nix
-    ./modules/vm.nix
+    ./modules/system/vm.nix
 
     inputs.disko.nixosModules.disko
   ];
@@ -62,7 +63,7 @@ let
   bareMetalModules =
     commonModules
     ++ [
-    ./modules/bootloader.nix
+    ./modules/system/bootloader.nix
   ];
 
   userOSConfig = ./users/${user}/${if darwin then "darwin" else "linux"}.nix;
@@ -144,7 +145,10 @@ in inputs.nixpkgs.lib.nixosSystem
     lib.optionals isLXC lxcModules ++
     lib.optionals isBareMetal bareMetalModules ++
     [
-      { networking.hostName = "${hostname}"; } # Force hostname setting
+      {
+        networking.hostName = "${hostname}"; # Force hostname setting
+        system.stateVersion = "24.05";       # Nixpkgs is based on 24.05
+      }
       ./machines/${hostname}/configuration.nix
     ]
     ++ [commonSettings]

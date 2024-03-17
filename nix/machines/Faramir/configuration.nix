@@ -1,8 +1,8 @@
 { pkgs, inputs, ... }:
 {
-  imports = [];
-
-  system.stateVersion = "23.11";
+  imports = [
+    ../../modules/wm/hyprland.nix
+  ];
 
   # How to create disks:
   #
@@ -40,22 +40,11 @@
     }
   ];
 
+  # Enable SDDM
   services.xserver = {
     enable = true;
     displayManager.sddm = {
       enable = true;
-      # wayland.enable = true;
     };
-    # defaultSession = "plasma";
-    # desktopManager.plasma5.enable = true;
-  };
-
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
-
-  environment.sessionVariables = {
-    WLR_RENDERER_ALLOW_SOFTWARE = "1";
   };
 }
