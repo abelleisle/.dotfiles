@@ -116,7 +116,9 @@ local function isTmuxProcess(pane)
 end
 
 local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
-    if isViProcess(pane) or isTmuxProcess(pane) then
+    local mux_window = window:mux_window()
+    local tab = mux_window:active_tab()
+    if isViProcess(pane) or isTmuxProcess(pane) or (#tab:panes() <= 1) then
         window:perform_action(
             -- This should match the keybinds set in Neovim and tmux.
             wezaction.SendKey({ key = vim_direction, mods = 'CTRL' }),
