@@ -1,8 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ...}:
-let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
-in
+{ pkgs, pkgs-unstable, ...}:
 {
   home.packages = [
     pkgs.ripgrep
@@ -37,4 +33,8 @@ in
       package = pkgs-unstable.wezterm;
     };
   };
+
+  imports = [
+    ./helix.nix
+  ];
 }
