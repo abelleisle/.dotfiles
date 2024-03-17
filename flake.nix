@@ -34,6 +34,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Override flakes
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+    };
+
   };
 
   outputs = { flake-parts, ... } @ inputs:

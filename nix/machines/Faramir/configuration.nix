@@ -1,3 +1,4 @@
+{ pkgs, inputs, ... }:
 {
   imports = [];
 
@@ -49,7 +50,10 @@
     # desktopManager.plasma5.enable = true;
   };
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
 
   environment.sessionVariables = {
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
