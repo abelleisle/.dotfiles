@@ -47,7 +47,10 @@ return require('lazy').setup({
     { -- Ctrl-<hjkl> navigation with TMUX
         "numToStr/Navigator.nvim",
         config = function()
-            require("Navigator").setup()
+            require("Navigator").setup({
+                auto_save = 'nil',
+                disable_on_zoom = true
+            })
         end
     },
 
@@ -101,6 +104,11 @@ return require('lazy').setup({
         -- {dir = "~/Development/telescope-fzf-native.nvim", build = "make"}, -- Dev
         {"nvim-telescope/telescope-media-files.nvim"},
         lazy = true,
+    },
+
+    { -- Leap
+        "ggandor/leap.nvim",
+        lazy = false,
     },
 
     --------------

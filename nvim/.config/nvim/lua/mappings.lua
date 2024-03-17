@@ -54,11 +54,6 @@ map("v", "x", [=[ "_x ]=])
 -----------------
 local has_navigator, navigator = pcall(require, 'Navigator')
 if has_navigator then
-    navigator.setup({
-        auto_save = 'nil',
-        disable_on_zoom = true
-    })
-
     map({'n','t'}, {"<C-h>", "<C-Left>"},  navigator.left,     Opt("Navigation: Left a window"))
     map({'n','t'}, {"<C-k>", "<C-Up>"},    navigator.up,       Opt("Navigation: Up a window"))
     map({'n','t'}, {"<C-l>", "<C-Right>"}, navigator.right,    Opt("Navigation: Right a window"))
@@ -97,54 +92,7 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], Opt("Navigation: Copy entire file to clipb
 ------------
 
 if vim.g.plugins_installed then
-    local mini = {
-        jump2d = require('mini.jump2d'),
-        jump2d_char = function()
-            local mj = require('mini.jump2d')
-            return mj.start(mj.builtin_opts.single_character)
-        end,
-        jump2d_start = function()
-            local mj = require("mini.jump2d")
-            return mj.start(mj.builtin_opts.default)
-        end,
-        jump2d_line = function()
-            local mj = require("mini.jump2d")
-            return mj.start(mj.builtin_opts.line_start)
-        end,
-        jump2d_word = function()
-            local mj = require("mini.jump2d")
-            return mj.start(mj.builtin_opts.word_start)
-        end,
-        jump2d_twochar = function()
-            local gettwocharstr = function()
-                local _, char0 = pcall(vim.fn.getcharstr)
-                local _, char1 = pcall(vim.fn.getcharstr)
-
-                return char0..char1
-            end
-            local pattern = vim.pesc(gettwocharstr())
-
-            local mj = require("mini.jump2d")
-            return mj.start({
-                spotter = mj.gen_pattern_spotter(pattern),
-                allowed_lines   = {
-                    cursor_before = true,
-                    cursor_after = true,
-                    blank = false,
-                    fold = false,
-                },
-                allowed_windows = {
-                    not_current = false
-                }
-            })
-        end
-    }
-
-    vim.keymap.set({"n", "v"}, "s",                 mini.jump2d_twochar, Opt("Navigation: Jump to a 2-char pair"))
-    vim.keymap.set({"n", "v"}, "<Leader><Leader>s", mini.jump2d_char,    Opt("Navigation: Jump to a single character"))
-    vim.keymap.set({"n", "v"}, "<Leader><Leader>f", mini.jump2d_start,   Opt("Navigation: Jump to any object"))
-    vim.keymap.set({"n", "v"}, "<Leader><Leader>l", mini.jump2d_line ,   Opt("Navigation: Jump to any line on screen"))
-    vim.keymap.set({"n", "v"}, "<Leader><Leader>w", mini.jump2d_word ,   Opt("Navigation: Jump to any word"))
+    require("leap").create_default_mappings()
 end -- vim.g.plugins_installed
 
 ------------------------------------------------------------------------

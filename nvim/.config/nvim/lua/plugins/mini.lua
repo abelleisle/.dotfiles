@@ -41,15 +41,6 @@ M.config = function ()
     })
 
     ---------------------------------
-    -- Jump 2D
-    mini.jump2d.setup({
-        mappings = {
-            start_jumping = '', -- This is mapped in mappings.lua
-        },
-        hooks = {}
-    })
-
-    ---------------------------------
     -- Pairs
     mini.pairs.setup({
         modes = {
