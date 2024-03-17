@@ -24,6 +24,9 @@
       };
 
       keys = {
+        normal = {
+          ";" = "repeat_last_motion";
+        };
         insert = {
           z.x = "normal_mode";
         };
