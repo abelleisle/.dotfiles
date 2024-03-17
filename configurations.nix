@@ -22,17 +22,28 @@ let
     inherit self lib overlays;
   };
 
+  mkHome = import ./nix/mkHome.nix {
+    inherit self lib overlays;
+  };
 in
 {
-  # VM and host systems
-  flake.nixosConfigurations = {
-    # Eowyn: Dev Laptop
-    Eowyn = mkSystem "Eowyn" "x86_64-linux"
-      { allowUnfree = true; user = "andy"; };
+  flake = {
+    # VM and host systems
+    nixosConfigurations = {
+      # Eowyn: Dev Laptop
+      Eowyn = mkSystem "Eowyn" "x86_64-linux"
+        { allowUnfree = true; user = "andy"; };
 
-    # Faramir: Dev VM
-    Faramir = mkSystem "Faramir" "x86_64-linux"
-      { allowUnfree = true; user = "andy"; isVM = true; isBareMetal = false; };
+      # Faramir: Dev VM
+      Faramir = mkSystem "Faramir" "x86_64-linux"
+        { allowUnfree = true; user = "andy"; isVM = true; isBareMetal = false; };
 
+    };
+
+    # Homes
+    homeConfigurations = {
+      # TODO: find a way to get host system value instead of hardcoding
+      "andy" = mkHome "andy" "x86_64-linux" {};
+    };
   };
 }

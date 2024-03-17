@@ -5,6 +5,7 @@
         # Nix Utilities
         pkgs.nixos-rebuild
         pkgs.nixos-generators
+        pkgs.home-manager
 
         # Python dependencies
         pkgs.python311.pkgs.invoke
@@ -19,6 +20,7 @@
 
         # Extra utilities
         pkgs.jq
+
       ] ++ pkgs.lib.optional (pkgs.stdenv.isLinux) pkgs.mkpasswd;
 
       # shellHook = ''

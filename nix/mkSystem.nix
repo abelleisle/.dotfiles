@@ -77,12 +77,6 @@ let
       home-manager.extraSpecialArgs = {
         inherit pkgs-unstable;
       };
-    #   home-manager.users.${user} = {
-    #     imports = [
-    #       ./users/${user}/home.nix
-    #       ./machines/${hostname}/home.nix
-    #     ];
-    #  };
     }
   ];
 

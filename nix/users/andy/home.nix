@@ -9,7 +9,11 @@ in
   ];
 
   home = {
+    username = "andy";
     stateVersion = "23.11";
+    homeDirectory = if isDarwin
+      then "/Users/andy"
+      else "/home/andy";
     packages = [];
   };
 
