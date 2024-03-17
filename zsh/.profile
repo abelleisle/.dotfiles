@@ -69,8 +69,6 @@ idf() {
     fi
 }
 
-export _JAVA_AWT_WM_NONREPARENTING=1
-
 case `uname` in
     Darwin)
 
@@ -109,5 +107,8 @@ case `uname` in
 
         ;;
     Linux)
+
+        export _JAVA_AWT_WM_NONREPARENTING=1
+
         ;;
 esac

@@ -134,4 +134,17 @@ fi
 zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
 fpath+=~/.zfunc
 
+# Load all of the plugins that were defined in ~/.zshrc
+# for plugin ($plugins); do
+#     timer=$(python -c 'from time import time; print(int(round(time() * 1000)))')
+#     if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
+#         source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
+#     elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
+#         source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+#     fi
+#     now=$(python -c 'from time import time; print(int(round(time() * 1000)))')
+#     elapsed=$(($now-$timer))
+#     echo $elapsed":" $plugin
+# done
+
 # zprof
