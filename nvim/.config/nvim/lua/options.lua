@@ -173,14 +173,35 @@ local retab_buf = function(old)
     vim.cmd[[retab]]
 end
 
-vim.api.nvim_create_user_command("FixTabs2", function() retab_buf(2) end, {})
-vim.api.nvim_create_user_command("FixTabs3", function() retab_buf(3) end, {})
+vim.api.nvim_create_user_command("FixTabs", function(args)
+    local retab_width = tonumber(args.args)
+    if retab_width >= 1 then
+        retab_buf(retab_width)
+    else
+        vim.notify(
+            args.args.." is not a number >= 1. Please use :FixTabs <number>",
+            vim.log.levels.ERROR
+        )
+    end
+end, { nargs = 1, desc = "Retab files to 4 spaces" })
 
 vim.api.nvim_create_user_command("DebugVar", function()
     local buf = vim.fn.bufnr()
     local bvr = vim.fn.getbufvar(buf, "&");
     require("utils").print_variable(bvr)
 end, {})
+
+vim.api.nvim_create_user_command("Fmt", function()
+    vim.cmd("Neoformat")
+end, {})
+
+vim.api.nvim_create_user_command(
+    'TrimWhitespace',
+    function()
+        require("mini.trailspace").trim()
+    end,
+    {desc = "Trim all trailing whitespace"}
+)
 
 ------------------------
 --  HELPER FUNCTIONS  --

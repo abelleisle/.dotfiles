@@ -95,21 +95,11 @@ local get_lsp_auto_install = function(auto_install)
 end -- fn get_lsp_auto_install
 
 M.on_attach = function(client, bufnr)
-    --vim.lsp.set_log_level("debug")
 
-    local function buf_set_keymap(...)
-        vim.api.nvim_buf_set_keymap(bufnr, ...)
-    end
+    -- LSP buffer settings
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
     end
-
-    -- local cfg = {
-    --     bind = true,
-    --     floating_window = true,
-    --     hint_enable = true,
-    --     fix_pos = true
-    -- }
 
     local cfg = {
         bind = true,
@@ -119,42 +109,18 @@ M.on_attach = function(client, bufnr)
         hint_enable = false
     }
 
+    -- local cfg = {
+    --     bind = true,
+    --     floating_window = true,
+    --     hint_enable = true,
+    --     fix_pos = true
+    -- }
+
     require("lsp_signature").on_attach(cfg, bufnr)
-    --require'completion'.on_attach()
 
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-    -- Mappings.
-    local opts = function(desc)
-        return {
-            noremap = true,
-            silent = true,
-            desc = "LSP: " .. desc
-        }
-    end
-
-    buf_set_keymap("n", "gD",        "<Cmd>lua vim.lsp.buf.declaration()<CR>",                                opts("goto declaration"))
-    buf_set_keymap("n", "gd",        "<Cmd>lua vim.lsp.buf.definition()<CR>",                                 opts("goto definition"))
-    buf_set_keymap("n", "gi",        "<cmd>lua vim.lsp.buf.implementation()<CR>",                             opts("goto implementation"))
-    buf_set_keymap("n", "<space>D",  "<cmd>lua vim.lsp.buf.type_definition()<CR>",                            opts("goto type definition"))
-    buf_set_keymap("n", "[d",        "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",                           opts("goto previous use"))
-    buf_set_keymap("n", "]d",        "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",                           opts("goto next use"))
-    buf_set_keymap("n", "K",         "<Cmd>lua vim.lsp.buf.hover()<CR>",                                      opts("start hover ???"))
-    buf_set_keymap("n", "<space>k",  "<cmd>lua vim.lsp.buf.signature_help()<CR>",                             opts("signature"))
-    buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",                       opts("add workspace folder"))
-    buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",                    opts("remove workspace folder"))
-    buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts("list workspace folders"))
-    buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>",                                     opts("rename LSP object"))
-    buf_set_keymap("n", "gr",        "<cmd>lua vim.lsp.buf.references()<CR>",                                 opts("see all object references"))
-    buf_set_keymap("n", "<space>e",  "<cmd>lua vim.diagnostic.open_float()<CR>",                              opts("open diagnostic float (window)"))
-    buf_set_keymap("n", "<space>q",  "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>",                         opts("set the location list ???"))
-
-    -- Set some keybinds conditional on server capabilities
-    if client.server_capabilities.document_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>",       opts("format buffer"))
-    elseif client.server_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts("format range"))
-    end
+    require("mappings").lsp_configure(client, bufnr)
 end -- fn M.on_attach()
 
 M.config = function()

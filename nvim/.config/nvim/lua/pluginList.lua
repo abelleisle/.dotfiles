@@ -72,13 +72,6 @@ return require('lazy').setup({
         end
     },
 
-    { -- Keybind Help
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup{}
-        end
-    },
-
     { -- File manager/browser
         "kyazdani42/nvim-tree.lua",
         cmd = "NvimTreeToggle",

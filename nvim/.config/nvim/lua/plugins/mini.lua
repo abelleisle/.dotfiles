@@ -3,10 +3,11 @@ local M = {}
 local mini = {
     ai         = require('mini.ai'),
     align      = require('mini.align'),
+    clue       = require('mini.clue'),
     jump2d     = require('mini.jump2d'),
     pairs      = require('mini.pairs'),
     surround   = require('mini.surround'),
-    trailspace = require('mini.trailspace')
+    trailspace = require('mini.trailspace'),
 }
 
 M.config = function ()
@@ -38,6 +39,30 @@ M.config = function ()
             start = 'ga',
             start_with_preview = 'gA'
         }
+    })
+
+    ---------------------------------
+    -- Clue
+    mini.clue.setup({
+        window = {
+            delay = 0,
+            config = {
+                width = 'auto',
+            },
+        },
+        triggers = require("mappings").clue.triggers,
+
+        clues = {
+            -- Enhance this by adding descriptions for <Leader> mapping groups
+            mini.clue.gen_clues.builtin_completion(),
+            mini.clue.gen_clues.g(),
+            mini.clue.gen_clues.marks(),
+            mini.clue.gen_clues.registers(),
+            mini.clue.gen_clues.windows(),
+            mini.clue.gen_clues.z(),
+
+            require("mappings").clue.clues
+        },
     })
 
     ---------------------------------
@@ -90,13 +115,6 @@ M.config = function ()
     mini.trailspace.setup({
         only_in_normal_buffers = true
     })
-    vim.api.nvim_create_user_command(
-        'TrimWhitespace',
-        function()
-            mini.trailspace.trim()
-        end,
-        {desc = "Trim all trailing whitespace"}
-    )
 end
 
 return M

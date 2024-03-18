@@ -1,9 +1,9 @@
 -- load all plugins
 
-require "pluginList"
-require "options"
+require("pluginList")
+require("options")
 
-require "mappings"
+require("mappings").setup()
 
 --require("utils").hideStuff()
 
@@ -16,6 +16,6 @@ else
 end
 
 -- Call this after local config sets colors
-require "highlights"
+require("highlights")
 
 -- require "plugins.lspconfig".config()
