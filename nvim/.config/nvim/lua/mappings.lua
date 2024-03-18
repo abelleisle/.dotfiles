@@ -151,6 +151,7 @@ _map.display = function()
     --  FORMAT  --
     --------------
     -- pmap("n", "<Leader>m", ":Neoformat<CR>", Opt("Display: Format the current file"))
+    pmap("n", "<Leader><Leader>", ":ToggleAlternate<CR>", Opt("Toggle boolean"))
 
     -----------------
     --  DASHBOARD  --

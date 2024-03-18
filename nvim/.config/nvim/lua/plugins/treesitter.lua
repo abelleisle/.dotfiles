@@ -49,6 +49,10 @@ M.config = function()
             filetypes = { "html" , "xml", "php" },
         },
 
+        matchup = { -- andymass/vim-matchup
+            enable = true,
+        },
+
         -- This is experimental, so it's disabled for now.
         -- With this enabled, continuing comments on new lines didn't align
         -- to the last set of comments on the previous line.

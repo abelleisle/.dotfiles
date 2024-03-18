@@ -46,30 +46,15 @@ return require('lazy').setup({
 
     { -- Ctrl-<hjkl> navigation with TMUX
         "numToStr/Navigator.nvim",
-        config = function()
-            require("Navigator").setup({
-                auto_save = 'nil',
-                disable_on_zoom = true
-            })
-        end
+        opts = {
+            auto_save = nil,
+            disable_on_zoom = true
+        },
     },
 
     { -- Statusline
         "NTBBloodbath/galaxyline.nvim",
         dependencies = {"kyazdani42/nvim-web-devicons"},
-        config = function()
-            require("nvim-web-devicons").setup({
-                -- your personnal icons can go here (to override)
-                -- you can specify color or cterm_color instead of specifying both of them
-                -- DevIcon will be appended to `name`
-                override = {
-                    tcl = {
-                        icon = "",
-                        name = "tcl"
-                    }
-                }
-            })
-        end
     },
 
     { -- File manager/browser
@@ -110,6 +95,8 @@ return require('lazy').setup({
 
     { -- Gruvbox theme
         "ellisonleao/gruvbox.nvim",
+        -- TODO update this to new version
+        -- This is being held because new version renamed variables
         commit = 'fc66cfbadaf926bc7c2a5e0616d7b8e64f8bd00c',
         dependencies = {"rktjmp/lush.nvim"},
         lazy = true,
@@ -147,23 +134,45 @@ return require('lazy').setup({
 
     { -- Highlight todo comments
         "folke/todo-comments.nvim",
-        branch = "neovim-pre-0.8.0",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "telescope.nvim"
         },
         event = Events.OpenFile,
-        config = function()
-            require("todo-comments").setup {
-                signs = false,
-                highlight = {
-                    pattern = [[(.*\@*<(KEYWORDS)(\s*|:))]],
+        opts = {
+            signs = false,
+            highlight = {
+                pattern = [[.*<(KEYWORDS)\s*:?]], -- vim regex
+            },
+            search = {
+                command = "rg",
+                args = {
+                "--color=never",
+                "--no-heading",
+                "--with-filename",
+                "--line-number",
+                "--column",
                 },
-                search = {
-                    pattern = [[@*\b(KEYWORDS)(\s|:)]],
-                },
+                -- Don't replace the (KEYWORDS) placeholder
+                pattern = [[\b(KEYWORDS):?]], -- ripgrep regex
+            },
+        }
+    },
+
+    { -- Filetype icons
+        "kyazdani42/nvim-web-devicons",
+        lazy = true,
+        opts = {
+            -- your personnal icons can go here (to override)
+            -- you can specify color or cterm_color instead of specifying both of them
+            -- DevIcon will be appended to `name`
+            override = {
+                tcl = {
+                    icon = "",
+                    name = "tcl"
+                }
             }
-        end
+        }
     },
     -----------------------
     --  LANGUAGE SERVER  --
@@ -201,15 +210,13 @@ return require('lazy').setup({
     {
         "ray-x/lsp_signature.nvim",
         event = Events.OpenFile,
-        config = function()
-            require("lsp_signature").setup({
-                bind = true,
-                handler_opts = {
-                    border = "rounded"
-                },
-                hint_enable = false
-            })
-        end
+        opts = {
+            bind = true,
+            handler_opts = {
+                border = "rounded"
+            },
+            hint_enable = false
+        }
     },
 
     ---------------------------
@@ -232,23 +239,20 @@ return require('lazy').setup({
 
     { -- Completion engine
         "hrsh7th/nvim-cmp",
-        dependencies = "LuaSnip",
+        dependencies = {
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "LuaSnip",
+        },
         module = "cmp",
         event = Events.InsertMode,
         config = function()
             require("plugins.cmp").config()
         end
-    },
-
-    { -- Completion engine plugins
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lua",
-        dependencies = "nvim-cmp",
-        event = Events.InsertMode,
     },
 
     ---------------
@@ -266,7 +270,7 @@ return require('lazy').setup({
     { -- Git commands within Neovim
         "tpope/vim-fugitive",
         "tpope/vim-rhubarb",
-        evend = Events.EnterWindow
+        event = Events.EnterWindow
     },
 
     { -- Github PRs in Neovim
@@ -306,12 +310,6 @@ return require('lazy').setup({
         dependencies = "nvim-treesitter",
         event = Events.OpenFile,
         config = function()
-            require('nvim-treesitter.configs').setup {
-                matchup = {
-                    enable = true,
-                }
-            }
-
             vim.g.matchup_matchparen_deferred = 0
             vim.g.matchup_matchparen_offscreen = {}--{ method = 'popup' }
         end
@@ -329,14 +327,14 @@ return require('lazy').setup({
     },
 
     { -- Toggle True/False, Yes/No, etc..
-        "lukelbd/vim-toggle",
-        key = '<Leader>b',
-        config = function()
-            vim.g.toggle_map            = '<Leader>b'
-            vim.g.toggle_chars_on       = true
-            vim.g.toggle_words_on       = true
-            vim.g.toggle_consecutive_on = true
-        end
+        "rmagatti/alternate-toggler",
+        cmd = "ToggleAlternate",
+        opts = {
+            alternates = {
+                ["=="] = "!=",
+                ["yes"] = "no",
+            }
+        }
     },
 
     -- { -- Automatically set buffer settings based on text
@@ -360,41 +358,34 @@ return require('lazy').setup({
             "anuvyklack/animation.nvim"
         },
         event = Events.EnterWindow,
-        config = function()
-            -- vim.o.winwidth = 10
-            -- vim.o.winminwidth = 10
-            -- vim.o.equalalways = false
-            require("windows").setup({
-                autowidth = {
-                    enable = true,
-                    winwidth = 10,
-                    filetype = {
-                        help = 2,
-                    },
+        opts = {
+            autowidth = {
+                enable = true,
+                winwidth = 10,
+                filetype = {
+                    help = 2,
                 },
-                ignore = {
-                    buftype = { "quickfix" },
-                    filetype = { "NvimTree", "neo-tree", "undotree", "gundo", "fzf", "TelescopePrompt", "TelescopeResults" }
-                },
-                animation = {
-                    enable = true,
-                    duration = 300,
-                    fps = 30,
-                    easing = "in_out_sine"
-                }
-            })
-        end
+            },
+            ignore = {
+                buftype = { "quickfix" },
+                filetype = { "NvimTree", "neo-tree", "undotree", "gundo", "fzf", "TelescopePrompt", "TelescopeResults" }
+            },
+            animation = {
+                enable = true,
+                duration = 300,
+                fps = 30,
+                easing = "in_out_sine"
+            }
+        },
     },
 
     { -- Show current function/class context
         "nvim-treesitter/nvim-treesitter-context",
         dependencies = "nvim-treesitter",
         event = Events.OpenFile,
-        config = function()
-            require'treesitter-context'.setup{
-                enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-            }
-        end
+        opts = {
+            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        }
     },
 
     { -- Add indent lines
