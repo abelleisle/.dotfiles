@@ -89,6 +89,18 @@ return require('lazy').setup({
         lazy = false,
     },
 
+    { -- Harpoon
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        -- config = true -- Force harpoon setup without opts set
+        -- lazy = true, -- This is faster but may not work properly
+        config = function()
+            require("harpoon").setup()
+            require("mappings").harpoon_extend()
+        end
+    },
+
     --------------
     --  COLORS  --
     --------------

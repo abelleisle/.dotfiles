@@ -121,6 +121,91 @@ _map.navigation = function()
     if vim.g.plugins_installed then
         require("leap").create_default_mappings()
     end -- vim.g.plugins_installed
+
+    ---------------
+    --  HARPOON  --
+    ---------------
+    if vim.g.plugins_installed then
+        local h = nil
+        local hp = function()
+            if h == nil then
+                h = require("harpoon")
+            end
+            return h
+        end
+
+        local hp_telescope = function(hp_files)
+            local conf = require("telescope.config").values
+            local file_paths = {}
+            for _, item in ipairs(hp_files.items) do
+                table.insert(file_paths, item.value)
+            end
+
+            require("telescope.pickers").new({}, {
+                prompt_title = "Harpoon",
+                finder = require("telescope.finders").new_table({
+                    results = file_paths,
+                }),
+                previewer = conf.file_previewer({}),
+                sorter = conf.generic_sorter({}),
+            }):find()
+        end
+
+        map("n", "<Leader><Leader>o",
+            function() hp_telescope(hp():list()) end,
+            Opt("Show Harpoon (Telescope)")
+        )
+        map("n", "<Leader>o",
+            function() hp().ui:toggle_quick_menu(hp():list()) end,
+            Opt("Show Harpoon")
+        )
+
+        map("n", "<Leader><Leader>a",
+            function() hp():list():append() end,
+            Opt("Append file to Harpoon")
+        )
+
+        for i=1,10 do
+            local key = i
+            if i == 10 then
+                key = 0
+            end
+
+            map("n", "<Leader><Leader>"..key,
+                function() hp():list():select(i) end,
+                Opt("Harpoon file "..i)
+            )
+        end
+    end
+end
+
+M.harpoon_extend = function()
+    local harpoon = require("harpoon")
+    -- Add keybinds to the harpoon picker
+    harpoon:extend({
+        UI_CREATE = function(cx)
+            for i=1,10 do
+                local key = i
+                if i == 10 then
+                    key = 0
+                end
+
+                map("n", tostring(key),
+                    function() harpoon:list():select(i) end,
+                    { buffer = cx.bufnr }
+                )
+            end
+            map("n", "%",
+                function() harpoon.ui:select_menu_item({ vsplit = true }) end,
+                { buffer = cx.bufnr }
+            )
+
+            map("n", "\"",
+                function() harpoon.ui:select_menu_item({ split = true }) end,
+                { buffer = cx.bufnr }
+            )
+        end
+    })
 end
 
 ------------------------------------------------------------------------
@@ -151,7 +236,7 @@ _map.display = function()
     --  FORMAT  --
     --------------
     -- pmap("n", "<Leader>m", ":Neoformat<CR>", Opt("Display: Format the current file"))
-    pmap("n", "<Leader><Leader>", ":ToggleAlternate<CR>", Opt("Toggle boolean"))
+    pmap("n", "<Leader>!", ":ToggleAlternate<CR>", Opt("Toggle boolean"))
 
     -----------------
     --  DASHBOARD  --
@@ -203,7 +288,7 @@ _map.project = function()
         vim.keymap.set('n', '<Leader>/',  ts.builtin().live_grep,                  Opt("Telescope: Live grep"))
         vim.keymap.set('n', '<Leader>,',  ts.grep_string,                          Opt("Telescope: Grep string (statusline)"))
         vim.keymap.set('n', '<Leader>?',  ts.builtin().keymaps,                    Opt("Telescope: Show all keybinds"))
-        vim.keymap.set('n', '<Leader>a',  ts.builtin().grep_string,                Opt("Telescope: Find word under cursor"))
+        vim.keymap.set('n', '<Leader>*',  ts.builtin().grep_string,                Opt("Telescope: Find word under cursor"))
         vim.keymap.set('n', '<Leader>d',  ts.builtin().lsp_document_symbols,       Opt("Telescope: Show LSP symbols in current file"))
     end
 
@@ -326,6 +411,7 @@ M.clue = {
         { mode = 'n', keys = '<Leader>h',  desc = 'git'},
         { mode = 'n', keys = '<Leader>s',  desc = 'Surround'},
         { mode = 'n', keys = '<Leader>p',  desc = 'Misc. Pickers'},
+        { mode = 'n', keys = '<Leader><Leader>',  desc = 'Harpoon'},
     }
 }
 
