@@ -77,6 +77,8 @@ function update_command_status() {
     local arrow="";
     local color_reset="%{$reset_color%}";
     local reset_font="%{$fg_no_bold[white]%}";
+    # Add newline before >>> if there are less than 50 chars for the command
+    local width_check="%-50(l::\n)";
     COMMAND_RESULT=$1;
     export COMMAND_RESULT=$COMMAND_RESULT
     if $COMMAND_RESULT;
@@ -85,7 +87,7 @@ function update_command_status() {
     else
         arrow="%{$fg_bold[red]%}❱❱❱";
     fi
-    COMMAND_STATUS="${arrow}${reset_font}${color_reset}";
+    COMMAND_STATUS="${width_check}${arrow}${reset_font}${color_reset}";
 }
 update_command_status true;
 
