@@ -19,3 +19,4 @@ end
 require("highlights")
 
 -- require "plugins.lspconfig".config()
+require("session")

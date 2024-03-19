@@ -94,8 +94,8 @@ M.config = function ()
         -- Module mappings. Use `''` (empty string) to disable one.
         mappings = {
             add = '<Leader>sa',            -- Add surrounding in Normal and Visual modes
-                                   --  Works by using visual selection. e.g.
-            --
+                                           --  Works by using visual selection. e.g.
+                                           --  <L>saiW), add surrounding to inner word: '(...)'
             delete = '<Leader>sd',         -- Delete surrounding
             find = '<Leader>sf',           -- Find surrounding (to the right)
             find_left = '<Leader>sF',      -- Find surrounding (to the left)
