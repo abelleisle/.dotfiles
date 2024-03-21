@@ -133,7 +133,7 @@ else
     error "Neither XDG_CONFIG_HOME or HOME are defined.."
 fi
 
-STOW_CMD="stow -t ${HOME} -d ${DOTFILES_DIR}"
+STOW_CMD="stow -t ${HOME} -d ${DOTFILES_DIR}/dots"
 
 ######################
 #  CONFIGURE NEOVIM  #
