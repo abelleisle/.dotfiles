@@ -1,11 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
+
+  installDir = config.home.homeDirectory + "/.dots";
 in
 {
   imports = [
-    ../dev/home.nix
+    ../../../dots/home.nix
   ];
 
   home = {
@@ -22,4 +24,6 @@ in
       enable = true;
     };
   };
+
+  dotfiles.dotDir = installDir;
 }

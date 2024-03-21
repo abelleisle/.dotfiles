@@ -1,16 +1,16 @@
 # zmodload zsh/zprof
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.zsh/oh-my-zsh
 
 # ~/.zprofile will source ~/.profile, so we don't need to here
-if [ -f ~/.profile ]; then
-    source ~/.profile
-fi
+# if [ -f ~/.profile ]; then
+#     source ~/.profile
+# fi
 
 # Source our custom functions
-if [ -d ~/.zsh ]; then
-    for file in ~/.zsh/**; do
+if [ -d ~/.zsh/extra/ ]; then
+    for file in ~/.zsh/extra/**; do
         source $file;
     done
 fi
@@ -69,7 +69,7 @@ done
 compinit -C
 
 # Extra plugins and themes
-export ZSH_CUSTOM=$HOME/.custom-zsh
+export ZSH_CUSTOM=$HOME/.zsh/custom
 
 # Plugin Settings
 VI_MODE_SET_CURSOR=true

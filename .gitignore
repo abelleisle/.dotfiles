@@ -2,10 +2,10 @@ swap/
 undo/
 plugged/
 
-bspwm/.config/bspwm/bspwm-config
-ncspot/.config/ncspot/userstate.cbor
+dots/bspwm/.config/bspwm/bspwm-config
+dots/ncspot/.config/ncspot/userstate.cbor
 
-zsh/.zsh/*.local
+dots/zsh/.zsh/extra/*.local
 
 result
 .direnv

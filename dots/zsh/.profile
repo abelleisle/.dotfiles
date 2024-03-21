@@ -12,7 +12,7 @@
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+        . "$HOME/.bashrc"
     fi
 fi
 
@@ -103,7 +103,7 @@ case `uname` in
 
         export LANG='en_US.UTF-8'
 
-        PATH="$HOME/.scripts/darwin:$PATH"
+        PATH="$HOME/.zsh/scripts/darwin:$PATH"
 
         ;;
     Linux)

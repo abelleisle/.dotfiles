@@ -1,27 +1,27 @@
-[submodule "dots/zsh/.oh-my-zsh"]
-	path = dots/zsh/.oh-my-zsh
+[submodule "dots/zsh/.zsh/oh-my-zsh"]
+	path = dots/zsh/.zsh/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
-[submodule "dots/zsh/.custom-zsh/plugins/zsh-autopair"]
-	path = dots/zsh/.custom-zsh/plugins/zsh-autopair
+[submodule "dots/zsh/.zsh/custom/plugins/zsh-autopair"]
+	path = dots/zsh/.zsh/custom/plugins/zsh-autopair
 	url = https://github.com/hlissner/zsh-autopair
-[submodule "dots/zsh/.custom-zsh/plugins/zsh-syntax-highlighting"]
-	path = dots/zsh/.custom-zsh/plugins/zsh-syntax-highlighting
+[submodule "dots/zsh/.zsh/custom/plugins/zsh-syntax-highlighting"]
+	path = dots/zsh/.zsh/custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "dots/zsh/.custom-zsh/plugins/zsh-nix-shell"]
-	path = dots/zsh/.custom-zsh/plugins/zsh-nix-shell
+[submodule "dots/zsh/.zsh/custom/plugins/zsh-nix-shell"]
+	path = dots/zsh/.zsh/custom/plugins/zsh-nix-shell
 	url = https://github.com/chisui/zsh-nix-shell.git
-[submodule "dots/zsh/.custom-zsh/plugins/nix-shell"]
-	path = dots/zsh/.custom-zsh/plugins/nix-shell
+[submodule "dots/zsh/.zsh/custom/plugins/nix-shell"]
+	path = dots/zsh/.zsh/custom/plugins/nix-shell
 	url = https://github.com/chisui/zsh-nix-shell.git
-[submodule "dots/zsh/.custom-zsh/plugins/fzf-zsh-plugin"]
-	path = dots/zsh/.custom-zsh/plugins/fzf-zsh-plugin
+[submodule "dots/zsh/.zsh/custom/plugins/fzf-zsh-plugin"]
+	path = dots/zsh/.zsh/custom/plugins/fzf-zsh-plugin
 	url = https://github.com/unixorn/fzf-zsh-plugin.git
 	shallow = true
-[submodule "dots/zsh/.custom-zsh/plugins/zsh-autosuggestions"]
-	path = dots/zsh/.custom-zsh/plugins/zsh-autosuggestions
+[submodule "dots/zsh/.zsh/custom/plugins/zsh-autosuggestions"]
+	path = dots/zsh/.zsh/custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule "dots/zsh/.custom-zsh/plugins/fast-syntax-highlighting"]
-	path = dots/zsh/.custom-zsh/plugins/fast-syntax-highlighting
+[submodule "dots/zsh/.zsh/custom/plugins/fast-syntax-highlighting"]
+	path = dots/zsh/.zsh/custom/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting
 [submodule "dots/tmux/.tmux/plugins/tpm"]
 	path = dots/tmux/.tmux/plugins/tpm
