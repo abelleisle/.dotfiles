@@ -6,3 +6,6 @@ bspwm/.config/bspwm/bspwm-config
 ncspot/.config/ncspot/userstate.cbor
 
 zsh/.zsh/*.local
+
+result
+.direnv
