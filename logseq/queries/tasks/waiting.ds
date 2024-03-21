@@ -1,0 +1,25 @@
+#+BEGIN_QUERY
+{:title [:b "Future tasks (waiting)"]
+ :query
+    [:find (pull ?b [*])
+     :where
+        (task ?b #{"WAITING"})
+    ]
+ :collapsed? true
+}
+#+END_QUERY
+
+#+BEGIN_QUERY
+{
+  :title
+      [:h2 [:strong "⏳ Waiting"]]
+  :query [
+      :find (pull ?block [*])
+      :where
+          [?block :block/marker ?marker]
+          [(contains? #{"WAITING"} ?marker)]
+  ]
+  :breadcrumb-show? true
+  :collapsed? false
+}
+#+END_QUERY

@@ -1,0 +1,14 @@
+#+BEGIN_QUERY
+{
+  :title
+      [:h2 [:strong "⌚ Later"]]
+  :query [
+      :find (pull ?block [*])
+      :where
+          [?block :block/marker ?marker]
+          [(contains? #{"LATER"} ?marker)]
+  ]
+  :breadcrumb-show? false
+  :collapsed? false
+}
+#+END_QUERY

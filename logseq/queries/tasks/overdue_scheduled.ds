@@ -1,0 +1,28 @@
+#+BEGIN_QUERY
+{:title [:h2 "🔥 Past Due (scheduled)"]
+  :query [:find (pull ?b [*])
+  :in $ ?day
+  :where
+      (or
+          [?b :block/deadline ?d]
+          [?b :block/scheduled ?d]
+      )
+      [(<= ?d ?day)]
+      [?b :block/marker ?m]
+      [(contains? #{"TODO" "LATER" "DOING" "NOW"} ?m)]
+  ]
+  ; Sort first by scheduled and then by deadline.
+  :result-transform (
+      fn [result] (
+          sort-by (
+              juxt
+                  (fn [r] (get-in r [:block/scheduled]))
+                  (fn [r] (get-in r [:block/deadline]))
+          )
+      result )
+  )
+  :breadcrumb-show? false
+  :table-view? false
+  :inputs [:today]
+}
+#+END_QUERY

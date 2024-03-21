@@ -1,0 +1,12 @@
+#+BEGIN_QUERY
+{:title [:b "All tasks"]
+ :query
+    [:find (pull ?b [*])
+     :where
+        ;(task ?b #{"TODO" "LATER"})
+        [?b :block/marker ?m]
+        (not [(contains? #{"DONE" "CANCELLED"} ?m)])
+    ]
+ :collapsed? true
+}
+#+END_QUERY

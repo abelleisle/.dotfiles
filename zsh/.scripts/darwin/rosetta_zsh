@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+arch -x86_64 zsh

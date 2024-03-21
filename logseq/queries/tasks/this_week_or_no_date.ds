@@ -1,0 +1,28 @@
+#+BEGIN_QUERY
+{
+    :title
+        [[:strong "📅 This week"] [:span " or "] [:span.block-marker.LATER "LATER"] [:sup "(without-date)"]]
+    :query [
+        :find (pull ?block [*])
+        :in $ ?start ?next
+        :where
+            (or-join [?block ?start ?next] 
+                (and
+                    (or [?block :block/scheduled ?d] [?block :block/deadline ?d])
+                    [(> ?d ?start)]
+                    [(< ?d ?next)]
+                )
+                ;;
+                (and
+                    [?block :block/marker ?m]
+                    [(contains? #{"LATER" "TODO"} ?m)]
+                    [(missing? $ ?block :block/scheduled)]
+                    [(missing? $ ?block :block/deadline)]
+                )
+            )
+    ]
+    :inputs [:1d-after :7d-after]
+    :breadcrumb-show? false
+    :collapsed? false
+}
+#+END_QUERY

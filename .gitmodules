@@ -1,28 +1,25 @@
-[submodule "dots/zsh/.oh-my-zsh"]
-	path = dots/zsh/.oh-my-zsh
-	url = https://github.com/ohmyzsh/ohmyzsh.git
-[submodule "dots/zsh/.custom-zsh/plugins/zsh-autopair"]
-	path = dots/zsh/.custom-zsh/plugins/zsh-autopair
+[submodule "zsh/.custom-zsh/plugins/zsh-autopair"]
+	path = zsh/.custom-zsh/plugins/zsh-autopair
 	url = https://github.com/hlissner/zsh-autopair
-[submodule "dots/zsh/.custom-zsh/plugins/zsh-syntax-highlighting"]
-	path = dots/zsh/.custom-zsh/plugins/zsh-syntax-highlighting
+[submodule "zsh/.custom-zsh/plugins/zsh-syntax-highlighting"]
+	path = zsh/.custom-zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "dots/zsh/.custom-zsh/plugins/zsh-nix-shell"]
-	path = dots/zsh/.custom-zsh/plugins/zsh-nix-shell
+[submodule "zsh/.custom-zsh/plugins/zsh-nix-shell"]
+	path = zsh/.custom-zsh/plugins/zsh-nix-shell
 	url = https://github.com/chisui/zsh-nix-shell.git
-[submodule "dots/zsh/.custom-zsh/plugins/nix-shell"]
-	path = dots/zsh/.custom-zsh/plugins/nix-shell
+[submodule "zsh/.custom-zsh/plugins/nix-shell"]
+	path = zsh/.custom-zsh/plugins/nix-shell
 	url = https://github.com/chisui/zsh-nix-shell.git
-[submodule "dots/zsh/.custom-zsh/plugins/fzf-zsh-plugin"]
-	path = dots/zsh/.custom-zsh/plugins/fzf-zsh-plugin
+[submodule "zsh/.custom-zsh/plugins/fzf-zsh-plugin"]
+	path = zsh/.custom-zsh/plugins/fzf-zsh-plugin
 	url = https://github.com/unixorn/fzf-zsh-plugin.git
 	shallow = true
-[submodule "dots/zsh/.custom-zsh/plugins/zsh-autosuggestions"]
-	path = dots/zsh/.custom-zsh/plugins/zsh-autosuggestions
+[submodule "zsh/.custom-zsh/plugins/zsh-autosuggestions"]
+	path = zsh/.custom-zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule "dots/zsh/.custom-zsh/plugins/fast-syntax-highlighting"]
-	path = dots/zsh/.custom-zsh/plugins/fast-syntax-highlighting
+[submodule "zsh/.custom-zsh/plugins/fast-syntax-highlighting"]
+	path = zsh/.custom-zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting
-[submodule "dots/tmux/.tmux/plugins/tpm"]
-	path = dots/tmux/.tmux/plugins/tpm
+[submodule "tmux/.tmux/plugins/tpm"]
+	path = tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm

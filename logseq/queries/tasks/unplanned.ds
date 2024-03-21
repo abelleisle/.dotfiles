@@ -1,0 +1,19 @@
+#+BEGIN_QUERY
+{:title [:h3 "☑ Unplanned"]
+ :query [:find (pull ?b [*])
+ :in $ ?day
+ :where
+   [?p :block/journal-day ?d]  ; ?p has the attribute journal-day with value ?d (you don't need the :block/journal? attribute if you also use this one)
+   [(<= ?d ?day)]
+   [?b :block/page ?p]  ; ?b has the attribute :block/page with value ?p, ?p has been define with the identifier of a journal page above.
+   [?b :block/marker "TODO"]
+   (not [?b :block/scheduled _])  ; ?b doesn't have the attribute scheduled (_ is used to say that the value doesn't matter. If a value is specified it would read as ?b may have the attribute, but not with that value)
+   (not [?b :block/deadline _])
+ ]
+ :result-transform (fn [result] (sort-by (fn [r] (get-in r [:block/page :block/journal-day])) result))  ; Sort by the journal date
+ :inputs [:today]
+ :table-view? false
+ :breadcrumb-show? false
+ :collapsed? false
+}
+#+END_QUERY

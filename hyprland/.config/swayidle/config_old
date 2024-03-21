@@ -1,0 +1,3 @@
+timeout 300 'waylock -fork-on-lock'
+timeout 420 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
+before-sleep 'waylock -fork-on-lock'

@@ -1,0 +1,28 @@
+#+BEGIN_QUERY
+{
+    :title
+        [[:strong "⏰ Today"] [:span " or "] [:span.block-marker.DOING "DOING"]]
+    :query [
+        :find (pull ?block [*])
+        :in $ ?day
+        :where
+            [?block :block/marker ?m]
+            (or-join [?block ?day ?m]
+                (and
+                    [(contains? #{"TODO" "LATER" "WAITING"} ?m)]
+                    (or [?block :block/scheduled ?d] [?block :block/deadline ?d])
+                    [(= ?d ?day)]
+                )
+                ;;
+                (and
+                    [(contains? #{"DOING" "NOW"} ?m)]
+                    ;[(missing? $ ?block :block/scheduled)]
+                    ;[(missing? $ ?block :block/deadline)]
+                )
+            )
+    ]
+    :inputs [:today]
+    :breadcrumb-show? false
+    :collapsed? false
+}
+#+END_QUERY

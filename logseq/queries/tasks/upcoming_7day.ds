@@ -1,0 +1,25 @@
+#+BEGIN_QUERY
+{:title [:h2 "📆 This Week"]
+  :query [:find (pull ?block [*])
+      :in $ ?start ?next
+      :where
+      (or
+          [?block :block/scheduled ?d]
+          [?block :block/deadline ?d]
+      )
+      [(>= ?d ?start)]
+      [(<= ?d ?next)]
+  ]
+  :result-transform ( fn [result]
+      (sort-by
+          (fn [d]
+            (get h :block/priority "Z")) result
+            (get d :block/scheduled)
+            (get d :block/scheduled)
+          )
+      result)
+  )
+  :inputs [:today :7d-after]
+  :collapsed? false
+}
+#+END_QUERY

@@ -1,0 +1,19 @@
+#+BEGIN_QUERY
+{:title [:h2 "🔥 Past Due (unscheduled)"]
+  :query [:find (pull ?b [*])
+  :in $ ?day
+  :where
+      (?b :block/page ?p)
+      (?p :block/journal-day ?d)
+      (not [?b :block/deadline])
+      (not [?b :block/scheduled])
+      [(< ?d ?day)]
+      [?b :block/marker ?m]
+      [(contains? #{"TODO" "LATER" "DOING" "NOW"} ?m)]
+  ]
+  ; Sort first by scheduled and then by deadline.
+  :breadcrumb-show? false
+  :table-view? false
+  :inputs [:today]
+}
+#+END_QUERY

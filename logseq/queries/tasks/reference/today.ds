@@ -1,0 +1,44 @@
+#+BEGIN_QUERY
+{:title [:h2 "🎯 Today"]
+    :query
+    [:find (pull ?b [*])
+     :in $ ?day
+     :where
+        [?b :block/marker ?marker]
+        [?b :block/page ?p]
+        (or
+            (and
+                [(contains? #{"NOW" "LATER" "TODO" "DOING"} ?marker)]
+                [?p :block/journal? true]
+                [?p :block/journal-day ?d]
+                (not [?b :block/scheduled])
+                (not [?b :block/deadline])
+                [(== ?d ?day)]
+            )
+            (and
+                [(contains? #{"NOW" "LATER" "TODO" "DOING"} ?marker)]
+                (or
+                [?b :block/scheduled ?d]
+                [?b :block/deadline ?d])
+                [(== ?d ?day)]
+            )
+            (and
+                [(contains? #{"WAITING"} ?marker)]
+                (or
+                    [?b :block/scheduled ?d]
+                    [?b :block/deadline ?d]
+                )
+                [(== ?d ?day)]
+            )
+        )
+    ]
+    :inputs [:today]
+    :result-transform (
+        fn [result] (
+            sort-by (fn [h]
+                (get h :block/priority "Z")) result
+            )
+    )
+    :breadcrumb-show? false
+}
+#+END_QUERY
