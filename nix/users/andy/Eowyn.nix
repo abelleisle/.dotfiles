@@ -6,6 +6,8 @@
     ../../../dots/helix.nix
   ];
 
+  colors.theme = "gruvbox_dark_hard";
+
   home.file = {
     ".shelf/nvim.lua".text = ''
       local M = {}
