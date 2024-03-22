@@ -6,8 +6,8 @@ let
   symlink = config.lib.file.mkOutOfStoreSymlink;
 
   nvimInstall = if dotsLocation != null
-    then dotsLocation + "/dots/nvim/.config/nvim"
-    else ./nvim/.config/nvim;
+    then dotsLocation + "/dots/nvim/"
+    else ./nvim;
 
   weztermInstall = if dotsLocation != null
     then dotsLocation + "/dots/wezterm/.wezterm.lua"
