@@ -1,0 +1,26 @@
+{
+  special = {
+    background = "#1d2021";
+    foreground = "#d5c4a1";
+    cursor = "#d5c4a1";
+  };
+  colors = {
+    color0 = "#1d2021";
+    color1 = "#fb4934";
+    color2 = "#b8bb26";
+    color3 = "#fabd2f";
+    color4 = "#83a598";
+    color5 = "#d3869b";
+    color6 = "#8ec07c";
+    color7 = "#d5c4a1";
+
+    color8 = "#665c54";
+    color9 = "#cc241d";
+    color10 = "#98971a";
+    color11 = "#d79921";
+    color12 = "#458588";
+    color13 = "#b16286";
+    color14 = "#689d6a";
+    color15 = "#fbf1c7";
+  };
+}

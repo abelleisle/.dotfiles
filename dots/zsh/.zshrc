@@ -124,9 +124,9 @@ export VISUAL="$EDITOR"
 export SHELL="$(which zsh)"
 
 # If wal is used, source the wal colors
-if [ -d ~/.cache/wal ]; then
-    cat ~/.cache/wal/sequences
-    source ~/.cache/wal/colors-tty.sh
+if [ -d ~/.shelf ]; then
+    cat ~/.shelf/sequences
+    source ~/.shelf/colors-tty.sh
 fi
 
 # ZSH Completions

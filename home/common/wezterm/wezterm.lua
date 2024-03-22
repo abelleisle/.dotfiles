@@ -8,7 +8,7 @@ local wezaction = wezterm.action
 --  APPEARANCE  --
 ------------------
 -- Colorscheme file
-local theme_file = wezterm.home_dir.."/.cache/wal/colors-wez.toml"
+local theme_file = wezterm.home_dir.."/.shelf/wezterm.toml"
 
 -- Colorscheme Colors
 local scheme_colors, _ = wezterm.color.load_scheme(theme_file)

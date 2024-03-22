@@ -9,10 +9,6 @@ let
     then dotsLocation + "/dots/nvim/"
     else ./nvim;
 
-  weztermInstall = if dotsLocation != null
-    then dotsLocation + "/dots/wezterm/.wezterm.lua"
-    else ./wezterm/.wezterm.lua;
-
   tmuxInstall = if dotsLocation != null
     then dotsLocation + "/dots/tmux/"
     else ./tmux;
@@ -25,14 +21,12 @@ in
   options = {
     dotfiles = {
       dotDir = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
         default = null;
         example = "~/.dots";
         description = ''
-          Directory where the zsh configuration and more should be located,
-          relative to the users home directory. The default is the home
-          directory.
+          Directory where the dotfiles repo is cloned. MUST BE ABSOLUTE PATH.
         '';
-        type = lib.types.nullOr lib.types.str;
       };
     };
   };
@@ -73,9 +67,6 @@ in
           source = symlink (tmuxInstall + ".tmux");
           recursive = true;
         };
-
-        # Wezterm
-        ".wezterm.lua".source = symlink weztermInstall;
       };
     };
 
