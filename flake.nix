@@ -44,7 +44,7 @@
   outputs = { flake-parts, ... } @ inputs:
   (flake-parts.lib.evalFlakeModule { inherit inputs; }
     ({ self, inputs, ... }: {
-    systems = [ "x86_64-linux" "aarch64-linux" ];
+    systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
     imports = [
       # ./devShells/flake-module.nix
       # ./pkgs/flake-module.nix
