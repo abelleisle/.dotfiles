@@ -36,7 +36,7 @@ in
     colors = {
       theme = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
-        default = null;
+        default = "gruvbox_dark_hard";
         example = "gruvbox";
         description = ''
           Which colorscheme to use?
@@ -45,7 +45,6 @@ in
 
       palette = lib.mkOption {
         type = lib.types.attrs;
-        # default = defaultPalette;
       };
     };
   };
@@ -112,7 +111,7 @@ in
     };
 
     colors.palette = if (cfg.theme != null)
-      then import "./themes/${cfg.theme}"
+      then import ./themes/${cfg.theme}.nix
       else defaultPalette;
   };
 }

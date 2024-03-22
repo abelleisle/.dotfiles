@@ -3,7 +3,30 @@
   imports = [
     ../../../home/colors
     ../../../home/common/wezterm
+    ../../../dots/helix.nix
   ];
+
+  home.file = {
+    ".shelf/nvim.lua".text = ''
+      local M = {}
+
+      M.setup = function()
+          -------------------
+          --  THEME STUFF  --
+          -------------------
+
+          require("colors.gruvbox").config()
+
+          ------------------------
+          --  VIM CONFIG STUFF  --
+          ------------------------
+
+          vim.opt.wrap = false
+      end
+
+      return M
+    '';
+  };
 
   programs.fuzzel = {
     enable = true;

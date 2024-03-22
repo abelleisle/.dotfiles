@@ -8,9 +8,10 @@ require("mappings").setup()
 --require("utils").hideStuff()
 
 -- Call local nvim configs
-local local_exists, local_configs = pcall(require, "local")
+local path = vim.fn.expand("$HOME/.shelf/nvim.lua")
+local local_exists, local_configs = pcall(dofile, path)
 if local_exists then
-    local_configs.config()
+    local_configs.setup()
 else
     print("No local configs... Using global")
 end
