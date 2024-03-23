@@ -8,7 +8,8 @@ in
 {
   imports = [
     ../../../dots/home.nix
-  ];
+    ../../../home/common/development.nix
+  ] ++ pkgs.lib.optionals (isLinux) ../../../home/common/programs.nix ;
 
   home = {
     username = "andy";
@@ -17,12 +18,6 @@ in
       then "/Users/andy"
       else "/home/andy";
     packages = [];
-  };
-
-  programs = {
-    librewolf = {
-      enable = true;
-    };
   };
 
   dotfiles.dotDir = installDir;

@@ -1,0 +1,8 @@
+{ ... }:
+{
+  imports = [
+    ./wezterm
+    ./ncspot
+    ./logseq
+  ];
+}

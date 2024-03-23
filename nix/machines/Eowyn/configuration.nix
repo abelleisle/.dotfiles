@@ -1,11 +1,8 @@
 {
   imports = [
-    # ../modules/common.nix
-    # ./Eowyn/hardware.nix
+    ../../../programs/wm/sddm.nix
+    ../../../programs/wm/hyprland.nix
   ];
-
-  system.stateVersion = "23.11";
-  networking.hostName = "Eowyn";
 
   fileSystems = {
     "/" = {

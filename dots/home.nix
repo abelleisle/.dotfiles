@@ -31,15 +31,22 @@ in
     };
   };
 
+  imports = [
+    # Enable helix editor
+    ./helix.nix
+    # Enable colors for shell
+    ../home/colors
+  ];
+
   config = {
     home = {
       packages = [
+        # Development packages
         pkgs.ripgrep
         pkgs.bat
         pkgs.fzf
         pkgs.jq
         pkgs.yq
-        pkgs.logseq
       
         # Fonts
         pkgs.fira-code-nerdfont
@@ -47,7 +54,6 @@ in
         # Manually configured
         pkgs.zsh
         pkgs.tmux
-        pkgs.direnv # Already configured in .zshrc
         (pkgs.neovim.override { vimAlias = true; })
       ];
 
@@ -82,13 +88,16 @@ in
     fonts.fontconfig.enable = true;
 
     programs = {
+      # Let home manager manage itself
       home-manager = {
         enable = true;
       };
+
+      # Don't need zsh integration because it's already configured in zshrc
+      direnv = {
+       enable = true;
+       nix-direnv.enable = true;
+      };
     };
   };
-
-  imports = [
-    ./helix.nix
-  ];
 }

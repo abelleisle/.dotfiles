@@ -1,7 +1,8 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    ../../modules/wm/hyprland.nix
+    ../../../programs/wm/hyprland.nix
+    ../../../programs/wm/sddm.nix
   ];
 
   # How to create disks:
@@ -39,12 +40,4 @@
       device = "/dev/disk/by-label/swap";
     }
   ];
-
-  # Enable SDDM
-  services.xserver = {
-    enable = true;
-    displayManager.sddm = {
-      enable = true;
-    };
-  };
 }

@@ -1,7 +1,10 @@
+-- This will be remove when imported into Nix config.
+-- We use it to make LSP behave
+local wezterm  = require('wezterm')
+--NIXSPLIT
 -----------------------------------------------------
 --                    LIBRARIES                    --
 -----------------------------------------------------
-local wezterm   = require('wezterm')
 local wezaction = wezterm.action
 
 ------------------
