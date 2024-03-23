@@ -14,6 +14,7 @@
         pkgs.python311.pkgs.isort
 
         # Sops stuff
+        inputs'.agenix.packages.default
         pkgs.age
         pkgs.sops
         pkgs.yq-go

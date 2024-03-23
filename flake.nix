@@ -4,37 +4,44 @@
   # To update inputs:
   # $ nix flake update --recreate-lock-file
   inputs = {
+    # Nixpkgs
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.11";
+
+    # Misc. utilities
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.11";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixlib.follows = "nixpkgs";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-
     flake-registry.url = "github:NixOS/flake-registry";
     flake-registry.flake = false;
 
+    # Hardware Configuration
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Secrets Management
+    agenix.url = "github:ryantm/agenix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
+    # dotfile Management
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Override flakes
+    # Override Flakes
     hyprland = {
       url = "github:hyprwm/Hyprland";
     };

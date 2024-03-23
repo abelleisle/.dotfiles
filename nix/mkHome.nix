@@ -34,6 +34,8 @@ in home-manager.lib.homeManagerConfiguration
 
   modules = [
     ./users/${username}/home.nix
+
+    inputs.agenix.homeManagerModules.default
   ] ++ extraImports;
 }
 

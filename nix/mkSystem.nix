@@ -23,6 +23,10 @@ let
 
   inputs = self.inputs;
 
+  agenixMod = if darwin
+    then inputs.agenix.darwinModules
+    else inputs.agenix.nixosModules;
+
   commonModules = [
     {
       config._module.args = {
@@ -42,6 +46,7 @@ let
     # ./modules/networking/ip.nix
 
     # (import ./modules/sops.nix { inherit sops-nix flake-registry nixpkgs; })
+    agenixMod.default
   ];
 
   vmModules =
