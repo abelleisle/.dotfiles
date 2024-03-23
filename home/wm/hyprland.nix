@@ -1,15 +1,27 @@
 { lib, config, ... }:
 let
-  cfg = config.hyprland;
+  cfg = config.dotfiles.wm.hyprland;
 in
-{
+with lib; {
   options = {
-    hyprland.machineConfig = lib.mkOption {
-      type = lib.types.str;
+    dotfiles.wm.hyprland = {
+      enable = mkOption {
+        type = types.bool;
+        description = "Enable hyprland?";
+      };
+      config = mkOption {
+        type = types.str;
+        default = "";
+      };
     };
   };
 
-  config = {
+  config = mkIf (cfg.enable) {
+    warnings =
+      lib.optional (cfg.config == "")
+        ("Please add a machine-specific hyprland configuration with "
+         + "`dotfiles.wm.hyprland.config`");
+
     programs.fuzzel = {
       enable = true;
     };
@@ -20,7 +32,7 @@ in
       systemd = {
         enable = true;
       };
-      extraConfig = cfg.machineConfig + ''
+      extraConfig = cfg.config + ''
         # See https://wiki.hyprland.org/Configuring/Keywords/ for more
         $mainMod = SUPER
 

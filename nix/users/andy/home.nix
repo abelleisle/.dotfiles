@@ -8,8 +8,10 @@ in
 {
   imports = [
     ../../../dots/home.nix
-    ../../../home/common/development.nix
-  ] ++ pkgs.lib.optionals (isLinux) ../../../home/common/programs.nix ;
+    ../../../home/common # Development stuff
+    ../../../home/programs # Standard programs
+    ../../../home/wm # Window manager settings
+  ];
 
   home = {
     username = "andy";

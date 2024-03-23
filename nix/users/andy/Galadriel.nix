@@ -1,8 +1,9 @@
-{ lib, ...}:
+{ config, ...}:
+let
+  cfg = config.dotfiles;
+in
 {
-  imports = [
-    ../../../home/common/wm/hyprland.nix
-  ];
+  imports = [];
 
   colors.theme = "gruvbox_dark_hard";
 
@@ -18,8 +19,15 @@
     '';
   };
 
-  hyprland.machineConfig = ''
-    monitor=,preferred,auto,1
-  '';
+  dotfiles.wm.hyprland = {
+    enable = true;
+    config = ''
+      monitor=,preferred,auto,1
+    '';
+  };
 
+  dotfiles.programs = {
+    email.enable = true;
+    browser.enable = true;
+  };
 }

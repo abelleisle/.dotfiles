@@ -1,8 +1,6 @@
 { lib, ...}:
 {
-  imports = [
-    ../../../home/common/wm/hyprland.nix
-  ];
+  imports = [];
 
   colors.theme = "gruvbox_dark_hard";
 
