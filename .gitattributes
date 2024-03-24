@@ -1,0 +1,2 @@
+nix/modules/secrets/** filter=git-crypt diff=git-crypt
+*.secure filter=git-crypt diff=git-crypt

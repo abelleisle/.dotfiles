@@ -18,6 +18,7 @@
         pkgs.age
         pkgs.sops
         pkgs.yq-go
+        pkgs.git-crypt
 
         # Extra utilities
         pkgs.jq
