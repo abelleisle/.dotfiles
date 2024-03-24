@@ -34,6 +34,7 @@ with lib; {
       settings = {
         main = {
           font = "FiraCode Nerd Font";
+          terminal = "wezterm -e";
         };
         colors = {
           background = "${cp.special.background}dd";
