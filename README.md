@@ -1,3 +1,6 @@
+# UNDER CONSTRUCTION
+I'm renovating my dotfiles to use nix. README is very out of date. I apologize.
+
 # .dotfiles
 These are my dotfiles. Currently I use a static colorscheme because I feel like that works for me.
 
