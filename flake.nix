@@ -46,6 +46,10 @@
       url = "github:hyprwm/Hyprland";
     };
 
+    nixGL = {
+      url = "github:nix-community/nixGL";
+    };
+
   };
 
   outputs = { flake-parts, ... } @ inputs:

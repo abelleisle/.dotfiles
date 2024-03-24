@@ -1,4 +1,7 @@
-{ lib, ...}:
+{ lib, inputs, pkgs, config, ...}:
+let
+  nixGL = import ../../../nix/modules/nixGL.nix { inherit pkgs config; };
+in
 {
   imports = [];
 
@@ -27,15 +30,20 @@
   };
 
   dotfiles.wm.hyprland = {
-    enable = true;
+    enable = false;
     config = ''
       monitor=,preferred,auto,1
     '';
   };
 
-  dotfiles.programs = {
-    email.enable = true;
-    browser.enable = true;
+  dotfiles.programs.personal.enable = false;
+
+  nixGLPrefix = "${inputs.nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel";
+
+  # Enable wezterm and configure it
+  programs.wezterm = {
+    package = (nixGL pkgs.wezterm);
   };
+
 
 }
