@@ -1,9 +1,7 @@
 { self, lib, ... }:
 let
   overlays = [
-    (final: prev: {
-      wings-pterodactyl = prev.callPackage ./pkgs/wings-pterodactyl {};
-    })
+    self.inputs.nixGL.overlay
   ];
 
   mkSystem = import ./nix/mkSystem.nix {

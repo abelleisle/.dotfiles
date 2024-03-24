@@ -25,7 +25,7 @@ let
   };
 
   extraSpecialArgs = {
-    inherit pkgs-stable inputs;
+    inherit pkgs-stable;
   };
 
 in home-manager.lib.homeManagerConfiguration

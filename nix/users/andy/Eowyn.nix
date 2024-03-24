@@ -1,4 +1,4 @@
-{ lib, inputs, pkgs, config, ...}:
+{ lib, pkgs, config, ...}:
 let
   nixGL = import ../../../nix/modules/nixGL.nix { inherit pkgs config; };
 in
@@ -38,7 +38,7 @@ in
 
   dotfiles.programs.personal.enable = false;
 
-  nixGLPrefix = "${inputs.nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel";
+  nixGLPrefix = "${pkgs.nix.nixGLIntel}/bin/nixGLIntel";
 
   # Enable wezterm and configure it
   programs.wezterm = {

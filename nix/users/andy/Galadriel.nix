@@ -1,6 +1,8 @@
-{ config, ...}:
+{ config, pkgs, ...}:
 let
   cfg = config.dotfiles;
+  nixGL = import ../../../nix/modules/nixGL.nix { inherit pkgs config; };
+  system = pkgs.system;
 in
 {
   imports = [];
@@ -29,5 +31,12 @@ in
   dotfiles.programs = {
     email.enable = true;
     browser.enable = true;
+  };
+
+  nixGLPrefix = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel";
+
+  # Enable wezterm and configure it
+  programs.wezterm = {
+    package = (nixGL pkgs.wezterm);
   };
 }
