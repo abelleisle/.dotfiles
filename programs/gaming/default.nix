@@ -1,12 +1,27 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
+let
+  cfg = config.programs.gaming;
+in
+with lib;
 {
-  environment.systemPackages = with pkgs; [
-    webcord
-  ];
+  options = {
+    programs.gaming = {
+      enable = mkOption {
+        type = types.bool;
+        description = "Enable gaming software";
+      };
+    };
+  };
 
-  programs = {
-    steam = {
-      enable = true;
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      webcord
+    ];
+
+    programs = {
+      steam = {
+        enable = true;
+      };
     };
   };
 }

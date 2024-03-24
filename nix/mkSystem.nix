@@ -11,6 +11,7 @@ hostname: system:
 { isBareMetal ? true
 , isVM ? false
 , isLXC ? false
+, isHeadless ? false
 , user ? "andy"
 , allowUnfree ? false
 , extraModules ? []
@@ -69,6 +70,10 @@ let
     commonModules
     ++ [
     ./modules/system/bootloader.nix
+  ];
+
+  uiModules = [
+    ../programs/interface
   ];
 
   userOSConfig = ./users/${user}/${if darwin then "darwin" else "linux"}.nix;
@@ -149,12 +154,14 @@ in inputs.nixpkgs.lib.nixosSystem
     lib.optionals isVM vmModules ++
     lib.optionals isLXC lxcModules ++
     lib.optionals isBareMetal bareMetalModules ++
+    lib.optionals (!darwin && !isHeadless) uiModules ++
     [
       {
         networking.hostName = "${hostname}"; # Force hostname setting
         system.stateVersion = "24.05";       # Nixpkgs is based on 24.05
       }
       ./machines/${hostname}/configuration.nix
+      ./machines/${hostname}/hardware.nix
     ]
     ++ [commonSettings]
     ++ [userOSConfig]
