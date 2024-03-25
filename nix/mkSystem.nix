@@ -73,7 +73,8 @@ let
   ];
 
   uiModules = [
-    ../programs/interface
+    ../programs/interface         # Display Server
+    ../nix/modules/service/av.nix # Pipewire/Wireplumber
   ];
 
   userOSConfig = ./users/${user}/${if darwin then "darwin" else "linux"}.nix;
