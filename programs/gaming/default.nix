@@ -23,5 +23,11 @@ with lib;
         enable = true;
       };
     };
+
+    hardware = {
+      steam-hardware = {
+        enable = true;
+      };
+    };
   };
 }
