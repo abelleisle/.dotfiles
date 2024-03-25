@@ -38,7 +38,7 @@ in
 
   dotfiles.programs.personal.enable = false;
 
-  nixGLPrefix = "${pkgs.nix.nixGLIntel}/bin/nixGLIntel";
+  nixGLPrefix = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel";
 
   # Enable wezterm and configure it
   programs.wezterm = {
