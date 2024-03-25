@@ -1,19 +1,19 @@
 {
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/root";
+      device = "/dev/disk/by-label/Eroot";
       fsType = "ext4";
     };
 
     "/boot/efi" = {
-      device = "/dev/disk/by-label/boot";
+      device = "/dev/disk/by-label/Eboot";
       fsType = "vfat";
     };
   };
 
   swapDevices = [
     {
-      device = "/dev/disk/by-label/swap";
+      device = "/dev/disk/by-label/Eswap";
     }
   ];
 }

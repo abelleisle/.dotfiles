@@ -1,5 +1,7 @@
 { self, lib, ... }:
 let
+  nixos-hw = self.inputs.nixos-hardware.nixosModules;
+
   overlays = [
     self.inputs.nixGL.overlay
   ];
@@ -18,11 +20,20 @@ in
     nixosConfigurations = {
       # Eowyn: Dev Laptop
       Eowyn = mkSystem "Eowyn" "x86_64-linux"
-        { allowUnfree = true; user = "andy"; };
+        { allowUnfree = true;
+          user = "andy";
+          extraModules = [
+            nixos-hw.lenovo-thinkpad-e14-intel
+          ];
+        };
 
       # Faramir: Dev VM
       Faramir = mkSystem "Faramir" "x86_64-linux"
-        { allowUnfree = true; user = "andy"; isVM = true; isBareMetal = false; };
+        { allowUnfree = true;
+          user = "andy";
+          isVM = true;
+          isBareMetal = false;
+        };
 
     };
 

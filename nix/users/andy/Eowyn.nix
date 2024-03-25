@@ -38,12 +38,7 @@ in
 
   dotfiles.programs.personal.enable = false;
 
+  # Override libGL since this is not a nixOS system
   nixGLPrefix = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel";
-
-  # Enable wezterm and configure it
-  programs.wezterm = {
-    package = (nixGL pkgs.wezterm);
-  };
-
-
+  programs.wezterm.package = (nixGL pkgs.wezterm);
 }
