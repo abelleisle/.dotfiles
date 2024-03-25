@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, config, isVM, ... }:
+{ pkgs, lib, config, isVM, ... }:
 let
   cfg = config.programs.wm;
 in
@@ -16,7 +16,6 @@ with lib;
   config = {
     programs.hyprland = {
       enable = cfg.hyprland.enable;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     };
 
     environment.sessionVariables = lib.mkIf (isVM) {

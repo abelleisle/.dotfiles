@@ -42,10 +42,6 @@
     };
 
     # Override Flakes
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-    };
-
     nixGL = {
       url = "github:nix-community/nixGL";
     };
