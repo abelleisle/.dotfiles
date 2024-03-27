@@ -33,10 +33,19 @@ in
     browser.enable = true;
   };
 
+  dotfiles.keyboard.enable = true;
+
   nixGLPrefix = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel";
 
   # Enable wezterm and configure it
   programs.wezterm = {
     package = (nixGL pkgs.wezterm);
+  };
+
+  programs.librewolf = {
+    settings = {
+      "network.trr.mode" = "5"; # Disable DNS-over-HTTPS because firewall
+                                # already does this.
+    };
   };
 }

@@ -4,5 +4,6 @@
     ./wezterm
     ./ncspot
     ./logseq
+    ./keyboard
   ];
 }
