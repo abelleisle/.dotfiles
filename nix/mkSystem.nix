@@ -2,6 +2,7 @@
 { self
 , overlays
 , lib
+, unfree_whitelist
 }:
 
 # Required args
@@ -136,11 +137,15 @@ let
 
   pkgs = import inputs.nixpkgs {
     inherit system overlays;
-    config.allowUnfree = allowUnfree;
+    config = {
+      inherit allowUnfree;
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) unfree_whitelist;
+    };
   };
 
   pkgs-stable = import inputs.nixpkgs-stable {
     inherit system;
+    config.allowUnfree = allowUnfree;
   };
 
   specialArgs = {

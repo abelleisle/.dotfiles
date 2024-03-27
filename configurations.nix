@@ -6,12 +6,16 @@ let
     self.inputs.nixGL.overlay
   ];
 
+  unfree_whitelist = [
+    "uhk-agent"
+  ];
+
   mkSystem = import ./nix/mkSystem.nix {
-    inherit self lib overlays;
+    inherit self lib overlays unfree_whitelist;
   };
 
   mkHome = import ./nix/mkHome.nix {
-    inherit self lib overlays;
+    inherit self lib overlays unfree_whitelist;
   };
 in
 {
