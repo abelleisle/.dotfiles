@@ -30,6 +30,7 @@
   "neoformat": { "branch": "master", "commit": "0c285d7a7c06a6ee88db70871a274797693fce42" },
   "nvim-cmp": { "branch": "main", "commit": "5dce1b778b85c717f6614e3f4da45e9f19f54435" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6" },
+  "nvim-dap": { "branch": "master", "commit": "6ae8a14828b0f3bff1721a35a1dfd604b6a933bb" },
   "nvim-dev-container": { "branch": "main", "commit": "415332f479ca873147f489fcf3cfb5a83fbed0c1" },
   "nvim-lspconfig": { "branch": "master", "commit": "360a895125ac4f39df6aa8f763635eff07e69fff" },
   "nvim-tree.lua": { "branch": "master", "commit": "94c7c810af205c0f00c8f105dcf490c8eb17658a" },

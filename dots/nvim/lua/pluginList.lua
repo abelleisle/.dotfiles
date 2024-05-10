@@ -231,6 +231,10 @@ return require('lazy').setup({
         }
     },
 
+    { -- Debug adapter protocol
+        "mfussenegger/nvim-dap"
+    },
+
     ---------------------------
     --  SNIPPETS/COMPLETION  --
     ---------------------------

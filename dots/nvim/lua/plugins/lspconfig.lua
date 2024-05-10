@@ -68,17 +68,18 @@ local lsp_entry = function(server_name, auto_install)
 end --fn create_lsp_entry
 
 M.servers = {
-    clang  = lsp_entry("clangd"                     ),
-    lua    = lsp_entry("lua_ls"                     ),
-    latex  = lsp_entry("ltex"                       ),
-    python = lsp_entry("jedi_language_server"       ),
-    rust   = lsp_entry("rust_analyzer"              ),
-    cmake  = lsp_entry("cmake"                      ),
-    nix    = lsp_entry("nil_ls"              ,  true),
- -- yaml   = lsp_entry("yaml-language-server", false),
-    ccls   = lsp_entry("ccls"                , false),
-    vhdl   = lsp_entry("rust_hdl"            , false),
-    zig    = lsp_entry("zls"                 , false),
+    clang    = lsp_entry("clangd"                     ),
+    lua      = lsp_entry("lua_ls"                     ),
+    latex    = lsp_entry("ltex"                       ),
+    python   = lsp_entry("jedi_language_server"       ),
+    rust     = lsp_entry("rust_analyzer"              ),
+    cmake    = lsp_entry("cmake"                      ),
+    nix      = lsp_entry("nil_ls"              ,  true),
+ -- yaml     = lsp_entry("yaml-language-server", false),
+    ccls     = lsp_entry("ccls"                , false),
+    vhdl     = lsp_entry("rust_hdl"            , false),
+    zig      = lsp_entry("zls"                 , false),
+    gdscript = lsp_entry("gdscript"            , false),
 }
 
 local get_lsp_auto_install = function(auto_install)

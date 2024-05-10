@@ -196,12 +196,34 @@ vim.api.nvim_create_user_command("Fmt", function()
     vim.cmd("Neoformat")
 end, {})
 
-vim.api.nvim_create_user_command(
-    'TrimWhitespace',
+vim.api.nvim_create_user_command('TrimWhitespace',
     function()
         require("mini.trailspace").trim()
     end,
     {desc = "Trim all trailing whitespace"}
+)
+
+vim.api.nvim_create_user_command('GodotServer',
+    function()
+        local dap = require("dap")
+        dap.adapters.godot = {
+            type = "server",
+            host = "localhost",
+            port = 6005,
+        }
+
+        dap.configurations.gdscript = {
+            {
+                launch_game_instance = false,
+                launch_scene = false,
+                name = "Launch scene",
+                project = "${workspaceFolder}",
+                request = "launch",
+                type = "godot",
+            },
+        }
+    end,
+    {desc = "Start Godot debug adapter server"}
 )
 
 ------------------------
