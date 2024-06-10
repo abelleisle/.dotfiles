@@ -109,7 +109,6 @@ return require('lazy').setup({
         "ellisonleao/gruvbox.nvim",
         -- TODO update this to new version
         -- This is being held because new version renamed variables
-        commit = 'fc66cfbadaf926bc7c2a5e0616d7b8e64f8bd00c',
         dependencies = {"rktjmp/lush.nvim"},
         lazy = true,
     },
@@ -248,6 +247,7 @@ return require('lazy').setup({
     { -- Snippet engine
         "L3MON4D3/LuaSnip",
         event = Events.InsertMode,
+        build = "make install_jsregexp",
         config = function()
             require("plugins.cmp").luasnip()
         end

@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function ()
     local utils   = require("utils")
-    local palette = require("gruvbox.palette").colors; -- TODO: change to get_base_colors()
+    local palette = require("gruvbox").palette; -- TODO: change to get_base_colors()
     local bg      = palette.dark0_hard;
 
     -- setup must be called before loading the colorscheme
