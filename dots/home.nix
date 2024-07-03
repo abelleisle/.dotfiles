@@ -47,7 +47,7 @@ in
         pkgs.fzf
         pkgs.jq
         pkgs.yq
-      
+
         # Fonts
         pkgs.fira-code-nerdfont
 

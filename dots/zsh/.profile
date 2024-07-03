@@ -51,6 +51,13 @@ if [ -d "$HOME/.cmake/bin" ] ; then
     PATH="$HOME/.cmake/bin:$PATH"
 fi
 
+if [ -d "$HOME/.rvm/" ] ; then
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+    # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+    export PATH="$PATH:$HOME/.rvm/bin"
+    export rvm_ignore_dotfiles=yes
+fi
+
 # If the ESP toolchain is installed, create a function to access it
 idf() {
     if [ -d "$HOME/bin/esp/esp-idf" ] && [ -d "$HOME/bin/esp/toolchain" ] ; then
@@ -73,33 +80,33 @@ case `uname` in
     Darwin)
 
         if [ $(sysctl -n sysctl.proc_translated) = '0' ]; then
-            #echo 'Running natively (arm64)'
+            # echo 'Running natively (arm64)'
 
             eval "$(/opt/homebrew/bin/brew shellenv)"
+
+            if [ -d "$HOME/Library/Python/3.9/bin" ] ; then
+                PATH="$HOME/Library/Python/3.9/bin:$PATH"
+            fi
 
             export PYENV_ROOT="$HOME/.pyenv_arm"
             PATH="$HOME/.pyenv_arm/shims:$PATH"
 
             export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib
 
-            if [ -d "$HOME/Library/Python/3.9/bin" ] ; then
-                PATH="$HOME/Library/Python/3.9/bin:$PATH"
-            fi
-
         else
-            #echo 'Running through Rosetta (x86_64)'
+            # echo 'Running through Rosetta (x86_64)'
 
             eval "$(/usr/local/bin/brew shellenv)"
 
-            export PYENV_ROOT="$HOME/.pyenv_intel"
-            PATH="$HOME/.pyenv_intel/shims:$PATH"
-
             if [ -d "$HOME/Library/Python/3.9/bin" ] ; then
                 PATH="$HOME/Library/Python/3.9/bin:$PATH"
             fi
+
+            export PYENV_ROOT="$HOME/.pyenv_intel"
+            PATH="$HOME/.pyenv_intel/shims:$PATH"
         fi
 
-        eval "$(pyenv init -)"
+        eval "$(pyenv init --path)"
 
         export LANG='en_US.UTF-8'
 

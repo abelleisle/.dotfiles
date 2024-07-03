@@ -49,6 +49,9 @@ in
 
       "andy@Eowyn" = mkHome "andy" "x86_64-linux"
         { extraImports = [ ./nix/users/andy/Eowyn.nix ]; };
+
+      "andy@Saruman" = mkHome "abelleisle" "aarch64-darwin"
+        { extraImports = [ ./nix/users/abelleisle/Saruman.nix ]; };
     };
   };
 }

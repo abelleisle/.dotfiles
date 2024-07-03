@@ -19,6 +19,7 @@
         pkgs.sops
         pkgs.yq-go
         pkgs.git-crypt
+        pkgs.gnupg
 
         # Extra utilities
         pkgs.jq

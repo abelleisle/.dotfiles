@@ -139,10 +139,12 @@ vim.api.nvim_create_autocmd({'FocusLost', 'BufLeave'}, {
     callback = function()
         local buf = vim.fn.bufnr()
         local bvr = vim.fn.getbufvar(buf, "&")
+        local fname = vim.fn.expand("%:t")
         if g.auto_save == true and
            bvr.buftype == "" and
            bvr.modifiable == 1 and
-           bvr.modified == 1
+           bvr.modified == 1 and
+           fname ~= ""
         then
             vim.cmd('silent update')
             vim.cmd('echohl InfoMsg | echo "Auto-saved " .. expand("%:t") .. " at " .. strftime("%H:%M:%S") | echohl None')

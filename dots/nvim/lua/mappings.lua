@@ -120,6 +120,7 @@ _map.navigation = function()
     ------------
     if vim.g.plugins_installed then
         require("leap").create_default_mappings()
+        require('leap').opts.labels = 'tnseriaoplfuvmwyqjc,x.z' --home row & least effort keys for Colemak layout
     end -- vim.g.plugins_installed
 
     ---------------

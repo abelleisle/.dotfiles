@@ -4,9 +4,9 @@
 export ZSH=$HOME/.zsh/oh-my-zsh
 
 # ~/.zprofile will source ~/.profile, so we don't need to here
-# if [ -f ~/.profile ]; then
-#     source ~/.profile
-# fi
+if [ -f ~/.profile ]; then
+    source ~/.profile
+fi
 
 # Source our custom functions
 if [ -d ~/.zsh/extra/ ]; then
@@ -124,9 +124,15 @@ export VISUAL="$EDITOR"
 export SHELL="$(which zsh)"
 
 # If wal is used, source the wal colors
+if [ -d ~/.cache/wal ]; then
+    [[ -s "~/.cache/wal/sequences" ]] && cat ~/.cache/wal/sequences
+    [[ -s "~/.cache/wal/colors-tty.sh" ]] && source ~/.cache/wal/colors-tty.sh
+fi
+
+# If home-manager is used, source our colorscheme
 if [ -d ~/.shelf ]; then
-    cat ~/.shelf/sequences
-    source ~/.shelf/colors-tty.sh
+    [[ -s "~/.shelf/sequences" ]] && cat ~/.shelf/sequences
+    [[ -s "~/.shelf/colors-tty.sh" ]] && source ~/.shelf/colors-tty.sh
 fi
 
 # ZSH Completions
