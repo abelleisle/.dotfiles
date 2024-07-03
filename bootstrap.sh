@@ -139,7 +139,8 @@ STOW_CMD="stow -t ${HOME} -d ${DOTFILES_DIR}/dots"
 #  CONFIGURE NEOVIM  #
 ######################
 header "Installing neovim configs"
-run ${STOW_CMD} nvim
+# run ${STOW_CMD} nvim
+run "ln -s ${DOTFILES_DIR}/dots/nvim ${HOME}/.config/nvim"
 info "Syncing neovim plugins (this may take a while)"
 NVIM_VERSION=$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')
 NVIM_REQUIRE="0.8.0"
@@ -158,7 +159,11 @@ if [ -f ${HOME}/.profile ]; then
     warn "~/.profile already exists. Renaming to .profile.old"
     mv ${HOME}/.profile ${HOME}/.profile.old
 fi
-run ${STOW_CMD} zsh
+run "ln -s ${DOTFILES_DIR}/dots/zsh/.zshrc ${HOME}/.zshrc"
+run "ln -s ${DOTFILES_DIR}/dots/zsh/.profile ${HOME}/.profile"
+run "ln -s ${DOTFILES_DIR}/dots/zsh/.zprofile ${HOME}/.zprofile"
+run "ln -s ${DOTFILES_DIR}/dots/zsh/.zsh ${HOME}/.zsh"
+# run ${STOW_CMD} zsh
 
 header "Setting zsh as default shell"
 run sudo chsh -s $(which zsh) ${DOTFILES_USER}
@@ -170,5 +175,7 @@ zsh -c "source ~/.zshrc"
 #  CONFIGURE TMUX  #
 ####################
 header "Installing tmux configs"
-run ${STOW_CMD} tmux
+run "ln -s ${DOTFILES_DIR}/dots/tmux/.tmux.conf ${HOME}/.tmux.conf"
+run "ln -s ${DOTFILES_DIR}/dots/tmux/.tmux ${HOME}/.tmux"
+# run ${STOW_CMD} tmux
 run ~/.tmux/plugins/tpm/bin/install_plugins
