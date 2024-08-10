@@ -117,5 +117,7 @@ case `uname` in
 
         export _JAVA_AWT_WM_NONREPARENTING=1
 
+        export LANG='en_US.UTF-8'
+
         ;;
 esac

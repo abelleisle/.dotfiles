@@ -155,6 +155,30 @@
         "type": "github"
       }
     },
+    "kmonad": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1722780550,
+        "narHash": "sha256-Snj1Aejw0W7jUiicMhyY88D8JjLtcOpCydXoDL9avMc=",
+        "ref": "refs/heads/master",
+        "rev": "218bb6f5ed499fac875383014cb443c2b6ec5ca3",
+        "revCount": 824,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kmonad/kmonad?dir=nix"
+      },
+      "original": {
+        "dir": "nix",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/kmonad/kmonad?dir=nix"
+      }
+    },
     "nixGL": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -282,6 +306,7 @@
         "flake-parts": "flake-parts",
         "flake-registry": "flake-registry",
         "home-manager": "home-manager_2",
+        "kmonad": "kmonad",
         "nixGL": "nixGL",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
@@ -296,7 +321,7 @@
           "nixpkgs"
         ],
         "nixpkgs-stable": [
-          "nixpkgs"
+          "nixpkgs-stable"
         ]
       },
       "locked": {

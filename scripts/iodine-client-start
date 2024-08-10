@@ -1,0 +1,401 @@
+#! /bin/bash
+
+### Script to set up an iodine tunnel route traffic through it
+###
+### Copyright 2008 Barak A. Pearlmutter <bap@debian.org>
+###
+### License: MIT
+###
+### Permission to use, copy, modify, and distribute this software for
+### any purpose with or without fee is hereby granted, provided that
+### the above copyright notice and this permission notice appear in
+### all copies.
+###
+### THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+### WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+### WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+### AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR
+### CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+### LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
+### NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+### CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+## Cause script to bail immediately on failed command
+set -e
+
+function usage
+{
+    cat <<EOF
+'iodine-client-start' starts an iodine IP-over-DNS tunnel.
+
+Usage: iodine-client-start [option]
+
+  -h, --help		Print help and exit
+  -v, --version		Print version info and exit
+
+Invoking the program without options attempts to set up and configure
+an iodine IP-over-DNS tunnel using the configuration in the file
+/etc/default/iodine-client or by querying the user. It tries to
+figure out the right way to set things up by observing the network,
+and if all else fails by guessing.
+
+QUICK CONFIGURATION
+
+Put two lines in the file /etc/default/iodine-client
+
+	subdomain=your.tunnel.sub.domain
+
+	passwd=password_for_that_tunnel
+
+
+or invoke the script with those environment variables set:
+
+	env subdomain=xxx passwd=xxx iodine-client-start
+
+If these are not set, the script will query the user for them.
+
+DETAILS
+
+The configuration file consists of lines which are either comments
+starting with '#', or settings of the form VAR="val". Valid VARs are:
+
+subdomain
+    Sample value: your.tunnel.sub.domain (no default, must be set)
+
+passwd
+    Sample value: password_for_that_tunnel (no default, must be set)
+
+testhost
+    Hostname to ping when testing if network is working (default:
+    slashdot.org)
+
+bounce_localnet
+    Take the local network down and then up again before starting
+    tunnel (default: false)
+
+test_ping_localnet
+    Test if the local network is working by pinging the gateway
+    (default: true)
+
+test_ping_tunnel
+    Test if the iodine tunnel is working after it has been set up by
+    pinging the host at the other end (default: true)
+
+test_ping_final
+    Test if the tunnel is working after everything is ostensibly set
+    up by trying to ping an external host (default: true)
+
+default_router
+    IP address of router on the local network---should be found
+    automatically, set this if that fails and the program guesses wrong.
+
+interface
+    Interface to use (e.g., eth1, eth0, etc) for connection to DNS
+    server used for the iodine tunnel---should be found automatically,
+    set this if that fails and the program guesses wrong.
+
+mtu
+    Set if tunnel MTU needs to be manually changed (lowered). Should
+    not be necessary anymore, as recent versions of iodine negotiate
+    an appropriate MTU during tunnel setup. But if that negotiation
+    does not happen, or if you are using an older version of iodine,
+    the default tunnel MTU is 1024, and if the local DNS server
+    restricts to 512 byte packets you might need to use an MTU of 220.
+
+skip_raw_udp_mode
+    Set "-r" option in iodine command line. With this option, iodine
+    does not try to establish a direct UDP socket to the iodine server
+    on port 53. (default: true).
+
+continue_on_error
+    Set if the script should continue even if a command fails.
+    Use to test script when running as non-root. Defaults to false
+    if running as root, true otherwise.
+EOF
+}
+
+function version
+{
+    echo iodine-client-start 1.0.6
+}
+
+case $# in
+    0)
+	;;
+    1)
+	case "$1" in
+	    # start)
+	    # 	;;
+	    # stop)
+	    # 	;;
+	    # restart)
+	    # 	;;
+	    --version|-v)
+		version
+		exit
+		;;
+	    --help|-h)
+		usage
+		exit
+		;;
+	    *)
+		echo error: unknown option "$1"
+		exit 1
+	esac
+	exit
+	;;
+    *)
+	echo error: too many arguments "$*"
+	exit 1
+	;;
+esac
+
+echo "${iodine_client_rc:=/etc/default/iodine-client}" > /dev/null
+
+if [ -r ${iodine_client_rc} ]; then
+    . ${iodine_client_rc}
+else
+    echo WARNING: Cannot read ${iodine_client_rc}
+fi
+
+if [ -z ${subdomain} ]; then
+    read -p "DNS tunnel DNS subdomain: " subdomain
+fi
+
+if [ -z ${subdomain} ]; then
+    echo ERROR: Must set subdomain.
+    exit 1
+fi
+
+if [ -z ${passwd} ]; then
+    read -p "Password for DNS tunnel over ${subdomain}: " passwd
+fi
+
+## This is a host name used for testing DNS and for pinging
+echo "${testhost:=slashdot.org}"		> /dev/null
+
+## Set if local network should be taken down and then up
+echo "${bounce_localnet:=false}"		> /dev/null
+
+## Set for testing network availability via ping at various points
+echo "${test_ping_localnet:=true}"		> /dev/null
+echo "${test_ping_tunnel:=true}"		> /dev/null
+echo "${test_ping_final:=true}"			> /dev/null
+
+## Set if the script cannot find and then incorrectly guesses the
+## local network router
+echo "${default_router}"			> /dev/null
+
+## Set if script uses the wrong hardware interface
+echo "${interface}"				> /dev/null
+
+## Set if MTU needs to be manually altered (lowered)
+##  - the default tunnel MTU is 1024.
+##  - if local DNS server restricts to 512 byte packets then use MTU 220
+echo "${mtu}"					> /dev/null
+
+## Set it if you want try RAW udp mode
+echo "${skip_raw_udp_mode:=true}"           > /dev/null
+
+## Set if the script should continue even if a command fails.
+## Used to test script when running as non-root.
+if [ $(whoami) = root ]; then
+    echo "${continue_on_error:=false}"		> /dev/null
+else
+    echo "${continue_on_error:=true}"		> /dev/null
+fi
+
+## DEBIAN PACKAGES TO INSTALL: these are needed to run this script
+##  iodine (for /usr/sbin/iodine)
+##  iproute (for /bin/ip)
+##  ipcalc (for /usr/bin/ipcalc)
+##  dnsutils (for /usr/bin/dig)
+##  fping (for /usr/bin/fping)
+##  or oping (for /usr/bin/oping)
+##  gawk (for /usr/bin/gawk, to use gensub())
+
+if type -P fping > /dev/null; then
+    ping_cmd="fping -C1"
+elif type -P oping > /dev/null; then
+    ping_cmd="oping -c1"
+else
+    ping_cmd="echo would ping"
+fi
+
+## TO DO
+## - avoid double ping when DNS server and local router are the same
+## - option to not kill existing iodine DNS tunnels, in case there
+##   are meant to be more than one
+## - sanify check whether default_router is on local network
+
+echo ==== Creating IP-over-DNS tunnel over local network connection...
+
+
+## Find a network interface
+
+if [ -z ${interface} ]; then
+    interfaces=$(tail --lines=+3 /proc/net/wireless \
+	| tr -d : | awk '{print $1}')
+    for dev in ${interfaces}; do
+        if ip -oneline -4 addr show dev ${dev} | grep -q inet; then
+            interface=${dev}
+        fi
+    done
+fi
+
+if [ -z ${interface} ]; then
+    interface=$(ip -oneline link show | awk '$16=="link/ether" {print $2}' | tr -d : | head -1)
+fi
+
+if [ -z ${interface} ]; then
+    echo ERROR: No network interface found.
+    exit 1
+fi
+
+echo ==== Local network interface: ${interface}
+
+## Down any existing DNS tunnel (wish there were "approved" way to do this)
+
+echo ==== Killing existing DNS tunnels...
+if killall --quiet --wait --verbose --signal HUP iodine; then
+    sleep 2
+fi
+
+## Stabilize local network
+
+if ${bounce_localnet}; then
+    echo ==== Bouncing local network connection...
+    ifdown --force ${interface} || true
+    ifup ${interface} || ${continue_on_error}
+fi
+
+## Fetch some information about the local network
+
+addr=$(ip -oneline -4 addr show dev ${interface} scope global \
+    | awk '{print $4}' | head -1)
+prefix_len=$(echo ${addr} | sed 'sX^.*/XX')
+local_net=$(ipcalc --nobinary ${addr} | awk '$1=="Network:" {print $2}')
+
+echo ==== Local address: ${addr}
+echo ==== Local network: ${local_net}
+
+router=$(ip -oneline -4 route list dev ${interface} default \
+    | awk '{print $3}' | head -1)
+if [ -z ${router} ]; then
+    ## This can happen when the default local route is already deleted
+    if [ -z ${default_router} ]; then
+	echo WARNING: no default route, guessing local router IP address.
+	## Minimum address on local net is usually right
+	router=$(ipcalc --nobinary ${addr} | awk '$1=="HostMin:" {print $2}')
+    else
+	echo WARNING: no default route, using configured default router.
+	## But sometimes need to hardwire...
+	router=${default_router}
+    fi
+fi
+
+echo ==== Local network router: ${router}
+
+## Test DNS service
+
+testhost_ip=$(dig +short -t A -q ${testhost})
+if [ -z ${testhost_ip} ]; then
+    echo WARNING: Failure on DNS lookup of ${testhost}.
+fi
+
+## fetch DNS servers
+
+nameservers=$(awk '$1=="nameserver" {print $2}' /etc/resolv.conf)
+if [ -n "${nameservers}" ]; then
+    echo ==== DNS servers: ${nameservers}
+else
+    echo ERROR: No DNS servers found.
+    exit 1
+fi
+
+## Test if local network is up
+
+if ${test_ping_localnet}; then
+    echo ==== Ping test of  local network router and DNS servers...
+    ${ping_cmd} ${router} ${nameservers} \
+	|| echo WARNING: Ping test failed.
+fi
+
+## Add point-to-point routes for any non-local DNS servers
+
+for n in ${nameservers}; do
+    n_net=$(ipcalc --nobinary ${n}/${prefix_len} | awk '$1=="Network:" {print $2}')
+    n_net8=$(ipcalc --nobinary ${n}/8 | awk '$1=="Network:" {print $2}')
+    if [ "${n_net}" != "${local_net}" ]; then
+        if [ "${n_net8}" != "127.0.0.0/8" ]; then
+	    echo ==== Adding point-to-point route for DNS server ${n}
+            ## remove point-to-point route first, in case it is already present
+	    ip -4 route del ${n}/32 || true
+	    ip -4 route add ${n}/32 via ${router} || ${continue_on_error}
+        fi
+    fi
+done
+
+## Bring up DNS tunnel
+
+echo ==== Creating IP-over-DNS tunnel...
+if ${skip_raw_udp_mode}; then
+    iodine_opts="${iodine_opts} -r"
+fi
+
+iodine ${iodine_opts} -P "${passwd}" "${subdomain}" || ${continue_on_error}
+
+## Find DNS tunnel interface
+tunnel_interface=$(ip -oneline link show | gawk '$2 ~ /^dns/ {print $2}' | tr -d : | head -1)
+if [ -z "${tunnel_interface}" ]; then
+    echo WARNING: Cannot find DNS tunnel interface, using default.
+    tunnel_interface=dns0
+fi
+echo ==== DNS tunnel interface: ${tunnel_interface}
+
+## Maybe try to change MTU
+
+if [ -n "${mtu}" ]; then
+    echo ==== Setting MTU of ${tunnel_interface} to ${mtu}
+    ip link set ${tunnel_interface} mtu ${mtu}
+fi
+
+## Figure out router at other end of tunnel, assuming router uses final octet .1
+## (There should be some way to get this information out of iodine, since
+## it *prints* it as it sets up the tunnel, so it does know it.)
+
+tunnel_remote=$(ip -oneline -4 address show dev ${tunnel_interface} \
+    | gawk '$3=="inet" {print gensub("[.][0-9]*/.*", ".1", 1, $4)}' | head -1)
+
+if [ -z ${tunnel_remote} ]; then
+    echo ERROR: Cannot find DNS tunnel remote endpoint.
+    ${continue_on_error}
+    ## set something random if debugging
+    echo WARNING: Confabulating DNS tunnel remote endpoint.
+    tunnel_remote=192.168.253.1
+fi
+
+echo ==== DNS tunnel remote endpoint: ${tunnel_remote}
+
+if ${test_ping_tunnel}; then
+    echo ==== Ping test of local router, nameserver, and DNS tunnel...
+    ${ping_cmd} ${router} ${nameservers} ${tunnel_remote} \
+	|| echo WARNING: Ping test failed.
+fi
+
+## Modify routing table to send trafic via DNS tunnel
+
+echo ==== Setting default route through DNS tunnel...
+
+## Remove default route via local router
+ip -4 route del default via ${router} || echo WARNING: No default route to delete
+## Add default via tunnel
+ip -4 route add default via ${tunnel_remote} || ${continue_on_error}
+
+## Test if all is well
+
+if ${test_ping_final}; then
+    echo ==== Ping test of local router, nameserver, DNS tunnel, external test host...
+    ${ping_cmd} ${router} ${nameservers} ${tunnel_remote} ${testhost_ip:-${testhost}} \
+	|| echo WARNING: Ping test failed.
+fi

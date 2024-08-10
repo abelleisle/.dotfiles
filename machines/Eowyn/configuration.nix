@@ -14,6 +14,15 @@
         enable = true;
       };
     };
+    kmonad = {
+      enable = true;
+      keyboards = {
+        "colemak-d-extended-ansi" = {
+          device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+          config = builtins.readFile ./keymaps/colemak-d-extend-ansi.kbd;
+        };
+      };
+    };
   };
 
   programs.hyprland = {

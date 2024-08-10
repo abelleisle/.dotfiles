@@ -1,6 +1,7 @@
 { self, lib, ... }:
 let
   nixos-hw = self.inputs.nixos-hardware.nixosModules;
+  kmonad = self.inputs.kmonad.nixosModules;
 
   overlays = [
     self.inputs.nixGL.overlay
@@ -28,6 +29,7 @@ in
           user = "andy";
           extraModules = [
             nixos-hw.lenovo-thinkpad-e14-intel
+            kmonad.default
           ];
         };
 
