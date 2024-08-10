@@ -1,7 +1,7 @@
 { config, pkgs, ...}:
 let
   cfg = config.dotfiles;
-  nixGL = import ../../../nix/modules/nixGL.nix { inherit pkgs config; };
+  nixGL = import ../../nix/nixGL.nix { inherit pkgs config; };
   system = pkgs.system;
 in
 {

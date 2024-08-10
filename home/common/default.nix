@@ -3,7 +3,7 @@
   imports = [
     ./wezterm
     ./ncspot
-    ./logseq
+    # ./logseq
     ./keyboard
   ];
 }

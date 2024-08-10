@@ -42,8 +42,8 @@ let
 
     # ./modules/users/admins.nix
     # ./modules/users/extra-opts.nix
-    ./modules/service/sshd.nix
-    ./modules/packages.nix
+    ../modules/service/sshd.nix
+    ../modules/packages.nix
     # ./modules/networking/hosts.nix
     # ./modules/networking/ip.nix
 
@@ -54,9 +54,9 @@ let
   vmModules =
     commonModules
     ++ [
-    ./modules/system/bootloader.nix
+    ../modules/system/bootloader.nix
     # ./modules/disks/disko-ext4.nix
-    ./modules/system/vm.nix
+    ../modules/system/vm.nix
 
     inputs.disko.nixosModules.disko
   ];
@@ -70,15 +70,14 @@ let
   bareMetalModules =
     commonModules
     ++ [
-    ./modules/system/bootloader.nix
+    ../modules/system/bootloader.nix
   ];
 
   uiModules = [
-    ../programs/interface         # Display Server
-    ../nix/modules/service/av.nix # Pipewire/Wireplumber
+    ../modules/ui # User interface definitions
   ];
 
-  userOSConfig = ./users/${user}/${if darwin then "darwin" else "linux"}.nix;
+  userOSConfig = ../users/${user}/${if darwin then "darwin" else "linux"}.nix;
   hm = if darwin
     then inputs.home-manager.darwinModules
     else inputs.home-manager.nixosModules;
@@ -166,8 +165,8 @@ in inputs.nixpkgs.lib.nixosSystem
         networking.hostName = "${hostname}"; # Force hostname setting
         system.stateVersion = "24.05";       # Nixpkgs is based on 24.05
       }
-      ./machines/${hostname}/configuration.nix
-      ./machines/${hostname}/hardware.nix
+      ../machines/${hostname}/configuration.nix
+      ../machines/${hostname}/hardware.nix
     ]
     ++ [commonSettings]
     ++ [userOSConfig]

@@ -40,7 +40,7 @@ in home-manager.lib.homeManagerConfiguration
   inherit pkgs extraSpecialArgs;
 
   modules = [
-    ./users/${username}/home.nix
+    ../users/${username}/home.nix
 
     {
       options.nixGLPrefix = lib.mkOption {

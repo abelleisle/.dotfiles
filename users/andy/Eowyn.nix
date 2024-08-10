@@ -1,6 +1,6 @@
 { lib, pkgs, config, ...}:
 let
-  nixGL = import ../../../nix/modules/nixGL.nix { inherit pkgs config; };
+  nixGL = import ../../nix/nixGL.nix { inherit pkgs config; };
 in
 {
   imports = [];
@@ -37,8 +37,9 @@ in
   };
 
   dotfiles.programs.personal.enable = false;
+  dotfiles.keyboard.enable = true;
 
   # Override libGL since this is not a nixOS system
-  nixGLPrefix = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel";
-  programs.wezterm.package = (nixGL pkgs.wezterm);
+  # nixGLPrefix = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel";
+  # programs.wezterm.package = (nixGL pkgs.wezterm);
 }

@@ -1,6 +1,20 @@
 # UNDER CONSTRUCTION
 I'm renovating my dotfiles to use nix. README is very out of date. I apologize.
 
+# Organization
+```
+.dots/
+├─ dots/              - Common dotfiles uses for all systems (shell, editor, tmux, etc..)
+├─ nix/               - Nix specific files/functions
+├─ common/            - Files to include for common configurations
+├─ modules/           - NixOS modules and service declarations
+│  ├─ services/       - Where we define system services
+│  ├─ progams/        - Program definitions
+├─ README.md          - Congrats! You found me!
+├─ configurations.nix - System and home configurations
+├─ bootstrap.sh       - Bootstrap non-nix systems
+```
+
 # .dotfiles
 These are my dotfiles. Currently I use a static colorscheme because I feel like that works for me.
 

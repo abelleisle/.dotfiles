@@ -73,6 +73,9 @@ M.config = function()
             }
         },
         pickers = {
+            find_files = {
+                hidden = true,
+            },
             --grep_string = {
             --    shorten_path = true,
             --    word_match = "-w",

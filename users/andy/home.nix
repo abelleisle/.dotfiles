@@ -7,10 +7,10 @@ let
 in
 {
   imports = [
-    ../../../dots/home.nix
-    ../../../home/common   # Development stuff
-    ../../../home/programs # Standard programs
-    ../../../home/wm       # Window manager settings
+    ../../dots/home.nix
+    ../../home/common   # Development stuff
+    ../../home/programs # Standard programs
+    ../../home/wm       # Window manager settings
   ];
 
   home = {

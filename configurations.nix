@@ -45,13 +45,13 @@ in
     homeConfigurations = {
       # TODO: find a way to get host system value instead of hardcoding
       "andy@Galadriel" = mkHome "andy" "x86_64-linux"
-        { extraImports = [ ./nix/users/andy/Galadriel.nix ]; };
+        { extraImports = [ ./users/andy/Galadriel.nix ]; };
 
       "andy@Eowyn" = mkHome "andy" "x86_64-linux"
-        { extraImports = [ ./nix/users/andy/Eowyn.nix ]; };
+        { extraImports = [ ./users/andy/Eowyn.nix ]; };
 
       "andy@Saruman" = mkHome "abelleisle" "aarch64-darwin"
-        { extraImports = [ ./nix/users/abelleisle/Saruman.nix ]; };
+        { extraImports = [ ./users/abelleisle/Saruman.nix ]; };
     };
   };
 }
