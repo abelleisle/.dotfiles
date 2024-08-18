@@ -1,12 +1,16 @@
 { lib, isVM, pkgs, ... }:
 {
-  imports = [];
+  imports = [
+    ./plymouth.nix
+  ];
 
   services = {
-    displayManager.sddm = {
-      enable = true;
-      wayland = {
+    displayManager = {
+      sddm = {
         enable = true;
+        wayland = {
+          enable = true;
+        };
       };
     };
     desktopManager = {
