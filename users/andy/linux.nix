@@ -9,6 +9,7 @@ in
     users.users.andy = {
       isNormalUser = true;
       home = "/home/andy";
+      description = "Andy";
       extraGroups = [ "docker" "wheel" "wireshark" ]
         ++ lib.optionals (usingNM) ["networkmanager" ];
       shell = pkgs.zsh;
