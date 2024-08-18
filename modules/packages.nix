@@ -3,6 +3,7 @@
     # Base packages
     coreutils
     man-pages
+    unzip
 
     # Extras
     file

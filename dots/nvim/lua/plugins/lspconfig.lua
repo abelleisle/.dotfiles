@@ -61,6 +61,12 @@ local lsp_entry = function(server_name, auto_install)
         auto_install_setting = true
     end
 
+    local path = vim.fn.expand("$HOME/.shelf/.nixmanaged")
+    local exists = vim.fn.filereadable(path)
+    if exists then
+        auto_install_setting = false
+    end
+
     return {
         lsp = server_name,
         auto_install = auto_install_setting,
@@ -82,65 +88,12 @@ M.servers = {
     gdscript = lsp_entry("gdscript"            , false),
 }
 
-local get_lsp_auto_install = function(auto_install)
-    if auto_install == nil then auto_install = true end
-
-    local t = {}
-    for _,v in pairs(M.servers) do
-        if v.auto_install == auto_install then
-            table.insert(t, v.lsp)
-        end
-    end
-
-    return t
-end -- fn get_lsp_auto_install
-
-M.on_attach = function(client, bufnr)
-
-    -- LSP buffer settings
-    local function buf_set_option(...)
-        vim.api.nvim_buf_set_option(bufnr, ...)
-    end
-
-    local cfg = {
-        bind = true,
-        handler_opts = {
-            border = "rounded"
-        },
-        hint_enable = false
-    }
-
-    -- local cfg = {
-    --     bind = true,
-    --     floating_window = true,
-    --     hint_enable = true,
-    --     fix_pos = true
-    -- }
-
-    require("lsp_signature").on_attach(cfg, bufnr)
-
-    buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-    require("mappings").lsp_configure(client, bufnr)
-end -- fn M.on_attach()
-
-M.config = function()
-    local mason = require("mason")
-    local mason_lspconfig = require("mason-lspconfig")
+local get_setup_handlers = function(default_opts)
     local lspconfig = require("lspconfig")
     local lspconfig_util = require("lspconfig/util")
-    local opts = get_options()
 
-    mason.setup()
-    mason_lspconfig.setup {
-        ensure_installed = get_lsp_auto_install(true),
-        automatic_installation = false,
-    }
-
-    mason_lspconfig.setup_handlers {
-        function(server_name)
-            lspconfig[server_name].setup(opts)
-        end,
+    local opts = default_opts
+    local setup_handlers_list = {
         [M.servers.clang.lsp] = function()
             local clang_opts = vim.tbl_deep_extend("force", opts, {
                 single_file_support = true,
@@ -222,13 +175,6 @@ M.config = function()
             })
             lspconfig[M.servers.latex.lsp].setup(latex_opts)
         end,
-    } -- mason_lspconfig.setup_handlers
-
-    local manual_setup_handlers = {
-        function(server_name)
-            lspconfig[server_name].setup(opts)
-        end,
-
         [M.servers.zig.lsp] = function()
             local zig_opts = vim.tbl_deep_extend("force", opts, {
                 cmd = {"zls"},
@@ -304,11 +250,100 @@ M.config = function()
             lspconfig[M.servers.ccls].setup(ccls_opts)
         --]]
         end,
+    }
+    return setup_handlers_list
+end
+
+local get_lsp_auto_install = function(auto_install)
+    if auto_install == nil then auto_install = true end
+
+    local t = {}
+    for _,v in pairs(M.servers) do
+        if v.auto_install == auto_install then
+            table.insert(t, v.lsp)
+        end
+    end
+
+    return t
+end -- fn get_lsp_auto_install
+
+M.on_attach = function(client, bufnr)
+
+    -- LSP buffer settings
+    local function buf_set_option(...)
+        vim.api.nvim_buf_set_option(bufnr, ...)
+    end
+
+    local cfg = {
+        bind = true,
+        handler_opts = {
+            border = "rounded"
+        },
+        hint_enable = false
+    }
+
+    -- local cfg = {
+    --     bind = true,
+    --     floating_window = true,
+    --     hint_enable = true,
+    --     fix_pos = true
+    -- }
+
+    require("lsp_signature").on_attach(cfg, bufnr)
+
+    buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+    require("mappings").lsp_configure(client, bufnr)
+end -- fn M.on_attach()
+
+M.config = function()
+    local mason = require("mason")
+    local mason_lspconfig = require("mason-lspconfig")
+    local lspconfig = require("lspconfig")
+    local lspconfig_util = require("lspconfig/util")
+    local opts = get_options()
+    local setup_handlers_list = get_setup_handlers(opts)
+
+    local mason_setup_handlers = {
+        function(server_name)
+            lspconfig[server_name].setup(opts)
+        end,
+    }
+    local mason_install_list = get_lsp_auto_install(true)
+    for _,s in ipairs(setup_handlers_list) do
+        if setup_handlers_list[s] ~= nil then
+            mason_setup_handlers[s] = setup_handlers_list[s]
+        end
+        if mason_setup_handlers[s] ~= nil then
+            mason_setup_handlers[s]() -- Setup the server
+        else
+            if mason_setup_handlers[1] ~= nil then
+                mason_setup_handlers[1](s)
+            end
+        end
+    end
+
+    mason.setup()
+    mason_lspconfig.setup {
+        ensure_installed = get_lsp_auto_install(true),
+        automatic_installation = false,
+    }
+
+    mason_lspconfig.setup_handlers (mason_setup_handlers)
+
+    local manual_setup_handlers = {
+        function(server_name)
+            lspconfig[server_name].setup(opts)
+        end,
+
     } -- manual_setup_handlers
 
     -- Setup manually configured LSPs
     local manual_install_list = get_lsp_auto_install(false)
     for _,s in ipairs(manual_install_list) do
+        if setup_handlers_list[s] ~= nil then
+            manual_setup_handlers[s] = setup_handlers_list[s]
+        end
         if manual_setup_handlers[s] ~= nil then
             manual_setup_handlers[s]() -- Setup the server
         else

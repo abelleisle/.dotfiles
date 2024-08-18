@@ -47,6 +47,7 @@ in
         pkgs.fzf
         pkgs.jq
         pkgs.yq
+        pkgs.fd
 
         # Fonts
         pkgs.fira-code-nerdfont
@@ -55,6 +56,16 @@ in
         pkgs.zsh
         pkgs.tmux
         (pkgs.neovim.override { vimAlias = true; })
+
+        # Utilities for stuff
+        pkgs.bc # Needed for shell
+        pkgs.tree-sitter # Neovim tree-sitter binary
+        pkgs.wl-clipboard # Neovim clipboard integration
+
+        # Language Servers
+        pkgs.lua-language-server
+        pkgs.nil
+        pkgs.ltex-ls
       ];
 
       file = {
@@ -73,6 +84,11 @@ in
           source = symlink (tmuxInstall + ".tmux");
           recursive = true;
         };
+
+        # Common
+        ".shelf/.nixmanaged".text = ''
+            This file indicates that this system is managed by nix
+        '';
       };
     };
 

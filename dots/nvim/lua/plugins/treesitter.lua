@@ -8,7 +8,6 @@ M.config = function()
             "cpp",
             "c",
             "verilog",
-            "latex",
             "bash",
             "json",
             "jsonc",
@@ -25,6 +24,7 @@ M.config = function()
             "markdown",
             "markdown_inline",
             "yaml"
+            -- "latex",
         },
         sync_install = true, -- Wait while parsers install
         highlight = {

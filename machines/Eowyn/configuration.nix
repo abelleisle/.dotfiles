@@ -25,6 +25,8 @@
     };
   };
 
+  hardware.enableRedistributableFirmware = true;
+
   programs.hyprland = {
     enable = true;
   };

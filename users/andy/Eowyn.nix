@@ -23,6 +23,7 @@ in
           ------------------------
 
           vim.opt.wrap = false
+          vim.g.nix = true
       end
 
       return M
@@ -36,8 +37,18 @@ in
     '';
   };
 
-  dotfiles.programs.personal.enable = false;
+  dotfiles.programs = {
+    personal.enable = true;
+    email.enable = true;
+    browser.enable = true;
+  };
   dotfiles.keyboard.enable = true;
+
+  programs.git = {
+      enable = true;
+      userName = "abelleisle";
+      userEmail = "abelleisle@protonmail.com";
+  };
 
   # Override libGL since this is not a nixOS system
   # nixGLPrefix = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel";

@@ -76,6 +76,7 @@ VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 MODE_INDICATOR="%F{white}[N]%f"
 INSERT_MODE_INDICATOR="%F{yellow}[I]%f"
+FZF_DEFAULT_OPTS='--height 75% --layout=reverse'
 
 # Load the plugins
 plugins=(
@@ -84,7 +85,7 @@ plugins=(
     sudo
     zsh-autopair
     vi-mode
-    fzf-zsh-plugin
+    fzf
     direnv
 )
 

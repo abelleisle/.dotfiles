@@ -13,10 +13,6 @@
 [submodule "dots/zsh/.zsh/custom/plugins/nix-shell"]
 	path = dots/zsh/.zsh/custom/plugins/nix-shell
 	url = https://github.com/chisui/zsh-nix-shell.git
-[submodule "dots/zsh/.zsh/custom/plugins/fzf-zsh-plugin"]
-	path = dots/zsh/.zsh/custom/plugins/fzf-zsh-plugin
-	url = https://github.com/unixorn/fzf-zsh-plugin.git
-	shallow = true
 [submodule "dots/zsh/.zsh/custom/plugins/zsh-autosuggestions"]
 	path = dots/zsh/.zsh/custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git

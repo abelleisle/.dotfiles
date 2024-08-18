@@ -23,6 +23,9 @@
 
         # Extra utilities
         pkgs.jq
+        pkgs.zig
+        pkgs.gcc
+        pkgs.cargo
 
       ] ++ pkgs.lib.optional (pkgs.stdenv.isLinux) pkgs.mkpasswd;
 
