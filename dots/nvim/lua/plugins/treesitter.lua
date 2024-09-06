@@ -5,22 +5,27 @@ M.config = function()
 
     ts_config.setup {
         ensure_installed = {
-            "cpp",
+            -- Compiled
             "c",
+            "cpp",
+            "cuda",
+            "glsl",
+            "rust",
             "verilog",
             "bash",
+            "lua",
+            "python",
+
+            -- Markup/Web
+            "css",
+            "html",
+            "latex",
+            "php",
+
+            -- Config
+            "cmake",
             "json",
             "jsonc",
-            "python",
-            "lua",
-            "html",
-            "php",
-            "css",
-            "cuda",
-            "rust",
-            "zig",
-            "glsl",
-            "nix",
             "markdown",
             "markdown_inline",
             "yaml"

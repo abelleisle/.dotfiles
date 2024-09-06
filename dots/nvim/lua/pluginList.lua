@@ -303,6 +303,20 @@ return require('lazy').setup({
         end
     },
 
+    {
+        'ruifm/gitlinker.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim'
+        },
+        event = Events.EnterWindow,
+        opts = {
+            opts = {
+                print_url = false,
+            },
+            mappings = nil,
+        },
+    },
+
     ------------------
     --  FORMATTING  --
     ------------------

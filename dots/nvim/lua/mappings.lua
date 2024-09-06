@@ -162,7 +162,7 @@ _map.navigation = function()
         )
 
         map("n", "<Leader><Leader>a",
-            function() hp():list():append() end,
+            function() hp():list():add() end,
             Opt("Append file to Harpoon")
         )
 
@@ -296,9 +296,26 @@ _map.project = function()
     -----------------
     --  GIT SIGNS  --
     -----------------
-    pmap("n", "<Leader>hb", '<cmd>lua require"gitsigns".blame_line()<CR>', Opt("Git: Blame this line"))
-    pmap("n", "<Leader>hs", '<cmd>Telescope git_status<CR>',               Opt("Git: Git status"))
-    pmap("n", "<Leader>hc", '<cmd>Telescope git_commits<CR>',              Opt("Git: Git commits"))
+    pmap("n", "<Leader>vb", '<cmd>lua require"gitsigns".blame_line()<CR>', Opt("Git: Blame this line"))
+    pmap("n", "<Leader>vs", '<cmd>Telescope git_status<CR>',               Opt("Git: Git status"))
+    pmap("n", "<Leader>vc", '<cmd>Telescope git_commits<CR>',              Opt("Git: Git commits"))
+
+    ----------------
+    -- GIT Linker --
+    ----------------
+    local gl_func = function(range)
+        return function()
+            require('gitlinker').get_buf_range_url(range, {
+                action_callback = require('gitlinker.actions').copy_to_clipboard
+            })
+            if range == 'v' then
+                vim.fn.feedkeys(":", "nx") -- Return to normal mode
+            end
+        end
+    end
+
+    pmap('n', '<leader>vl', gl_func('n'), Opt("Git: Copy Permalink"))
+    pmap('x', '<leader>vl', gl_func('v'), Opt("Git: Copy Permalink"))
 
     --------------
     --  WINDOW  --
@@ -409,8 +426,10 @@ M.clue = {
     clues = {
         { mode = 'n', keys = '<Leader>l',  desc = 'LSP: Extra'},
         { mode = 'n', keys = '<Leader>lw', desc = 'Workspace'},
-        { mode = 'n', keys = '<Leader>h',  desc = 'git'},
+        { mode = 'n', keys = '<Leader>v',  desc = 'VCS (git)'},
+        { mode = 'x', keys = '<Leader>v',  desc = 'VCS (git)'},
         { mode = 'n', keys = '<Leader>s',  desc = 'Surround'},
+        { mode = 'x', keys = '<Leader>s',  desc = 'Surround'},
         { mode = 'n', keys = '<Leader>p',  desc = 'Misc. Pickers'},
         { mode = 'n', keys = '<Leader><Leader>',  desc = 'Harpoon'},
     }
