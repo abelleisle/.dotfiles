@@ -15,11 +15,12 @@ M.config = function()
             "bash",
             "lua",
             "python",
+            "zig",
 
             -- Markup/Web
             "css",
             "html",
-            "latex",
+            -- "latex",
             "php",
 
             -- Config
@@ -29,7 +30,6 @@ M.config = function()
             "markdown",
             "markdown_inline",
             "yaml"
-            -- "latex",
         },
         sync_install = true, -- Wait while parsers install
         highlight = {

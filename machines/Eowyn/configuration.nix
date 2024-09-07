@@ -13,6 +13,10 @@
         wayland = {
           enable = true;
         };
+        catppuccin = {
+          enable = true;
+          flavor = "frappe";
+        };
       };
     };
 
@@ -44,9 +48,16 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  # Also enable hyprland wm
-  programs.hyprland = {
-    enable = true;
+  programs = {
+    # Also enable hyprland wm
+    hyprland = {
+      enable = true;
+    };
+
+    # Enable dconf to fix theming on wayland GTK apps (firefox)
+    dconf = {
+      enable = true;
+    };
   };
 
   environment = {

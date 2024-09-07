@@ -64,7 +64,11 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_no_bold[blue]%}) 🔥";
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_no_bold[blue]%})";
 
 function update_git_status() {
-    GIT_STATUS=$(git_prompt_info);
+    if [ -f ~/.shelf/.nixmanaged ]; then
+        GIT_STATUS=$(__git_ps1 "(%s) ");
+    else
+        GIT_STATUS=$(git_prompt_info);
+    fi
 }
 
 function git_status() {

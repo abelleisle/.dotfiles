@@ -1,12 +1,33 @@
 local M = {}
 
-M.config = function ()
-    local flavour = "macchiato" -- latte, frappe, macchiato, mocha
+M.flavours = {"latte", "frappe", "macchiato", "mocha"}
+
+local function valid_palette(str)
+    for _, element in ipairs(M.flavours) do
+        if (element == str) then
+            return true
+        end
+    end
+    return false
+end
+
+local function get_dark_background(flavour)
+    if not valid_palette(flavour) or flavour == "latte" then
+        return "mocha"
+    end
+
+    return flavour
+end
+
+M.config = function (flavour)
+    if not valid_palette(flavour) then
+        vim.notify("Unknown catppuccin palette: "..flavour, vim.log.levels.ERROR)
+    end
     require("catppuccin").setup({
         flavour = flavour,
         background = { -- :h background
             light = "latte",
-            dark = "mocha",
+            dark = get_dark_background(flavour),
         },
         transparent_background = false, -- disables setting the background color.
         show_end_of_buffer = false, -- shows the '~' characters after the end of buffers

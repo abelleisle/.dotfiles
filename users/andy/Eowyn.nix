@@ -5,7 +5,7 @@ in
 {
   imports = [];
 
-  colors.theme = "gruvbox_dark_hard";
+  colors.theme = "catppuccin_frappe";
 
   home.file = {
     ".shelf/nvim.lua".text = ''
@@ -16,7 +16,7 @@ in
           --  THEME STUFF  --
           -------------------
 
-          require("colors.gruvbox").config()
+          require("colors.catppuccin").config("frappe")
 
           ------------------------
           --  VIM CONFIG STUFF  --
@@ -29,6 +29,15 @@ in
       return M
     '';
   };
+
+  home.packages = with pkgs; [
+    prismlauncher
+    (catppuccin-kde.override {
+      accents = [ "blue" ];
+      flavour = [ "frappe" ];
+      winDecStyles = [ "modern" "classic" ];
+    })
+  ];
 
   dotfiles.wm.hyprland = {
     enable = false;
@@ -44,13 +53,45 @@ in
   };
   dotfiles.keyboard.enable = true;
 
-  programs.git = {
-      enable = true;
-      userName = "abelleisle";
-      userEmail = "abelleisle@protonmail.com";
-  };
-
   # Override libGL since this is not a nixOS system
   # nixGLPrefix = "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel";
   # programs.wezterm.package = (nixGL pkgs.wezterm);
+
+  catppuccin = {
+    enable = true;
+    flavor = "frappe";
+  };
+
+  gtk = {
+    enable = true;
+    catppuccin = {
+      enable = true;
+      flavor = "frappe";
+      icon = {
+        enable = true;
+      };
+    };
+  };
+
+  qt = {
+    enable = true;
+    style = {
+      name = "kvantum";
+      catppuccin = {
+        enable = true;
+        flavor = "frappe";
+        apply = true;
+      };
+    };
+    platformTheme = {
+      name = "kvantum";
+    };
+  };
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    name = "Catppuccin-Frappe-Blue-Cursors";
+    package = pkgs.catppuccin-cursors.frappeBlue;
+    size = 24;
+  };
 }

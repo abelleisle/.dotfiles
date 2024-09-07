@@ -1,9 +1,9 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   programs.helix = {
     enable = true;
     settings = {
-      theme = config.colors.theme;
+      theme = lib.mkDefault config.colors.theme;
 
       editor = {
         scrolloff = 10;

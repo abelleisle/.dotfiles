@@ -4,7 +4,19 @@ let
 in
 {
   config = {
-    programs.zsh.enable = true;
+    programs = {
+      # Enable zsh
+      zsh = {
+        enable = true;
+        enableCompletion = true;
+      };
+
+      # Enable/install git
+      git = {
+        enable = true;
+        prompt.enable = true; # Enable git-prompt.sh
+      };
+    };
 
     users.users.andy = {
       isNormalUser = true;

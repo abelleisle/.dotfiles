@@ -114,6 +114,24 @@ in
        enable = true;
        nix-direnv.enable = true;
       };
+
+      # Enable zsh so we source the correct nix env vars
+      # zsh = {
+      #   enable = true;
+      #   enableCompletion = true;
+      #   oh-my-zsh = {
+      #     enable = false;
+      #     theme = "passion";
+      #     custom = "~/.zsh/custom";
+      #   };
+      # };
+
+      git = {
+        enable = true;
+        userName = "abelleisle";
+        # Allow this to get overridden per-system if required
+        userEmail = lib.mkDefault "abelleisle@protonmail.com";
+      };
     };
   };
 }

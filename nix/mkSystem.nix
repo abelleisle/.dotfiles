@@ -49,6 +49,7 @@ let
 
     # (import ./modules/sops.nix { inherit sops-nix flake-registry nixpkgs; })
     agenixMod.default
+    inputs.catppuccin.nixosModules.catppuccin
   ];
 
   vmModules =
@@ -88,6 +89,11 @@ let
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
         inherit pkgs-stable;
+      };
+      home-manager.users.${user} = {
+        imports = [
+          inputs.catppuccin.homeManagerModules.catppuccin
+        ];
       };
     }
   ];

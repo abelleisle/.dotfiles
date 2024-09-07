@@ -48,8 +48,8 @@
   grv      1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab      q    w    f    p    b    j    l    u    y    ;    [    ]    \\
   @cb       a    r    s    t    g    h    n    e    i    o    @nav ret
-  @scl       z    x    c    d    v    k    m    ,    .    /    @scr
-  lctl     lmet @ext         @exs            ralt rmet _    _
+  lsft       z    x    c    d    v    k    m    ,    .    /    rsft
+  lctl     lmet @ext          spc            ralt rmet _    _
 )
 
 ;;(deflayer extend_old

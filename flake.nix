@@ -51,6 +51,8 @@
       url = "github:nix-community/nixGL";
     };
 
+    # Themes
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = { flake-parts, ... } @ inputs:
