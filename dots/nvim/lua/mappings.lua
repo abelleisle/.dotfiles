@@ -115,14 +115,6 @@ _map.navigation = function()
     -----------------
     -- N/A
 
-    ------------
-    --  LEAP  --
-    ------------
-    if vim.g.plugins_installed then
-        require("leap").create_default_mappings()
-        require('leap').opts.labels = 'tnseriaoplfuvmwyqjc,x.z' --home row & least effort keys for Colemak layout
-    end -- vim.g.plugins_installed
-
     ---------------
     --  HARPOON  --
     ---------------
@@ -433,6 +425,15 @@ M.clue = {
         { mode = 'n', keys = '<Leader>p',  desc = 'Misc. Pickers'},
         { mode = 'n', keys = '<Leader><Leader>',  desc = 'Harpoon'},
     }
+}
+
+------------
+--  LEAP  --
+------------
+M.leap = {
+    { "s", mode = { "n", "x", "o" }, desc = "Leap Forward to" },
+    { "S", mode = { "n", "x", "o" }, desc = "Leap Backward to" },
+    { "gs", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
 }
 
 return M
