@@ -64,11 +64,15 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_no_bold[blue]%}) 🔥";
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_no_bold[blue]%})";
 
 function update_git_status() {
-    if [ -f ~/.shelf/.nixmanaged ]; then
-        GIT_STATUS=$(__git_ps1 "(%s) ");
-    else
-        GIT_STATUS=$(git_prompt_info);
-    fi
+    # GIT_STATUS=$(git_prompt_info);
+    GIT_STATUS=$(_omz_git_prompt_info); # https://github.com/ohmyzsh/ohmyzsh/issues/12328#issuecomment-2041350726
+
+    # omz added async git status which doesn't work on a nested function call.
+    # There are two fixes
+    #  1. Call `_omz_git_prompt_info` instead of `git_prompt_info` (not portable)
+    #  2. Add `zstyle ':omz:alpha:lib:git' async-prompt no` to zshrc BEFORE
+    #     sourcing omz. This will disable the async prompt and allow us to still
+    #     use `git_prompt_info`.
 }
 
 function git_status() {

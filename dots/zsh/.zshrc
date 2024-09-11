@@ -21,6 +21,9 @@ ZSH_THEME="passion"
 # Disable OMZ update reminders
 zstyle ':omz:update' mode disabled  # disable automatic updates
 
+# Disable OMZ async git fetching
+# zstyle ':omz:alpha:lib:git' async-prompt no
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 

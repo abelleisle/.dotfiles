@@ -31,6 +31,7 @@ in
   };
 
   home.packages = with pkgs; [
+    speedcrunch
     prismlauncher
     (catppuccin-kde.override {
       accents = [ "blue" ];
