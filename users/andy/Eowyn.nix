@@ -39,7 +39,11 @@ in
       winDecStyles = [ "modern" "classic" ];
     })
     gimp
+    jellyfin-media-player
   ];
+
+  # Allow jellyfin-media-player to get controlled via mpris
+  xdg.dataFile."jellyfinmediaplayer/scripts/mpris.so".source = "${pkgs.mpvScripts.mpris}/share/mpv/scripts/mpris.so";
 
   dotfiles.wm.hyprland = {
     enable = false;
