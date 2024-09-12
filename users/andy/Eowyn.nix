@@ -38,6 +38,7 @@ in
       flavour = [ "frappe" ];
       winDecStyles = [ "modern" "classic" ];
     })
+    gimp
   ];
 
   dotfiles.wm.hyprland = {
