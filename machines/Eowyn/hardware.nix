@@ -16,4 +16,13 @@
       device = "/dev/disk/by-label/Eswap";
     }
   ];
+
+  hardware = {
+    enableRedistributableFirmware = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+  };
+
 }

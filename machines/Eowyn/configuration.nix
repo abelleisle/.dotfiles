@@ -46,8 +46,6 @@
 
   time.timeZone = "America/New_York";
 
-  hardware.enableRedistributableFirmware = true;
-
   programs = {
     # Also enable hyprland wm
     hyprland = {
