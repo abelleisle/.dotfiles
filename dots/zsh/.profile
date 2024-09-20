@@ -84,29 +84,33 @@ case `uname` in
 
             eval "$(/opt/homebrew/bin/brew shellenv)"
 
-            if [ -d "$HOME/Library/Python/3.9/bin" ] ; then
-                PATH="$HOME/Library/Python/3.9/bin:$PATH"
-            fi
+            export PATH="/opt/local/bin:$PATH"
 
             export PYENV_ROOT="$HOME/.pyenv_arm"
-            PATH="$HOME/.pyenv_arm/shims:$PATH"
 
-            export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib
-
+            # Python installed via `pyenv` searches the default library path `/usr/local/lib`
+            # instead of the path used by homebrew (`/opt/homebrew/lib`). This can cause it
+            # to find libraries installed with x86_64 homebrew instead of arm64 homebrew.
+            #
+            # This will inform any Python installation managed by `pyenv` to check against the
+            # homebrew arm64 `lib` directory.
+            #
+            # Note: Apple's SIP considers this a security issue (with good reason), so the
+            # `DYLD_LIBRARY_PATH` variable is cleared before executing signed applications within
+            # the SIP umbrella. On the plus side, `pyenv` Python installations are not signed or SIP
+            # protected like the homebrew installed variants.
+            export DYLD_LIBRARY_PATH=/opt/homebrew/lib
         else
             # echo 'Running through Rosetta (x86_64)'
 
             eval "$(/usr/local/bin/brew shellenv)"
 
-            if [ -d "$HOME/Library/Python/3.9/bin" ] ; then
-                PATH="$HOME/Library/Python/3.9/bin:$PATH"
-            fi
-
             export PYENV_ROOT="$HOME/.pyenv_intel"
-            PATH="$HOME/.pyenv_intel/shims:$PATH"
         fi
 
+        export PATH="$PYENV_ROOT/bin:$PATH"
         eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
 
         export LANG='en_US.UTF-8'
 
