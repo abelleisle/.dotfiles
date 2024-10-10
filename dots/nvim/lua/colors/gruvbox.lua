@@ -24,6 +24,13 @@ M.config = function ()
         inverse              = true, -- invert background for search, diffs, statuslines and errors
         contrast             = "hard", -- can be "hard", "soft" or empty string
         overrides            = { -- TODO: reformat these to line up... This looks awful lol
+            -- Line numbers above current
+            LineNrAbove = {fg = palette.dark4},
+            -- Current line number
+            LineNr      = {fg = "yellow",
+                           bold = true},
+            -- Line numbers below current
+            LineNrBelow = {fg = palette.dark4},
             -- TS Context
             TreesitterContext = {underline = true},
             -- mini.jump2d jump spots
