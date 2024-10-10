@@ -27,8 +27,8 @@ M.config = function ()
             -- Line numbers above current
             LineNrAbove = {fg = palette.dark4},
             -- Current line number
-            LineNr      = {fg = "yellow",
-                           bold = true},
+            LineNr      = {fg = palette.bright_yellow,
+                           bold = false},
             -- Line numbers below current
             LineNrBelow = {fg = palette.dark4},
             -- TS Context
