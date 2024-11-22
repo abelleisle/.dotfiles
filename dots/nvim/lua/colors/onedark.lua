@@ -30,9 +30,18 @@ M.config = function(style)
             transparent = false, -- lualine center bar transparency
         },
 
-        -- Custom Highlights --
-        colors = {}, -- Override default colors
-        highlights = {}, -- Override highlight groups
+        -- Override default colors
+        colors = {},
+        -- Override highlight groups
+        highlights = {
+            -- Line numbers above current
+            LineNrAbove = {fg = '$grey'},
+            -- Current line number
+            LineNr      = {fg = '$yellow',
+                           bold = false},
+            -- Line numbers below current
+            LineNrBelow = {fg = '$grey'},
+        },
 
         -- Plugins Config --
         diagnostics = {
