@@ -76,6 +76,8 @@ idf() {
     fi
 }
 
+export PIP_REQUIRE_VIRTUALENV=true
+
 case `uname` in
     Darwin)
 

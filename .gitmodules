@@ -22,3 +22,6 @@
 [submodule "dots/tmux/.tmux/plugins/tpm"]
 	path = dots/tmux/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "dots/zsh/.zsh/custom/themes/powerlevel10k"]
+	path = dots/zsh/.zsh/custom/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
