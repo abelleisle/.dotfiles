@@ -38,6 +38,11 @@
       };
     };
 
+    mullvad-vpn = {
+      enable = true;
+      enableExcludeWrapper = false;
+    };
+
     # This is a laptop, automatically set the timezone
     # Note: This is currently broken due to
     #       https://github.com/NixOS/nixpkgs/issues/321121

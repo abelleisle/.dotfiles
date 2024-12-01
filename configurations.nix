@@ -5,6 +5,9 @@ let
 
   overlays = [
     self.inputs.nixGL.overlay
+    (final: prev: {
+      ghostty = self.inputs.ghostty.packages.${prev.system}.default;
+    })
   ];
 
   unfree_whitelist = [
