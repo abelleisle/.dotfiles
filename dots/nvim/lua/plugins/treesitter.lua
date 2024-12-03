@@ -5,16 +5,16 @@ M.config = function()
 
     ts_config.setup {
         ensure_installed = {
-            -- Compiled
+            -- Programming
+            "bash",
             "c",
             "cpp",
             "cuda",
             "glsl",
-            "rust",
-            "verilog",
-            "bash",
             "lua",
             "python",
+            "rust",
+            "verilog",
             "zig",
 
             -- Markup/Web
@@ -29,6 +29,7 @@ M.config = function()
             "jsonc",
             "markdown",
             "markdown_inline",
+            "proto",
             "yaml"
         },
         sync_install = true, -- Wait while parsers install

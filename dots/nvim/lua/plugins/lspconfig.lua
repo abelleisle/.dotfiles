@@ -80,6 +80,7 @@ M.servers = {
     python   = lsp_entry("jedi_language_server"       ),
     rust     = lsp_entry("rust_analyzer"              ),
     cmake    = lsp_entry("cmake"                      ),
+    proto    = lsp_entry("pbls"                       ),
     nix      = lsp_entry("nil_ls"              ,  true),
  -- yaml     = lsp_entry("yaml-language-server", false),
     ccls     = lsp_entry("ccls"                , false),
