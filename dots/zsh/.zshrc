@@ -144,6 +144,18 @@ fi
 zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
 fpath+=~/.zfunc
 
+# Ghostty resources loading
+if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+  autoload -Uz -- "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+  ghostty-integration
+  unfunction ghostty-integration
+fi
+
+# Autostart zellij
+# if command -v zellij >/dev/null 2>&1; then
+#     eval "$(zellij setup --generate-auto-start zsh)"
+# fi
+
 # Load all of the plugins that were defined in ~/.zshrc
 # for plugin ($plugins); do
 #     timer=$(python -c 'from time import time; print(int(round(time() * 1000)))')

@@ -3,66 +3,10 @@ layout {
         children
         pane size=1 borderless=true {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
-                // -- Gruvbox Dark mode
-                color_bg0 "#282828" //dark0
-                color_bg1 "#3c3836" //dark1
-                color_bg2 "#504945" //dark2
-                color_bg3 "#665c54" //dark3
-                color_bg4 "#7c6f64" //dark4
-                color_fg0 "#fbf1c7" //light0
-                color_fg1 "#ebdbb2" //light1
-                color_fg2 "#d5c4a1" //light2
-                color_fg3 "#bdae93" //light3
-                color_fg4 "#a89984" //light4
-                color_red "#fb4934" // bright_red
-                color_green "#b8bb26" //bright_green
-                color_yellow "#fabd2f" // bright_yellow
-                color_blue "#83a598" //bright_blue
-                color_purple "#d3869b" //bright_purple
-                color_aqua "#8ec07c" //bright_aqua
-                color_gray "#a89984" //bright_gray
-                color_orange "#fe8019" //bright_orange
-                color_neutral_red "#cc241d" //neutral_red
-                color_neutral_green "#98971a" //neutral_green
-                color_neutral_yellow "#d79921" //neutral_yellow
-                color_neutral_blue "#458588" //neutral_blue
-                color_neutral_purple "#b16286" //neutral_purple
-                color_neutral_aqua "#689d6a" //neutral_aqua
-                color_neutral_gray "#928374" //neutral_gray
-                color_neutral_orange "#d65d0e" //neatural_orange
-
-                // -- Gruvbox Light mode
-                //color_bg0 "#fbf1c7" //light0
-                //color_bg1 "#ebdbb2" //light1
-                //color_bg2 "#d5c4a1" //light2
-                //color_bg3 "#bdae93" //light3
-                //color_bg4 "#a89984" //light4
-                //color_fg0 "#282828" //dark0
-                //color_fg1 "#3c3836" //dark1
-                //color_fg2 "#504945" //dark2
-                //color_fg3 "#665c54" //dark3
-                //color_fg4 "#7c6f64" //dark4
-                //color_red "#9d0006" //faded_red
-                //color_green "#79740e" //faded_green
-                //color_yellow "#b57614" //faded_yellow
-                //color_blue "#076678" //faded_blue
-                //color_purple "#8f3f71" //faded_purple
-                //color_aqua "#427b58" //faded_aqua
-                //color_gray "#7c6f64" //faded_gray
-                //color_orange "#af3a03" //faded_orange
-                //color_neutral_red "#cc241d" //neutral_red
-                //color_neutral_green "#98971a" //neutral_green
-                //color_neutral_yellow "#d79921" //neutral_yellow
-                //color_neutral_blue "#458588" //neutral_blue
-                //color_neutral_purple "#b16286" //neutral_purple
-                //color_neutral_aqua "#689d6a" //neutral_aqua
-                //color_neutral_orange "#d65d0e" //neatural_orange
-                //color_neutral_gray "#928374" //neutral_gray
-
-                format_left   "#[bg=$bg2,fg=$fg3] {session} {mode}#[bg=$bg1]{tabs}#[fg=$bg1]"
+                format_left "{mode}#[bg=bright_blue,fg=yellow] {session} #[fg=bright_blue,bg=black]#[bg=black,fg=black]█{tabs}#[fg=black]█"
                 format_center "{notifications}"
-                format_right  "#[fg=$bg2]#[bg=$bg2,fg=$fg4] {command_user}@{command_host} #[bg=$bg2,fg=$fg3]#[bg=$fg3,fg=$bg1] {datetime} "
-                // format_space  "#[bg=$bg0,fg=$fg1]"
+                format_right  "#[fg=white]{command_cpu} | {command_mem} #[fg=white]#[bg=white,fg=yellow] {command_user}@{command_host} #[bg=white,fg=black]#[bg=black,fg=white] {datetime} "
+                format_space  "#[fg=white]"
                 format_hide_on_overlength "true"
                 format_precedence "lrc"
 
@@ -75,34 +19,38 @@ layout {
                 hide_frame_except_for_search     "true"
                 hide_frame_except_for_fullscreen "true"
 
-                mode_normal        "#[bg=$bg3,fg=$bg2]#[bg=$bg3,fg=$fg3,bold] NORMAL#[bg=$bg1,fg=$bg3]"
-                mode_tmux          "#[bg=$green,fg=$bg2]#[bg=$green,fg=$bg0,bold] TMUX#[bg=$bg1,fg=$green]"
-                mode_locked        "#[bg=$red,fg=$bg2]#[bg=$red,fg=$bg0,bold] LOCKED#[bg=$bg1,fg=$red]"
-                mode_pane          "#[bg=$aqua,fg=$bg2]#[bg=$aqua,fg=$bg0,bold] PANE#[bg=$bg1,fg=$aqua]"
-                mode_tab           "#[bg=$aqua,fg=$bg2]#[bg=$aqua,fg=$bg0,bold] TAB#[bg=$bg1,fg=$aqua]"
-                mode_scroll        "#[bg=$blue,fg=$bg2]#[bg=$blue,fg=$bg0,bold] SCROLL#[bg=$bg1,fg=$blue]"
-                mode_enter_search  "#[bg=$blue,fg=$bg2]#[bg=$blue,fg=$bg0,bold] ENT-SEARCH#[bg=$bg1,fg=$blue]"
-                mode_search        "#[bg=$blue,fg=$bg2]#[bg=$blue,fg=$bg0,bold] SEARCH#[bg=$bg1,fg=$blue]"
-                mode_resize        "#[bg=$yellow,fg=$bg2]#[bg=$yellow,fg=$bg0,bold] RESIZE#[bg=$bg1,fg=$yellow]"
-                mode_rename_tab    "#[bg=$yellow,fg=$bg2]#[bg=$yellow,fg=$bg0,bold] RESIZE#[bg=$bg1,fg=$yellow]"
-                mode_rename_pane   "#[bg=$yellow,fg=$bg2]#[bg=$yellow,fg=$bg0,bold] RESIZE#[bg=$bg1,fg=$yellow]"
-                mode_move          "#[bg=$yellow,fg=$bg2]#[bg=$yellow,fg=$bg0,bold] MOVE#[bg=$bg1,fg=$yellow]"
-                mode_session       "#[bg=$purple,fg=$bg2]#[bg=$purple,fg=$bg0,bold] MOVE#[bg=$bg1,fg=$purple]"
-                mode_prompt        "#[bg=$purple,fg=$bg2]#[bg=$purple,fg=$bg0,bold] PROMPT#[bg=$bg1,fg=$purple]"
+                mode_locked        "#[fg=blue]▋#[fg=bright_yellow,bold]LOCKED#[fg=bright_blue]"
+                mode_normal        "#[fg=blue]▋#[fg=bright_yellow,bold]NORMAL#[fg=bright_blue]"
+                mode_tmux          "#[fg=green]▋#[fg=bright_yellow,bold]TMUX#[fg=bright_blue]"
+                mode_pane          "#[fg=red]▋#[fg=bright_yellow,bold]PANE#[fg=bright_blue]"
+                mode_tab           "#[fg=red]▋#[fg=bright_yellow,bold]TAB#[fg=bright_blue]"
+                mode_scroll        "#[fg=red]▋#[fg=bright_yellow,bold]SCROLL#[fg=bright_blue]"
+                mode_enter_search  "#[fg=red]▋#[fg=bright_yellow,bold]ENT-SEARCH#[fg=bright_blue]"
+                mode_search        "#[fg=red]▋#[fg=bright_yellow,bold]SEARCH#[fg=bright_blue]"
+                mode_resize        "#[fg=red]▋#[fg=bright_yellow,bold]RESIZE#[fg=bright_blue]"
+                mode_rename_tab    "#[fg=red]▋#[fg=bright_yellow,bold]RENAME#[fg=bright_blue]"
+                mode_rename_pane   "#[fg=red]▋#[fg=bright_yellow,bold]RENAME#[fg=bright_blue]"
+                mode_move          "#[fg=red]▋#[fg=bright_yellow,bold]MOVE#[fg=bright_blue]"
+                mode_session       "#[fg=red]▋#[fg=bright_yellow,bold]SESSION#[fg=bright_blue]"
+                mode_prompt        "#[fg=red]▋#[fg=bright_yellow,bold]PROMPT#[fg=bright_blue]"
 
-                tab_normal              "#[bg=$bg2,fg=$bg1]#[bg=$bg2,fg=$fg1] {index} #[bg=$bg2,fg=$fg1,bold] {name} {floating_indicator}#[bg=$bg1,fg=$bg2]"
-                tab_normal_fullscreen   "#[bg=$bg2,fg=$bg1]#[bg=$bg2,fg=$fg1] {index} #[bg=$bg2,fg=$fg1,bold] {name} {fullscreen_indicator}#[bg=$bg1,fg=$bg2]"
-                tab_normal_sync         "#[bg=$bg2,fg=$bg1]#[bg=$bg2,fg=$fg1] {index} #[bg=$bg2,fg=$fg1,bold] {name} {sync_indicator}#[bg=$bg1,fg=$bg2]"
-                tab_active              "#[bg=$yellow,fg=$bg1]#[bg=$yellow,fg=$bg2] {index} #[bg=$yellow,fg=$bg2,bold] {name} {floating_indicator}#[bg=$bg1,fg=$yellow]"
-                tab_active_fullscreen   "#[bg=$yellow,fg=$bg1]#[bg=$yellow,fg=$bg2] {index} #[bg=$yellow,fg=$bg2,bold] {name} {fullscreen_indicator}#[bg=$bg1,fg=$yellow]"
-                tab_active_sync         "#[bg=$yellow,fg=$bg1]#[bg=$yellow,fg=$bg2] {index} #[bg=$yellow,fg=$bg2,bold] {name} {sync_indicator}#[bg=$bg1,fg=$yellow]"
-                tab_separator           "#[bg=$bg1,fg=$fg1]"
+                // Inactive Tabs
+                tab_normal                "#[fg=bright_blue,bg=black]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[bg=black,fg=bright_blue] {name} {floating_indicator}#[fg=black,bg=black]"
+                tab_normal_fullscreen     "#[fg=bright_blue,bg=black]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[bg=black,fg=bright_blue] {name} {fullscreen_indicator}#[fg=black,bg=black]"
+                fab_normal_sync           "#[fg=bright_blue,bg=black]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[bg=black,fg=bright_blue] {name} {sync_indicator}#[fg=black,bg=black]"
+
+                // Active tabs
+                tab_active                "#[fg=green,bg=black]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {floating_indicator}#[fg=bright_green,bg=black]"
+                tab_active_fullscreen     "#[fg=green,bg=black]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {fullscreen_indicator}#[fg=bright_green,bg=black]"
+                tab_active_sync           "#[fg=green,bg=black]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {sync_indicator}#[fg=bright_green,bg=black]"
+
+                tab_separator           "#[fg=blue,bg=black]"
 
                 tab_sync_indicator       ""
                 tab_fullscreen_indicator "󰊓"
                 tab_floating_indicator   "󰹙"
 
-                notification_format_unread "#[fg=$orange]#[bg=$orange,fg=$bg1] {message} #[fg=$orange]"
+                notification_format_unread "#[fg=magenta]#[bg=magenta,fg=black] {message} #[fg=magenta]"
                 notification_format_no_notifications ""
                 notification_show_interval "10"
 
@@ -115,6 +63,16 @@ layout {
                 command_user_format     "{stdout}"
                 command_user_interval   "0"
                 command_user_rendermode "static"
+
+                command_cpu_command  "bash -c '~/.config/zellij/plugins/system.sh cpu'"
+                command_cpu_format   "#[fg=bright_cyan]CPU: {stdout}"
+                command_cpu_interval   "5"
+                command_cpu_rendermode "static"
+
+                command_mem_command  "bash -c '~/.config/zellij/plugins/system.sh mem'"
+                command_mem_format   "#[fg=bright_magenta]MEM: {stdout}"
+                command_mem_interval   "5"
+                command_mem_rendermode "static"
 
                 datetime          "{format}"
                 datetime_format   "%Y-%m-%d %H:%M"
