@@ -5,6 +5,39 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Ctrl b" { SwitchToMode "tmux"; }
+    }
+    tmux {
+        bind "[" { SwitchToMode "Scroll"; }
+        bind "Ctrl v" { Write 2; SwitchToMode "Locked"; }
+        bind "\"" { NewPane "Down"; SwitchToMode "Locked"; }
+        bind "%" { NewPane "Right"; SwitchToMode "Locked"; }
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "Locked"; }
+        bind "c" { NewTab; SwitchToMode "Locked"; }
+        bind "," { SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "p" { GoToPreviousTab; SwitchToMode "Locked"; }
+        bind "n" { GoToNextTab; SwitchToMode "Locked"; }
+        bind "Left" { MoveFocus "Left"; SwitchToMode "Locked"; }
+        bind "Right" { MoveFocus "Right"; SwitchToMode "Locked"; }
+        bind "Down" { MoveFocus "Down"; SwitchToMode "Locked"; }
+        bind "Up" { MoveFocus "Up"; SwitchToMode "Locked"; }
+        bind "h" { MoveFocus "Left"; SwitchToMode "Locked"; }
+        bind "l" { MoveFocus "Right"; SwitchToMode "Locked"; }
+        bind "j" { MoveFocus "Down"; SwitchToMode "Locked"; }
+        bind "k" { MoveFocus "Up"; SwitchToMode "Locked"; }
+        bind "o" { FocusNextPane; }
+        bind "d" { Detach; }
+        bind "s" { NextSwapLayout; }
+        bind "Space" { CloseFocus; SwitchToMode "Locked"; }
+        bind "1" { GoToTab 1; SwitchToMode "locked"; }
+        bind "2" { GoToTab 2; SwitchToMode "locked"; }
+        bind "3" { GoToTab 3; SwitchToMode "locked"; }
+        bind "4" { GoToTab 4; SwitchToMode "locked"; }
+        bind "5" { GoToTab 5; SwitchToMode "locked"; }
+        bind "6" { GoToTab 6; SwitchToMode "locked"; }
+        bind "7" { GoToTab 7; SwitchToMode "locked"; }
+        bind "8" { GoToTab 8; SwitchToMode "locked"; }
+        bind "9" { GoToTab 9; SwitchToMode "locked"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -150,6 +183,18 @@ keybinds clear-defaults=true {
         bind "Alt l" { MoveFocusOrTab "right"; }
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
+        bind "Ctrl Tab" { MoveTab "right"; }
+        bind "Ctrl Shift Tab" { MoveTab "left"; }
+
+        bind "Alt 1" { GoToTab 1; SwitchToMode "locked"; }
+        bind "Alt 2" { GoToTab 2; SwitchToMode "locked"; }
+        bind "Alt 3" { GoToTab 3; SwitchToMode "locked"; }
+        bind "Alt 4" { GoToTab 4; SwitchToMode "locked"; }
+        bind "Alt 5" { GoToTab 5; SwitchToMode "locked"; }
+        bind "Alt 6" { GoToTab 6; SwitchToMode "locked"; }
+        bind "Alt 7" { GoToTab 7; SwitchToMode "locked"; }
+        bind "Alt 8" { GoToTab 8; SwitchToMode "locked"; }
+        bind "Alt 9" { GoToTab 9; SwitchToMode "locked"; }
     }
     shared_except "locked" "renametab" "renamepane" {
         bind "Ctrl g" { SwitchToMode "locked"; }
@@ -173,7 +218,7 @@ keybinds clear-defaults=true {
     shared_except "locked" "tab" "scroll" "entersearch" "renametab" "renamepane" {
         bind "s" { SwitchToMode "scroll"; }
     }
-    shared_among "normal" "resize" "tab" "scroll" "prompt" "tmux" {
+    shared_among "normal" "resize" "tab" "scroll" "prompt" {
         bind "p" { SwitchToMode "pane"; }
     }
     shared_except "locked" "resize" "pane" "tab" "entersearch" "renametab" "renamepane" {
@@ -290,7 +335,7 @@ default_mode "locked"
 //   - true (default, enabled)
 //   - false
 // 
-// pane_frames false
+pane_frames false
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
@@ -410,4 +455,4 @@ default_mode "locked"
 // (Requires restart)
 // Default: true (if the host terminal supports it)
 // 
-// support_kitty_keyboard_protocol false
+support_kitty_keyboard_protocol true

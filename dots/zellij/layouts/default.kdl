@@ -3,9 +3,13 @@ layout {
         children
         pane size=1 borderless=true {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                format_hide_on_overlength "true"
+                format_precedence         "lrc"
+
                 format_left "{mode}#[bg=bright_blue,fg=yellow] {session} #[fg=bright_blue,bg=black]#[bg=black,fg=black]█{tabs}#[fg=black]█"
                 format_center "{notifications}"
-                format_right  "#[fg=white]{command_cpu} | {command_mem} #[fg=white]#[bg=white,fg=yellow] {command_user}@{command_host} #[bg=white,fg=black]#[bg=black,fg=white] {datetime} "
+                //format_right  "#[fg=white]{command_cpu} | {command_mem} #[fg=white]#[bg=white,fg=yellow] {command_user}@{command_host} #[bg=white,fg=black]#[bg=black,fg=white] {datetime} "
+                format_right  "#[fg=white]#[bg=white,fg=yellow] {command_user}@{command_host} #[bg=white,fg=black]#[bg=black,fg=white] {datetime} "
                 format_space  "#[fg=white]"
                 format_hide_on_overlength "true"
                 format_precedence "lrc"
@@ -15,7 +19,7 @@ layout {
                 border_format   "#[fg=$bg1]{char}"
                 border_position "top"
 
-                hide_frame_for_single_pane       "true"
+                hide_frame_for_single_pane       "false"
                 hide_frame_except_for_search     "true"
                 hide_frame_except_for_fullscreen "true"
 
