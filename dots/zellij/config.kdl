@@ -183,8 +183,8 @@ keybinds clear-defaults=true {
         bind "Alt l" { MoveFocusOrTab "right"; }
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
-        bind "Ctrl Tab" { MoveTab "right"; }
-        bind "Ctrl Shift Tab" { MoveTab "left"; }
+        bind "Alt Tab" { GoToNextTab; }
+        bind "Alt Shift Tab" { GoToPreviousTab; }
 
         bind "Alt 1" { GoToTab 1; SwitchToMode "locked"; }
         bind "Alt 2" { GoToTab 2; SwitchToMode "locked"; }

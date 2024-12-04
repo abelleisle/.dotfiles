@@ -118,6 +118,13 @@ local function isTmuxProcess(pane)
     return process_is_tmux or pane_is_tmux
 end
 
+local function isZellijProcess(pane)
+    -- see: isViProcess
+    local process_is_zellij = (nil ~= pane:get_foreground_process_name():find('zellij'))
+    local pane_is_zellij    = (nil ~= pane:get_title():find("zellij"))
+    return process_is_zellij or pane_is_zellij
+end
+
 local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
     local mux_window = window:mux_window()
     local tab = mux_window:active_tab()
@@ -132,13 +139,20 @@ local function conditionalActivatePane(window, pane, pane_direction, vim_directi
     end
 end
 
-local function conditionalActivateTab(window, pane, tab_dirction, tmux_direction)
+local function conditionalActivateTab(window, pane, tab_direction, tmux_direction)
     if isTmuxProcess(pane) then
         -- This should match the keybinds set in tmux. Kinda hacky ngl.
         window:perform_action(wezaction.SendKey({ key = 'b', mods = 'CTRL' }), pane)
         window:perform_action(wezaction.SendKey({ key = tmux_direction }),     pane)
+    elseif isZellijProcess(pane) then
+        -- This should match the keybinds set in Zellij. Also kinda hacky...
+        local mods = 'ALT'
+        if tab_direction < 0 then
+            mods = mods..'|SHIFT'
+        end
+        window:perform_action(wezaction.SendKey({ key = 'Tab', mods = mods }),     pane)
     else
-        window:perform_action(wezaction.ActivateTabRelative(tab_dirction), pane)
+        window:perform_action(wezaction.ActivateTabRelative(tab_direction), pane)
     end
 end
 
@@ -236,6 +250,7 @@ return {
     -------------------
     --  KEYBINDINGS  --
     -------------------
+    enable_kitty_keyboard = true,
     keys = {
         --
         -- Fix some mac bindings
