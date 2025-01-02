@@ -59,55 +59,60 @@ in
       # 17 = highlight background
       # 19 = highlight foreground
       # 708 = background border
-      ".shelf/sequences".text = lib.strings.concatStrings [
-        "]4;0;${cp.colors.color0}\\"
-        "]4;1;${cp.colors.color1}\\"
-        "]4;2;${cp.colors.color2}\\"
-        "]4;3;${cp.colors.color3}\\"
-        "]4;4;${cp.colors.color4}\\"
-        "]4;5;${cp.colors.color5}\\"
-        "]4;6;${cp.colors.color6}\\"
-        "]4;7;${cp.colors.color7}\\"
-        "]4;8;${cp.colors.color8}\\"
-        "]4;9;${cp.colors.color9}\\"
-        "]4;10;${cp.colors.color10}\\"
-        "]4;11;${cp.colors.color11}\\"
-        "]4;12;${cp.colors.color12}\\"
-        "]4;13;${cp.colors.color13}\\"
-        "]4;14;${cp.colors.color14}\\"
-        "]4;15;${cp.colors.color15}\\"
-        "]10;${cp.special.foreground}\\"
-        "]11;${cp.special.background}\\"
-        "]12;${cp.special.foreground}\\"
-        "]13;${cp.special.foreground}\\"
-        "]17;${cp.special.foreground}\\"
-        "]19;${cp.special.background}\\"
-        "]4;232;${cp.colors.color0}\\"
-        "]4;256;${cp.colors.color7}\\"
-        "]708;${cp.special.background}\\"
-      ];
+      ".shelf/sequences" = {
+        text = lib.strings.concatStrings [
+          "]4;0;${cp.colors.color0}\\"
+          "]4;1;${cp.colors.color1}\\"
+          "]4;2;${cp.colors.color2}\\"
+          "]4;3;${cp.colors.color3}\\"
+          "]4;4;${cp.colors.color4}\\"
+          "]4;5;${cp.colors.color5}\\"
+          "]4;6;${cp.colors.color6}\\"
+          "]4;7;${cp.colors.color7}\\"
+          "]4;8;${cp.colors.color8}\\"
+          "]4;9;${cp.colors.color9}\\"
+          "]4;10;${cp.colors.color10}\\"
+          "]4;11;${cp.colors.color11}\\"
+          "]4;12;${cp.colors.color12}\\"
+          "]4;13;${cp.colors.color13}\\"
+          "]4;14;${cp.colors.color14}\\"
+          "]4;15;${cp.colors.color15}\\"
+          "]10;${cp.special.foreground}\\"
+          "]11;${cp.special.background}\\"
+          "]12;${cp.special.foreground}\\"
+          "]13;${cp.special.foreground}\\"
+          "]17;${cp.special.foreground}\\"
+          "]19;${cp.special.background}\\"
+          "]4;232;${cp.colors.color0}\\"
+          "]4;256;${cp.colors.color7}\\"
+          "]708;${cp.special.background}\\"
+        ];
+      };
 
-      ".shelf/colors-tty.sh".text = with lib.strings; ''
-        #!/bin/sh
-        [ "''${TERM:-none}" = "linux" ] && \
-            printf '%b' '\e]P0${removePrefix "#" cp.colors.color0}
-                         \e]P1${removePrefix "#" cp.colors.color1}
-                         \e]P2${removePrefix "#" cp.colors.color2}
-                         \e]P3${removePrefix "#" cp.colors.color3}
-                         \e]P4${removePrefix "#" cp.colors.color4}
-                         \e]P5${removePrefix "#" cp.colors.color5}
-                         \e]P6${removePrefix "#" cp.colors.color6}
-                         \e]P7${removePrefix "#" cp.colors.color7}
-                         \e]P8${removePrefix "#" cp.colors.color8}
-                         \e]P9${removePrefix "#" cp.colors.color9}
-                         \e]PA${removePrefix "#" cp.colors.color10}
-                         \e]PB${removePrefix "#" cp.colors.color11}
-                         \e]PC${removePrefix "#" cp.colors.color12}
-                         \e]PD${removePrefix "#" cp.colors.color13}
-                         \e]PE${removePrefix "#" cp.colors.color14}
-                         \e]PF${removePrefix "#" cp.colors.color15}
-                         \ec'
-      '';
+      ".shelf/colors-tty.sh" = {
+        executable = true;
+        text = with lib.strings; ''
+          #!/bin/sh
+          [ "''${TERM:-none}" = "linux" ] && \
+              printf '%b' '\e]P0${removePrefix "#" cp.colors.color0}
+                          \e]P1${removePrefix "#" cp.colors.color1}
+                          \e]P2${removePrefix "#" cp.colors.color2}
+                          \e]P3${removePrefix "#" cp.colors.color3}
+                          \e]P4${removePrefix "#" cp.colors.color4}
+                          \e]P5${removePrefix "#" cp.colors.color5}
+                          \e]P6${removePrefix "#" cp.colors.color6}
+                          \e]P7${removePrefix "#" cp.colors.color7}
+                          \e]P8${removePrefix "#" cp.colors.color8}
+                          \e]P9${removePrefix "#" cp.colors.color9}
+                          \e]PA${removePrefix "#" cp.colors.color10}
+                          \e]PB${removePrefix "#" cp.colors.color11}
+                          \e]PC${removePrefix "#" cp.colors.color12}
+                          \e]PD${removePrefix "#" cp.colors.color13}
+                          \e]PE${removePrefix "#" cp.colors.color14}
+                          \e]PF${removePrefix "#" cp.colors.color15}
+                          \ec'
+        '';
+      };
     };
 
     colors.palette = if (cfg.theme != null)

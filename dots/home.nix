@@ -34,6 +34,7 @@ in
   imports = [
     # Enable helix editor
     ./helix.nix
+    ./ghostty
     # Enable colors for shell
     ../home/colors
   ];
@@ -50,7 +51,7 @@ in
         pkgs.fd
 
         # Fonts
-        pkgs.fira-code-nerdfont
+        # pkgs.fira-code-nerdfont
 
         # Manually configured
         pkgs.zsh

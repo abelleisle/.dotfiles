@@ -40,7 +40,6 @@ in
     })
     gimp
     jellyfin-media-player
-    ghostty
   ];
 
   # Allow jellyfin-media-player to get controlled via mpris
