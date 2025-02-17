@@ -39,7 +39,7 @@ local Events = {
     Modified = {"TextChanged", "TextChangedI"}
 }
 
-return require('lazy').setup({
+return require('lazy').setup({ spec = {
     ------------------
     --  NAVIGATION  --
     ------------------
@@ -353,8 +353,8 @@ return require('lazy').setup({
         dependencies = "nvim-treesitter",
         event = Events.OpenFile,
         config = function()
-            vim.g.matchup_matchparen_deferred = 0
-            vim.g.matchup_matchparen_offscreen = {}--{ method = 'popup' }
+            vim.g.matchup_matchparen_deferred = 1
+            vim.g.matchup_matchparen_offscreen = {} -- { method = 'popup' }
         end
     },
 
@@ -546,8 +546,10 @@ return require('lazy').setup({
         build = function() vim.fn['mkdp#util#install']() end,
     }
 },
-{
     -- defaults = {
     --     lazy = false,
     -- }
+    git = {
+        timeout = 600, -- kill processes that take more than 2 minutes
+    }
 })

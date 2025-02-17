@@ -78,6 +78,11 @@ g.loaded_matchit      = 0
 g.loaded_matchparen   = 0
 g.loaded_spec         = 0
 
+-- Configure vim diagnostics
+vim.diagnostic.config({
+    virtual_lines = true
+})
+
 --------------------
 --  AUTOCOMMANDS  --
 --------------------

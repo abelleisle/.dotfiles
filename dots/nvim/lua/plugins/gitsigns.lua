@@ -3,11 +3,11 @@ local M = {}
 M.config = function()
     require("gitsigns").setup {
         signs = {
-            add          = {hl = "GitSignsAddNr",    text = "+", numhl = "GitSignsAddNr"},
-            change       = {hl = "GitSignsChangeNr", text = "~", numhl = "GitSignsChangeNr"},
-            delete       = {hl = "GitSignsDeleteNr", text = "-", numhl = "GitSignsDeleteNr"},
-            topdelete    = {hl = "GitSignsDeleteNr", text = "-", numhl = "GitSignsDeleteNr"},
-            changedelete = {hl = "GitSignsChangeNr", text = "~", numhl = "GitSignsChangeNr"}
+            add          = {text = "+"},
+            change       = {text = "~"},
+            delete       = {text = "-"},
+            topdelete    = {text = "-"},
+            changedelete = {text = "~"}
         },
         numhl = false,
         watch_gitdir = {

@@ -35,8 +35,8 @@ M.config = function()
         sync_install = true, -- Wait while parsers install
         highlight = {
             enable = true,
-            use_languagetree = true,
-            --additional_vim_regex_highlighting = true,
+            -- use_languagetree = true,
+            additional_vim_regex_highlighting = false,
             -- Disable treesitter highlight on files larger than 1 MB in size
             disable = function(lang, buf)
                 local max_filesize = 1 * 1024 * 1024 -- 1 MB
@@ -56,7 +56,9 @@ M.config = function()
         },
 
         matchup = { -- andymass/vim-matchup
-            enable = true,
+            -- I noticed that this adds nasty input delay in some files, such as
+            -- C/C++ files with long match statements.
+            enable = false,
         },
 
         -- This is experimental, so it's disabled for now.

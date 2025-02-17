@@ -143,7 +143,7 @@ header "Installing neovim configs"
 run "ln -s ${DOTFILES_DIR}/dots/nvim ${HOME}/.config/nvim"
 info "Syncing neovim plugins (this may take a while)"
 NVIM_VERSION=$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')
-NVIM_REQUIRE="0.8.0"
+NVIM_REQUIRE="0.9.0"
 if [ "$(printf '%s\n' "$NVIM_REQUIRE" "$NVIM_VERSION" | sort -V | head -n1)" = "$NVIM_REQUIRE" ]; then
     info "Installed Neovim version: v$NVIM_VERSION"
     run nvim --headless "+Lazy! install" +qa

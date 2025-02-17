@@ -127,3 +127,8 @@ case `uname` in
 
         ;;
 esac
+
+# set PATH to include beta nvim binaries
+if [ -d "$HOME/.local/share/nvim/beta/bin" ] ; then
+    PATH="$HOME/.local/share/nvim/beta/bin:$PATH"
+fi
