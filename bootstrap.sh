@@ -95,25 +95,22 @@ case `uname` in
             info "Using apt.. Installing the following programs:"
             run sudo apt update;
             run sudo apt install -y stow zsh ripgrep fzf curl bc tmux make cmake gcc g++ unzip;
+
             header "Installing neovim"
+            warn "Apt usually has an outdated neovim. Installing directly from github.";
+            run sudo apt install fuse -y
+            mkdir -p ${HOME}/bin
             case `uname -m` in
                 # ARM CPU
                 aarch64)
-                    warn "Using an ARM CPU. ARM CPUs requires the package manager version of neovim.";
-                    warn "Neovim may be out of date";
-                    run sudo apt install neovim -y;
-                    warn "Neovim version:";
-                    run nvim --version;;
+                    run curl -Lo ${HOME}/bin/nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-arm64.appimage;;
                 # x86
                 x86_64)
-                    warn "Apt usually has an outdated neovim. Installing directly from github.";
-                    run sudo apt install fuse -y
-                    mkdir -p ${HOME}/bin
-                    run curl -Lo ${HOME}/bin/nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
-                    chmod u+x ${HOME}/bin/nvim
-                    PATH=${HOME}/bin:${PATH};;
+                    run curl -Lo ${HOME}/bin/nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage;;
                 *) error "Unsupported arch: $(uname -m)"
             esac
+            chmod u+x ${HOME}/bin/nvim
+            PATH=${HOME}/bin:${PATH}
         # Not apt
         else
             error "Unsupported Linux Distribution"
@@ -140,7 +137,7 @@ STOW_CMD="stow -t ${HOME} -d ${DOTFILES_DIR}/dots"
 ######################
 header "Installing neovim configs"
 # run ${STOW_CMD} nvim
-run "ln -s ${DOTFILES_DIR}/dots/nvim ${HOME}/.config/nvim"
+run "ln -sfn ${DOTFILES_DIR}/dots/nvim ${HOME}/.config/nvim"
 info "Syncing neovim plugins (this may take a while)"
 NVIM_VERSION=$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')
 NVIM_REQUIRE="0.9.0"
@@ -159,10 +156,10 @@ if [ -f ${HOME}/.profile ]; then
     warn "~/.profile already exists. Renaming to .profile.old"
     mv ${HOME}/.profile ${HOME}/.profile.old
 fi
-run "ln -s ${DOTFILES_DIR}/dots/zsh/.zshrc ${HOME}/.zshrc"
-run "ln -s ${DOTFILES_DIR}/dots/zsh/.profile ${HOME}/.profile"
-run "ln -s ${DOTFILES_DIR}/dots/zsh/.zprofile ${HOME}/.zprofile"
-run "ln -s ${DOTFILES_DIR}/dots/zsh/.zsh ${HOME}/.zsh"
+run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.zshrc ${HOME}/.zshrc"
+run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.profile ${HOME}/.profile"
+run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.zprofile ${HOME}/.zprofile"
+run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.zsh ${HOME}/.zsh"
 # run ${STOW_CMD} zsh
 
 header "Setting zsh as default shell"
@@ -175,7 +172,7 @@ zsh -c "source ~/.zshrc"
 #  CONFIGURE TMUX  #
 ####################
 header "Installing tmux configs"
-run "ln -s ${DOTFILES_DIR}/dots/tmux/.tmux.conf ${HOME}/.tmux.conf"
-run "ln -s ${DOTFILES_DIR}/dots/tmux/.tmux ${HOME}/.tmux"
+run "ln -sfn ${DOTFILES_DIR}/dots/tmux/.tmux.conf ${HOME}/.tmux.conf"
+run "ln -sfn ${DOTFILES_DIR}/dots/tmux/.tmux ${HOME}/.tmux"
 # run ${STOW_CMD} tmux
 run ~/.tmux/plugins/tpm/bin/install_plugins
