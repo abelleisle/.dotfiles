@@ -109,7 +109,7 @@ case `uname` in
                     warn "Apt usually has an outdated neovim. Installing directly from github.";
                     run sudo apt install fuse -y
                     mkdir -p ${HOME}/bin
-                    run curl -Lo ${HOME}/bin/nvim https://github.com/neovim/neovim/releases/download/latest/nvim.appimage
+                    run curl -Lo ${HOME}/bin/nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
                     chmod u+x ${HOME}/bin/nvim
                     PATH=${HOME}/bin:${PATH};;
                 *) error "Unsupported arch: $(uname -m)"
