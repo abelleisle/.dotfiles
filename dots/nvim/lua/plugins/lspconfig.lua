@@ -95,6 +95,21 @@ local get_setup_handlers = function(default_opts)
 
     local opts = default_opts
     local setup_handlers_list = {
+        [M.servers.rust.lsp] = function()
+            local rust_opts = vim.tbl_deep_extend("force", opts, {
+                settings = {
+                    cargo = {
+                        buildScripts = {
+                            enable = true,
+                        },
+                    },
+                    procMacro = {
+                        enable = true
+                    },
+                }
+            })
+            lspconfig[M.servers.rust.lsp].setup(rust_opts)
+        end,
         [M.servers.clang.lsp] = function()
             local clang_opts = vim.tbl_deep_extend("force", opts, {
                 single_file_support = true,
