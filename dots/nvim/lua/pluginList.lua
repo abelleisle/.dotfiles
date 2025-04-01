@@ -57,6 +57,11 @@ return require('lazy').setup({ spec = {
         dependencies = {"kyazdani42/nvim-web-devicons"},
     },
 
+    { -- Statusline
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
+
     { -- File manager/browser
         "kyazdani42/nvim-tree.lua",
         cmd = "NvimTreeToggle",

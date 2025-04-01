@@ -172,4 +172,5 @@ end
 
 -- bg("Normal", "#1e222a") -- change the hex color here.
 
-require("plugins.statusline").config()
+-- require("plugins.statusline").config()
+require("plugins.lualine").config()
