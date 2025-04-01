@@ -85,6 +85,7 @@ M.config = function()
             { name = "buffer" },
             { name = "nvim_lua" },
             { name = "path" },
+            { name = "codecompanion" }
         },
     } -- cmp.setup
 

@@ -313,6 +313,13 @@ _map.project = function()
     --  WINDOW  --
     --------------
     map("n", "<Leader>w", "<C-w>", {remap = true; desc = "Window operations"})
+
+    ----------------------
+    --  CODE COMPANION  --
+    ----------------------
+    pmap('v',        '<leader>aa', "<cmd>CodeCompanionChat Add<cr>",    Opt("Add line to chat"))
+    pmap({'n', 'v'}, '<leader>ac', "<cmd>CodeCompanionChat Toggle<cr>", Opt("Toggle chat"))
+    pmap({'n', 'v'}, '<leader>av', "<cmd>CodeCompanionActions<cr>",     Opt("Open actions"))
 end
 
 ------------------------------------------------------------------------
@@ -424,6 +431,8 @@ M.clue = {
         { mode = 'x', keys = '<Leader>s',  desc = 'Surround'},
         { mode = 'n', keys = '<Leader>p',  desc = 'Misc. Pickers'},
         { mode = 'n', keys = '<Leader><Leader>',  desc = 'Harpoon'},
+        { mode = 'n', keys = '<Leader>a',  desc = 'Code Companion'},
+        { mode = 'v', keys = '<Leader>a',  desc = 'Code Companion'},
     }
 }
 

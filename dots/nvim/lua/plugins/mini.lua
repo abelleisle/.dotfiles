@@ -4,6 +4,7 @@ local mini = {
     ai         = require('mini.ai'),
     align      = require('mini.align'),
     clue       = require('mini.clue'),
+    diff       = require('mini.diff'),
     jump2d     = require('mini.jump2d'),
     pairs      = require('mini.pairs'),
     surround   = require('mini.surround'),
@@ -115,6 +116,10 @@ M.config = function ()
     mini.trailspace.setup({
         only_in_normal_buffers = true
     })
+
+    ---------------------------------
+    -- Diff
+    mini.diff.setup({ })
 end
 
 return M

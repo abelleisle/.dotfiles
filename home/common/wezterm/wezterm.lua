@@ -289,5 +289,9 @@ return {
         { key = 'Tab',      mods = 'CTRL',       action = wezaction.EmitEvent('ActivateTabDirection-next')  },
         { key = 'Tab',      mods = 'CTRL|SHIFT', action = wezaction.EmitEvent('ActivateTabDirection-prev')  },
         { key = 't',        mods = 'CMD',        action = wezaction.EmitEvent('SpawnTab')                   },
+        { key = 'v',        mods = 'SUPER',      action = wezaction.PasteFrom('Clipboard')                  },
+        { key = 'v',        mods = 'SUPER',      action = wezaction.PasteFrom('PrimarySelection')           },
+        { key = 'V',        mods = 'CTRL',       action = wezaction.PasteFrom('Clipboard')                  },
+        { key = 'V',        mods = 'CTRL',       action = wezaction.PasteFrom('PrimarySelection')           },
     },
 }
