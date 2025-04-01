@@ -18,6 +18,10 @@ M.config = function()
         return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
     end
 
+    local buffer_empty = function()
+        return vim.fn.empty(vim.fn.expand('%:t')) == 1
+    end
+
     local filename_and_parent = function()
         if buffer_not_empty() then
             local file = vim.fn.expand("%:")
@@ -39,7 +43,7 @@ M.config = function()
             end
             return pr:sub(2) .. " "
         end
-        return ""
+        return " [BLANK] "
     end
 
     local checkwidth = function()
@@ -55,12 +59,16 @@ M.config = function()
         return buffer_not_empty() and checkwidth()
     end
 
+    local buffer_narrow_or_empty = function()
+        return buffer_empty() or not checkwidth()
+    end
+
+    local csep = function(cond, char, fg, bg)
+        return {function() return char end, color = {fg = fg, bg = bg}, padding = 0, cond = cond}
+    end
+
     local sep = function(char, fg, bg)
-        if bg then
-            return {function() return char end, color = {fg = fg, bg = bg}, padding = 0 }
-        else
-            return {function() return char end, color = {fg = fg}, padding = 0 }
-        end
+        return csep(nil, char, fg, bg)
     end
 
     ---------------------
@@ -95,17 +103,17 @@ M.config = function()
                 {'mode', color = {fg = colors.yellow, bg = colors.grey0, gui = 'bold'}, padding = 0},
                 sep('', colors.grey0),
                 {'filetype', icon_only = true, padding = 0},
-                {filename_and_parent, cond = buffer_not_empty, color = {fg = colors.magenta}, padding = 0},
+                {filename_and_parent, color = {fg = colors.magenta}, padding = 0},
                 {'filesize', padding = {left = 0, right = 1}},
             },
             lualine_b = {
-                sep('', colors.grey1),
-                -- {'branch', condition = buffer_wide},
+                csep(buffer_wide, '', colors.grey1),
+                csep(buffer_narrow_or_empty, '', colors.grey1, colors.bg),
                 {'branch', icon = {'', color = {fg = colors.orange}}, color = {fg = colors.grey2}, cond = buffer_wide},
                 {'diff', symbols = {added = ' ', modified = ' ', removed = ' '}, cond = buffer_wide},
             },
             lualine_c = {
-                sep('', colors.grey0),
+                csep(buffer_wide, '', colors.grey0),
                 {'diagnostics', sources = {"nvim_lsp"}, symbols = {error = '  ', warn = '  '}, cond = buffer_wide},
             },
             lualine_x = {
@@ -125,7 +133,7 @@ M.config = function()
         },
         inactive_sections = {
             lualine_a = {
-                sep('▋', colors.red, colors.grey0),
+                sep('▋ ', colors.red, colors.grey0),
                 sep('', colors.grey0),
                 {'filetype', icon_only = true, padding = 0},
                 {filename_and_parent, cond = buffer_not_empty, color = {fg = colors.magenta}, padding = 0},
