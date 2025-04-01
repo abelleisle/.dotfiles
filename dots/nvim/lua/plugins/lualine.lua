@@ -152,6 +152,13 @@ M.config = function()
         },
     }) -- lualine.setup
 
+    --------------
+    --  COLORS  --
+    --------------
+
+    -- vim.api.nvim_command(string.format("highlight StatusLine guifg=%s", colors.grey0))
+    -- vim.api.nvim_command(string.format("highlight StatusLineNC guifg=%s", colors.grey0))
+
     --------------------
     --  AUTOCOMMANDS  --
     --------------------

@@ -30,7 +30,13 @@ M.opts = {
             }
         },
         diff = {
-          provider = "mini_diff", -- default|mini_diff
+            provider = "mini_diff", -- default|mini_diff
+        },
+        chat = {
+            window = {
+                layout = "buffer", -- "vertical" will open this to the side
+                width = 0.3 -- Ignored if using "buffer"
+            }
         },
     },
     adapters = {

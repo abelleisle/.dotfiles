@@ -416,7 +416,7 @@ return require('lazy').setup({ spec = {
             },
             ignore = {
                 buftype = { "quickfix" },
-                filetype = { "NvimTree", "neo-tree", "undotree", "gundo", "fzf", "TelescopePrompt", "TelescopeResults", "Avante", "AvanteInput" }
+                filetype = { "NvimTree", "neo-tree", "undotree", "gundo", "fzf", "TelescopePrompt", "TelescopeResults", "Avante", "AvanteInput", "codecompanion" }
             },
             animation = {
                 enable = true,
