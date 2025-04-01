@@ -553,6 +553,7 @@ return require('lazy').setup({ spec = {
 
     { -- Edit hex
         "RaafatTurki/hex.nvim",
+        enabled = (vim.fn.executable('xxd') == 1),
         config = function()
             require("hex").setup()
         end
