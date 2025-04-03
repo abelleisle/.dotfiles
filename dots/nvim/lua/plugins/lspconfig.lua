@@ -295,7 +295,8 @@ M.on_attach = function(client, bufnr)
         handler_opts = {
             border = "rounded"
         },
-        hint_enable = false
+        hint_enable = false,
+        cursorhold_update = false,
     }
 
     -- local cfg = {
