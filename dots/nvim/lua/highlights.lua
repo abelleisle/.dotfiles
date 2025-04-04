@@ -1,5 +1,7 @@
 local cmd = vim.cmd
 
+local colorutils = require("utils.colors")
+
 -- local colors = require(vim.g.theme .. ".colors")
 --
 -- local white = colors.white
@@ -22,6 +24,10 @@ local cmd = vim.cmd
 
 -- for guifg , bg
 
+--------------
+--  COLORS  --
+--------------
+
 if vim.g.colors == nil then
     vim.g.colors = {
       bg      = '#000000',
@@ -38,6 +44,10 @@ if vim.g.colors == nil then
       grey2   = '#c0c0c0',
     }
 end
+
+-------------
+--  UTILS  --
+-------------
 
 local function fg(group, color)
     if (color ~= nil) then
@@ -56,6 +66,10 @@ local function fg_bg(group, fgcol, bgcol)
         cmd("hi " .. group .. " guifg=" .. fgcol .. " guibg=" .. bgcol)
     end
 end
+
+---------------
+--  PLUGINS  --
+---------------
 
 -- blankline
 
@@ -81,7 +95,9 @@ end
 -- cmd "hi clear CursorLine"
 -- fg("cursorlinenr", white)
 
--- Diff Signs
+-------------------------------
+-- Git Signs
+
 fg("GitSignsAdd",          vim.g.colors.green)
 fg("GitSignsChange",       vim.g.colors.orange)
 fg("GitSignsDelete",       vim.g.colors.red)
@@ -174,13 +190,25 @@ fg("GitSignsTopdelete",    vim.g.colors.red)
 
 -- bg("Normal", "#1e222a") -- change the hex color here.
 
+-------------------------------
 -- Avante Chat Highlights
+
+local win_sep = vim.api.nvim_get_hl(0, { name = "WinSeparator"} )
+local win_sep_bg = colorutils.hl_to_hex(win_sep.bg)
+local win_sep_fg = colorutils.hl_to_hex(win_sep.fg)
+
+fg_bg("AvanteSidebarWinSeparator",   win_sep_fg, win_sep_bg)
+
 fg_bg("AvanteTitle",              vim.g.colors.bg,    vim.g.colors.cyan )
 fg_bg("AvanteReversedTitle",      vim.g.colors.cyan,  vim.g.colors.bg   )
 fg_bg("AvanteSubtitle",           vim.g.colors.bg,    vim.g.colors.blue )
 fg_bg("AvanteReversedSubtitle",   vim.g.colors.blue,  vim.g.colors.bg   )
 fg_bg("AvanteThirdTitle",         vim.g.colors.grey2, vim.g.colors.grey1)
 fg_bg("AvanteReversedThirdTitle", vim.g.colors.grey1, vim.g.colors.bg   )
+
+------------------
+--  STATUS BAR  --
+------------------
 
 -- require("plugins.statusline").config()
 require("plugins.lualine").config()
