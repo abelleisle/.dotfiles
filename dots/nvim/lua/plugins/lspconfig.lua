@@ -169,7 +169,8 @@ local get_setup_handlers = function(default_opts)
                                 --library = vim.api.nvim_get_runtime_file("", true),
                             },
                             maxPreload = 100000,
-                            preloadFileSize = 10000
+                            preloadFileSize = 10000,
+                            checkThirdParty = "Apply",
                         },
                         telemetry = {
                             enable = false
@@ -177,6 +178,13 @@ local get_setup_handlers = function(default_opts)
                     }
                 }
             })
+
+            local proj_override = vim.env.LUA_LS_LIBRARY_PATH;
+            if proj_override then
+                local third_party_table = vim.split(proj_override, ":", {trimempty=true})
+                lua_opts.settings.Lua.workspace.userThirdParty = third_party_table
+            end
+
             lspconfig[M.servers.lua.lsp].setup(lua_opts)
         end,
         [M.servers.latex.lsp] = function()
@@ -373,7 +381,7 @@ M.config = function()
     -- adds a check to see if any of the active clients have the capability
     -- textDocument/documentHighlight. without the check it was causing constant
     -- errors when servers didn't have that capability
-    for _,client in ipairs(vim.lsp.get_active_clients()) do
+    for _,client in ipairs(vim.lsp.get_clients()) do
         if client.server_capabilities.document_highlight then
             vim.cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
             vim.cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
