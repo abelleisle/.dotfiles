@@ -172,5 +172,13 @@ end
 
 -- bg("Normal", "#1e222a") -- change the hex color here.
 
+-- Avante Chat Highlights
+fg_bg("AvanteTitle",              vim.g.colors.bg,    vim.g.colors.cyan )
+fg_bg("AvanteReversedTitle",      vim.g.colors.cyan,  vim.g.colors.bg   )
+fg_bg("AvanteSubtitle",           vim.g.colors.bg,    vim.g.colors.blue )
+fg_bg("AvanteReversedSubtitle",   vim.g.colors.blue,  vim.g.colors.bg   )
+fg_bg("AvanteThirdTitle",         vim.g.colors.grey2, vim.g.colors.grey1)
+fg_bg("AvanteReversedThirdTitle", vim.g.colors.grey1, vim.g.colors.bg   )
+
 -- require("plugins.statusline").config()
 require("plugins.lualine").config()
