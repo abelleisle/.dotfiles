@@ -85,13 +85,6 @@ M.config = function ()
 
             -- Sign column (left of numbers)
             SignColumn  = {bg = bg},
-
-            -- Sign column '+' symbol
-            GitSignsAddNr    = {bg = bg, fg = palette.bright_green},
-            -- Sign column '~' symbol
-            GitSignsChangeNr = {bg = bg, fg = palette.bright_aqua},
-            -- Sign column '-' symbol
-            GitSignsDeleteDr = {bg = bg, fg = palette.bright_red},
         },
     })
 
