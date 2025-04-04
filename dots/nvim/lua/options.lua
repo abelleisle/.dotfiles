@@ -166,6 +166,15 @@ vim.api.nvim_create_autocmd('Filetype', {
     end
 })
 
+-- Disable wrapping and colorcolumn on Avante
+vim.api.nvim_create_autocmd('Filetype', {
+    pattern = {"Avante", "AvanteInput", "AvanteSelectedFiles"},
+    callback = function()
+        vim.opt_local.colorcolumn = ""
+        vim.opt_local.textwidth = 0
+    end
+})
+
 -----------------
 --  FUNCTIONS  --
 -----------------

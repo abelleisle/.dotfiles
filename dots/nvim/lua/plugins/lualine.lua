@@ -97,6 +97,7 @@ M.config = function()
                 statusline = {
                     "Avante",
                     "AvanteSelectedFiles",
+                    "NvimTree"
                 },
             },
             section_separators = '',

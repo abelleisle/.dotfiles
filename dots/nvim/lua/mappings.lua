@@ -313,13 +313,6 @@ _map.project = function()
     --  WINDOW  --
     --------------
     map("n", "<Leader>w", "<C-w>", {remap = true; desc = "Window operations"})
-
-    ----------------------
-    --  CODE COMPANION  --
-    ----------------------
-    pmap('v',        '<leader>aa', "<cmd>CodeCompanionChat Add<cr>",    Opt("Add line to chat"))
-    pmap({'n', 'v'}, '<leader>ac', "<cmd>CodeCompanionChat Toggle<cr>", Opt("Toggle chat"))
-    pmap({'n', 'v'}, '<leader>av', "<cmd>CodeCompanionActions<cr>",     Opt("Open actions"))
 end
 
 ------------------------------------------------------------------------
