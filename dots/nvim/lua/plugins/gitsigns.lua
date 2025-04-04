@@ -9,7 +9,9 @@ M.config = function()
             topdelete    = {text = "-"},
             changedelete = {text = "~"}
         },
+        signcolumn = true,
         numhl = false,
+        linehl = false,
         watch_gitdir = {
             interval = 100
         },

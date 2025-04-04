@@ -93,6 +93,12 @@ M.config = function()
                     z = { fg = colors.red, bg = colors.grey0}
                 },
             },
+            disabled_filetypes = {
+                statusline = {
+                    "Avante",
+                    "AvanteSelectedFiles",
+                },
+            },
             section_separators = '',
             component_separators = '',
             always_divide_middle = true,
