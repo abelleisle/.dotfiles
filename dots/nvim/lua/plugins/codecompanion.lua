@@ -30,11 +30,12 @@ M.opts = {
             }
         },
         diff = {
-            provider = "mini_diff", -- default|mini_diff
+            -- provider = "mini_diff", -- default|mini_diff
+            provider = "default", -- default|mini_diff
         },
         chat = {
             window = {
-                layout = "buffer", -- "vertical" will open this to the side
+                layout = "vertical", -- "vertical" will open this to the side
                 width = 0.3 -- Ignored if using "buffer"
             }
         },
@@ -45,7 +46,7 @@ M.opts = {
                 name = "qwen",
                 schema = {
                     model = {
-                        default = "qwen2.5-coder:32b",
+                        default = "qwen2.5-coder:14b-instruct-q4_K_M",
                     },
                     num_ctx = {
                         default = 32768,

@@ -494,15 +494,15 @@ return require('lazy').setup({ spec = {
     -- I really don't want this stuff in here,
     -- but I guess this is the future :(
 
-    -- { -- Copilot chat
-    --     "olimorris/codecompanion.nvim",
-    --     config = true,
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim",
-    --         "nvim-treesitter/nvim-treesitter",
-    --     },
-    --     opts = require("plugins.codecompanion").opts,
-    -- },
+    { -- Copilot chat
+        "olimorris/codecompanion.nvim",
+        config = true,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = require("plugins.codecompanion").opts,
+    },
     { -- AI Coding Companion
         "yetone/avante.nvim",
         event = "VeryLazy",
