@@ -85,16 +85,16 @@ _map.navigation = function()
     -----------------
     local has_navigator, navigator = pcall(require, 'Navigator')
     if has_navigator then
-        map({'n','t'}, {"<C-h>", "<C-Left>"},  navigator.left,     Opt("Navigation: Left a window"))
-        map({'n','t'}, {"<C-k>", "<C-Up>"},    navigator.up,       Opt("Navigation: Up a window"))
-        map({'n','t'}, {"<C-l>", "<C-Right>"}, navigator.right,    Opt("Navigation: Right a window"))
-        map({'n','t'}, {"<C-j>", "<C-Down>"},  navigator.down,     Opt("Navigation: Down a window"))
+        map({'n','t'}, {"<A-h>", "<A-Left>"},  navigator.left,     Opt("Navigation: Left a window"))
+        map({'n','t'}, {"<A-k>", "<A-Up>"},    navigator.up,       Opt("Navigation: Up a window"))
+        map({'n','t'}, {"<A-l>", "<A-Right>"}, navigator.right,    Opt("Navigation: Right a window"))
+        map({'n','t'}, {"<A-j>", "<A-Down>"},  navigator.down,     Opt("Navigation: Down a window"))
         map({'n','t'}, "<A-p>",                navigator.previous, Opt("Navigation: Go to previous window"))
     else
-        map({'n','t'}, {"<C-h>", "<C-Left>"},  "<C-w>h",           Opt("Navigation: Left a window"))
-        map({'n','t'}, {"<C-k>", "<C-Up>"},    "<C-w>k",           Opt("Navigation: Up a window"))
-        map({'n','t'}, {"<C-l>", "<C-Right>"}, "<C-w>l",           Opt("Navigation: Right a window"))
-        map({'n','t'}, {"<C-j>", "<C-Down>"},  "<C-w>j",           Opt("Navigation: Down a window"))
+        map({'n','t'}, {"<A-h>", "<A-Left>"},  "<C-w>h",           Opt("Navigation: Left a window"))
+        map({'n','t'}, {"<A-k>", "<A-Up>"},    "<C-w>k",           Opt("Navigation: Up a window"))
+        map({'n','t'}, {"<A-l>", "<A-Right>"}, "<C-w>l",           Opt("Navigation: Right a window"))
+        map({'n','t'}, {"<A-j>", "<A-Down>"},  "<C-w>j",           Opt("Navigation: Down a window"))
         map({'n','t'}, "<A-p>",                "<C-w>p",           Opt("Navigation: Go to previous window"))
     end
 

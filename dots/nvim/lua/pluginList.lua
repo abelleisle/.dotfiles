@@ -45,7 +45,7 @@ return require('lazy').setup({ spec = {
     ------------------
 
     { -- Ctrl-<hjkl> navigation with TMUX
-        "numToStr/Navigator.nvim",
+        "dynamotn/Navigator.nvim",
         opts = {
             auto_save = nil,
             disable_on_zoom = true
@@ -457,12 +457,12 @@ return require('lazy').setup({ spec = {
         end
     },
 
-    { -- Devcontainer support
-        "https://codeberg.org/esensar/nvim-dev-container",
-        config = function()
-            require("devcontainer").setup({})
-        end
-    },
+    -- { -- Devcontainer support
+    --     "https://codeberg.org/esensar/nvim-dev-container",
+    --     config = function()
+    --         require("devcontainer").setup({})
+    --     end
+    -- },
 
     --------------------
     --  LANG HELPERS  --
