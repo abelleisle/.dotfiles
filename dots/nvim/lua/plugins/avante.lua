@@ -21,6 +21,7 @@ M.opts = {
         options = {
             -- Number of context tokens
             num_ctx = 32768,
+            -- num_ctx = 8192,
             -- Temperature for randomness in output
             temperature = 0,
         },

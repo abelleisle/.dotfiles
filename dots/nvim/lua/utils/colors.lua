@@ -21,7 +21,11 @@ function M.tbl_deep_extend(...)
 end
 
 function M.hl_to_hex(hl_num)
-  return string.format("#%06X", hl_num)
+    if hl_num ~= nil then
+        return string.format("#%06X", hl_num)
+    end
+
+    return nil
 end
 
 function M.hex_to_rgb(hex_str)

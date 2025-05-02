@@ -206,6 +206,8 @@ fg_bg("AvanteReversedSubtitle",   vim.g.colors.blue,  vim.g.colors.bg   )
 fg_bg("AvanteThirdTitle",         vim.g.colors.grey2, vim.g.colors.grey1)
 fg_bg("AvanteReversedThirdTitle", vim.g.colors.grey1, vim.g.colors.bg   )
 
+fg_bg("AvanteSidebarNormal",      vim.g.colors.fg,    vim.g.colors.bg   )
+
 ------------------
 --  STATUS BAR  --
 ------------------
