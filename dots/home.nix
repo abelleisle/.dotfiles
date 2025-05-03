@@ -35,6 +35,8 @@ in
     # Enable helix editor
     ./helix.nix
     ./ghostty
+    # Enable utilities
+    ./btop
     # Enable colors for shell
     ../home/colors
   ];

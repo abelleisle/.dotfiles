@@ -66,13 +66,16 @@ in
   catppuccin = {
     enable = true;
     flavor = "frappe";
-  };
-
-  gtk = {
-    enable = true;
-    catppuccin = {
+    accent = "blue";
+    cursors = {
       enable = true;
-      flavor = "frappe";
+    };
+    kvantum = {
+      enable = true;
+      apply = true;
+    };
+    gtk = {
+      enable = true;
       icon = {
         enable = true;
       };
@@ -83,11 +86,6 @@ in
     enable = true;
     style = {
       name = "kvantum";
-      catppuccin = {
-        enable = true;
-        flavor = "frappe";
-        apply = true;
-      };
     };
     platformTheme = {
       name = "kvantum";
@@ -96,8 +94,6 @@ in
 
   home.pointerCursor = {
     gtk.enable = true;
-    name = "Catppuccin-Frappe-Blue-Cursors";
-    package = pkgs.catppuccin-cursors.frappeBlue;
     size = 24;
   };
 }

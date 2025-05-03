@@ -1,12 +1,7 @@
 { pkgs, ... }: {
   boot = {
-
     plymouth = {
       enable = true;
-      catppuccin = {
-        enable = true;
-        flavor = "frappe";
-      };
     };
 
     # Enable "Silent Boot"
