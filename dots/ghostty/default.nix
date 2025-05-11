@@ -13,7 +13,7 @@ in
   ];
 
   xdg.configFile = with lib.strings; {
-    "ghostty/config.toml".text = ''
+    "ghostty/config".text = ''
       background  = ${palette.special.background}
       foreground  = ${palette.special.foreground}
 
@@ -33,6 +33,16 @@ in
       palette = 13=${palette.colors.color13}
       palette = 14=${palette.colors.color14}
       palette = 15=${palette.colors.color15}
+
+      keybind = alt+one=unbind
+      keybind = alt+two=unbind
+      keybind = alt+three=unbind
+      keybind = alt+four=unbind
+      keybind = alt+five=unbind
+      keybind = alt+six=unbind
+      keybind = alt+seven=unbind
+      keybind = alt+eight=unbind
+      keybind = alt+nine=unbind
     '';
   };
 }
