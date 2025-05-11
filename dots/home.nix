@@ -16,6 +16,10 @@ let
   zshInstall = if dotsLocation != null
     then dotsLocation + "/dots/zsh/"
     else ./zsh;
+
+  zellijInstall = if dotsLocation != null
+    then dotsLocation + "/dots/zellij/"
+    else ./zellij;
 in
 {
   options = {
@@ -56,6 +60,7 @@ in
         # pkgs.fira-code-nerdfont
 
         # Manually configured
+        pkgs.zellij
         pkgs.zsh
         pkgs.tmux
         (pkgs.neovim.override { vimAlias = true; })
@@ -98,8 +103,12 @@ in
     xdg.configFile = {
       # Neovim
       "nvim" = {
-          source = symlink nvimInstall;
-          recursive = true;
+        source = symlink nvimInstall;
+        recursive = true;
+      };
+      "zellij" = {
+        source = symlink zellijInstall;
+        recursive = true;
       };
     };
 
