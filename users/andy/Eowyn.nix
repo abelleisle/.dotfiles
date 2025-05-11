@@ -40,10 +40,17 @@ in
     })
     gimp
     jellyfin-media-player
+    logseq
   ];
 
   # Allow jellyfin-media-player to get controlled via mpris
   xdg.dataFile."jellyfinmediaplayer/scripts/mpris.so".source = "${pkgs.mpvScripts.mpris}/share/mpv/scripts/mpris.so";
+
+  services = {
+    syncthing = {
+      enable = true;
+    };
+  };
 
   dotfiles.wm.hyprland = {
     enable = false;
