@@ -119,6 +119,17 @@ return require('lazy').setup({ spec = {
         end
     },
 
+    { -- Hardtime, ban repetitive movements
+        "m4xshen/hardtime.nvim",
+        lazy = false,
+        dependencies = { "MunifTanjim/nui.nvim" },
+        opts = {
+            disabled_filetypes = {
+                lazy = false, -- Disable Hardtime in lazy filetype
+            }
+        },
+    },
+
     --------------
     --  COLORS  --
     --------------
