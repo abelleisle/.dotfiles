@@ -70,7 +70,7 @@ M.config = function()
             media_files = {
                 filetypes = {"png", "webp", "jpg", "jpeg"},
                 find_cmd = "rg" -- find command (defaults to `fd`)
-            }
+            },
         },
         pickers = {
             find_files = {
@@ -92,6 +92,8 @@ M.config = function()
 
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("media_files")
+    require("telescope").load_extension("notify")
+    require("telescope").load_extension("noice")
 end
 
 return M
