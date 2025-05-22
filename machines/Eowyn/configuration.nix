@@ -34,6 +34,7 @@
       };
     };
 
+    # Allow the use of mullvad VPN on this computer
     mullvad-vpn = {
       enable = true;
       enableExcludeWrapper = false;
@@ -44,7 +45,21 @@
     #       https://github.com/NixOS/nixpkgs/issues/321121
     # automatic-timezoned.enable = true;
 
+    # Enable systemd DNS resolver
     resolved.enable = true;
+
+    # Enable network time syncing
+    chrony = {
+      enable = true;
+      enableNTS = true; # Enable the more secure NTS protocol
+      # Default NixOS servers don't have NTS support so we have to override
+      servers = [
+        "time.cloudflare.com"
+        "ohio.time.system76.com"
+        "oregon.time.system76.com"
+        "virginia.time.system76.com"
+      ];
+    };
   };
 
   time.timeZone = "America/New_York";
