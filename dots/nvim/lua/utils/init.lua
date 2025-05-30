@@ -31,9 +31,8 @@ end
 M.print_variable = function(var, depth)
     if depth == nil then depth = 0 end
 
-    to_print = ""
-
-    indent = string.rep("  ", depth)
+    local to_print = ""
+    local indent = string.rep("  ", depth)
 
     if type(var) == "table" then
         to_print = to_print .. string.format("%s{\n", indent)
@@ -59,5 +58,7 @@ end
 
 M.hsluv  = require("utils.hsluv")
 M.colors = require("utils.colors")
+M.indent = require("utils.indent")
+M.search = require("utils.search")
 
 return M

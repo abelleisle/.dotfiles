@@ -73,6 +73,14 @@ _map.misc = function()
     -- map("i", "<Down>", "<Nop>", {})
     map("i", "<PageUp>", "<Nop>", {})
     map("i", "<PageDown>", "<Nop>", {})
+
+    ----------------------------------
+    --     INDENT AND BRACES        --
+    ----------------------------------
+    -- Indent selected block and wrap with braces
+    local indent_and_wrap_braces = require("utils").indent.indent_and_wrap_braces
+    map({'n', 'x'}, '<leader>sb', indent_and_wrap_braces, Opt("Wrap block with braces"))
+
 end
 
 ------------------------------------------------------------------------
