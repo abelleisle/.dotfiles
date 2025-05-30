@@ -52,11 +52,11 @@ M.config = function()
                 local strings = vim.split(kind.kind, "%s", { trimempty = true })
                 local type_str = "    (" .. (strings[2] or "") .. ")"
                 kind.kind = " " .. (strings[1] or "") .. " "
-                kind.menu = type_str.." "..({
+                kind.menu = type_str.." "..(({
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[Lua]",
                     buffer = "[BUF]",
-                })[entry.source.name]
+                })[entry.source.name] or "")
 
                 return kind
             end,
