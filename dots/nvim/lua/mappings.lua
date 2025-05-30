@@ -98,6 +98,23 @@ _map.navigation = function()
         map({'n','t'}, "<A-p>",                "<C-w>p",           Opt("Navigation: Go to previous window"))
     end
 
+    ------------------------------
+    -- LSP Signature Navigation --
+    ------------------------------
+    local has_noice, noice = pcall(require, 'noice.lsp')
+    if has_noice then
+        vim.keymap.set({ "n", "i", "s" }, "<c-d>", function()
+            if not noice.scroll(4) then
+                return "<c-d>"
+            end
+        end, { silent = true, expr = true })
+        vim.keymap.set({ "n", "i", "s" }, "<c-u>", function()
+            if not noice.scroll(-4) then
+                return "<c-u>"
+            end
+        end, { silent = true, expr = true })
+    end
+
     -----------------------
     --  MODE NAVIGATION  --
     -----------------------
