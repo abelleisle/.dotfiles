@@ -83,6 +83,9 @@ vim.diagnostic.config({
     virtual_lines = true
 })
 
+-- Highlight configuration
+g.search_highlight_timeout_ms = 1000;
+
 --------------------
 --  AUTOCOMMANDS  --
 --------------------

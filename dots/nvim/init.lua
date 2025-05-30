@@ -1,13 +1,24 @@
--- load all plugins
+-----------------------------------------------------------
+-- Load plugins
 
+-- Remote Plugins
 require("pluginList")
+
+-- "Local" Plugins
+require("utils.search").setup()
+
+-----------------------------------------------------------
+-- Configuration
 require("options")
 
+-----------------------------------------------------------
+-- Keybinds
 require("mappings").setup()
 
---require("utils").hideStuff()
+-----------------------------------------------------------
+-- Configuration
 
--- Call local nvim configs
+-- Call local nvim configs/overrides
 local path = vim.fn.expand("$HOME/.shelf/nvim.lua")
 local local_exists, local_configs = pcall(dofile, path)
 if local_exists then
@@ -16,8 +27,11 @@ else
     print("No local configs... Using global")
 end
 
+-----------------------------------------------------------
+-- Highlights
 -- Call this after local config sets colors
 require("highlights")
 
--- require "plugins.lspconfig".config()
+-----------------------------------------------------------
+-- Session loading
 require("session")
