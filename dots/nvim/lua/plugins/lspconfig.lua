@@ -314,7 +314,7 @@ M.on_attach = function(client, bufnr)
     --     fix_pos = true
     -- }
 
-    require("lsp_signature").on_attach(cfg, bufnr)
+    -- require("lsp_signature").on_attach(cfg, bufnr)
 
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 

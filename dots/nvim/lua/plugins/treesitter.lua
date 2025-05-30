@@ -22,6 +22,7 @@ M.config = function()
             "html",
             -- "latex",
             "php",
+            "regex",
 
             -- Config
             "cmake",

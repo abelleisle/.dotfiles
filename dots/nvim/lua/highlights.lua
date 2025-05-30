@@ -71,6 +71,53 @@ end
 --  PLUGINS  --
 ---------------
 
+-- Customization for Pmenu
+-- vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#282C34", fg = "NONE" })
+-- vim.api.nvim_set_hl(0, "Pmenu", { fg = vim.g.colors.fg, bg = "#22252A" })
+vim.api.nvim_set_hl(0, "PmenuSel", { bg = vim.g.colors.red, fg = "NONE" })
+vim.api.nvim_set_hl(0, "Pmenu", { fg = vim.g.colors.fg, bg = vim.g.colors.yellow })
+
+vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = vim.g.colors.grey0, bg = "NONE", strikethrough = true })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = vim.g.colors.blue, bg = "NONE", bold = true })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = vim.g.colors.blue, bg = "NONE", bold = true })
+vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = vim.g.colors.magenta, bg = "NONE", italic = true })
+
+vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = vim.g.colors.fg, bg = vim.g.colors.red })
+vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = vim.g.colors.fg, bg = vim.g.colors.red })
+vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = vim.g.colors.fg, bg = vim.g.colors.red })
+
+local fg_green = colorutils.brighten(vim.g.colors.green, 20)
+vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = fg_green, bg = vim.g.colors.green })
+vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = fg_green, bg = vim.g.colors.green })
+vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = fg_green, bg = vim.g.colors.green })
+
+local fg_yellow = colorutils.brighten(vim.g.colors.yellow, 20)
+vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = fg_yellow, bg = vim.g.colors.yellow })
+vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = fg_yellow, bg = vim.g.colors.yellow })
+vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = fg_yellow, bg = vim.g.colors.yellow })
+
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = vim.g.colors.fg, bg = vim.g.colors.magenta })
+vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = vim.g.colors.fg, bg = vim.g.colors.magenta })
+vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = vim.g.colors.fg, bg = vim.g.colors.magenta })
+vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = vim.g.colors.fg, bg = vim.g.colors.magenta })
+vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = vim.g.colors.fg, bg = vim.g.colors.magenta })
+
+vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = vim.g.colors.fg, bg = vim.g.colors.grey1 })
+vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = vim.g.colors.fg, bg = vim.g.colors.grey1 })
+
+vim.api.nvim_set_hl(0, "CmpItemKindUnit", { fg = vim.g.colors.fg, bg = vim.g.colors.orange })
+vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = vim.g.colors.fg, bg = vim.g.colors.orange })
+vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = vim.g.colors.fg, bg = vim.g.colors.orange })
+
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = vim.g.colors.grey2, bg = vim.g.colors.blue })
+vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = vim.g.colors.grey2, bg = vim.g.colors.blue })
+vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = vim.g.colors.grey2, bg = vim.g.colors.blue })
+
+vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = vim.g.colors.grey2, bg = vim.g.colors.cyan })
+vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = vim.g.colors.grey2, bg = vim.g.colors.cyan })
+vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = vim.g.colors.grey2, bg = vim.g.colors.cyan })
+
+
 -- blankline
 
 -- fg("IndentBlanklineChar", line)

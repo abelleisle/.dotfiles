@@ -1,6 +1,5 @@
 local M = {}
 
-
 M.config = function()
     local cmp_present, cmp = pcall(require, "cmp")
     local lua_present, luasnip = pcall(require, "luasnip")
@@ -29,22 +28,42 @@ M.config = function()
                 luasnip.lsp_expand(args.body)
             end,
         },
+        -- formatting = {
+        --     format = function(entry, vim_item) -- load lspkind icons
+        --         vim_item.kind = string.format(
+        --             "%s %s",
+        --             require("plugins.lspkind_icons").icons[vim_item.kind],
+        --             vim_item.kind
+        --         )
+        --
+        --         vim_item.menu = ({
+        --             nvim_lsp = "[LSP]",
+        --             nvim_lua = "[Lua]",
+        --             buffer = "[BUF]",
+        --         })[entry.source.name]
+        --
+        --         return vim_item
+        --     end,
+        -- },
         formatting = {
-            format = function(entry, vim_item) -- load lspkind icons
-                vim_item.kind = string.format(
-                    "%s %s",
-                    require("plugins.lspkind_icons").icons[vim_item.kind],
-                    vim_item.kind
-                )
-
-                vim_item.menu = ({
+            fields = { "kind", "abbr", "menu" },
+            format = function(entry, vim_item)
+                local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+                local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                local type_str = "    (" .. (strings[2] or "") .. ")"
+                kind.kind = " " .. (strings[1] or "") .. " "
+                kind.menu = type_str.." "..({
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[Lua]",
                     buffer = "[BUF]",
                 })[entry.source.name]
 
-                return vim_item
+                return kind
             end,
+        },
+        window = {
+            completion = cmp.config.window.bordered({}),
+            documentation = cmp.config.window.bordered({}),
         },
         mapping = {
             ["<C-p>"] = cmp.mapping.select_prev_item(),

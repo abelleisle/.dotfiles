@@ -235,6 +235,17 @@ return require('lazy').setup({ spec = {
                 inc_rename = false, -- enables an input dialog for inc-rename.nvim
                 lsp_doc_border = false, -- add a border to hover docs and signature help
             },
+            popupmenu = {
+                backend = 'cmp',
+            },
+            views = {
+                hover = {
+                    border = {
+                        style = "rounded",
+                    },
+                    position = { row = 2, col = 0 },
+                },
+            },
         },
         dependencies = {
             -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -261,9 +272,7 @@ return require('lazy').setup({ spec = {
     { -- Neovim Language Server
         "neovim/nvim-lspconfig",
         event = Events.OpenFile,
-        config = function()
-            require("plugins.lspconfig").config()
-        end,
+        config = require("plugins.lspconfig").config,
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim"
@@ -278,17 +287,17 @@ return require('lazy').setup({ spec = {
         end
     },
 
-    {
-        "ray-x/lsp_signature.nvim",
-        event = Events.OpenFile,
-        opts = {
-            bind = true,
-            handler_opts = {
-                border = "rounded"
-            },
-            hint_enable = false
-        }
-    },
+    -- {
+    --     "ray-x/lsp_signature.nvim",
+    --     event = Events.OpenFile,
+    --     opts = {
+    --         bind = true,
+    --         handler_opts = {
+    --             border = "rounded"
+    --         },
+    --         hint_enable = false
+    --     }
+    -- },
 
     { -- Debug adapter protocol
         "mfussenegger/nvim-dap"
