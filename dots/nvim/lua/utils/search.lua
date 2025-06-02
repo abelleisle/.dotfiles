@@ -2,7 +2,15 @@ local highlight_timer = nil
 
 -- ensure n and N highlight for only a brief time
 local function searchAndOpenFold(key)
-    vim.cmd('normal! ' .. key)
+    local ok, _ = pcall(vim.cmd, 'normal! ' .. key)
+
+    -- If there are no 'next' objects
+    if not ok then
+        local searchTerm = vim.fn.getreg('/')
+        vim.notify("Pattern not found: "..searchTerm, vim.log.levels.WARN)
+        return
+    end
+
 
     if string.find(vim.o.foldopen, "search") and vim.fn.foldclosed('.') ~= -1 then
         vim.cmd('normal! zv')
