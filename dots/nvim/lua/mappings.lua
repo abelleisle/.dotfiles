@@ -233,7 +233,7 @@ _map.display = function()
     -----------------------
     --  HIDE HIGHLIGHTS  --
     -----------------------
-    map("n", "<Leader>n", ":noh<CR>", Opt("Display: Hide \"find\" highlight"))
+    map("n", "<Leader>h", ":noh<CR>", Opt("Display: Hide \"find\" highlight"))
 
     ----------------
     --  COMMENTS  --
@@ -289,12 +289,24 @@ _map.project = function()
             end,
             grep_string = function()
                 require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ")})
+            end,
+            grep_file = function()
+                local current_file = vim.fn.expand('%:p')
+                if current_file ~= '' then
+                    require('telescope.builtin').live_grep({
+                        search_dirs = { current_file },
+                        prompt_title = 'Live Grep: ' .. vim.fn.expand('%:t'),
+                    })
+                else
+                    vim.notify('No file currently open', vim.log.levels.WARN)
+                end
             end
         }
 
         -- File pickers
         vim.keymap.set('n', '<Leader>f',  ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
         vim.keymap.set('n', '<Leader>b',  ts.builtin().buffers,                    Opt("Telescope: Show active buffers"))
+        vim.keymap.set('n', '<Leader>n',  ts.grep_file,                            Opt("Telescope: Search current file"))
 
         -- Extra pickers
         vim.keymap.set('n', '<Leader>pz', ts.grep_fuzzy,                           Opt("Telescope: Fuzzy finder"))
