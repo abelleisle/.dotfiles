@@ -28,7 +28,7 @@ keybinds clear-defaults=true {
         bind "o" { FocusNextPane; }
         bind "d" { Detach; }
         bind "s" { NextSwapLayout; }
-        bind "Space" { CloseFocus; SwitchToMode "Locked"; }
+        // bind "Space" { CloseFocus; SwitchToMode "Locked"; }
         bind "1" { GoToTab 1; SwitchToMode "locked"; }
         bind "2" { GoToTab 2; SwitchToMode "locked"; }
         bind "3" { GoToTab 3; SwitchToMode "locked"; }
