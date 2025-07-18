@@ -111,8 +111,13 @@ case `uname` in
         fi
 
         export PATH="$PYENV_ROOT/bin:$PATH"
-        eval "$(pyenv init --path)"
-        eval "$(pyenv init -)"
+
+        if [ ! -z ${ZSH_VERSION+x} ]; then
+            eval "$(pyenv init - zsh)"
+        else
+            eval "$(pyenv init --path)"
+            eval "$(pyenv init -)"
+        fi
 
         export LANG='en_US.UTF-8'
 
