@@ -1,0 +1,249 @@
+# Starship configuration matching passion.zsh-theme
+# Based on the passion theme with time, directory, git, and environment indicators
+
+# Add a blank line before the prompt
+add_newline = false
+
+# Custom format to match passion theme layout
+format = """$cmd_duration
+$time $directory
+$custom$container$nix_shell$python$git_branch$git_status$character"""
+
+right_format = """$memory_usage$battery$jobs"""
+
+# Git takes a while sometimes
+command_timeout = 1000
+
+# Time module - matches [HH:MM:SS] format from passion theme
+[time]
+disabled = false
+format = '[\[$time\]]($style)'
+style = 'cyan'
+time_format = '%H:%M:%S'
+
+# Directory module - matches [~/path] format
+[directory]
+format = '[\[$path\]]($style)'
+style = 'cyan'
+truncation_length = 0
+truncate_to_repo = false
+
+# SSH indicator - matches [SSH] from passion theme using custom module
+[custom.ssh]
+command = 'echo "SSH"'
+when = '[ -n "$SSH_CONNECTION" ]'
+format = '[\[$output\]]($style) '
+style = 'yellow'
+disabled = false
+
+# Container indicator - matches [Docker] from passion theme
+[container]
+format = '[$symbol]($style)'
+symbol = '\[Docker\] '
+style = 'magenta'
+
+# Nix shell indicator - matches [nix] from passion theme
+[nix_shell]
+format = '[$symbol]($style)'
+symbol = '\[nix\] '
+style = 'blue'
+
+# Python virtual environment - matches [python] from passion theme
+[python]
+format = '[$symbol]($style)'
+symbol = '\[python\] '
+style = 'green'
+detect_files = []
+
+# Command duration - matches the timing feature from passion theme
+[cmd_duration]
+format = '''[cost $duration]($style)
+'''
+style = 'cyan'
+min_time = 100
+show_milliseconds = true
+
+# Git branch - matches git(branch) format
+[git_branch]
+format = '[git\(](blue)[$branch]($style)[\)](blue)'
+style = 'red'
+
+# Git status - matches the 🔥 indicator for dirty repos
+[git_status]
+format = ' [$all_status$ahead_behind]($style) '
+style = 'blue'
+# conflicted = '🔥'
+# ahead = '🔥'
+# behind = '🔥'
+# diverged = '🔥'
+up_to_date = ''
+untracked = ''
+# stashed = '🔥'
+modified = '🔥'
+# staged = '🔥'
+# renamed = '🔥'
+# deleted = '🔥'
+
+# Character module - matches the ❱❱❱ arrows from passion theme
+[character]
+success_symbol = '[❱](red)[❱](yellow)[❱](green)'
+error_symbol = '[❱❱❱](red)'
+vimcmd_symbol = '[❮](green)'
+
+# Keep your existing language module customizations but add them back
+[bun]
+format = "via [$symbol]($style)"
+
+[buf]
+format = "via [$symbol]($style)"
+
+[cmake]
+format = "via [$symbol]($style)"
+
+[cobol]
+format = "via [$symbol]($style)"
+
+[crystal]
+format = "via [$symbol]($style)"
+
+[daml]
+format = "via [$symbol]($style)"
+
+[dart]
+format = "via [$symbol]($style)"
+
+[deno]
+format = "via [$symbol]($style)"
+
+[dotnet]
+format = "[$symbol(🎯 $tfm )]($style)"
+
+[elixir]
+format = 'via [$symbol]($style)'
+
+[elm]
+format = 'via [$symbol]($style)'
+
+[erlang]
+format = 'via [$symbol]($style)'
+
+[fennel]
+format = 'via [$symbol]($style)'
+
+[gleam]
+format = 'via [$symbol]($style)'
+
+[golang]
+format = 'via [$symbol]($style)'
+
+[gradle]
+format = 'via [$symbol]($style)'
+
+[haxe]
+format = 'via [$symbol]($style)'
+
+[helm]
+format = 'via [$symbol]($style)'
+
+[java]
+format = 'via [$symbol]($style)'
+
+[julia]
+format = 'via [$symbol]($style)'
+
+[kotlin]
+format = 'via [$symbol]($style)'
+
+[lua]
+format = 'via [$symbol]($style)'
+
+[meson]
+format = 'via [$symbol]($style)'
+
+[nim]
+format = 'via [$symbol]($style)'
+
+[nodejs]
+format = 'via [$symbol]($style)'
+
+[ocaml]
+format = 'via [$symbol(\($switch_indicator$switch_name\) )]($style)'
+
+[opa]
+format = 'via [$symbol]($style)'
+
+[perl]
+format = 'via [$symbol]($style)'
+
+[pixi]
+format = 'via [$symbol($environment )]($style)'
+
+[php]
+format = 'via [$symbol]($style)'
+
+[pulumi]
+format = 'via [$symbol$stack]($style)'
+
+[purescript]
+format = 'via [$symbol]($style)'
+
+[quarto]
+format = 'via [$symbol]($style)'
+
+[raku]
+format = 'via [$symbol]($style)'
+
+[red]
+format = 'via [$symbol]($style)'
+
+[rlang]
+format = 'via [$symbol]($style)'
+
+[ruby]
+format = 'via [$symbol]($style)'
+
+[rust]
+format = 'via [$symbol]($style)'
+
+[solidity]
+format = 'via [$symbol]($style)'
+
+[swift]
+format = 'via [$symbol]($style)'
+
+[typst]
+format = 'via [$symbol]($style)'
+
+[vagrant]
+format = 'via [$symbol]($style)'
+
+[vlang]
+format = 'via [$symbol]($style)'
+
+[zig]
+format = 'via [$symbol]($style)'
+
+# Disable modules we don't want to show
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[terraform]
+disabled = true
+
+[battery]
+disabled = true
+
+[memory_usage]
+disabled = false
+threshold = 0
+format = '$symbol [${ram}( | ${swap})]($style) '
+symbol = '󰍛'
+
+[jobs]
+disabled = false
