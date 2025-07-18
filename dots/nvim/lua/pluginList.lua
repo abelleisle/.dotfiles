@@ -63,7 +63,7 @@ return require('lazy').setup({ spec = {
     },
 
     { -- File manager/browser
-        "kyazdani42/nvim-tree.lua",
+        "nvim-tree/nvim-tree.lua",
         cmd = "NvimTreeToggle",
         config = function()
             require("plugins.nvimtree").config()

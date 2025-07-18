@@ -10,23 +10,27 @@ end
 M.opts = {
     -- Specify the provider to use (e.g., "ollama")
     provider = "ollama",
-    ollama = {
-        -- Name of the API key environment variable
-        api_key_name = "",
-        -- Endpoint URL for the Ollama service
-        endpoint = "http://127.0.0.1:11434",
-        -- Model to use (e.g., "qwen2.5-coder:32b")
-        -- model = "qwen2.5-coder:32b",
-        model = "qwen2.5-coder:14b-instruct-q4_K_M",
-        options = {
-            -- Number of context tokens
-            num_ctx = 32768,
-            -- num_ctx = 8192,
-            -- Temperature for randomness in output
-            temperature = 0,
+    providers = {
+        ollama = {
+            -- Name of the API key environment variable
+            api_key_name = "",
+            -- Endpoint URL for the Ollama service
+            endpoint = "http://127.0.0.1:11434",
+            -- Model to use (e.g., "qwen2.5-coder:32b")
+            model = "qwen2.5-coder:32b-instruct-q4_K_M",
+            -- model = "qwen2.5-coder:14b-instruct-q4_K_M",
+            extra_request_body = {
+                options = {
+                    -- Number of context tokens
+                    -- num_ctx = 32768,
+                    num_ctx = 8192,
+                    -- Temperature for randomness in output
+                    temperature = 0.7,
+                },
+            },
+            -- Enable streaming responses
+            stream = true,
         },
-        -- Enable streaming responses
-        stream = true,
     },
 }
 

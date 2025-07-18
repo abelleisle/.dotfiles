@@ -304,20 +304,20 @@
       },
       "locked": {
         "dir": "nix",
-        "lastModified": 1746742173,
-        "narHash": "sha256-VZSqayaZPMrpI4eqpx9a+XDsvdnsNF5bOkiQuJ2TuQE=",
+        "lastModified": 1751487254,
+        "narHash": "sha256-0m+M1Y5i2QZ2gMtL3e+Mh4iDJ3m9T/wc4i2IgiJ4L10=",
         "ref": "refs/heads/master",
-        "rev": "e716fb08a734e68eac3dd6ace784d4d8dd1c017a",
-        "revCount": 983,
+        "rev": "f78b8fa9c82589abcc4964406d5e7bdf96860689",
+        "revCount": 987,
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/kmonad/kmonad?dir=nix"
+        "url": "https://github.com/kmonad/kmonad"
       },
       "original": {
         "dir": "nix",
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/kmonad/kmonad?dir=nix"
+        "url": "https://github.com/kmonad/kmonad"
       }
     },
     "nixGL": {
