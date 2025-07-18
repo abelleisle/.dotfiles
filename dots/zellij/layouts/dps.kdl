@@ -1,0 +1,5 @@
+layout {
+    pane command="zsh" close_on_exit=true {
+        cwd "~/Development/Tools/dps"
+    }
+}

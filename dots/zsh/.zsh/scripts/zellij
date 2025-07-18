@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+
+# Zellij session management function
+z() {
+    local session_name="$1"
+
+    # Check if session name is provided
+    if [[ -z "$session_name" ]]; then
+        echo "Usage: z <session_name>"
+        echo "Example: z dps"
+        return 1
+    fi
+
+    # Check if zellij is installed
+    if ! command -v zellij &> /dev/null; then
+        echo "Error: zellij is not installed or not in PATH"
+        return 1
+    fi
+
+    # Get list of existing sessions
+    local existing_sessions
+    existing_sessions=$(zellij ls -s 2>/dev/null)
+
+    # Check if the session already exists
+    if echo "$existing_sessions" | grep -q "^${session_name}$"; then
+        echo "Attaching to existing zellij session: $session_name"
+        zellij attach "$session_name"
+    else
+        echo "Creating new zellij session: $session_name"
+        case "$session_name" in
+            "dps")
+                zellij -n "dps" -s "$session_name"
+                ;;
+            *)
+                zellij -s "$session_name"
+                ;;
+        esac
+    fi
+}
