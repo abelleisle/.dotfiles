@@ -15,8 +15,10 @@ if [ -d ~/.zsh/extra/ ]; then
     done
 fi
 
-# Set name of the ZSH theme to load
-ZSH_THEME="passion"
+# Set name of the ZSH theme to load (if starship isn't installed)
+if ! command -v starship &> /dev/null; then
+    ZSH_THEME="passion"
+fi
 
 # Disable OMZ update reminders
 zstyle ':omz:update' mode disabled  # disable automatic updates
@@ -173,5 +175,9 @@ fi
 #     elapsed=$(($now-$timer))
 #     echo $elapsed":" $plugin
 # done
+
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi
 
 # zprof
