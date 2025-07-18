@@ -126,7 +126,9 @@ return require('lazy').setup({ spec = {
         opts = {
             disabled_filetypes = {
                 lazy = false, -- Disable Hardtime in lazy filetype
-            }
+            },
+            disabled_keys = {
+            },
         },
     },
 
@@ -514,6 +516,10 @@ return require('lazy').setup({ spec = {
     --         require("devcontainer").setup({})
     --     end
     -- },
+
+    { -- Nicer CSV rendering
+        "mechatroner/rainbow_csv"
+    },
 
     --------------------
     --  LANG HELPERS  --
