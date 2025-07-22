@@ -90,7 +90,7 @@ plugins=(
     sudo
     zsh-autopair
     vi-mode
-    fzf
+    # fzf
     direnv
 )
 
@@ -175,6 +175,8 @@ fi
 #     elapsed=$(($now-$timer))
 #     echo $elapsed":" $plugin
 # done
+
+source <(fzf --zsh)
 
 if command -v starship &> /dev/null; then
     eval "$(starship init zsh)"
