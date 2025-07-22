@@ -54,6 +54,7 @@ format = '[$symbol]($style)'
 symbol = '\[python\] '
 style = 'green'
 detect_files = []
+detect_extensions = []
 
 # Command duration - matches the timing feature from passion theme
 [cmd_duration]
