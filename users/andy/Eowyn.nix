@@ -41,6 +41,10 @@ in
     gimp
     jellyfin-media-player
     logseq
+    ollama
+    meshcentral
+    dig
+    claude-code
   ];
 
   # Allow jellyfin-media-player to get controlled via mpris
@@ -102,5 +106,14 @@ in
   home.pointerCursor = {
     gtk.enable = true;
     size = 24;
+  };
+
+  programs = {
+    zed-editor = {
+      enable = true;
+      userSettings = {
+        vim_mode = true;
+      };
+    };
   };
 }

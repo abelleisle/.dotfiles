@@ -55,6 +55,7 @@ in
         pkgs.jq
         pkgs.yq
         pkgs.fd
+        pkgs.devenv
 
         # Fonts
         # pkgs.fira-code-nerdfont

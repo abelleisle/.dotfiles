@@ -60,9 +60,23 @@
         "virginia.time.system76.com"
       ];
     };
+
+    meshcentral = {
+      enable = true;
+      settings = {
+        Port = 4430;
+      };
+    };
+
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "client";
+      authKeyFile = "/etc/tailscale/tailscale0_key";
+    };
   };
 
-  time.timeZone = "America/New_York";
+  # time.timeZone = "America/New_York";
+  time.timeZone = "MST";
 
   programs = {
     # Also enable hyprland wm
@@ -77,6 +91,16 @@
 
     # Enable kdeconnect
     kdeconnect.enable = true;
+
+    ladybird = {
+      enable = false;
+    };
+
+    winbox = {
+      enable = true;
+      openFirewall = true;
+      package = pkgs.winbox4;
+    };
   };
 
   environment = {
@@ -139,10 +163,11 @@
 
     wg-quick.interfaces = {
       "mgmt0" = {
-        autostart = true;
+        autostart = false;
         configFile = "/etc/wireguard/mgmt0.conf";
       };
     };
+
   };
 
   environment.systemPackages = [
