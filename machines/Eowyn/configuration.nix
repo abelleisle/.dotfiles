@@ -9,16 +9,22 @@
     # Use sddm (wayland) as the greeter
     displayManager = {
       sddm = {
-        enable = true;
+        enable = false;
         wayland = {
-          enable = true;
+          enable = false;
         };
+      };
+      gdm = {
+        enable = true;
       };
     };
 
     # Install plasma6
     desktopManager = {
       plasma6 = {
+        enable = false;
+      };
+      gnome = {
         enable = true;
       };
     };
@@ -72,6 +78,11 @@
       enable = true;
       useRoutingFeatures = "client";
       authKeyFile = "/etc/tailscale/tailscale0_key";
+    };
+
+    protonmail-bridge = {
+      enable = true;
+      path = with pkgs; [ pass gnome-keyring ];
     };
   };
 
@@ -172,7 +183,22 @@
 
   environment.systemPackages = [
     pkgs.nfs-utils
+    pkgs.gnomeExtensions.appindicator
+    pkgs.gnomeExtensions.keep-awake
+    pkgs.gnome-tweaks
   ];
+  services.udev.packages = [ pkgs.gnome-settings-daemon ];
+
+  # Configure the virt-manager template
+  templates.system.virtualization.virt-manager = {
+    enable = true;
+    users = [ "andy" ];  # List of users to add to libvirtd group
+    pciPassthrough = {
+      enable = true;
+      cpu = "intel";
+      # extraDrivers = ["i915"]
+    };
+  };
 
   catppuccin = {
     sddm = {

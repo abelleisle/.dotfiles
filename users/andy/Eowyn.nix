@@ -116,4 +116,26 @@ in
       };
     };
   };
+
+  dconf.enable = true;
+  dconf.settings = {
+    "org/gnome/desktop/peripherals/touchpad" = {
+      natural-scroll = false;
+    };
+    "org/gnome/desktop/interface" = {
+      accent-color = "red";
+    };
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = with pkgs.gnomeExtensions; [
+        keep-awake.extensionUuid
+      ];
+    };
+  };
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
 }
