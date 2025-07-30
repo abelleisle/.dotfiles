@@ -55,7 +55,7 @@ in home-manager.lib.homeManagerConfiguration
     }
 
     inputs.agenix.homeManagerModules.default
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
   ] ++ extraImports;
 }
 

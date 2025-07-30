@@ -149,8 +149,8 @@ if [ -z "$SSH_CONNECTION" ]; then
 
     # If home-manager is used, source our colorscheme
     if [ -d ~/.shelf ]; then
-        [[ -s ~/.shelf/sequences ]] && cat ~/.shelf/sequences
-        [[ -s ~/.shelf/colors-tty.sh ]] && source ~/.shelf/colors-tty.sh
+        # [[ -s ~/.shelf/sequences ]] && cat ~/.shelf/sequences
+        # [[ -s ~/.shelf/colors-tty.sh ]] && source ~/.shelf/colors-tty.sh
     fi
 
 fi
