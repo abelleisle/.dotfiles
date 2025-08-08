@@ -1,7 +1,6 @@
 {...}:
 {
   imports = [
-    ./home
-    ./system
+    ./dns.nix
   ];
 }

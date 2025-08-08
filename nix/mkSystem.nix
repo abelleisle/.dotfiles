@@ -46,7 +46,7 @@ let
     ../modules/packages.nix
     # ./modules/networking/hosts.nix
     # ./modules/networking/ip.nix
-    ../templates
+    ../templates/system
 
     # (import ./modules/sops.nix { inherit sops-nix flake-registry nixpkgs; })
     agenixMod.default
@@ -94,6 +94,7 @@ let
       home-manager.users.${user} = {
         imports = [
           inputs.catppuccin.homeModules.catppuccin
+          ../templates/home
         ];
       };
     }
