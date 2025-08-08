@@ -51,9 +51,6 @@
     #       https://github.com/NixOS/nixpkgs/issues/321121
     # automatic-timezoned.enable = true;
 
-    # Enable systemd DNS resolver
-    resolved.enable = true;
-
     # Enable network time syncing
     chrony = {
       enable = true;
