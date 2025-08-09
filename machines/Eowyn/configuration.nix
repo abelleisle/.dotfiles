@@ -179,10 +179,16 @@
   };
 
   environment.systemPackages = [
+    pkgs.efibootmgr
     pkgs.nfs-utils
     pkgs.gnomeExtensions.appindicator
-    pkgs.gnomeExtensions.keep-awake
+    # pkgs.gnomeExtensions.keep-awake
+    pkgs.gnomeExtensions.user-themes
+    pkgs.gnomeExtensions.caffeine
     pkgs.gnome-tweaks
+    pkgs.wl-clipboard
+    pkgs.adwaita-icon-theme
+    pkgs.kdePackages.breeze-icons
   ];
   services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
@@ -199,7 +205,7 @@
 
   catppuccin = {
     sddm = {
-      enable = true;
+      enable = false;
       flavor = "frappe";
     };
     plymouth = {
