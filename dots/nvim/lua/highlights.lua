@@ -166,6 +166,9 @@ bg("NotifyBackground", normal_bg)
 -- fg("IndentBlanklineChar", line)
 
 -- misc --
+fg("LineNrAbove", c.grey1)
+fg("LineNr", c.yellow)
+fg("LineNrBelow", c.grey1)
 -- fg("LineNr", grey)
 -- fg("Comment", grey)
 -- fg("NvimInternalError", red)
