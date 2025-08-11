@@ -25,8 +25,8 @@ M.config = function()
         -- Indent scope colors
         local colorutils = require("utils.colors")
         local sc_hl = vim.api.nvim_get_hl(0, { name = "Normal"} )
-        local sc_hl_bg = colorutils.hl_to_hex(sc_hl.bg or 0x000000)
-        local sc_hl_fg = colorutils.hl_to_hex(sc_hl.fg or 0xFFFFFF)
+        local sc_hl_bg = colorutils.hl_to_hex(sc_hl.bg or vim.g.terminal_color_0)
+        local sc_hl_fg = colorutils.hl_to_hex(sc_hl.fg or vim.g.terminal_color_15)
 
         local gray = colorutils.blend(sc_hl_fg, sc_hl_bg, 0.50)
         local spaces = colorutils.blend(sc_hl_fg, sc_hl_bg, 0.10)

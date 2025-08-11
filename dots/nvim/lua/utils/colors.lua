@@ -22,7 +22,11 @@ end
 
 function M.hl_to_hex(hl_num)
     if hl_num ~= nil then
-        return string.format("#%06X", hl_num)
+        if type(hl_num)=='string' and vim.startswith(hl_num, '#') then
+            return hl_num
+        else
+            return string.format("#%06X", hl_num)
+        end
     end
 
     return nil

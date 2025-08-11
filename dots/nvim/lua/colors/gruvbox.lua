@@ -16,6 +16,7 @@ M.config = function ()
             comments  = true,
             operators = false,
         },
+        transparent_mode     = true,
         strikethrough        = true,
         invert_selection     = false,
         invert_signs         = false,

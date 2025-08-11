@@ -30,7 +30,7 @@ end
 -----------------------------------------------------------
 -- Highlights
 -- Call this after local config sets colors
-require("highlights")
+-- require("highlights")
 
 -----------------------------------------------------------
 -- Session loading
