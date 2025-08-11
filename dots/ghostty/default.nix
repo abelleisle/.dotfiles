@@ -45,7 +45,8 @@ in
       keybind = alt+nine=unbind
 
       # theme = dark:catppuccin-frappe,light:catppuccin-latte
-      theme = dark:matcha-dark-aliz,light:matcha-light-aliz
+      # theme = dark:matcha-dark-aliz,light:matcha-light-aliz
+      theme = dark:"Adwaita Dark",light:Adwaita
     '';
 
     "ghostty/themes/matcha-dark-aliz" = let 

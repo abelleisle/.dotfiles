@@ -16,7 +16,8 @@ in
           --  THEME STUFF  --
           -------------------
 
-          require("colors.catppuccin").config("frappe")
+          -- require("colors.catppuccin").config("frappe")
+          require("colors.adwaita").config()
 
           ------------------------
           --  VIM CONFIG STUFF  --
@@ -95,12 +96,12 @@ in
 
   gtk = {
     enable = true;
-    theme = {
+    # theme = {
       # package = pkgs.marble-shell-theme;
       # name = "Marble-red";
-      package = pkgs.matcha-gtk-theme;
-      name = "Matcha-dark-aliz";
-    };
+      # package = pkgs.matcha-gtk-theme;
+      # name = "Matcha-dark-aliz";
+    # };
     iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus";
@@ -162,9 +163,9 @@ in
       natural-scroll = false;
     };
     "org/gnome/desktop/interface" = {
-      # accent-color = "red";  # Matches catppuccin blue accent
+      accent-color = "red";  # Matches catppuccin blue accent
       color-scheme = "default";  # Can be "default", "prefer-dark", or "prefer-light"
-      gtk-theme = "Matcha-dark-aliz";
+      # gtk-theme = "Matcha-dark-aliz";
     };
     "org/gnome/shell" = {
       disable-user-extensions = false;
@@ -174,9 +175,9 @@ in
         caffeine.extensionUuid
       ];
     };
-    "org/gnome/shell/extensions/user-theme" = {
-      name = "Matcha-dark-aliz";
-    };
+    # "org/gnome/shell/extensions/user-theme" = {
+    #   name = "Matcha-dark-aliz";
+    # };
   };
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {

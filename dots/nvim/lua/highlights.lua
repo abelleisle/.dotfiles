@@ -132,6 +132,9 @@ vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = c.grey2,   bg = c.cyan
 -- fg("IndentBlanklineChar", line)
 
 -- misc --
+fg("LineNrAbove", c.grey1)
+fg("LineNr", c.yellow)
+fg("LineNrBelow", c.grey1)
 -- fg("LineNr", grey)
 -- fg("Comment", grey)
 -- fg("NvimInternalError", red)
