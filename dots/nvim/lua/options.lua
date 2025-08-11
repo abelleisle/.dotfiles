@@ -206,6 +206,15 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
     group = 'NoiceMacroNotfication'
 })
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*", -- We can use this to filter for certain
+                   -- colorschemes, e.g. `pattern = "gruvbox"`.
+    callback = function()
+        require("highlights").config()
+        vim.notify("Colorscheme changed!", vim.log.levels.INFO)
+    end
+})
+
 -----------------
 --  FUNCTIONS  --
 -----------------

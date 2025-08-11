@@ -1,5 +1,3 @@
-local cmd = vim.cmd
-
 local colorutils = require("utils.colors")
 
 -- local colors = require(vim.g.theme .. ".colors")
@@ -52,22 +50,45 @@ local c = vim.g.colors
 
 local function fg(group, color)
     if (color ~= nil) then
-        cmd("hi " .. group .. " guifg=" .. color)
+        -- cmd("hi " .. group .. " guifg=" .. color)
+        vim.api.nvim_set_hl(0, group, {fg = color})
     end
 end
 
 local function bg(group, color)
     if (color ~= nil) then
-        cmd("hi " .. group .. " guibg=" .. color)
+        vim.api.nvim_set_hl(0, group, {bg = color})
+        -- cmd("hi " .. group .. " guibg=" .. color)
     end
 end
 
 local function fg_bg(group, fgcol, bgcol)
     if (fgcol ~= nil and bgcol ~= nil) then
-        cmd("hi " .. group .. " guifg=" .. fgcol .. " guibg=" .. bgcol)
+        -- cmd("hi " .. group .. " guifg=" .. fgcol .. " guibg=" .. bgcol)
+        vim.api.nvim_set_hl(0, group, {fg = fgcol, bg = bgcol})
     end
 end
 
+local M = {}
+
+-----------------------------------------------------
+--                    CONFIGURE                    --
+-----------------------------------------------------
+-- Sorry this function body isn't indented.
+-- It's kinda gross, BUT IMO it's easier to read
+-- this way.
+--
+-- We need this fuction because we use an
+-- autocommand (`ColorScheme`) to update our
+-- highlights (execute this function). If we just
+-- call `require('highlights')` only the first
+-- call will execute code, the rest will use the
+-- cached results.
+M.config = function()
+
+local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal"} )
+local normal_bg = colorutils.hl_to_hex(normal_hl.bg or vim.g.terminal_color_0)
+local normal_fg = colorutils.hl_to_hex(normal_hl.fg or vim.g.terminal_color_15)
 
 ---------------
 --    UI     --
@@ -126,6 +147,19 @@ vim.api.nvim_set_hl(0, "CmpItemKindInterface",     { fg = c.grey2,   bg = c.cyan
 vim.api.nvim_set_hl(0, "CmpItemKindColor",         { fg = c.grey2,   bg = c.cyan                       })
 vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = c.grey2,   bg = c.cyan                       })
 
+-------------------------------
+-- Notify
+
+-- TODO maybe we want to keep some version of this so we don't overwrite
+-- the highlight provided by the loaded colorscheme.
+-- At the moment, this will always overwrite it with `normal_bg`. If
+-- we use the "non-nil" branch below, it will only set the value the
+-- first time we set the colorscheme. This also means that we don't
+-- update the highlight if the background polarity changes.
+-- local notify_bg = vim.api.nvim_get_hl(0, { name = "NotifyBackground"} )
+-- if notify_bg.bg == nil then
+bg("NotifyBackground", normal_bg)
+-- end
 
 -- blankline
 
@@ -143,7 +177,6 @@ vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = c.grey2,   bg = c.cyan
 -- bg("PmenuSbar", one_bg2)
 -- bg("PmenuSel", green)
 -- bg("PmenuThumb", nord_blue)
-
 -- inactive statuslines as thin splitlines
 -- cmd("hi! StatusLineNC gui=underline guifg=" .. line)
 
@@ -272,3 +305,6 @@ fg_bg("AvanteSidebarWinHorizontalSeparator", c.grey1,    c.bg      )
 
 -- require("plugins.statusline").config()
 require("plugins.lualine").config()
+end
+
+return M
