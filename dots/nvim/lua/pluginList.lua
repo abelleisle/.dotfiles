@@ -374,7 +374,7 @@ return require('lazy').setup({ spec = {
         end
     },
 
-    {
+    { -- Get github permalink for selected lines
         'ruifm/gitlinker.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim'
@@ -386,6 +386,10 @@ return require('lazy').setup({ spec = {
             },
             mappings = nil,
         },
+    },
+
+    { -- View git diffs for any revision
+        'sindrets/diffview.nvim'
     },
 
     ------------------
