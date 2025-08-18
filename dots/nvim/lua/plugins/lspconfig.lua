@@ -87,6 +87,9 @@ M.servers = {
     vhdl     = lsp_entry("rust_hdl"            , false),
     zig      = lsp_entry("zls"                 , false),
     gdscript = lsp_entry("gdscript"            , false),
+    tsclint  = lsp_entry("oxlint"              , false),
+    tsclsp   = lsp_entry("typescript-language-server", false),
+    tailwind = lsp_entry("tailwindcss-language-server", false),
 }
 
 local get_setup_handlers = function(default_opts)
@@ -274,6 +277,28 @@ local get_setup_handlers = function(default_opts)
             lspconfig[M.servers.ccls].setup(ccls_opts)
         --]]
         end,
+        [M.servers.tsclint.lsp] = function()
+            local oxlint_opts = vim.tbl_deep_extend("force", opts, {
+                cmd = { 'oxc_language_server' },
+                filetypes = {
+                    'javascript',
+                    'javascriptreact',
+                    'javascript.jsx',
+                    'typescript',
+                    'typescriptreact',
+                    'typescript.tsx',
+                },
+                workspace_required = true,
+                -- root_dir = function(bufnr, on_dir)
+                --     vim.notify("Bufnr: "..bufnr, vim.log.levels.WARN)
+                --     local fname = vim.api.nvim_buf_get_name(bufnr)
+                --     local root_markers = lspconfig_util.insert_package_json({ '.oxlintrc.json' }, 'oxlint', fname)
+                --     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
+                -- end,
+                root_dir = lspconfig_util.root_pattern('.oxlintrc.json'),
+            })
+            lspconfig[M.servers.tsclint.lsp].setup(oxlint_opts)
+        end
     }
     return setup_handlers_list
 end
