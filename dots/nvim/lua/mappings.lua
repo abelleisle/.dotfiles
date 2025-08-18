@@ -169,7 +169,7 @@ _map.navigation = function()
             }):find()
         end
 
-        map("n", "<Leader><Leader>o",
+        map("n", "<Leader>ro",
             function() hp_telescope(hp():list()) end,
             Opt("Show Harpoon (Telescope)")
         )
@@ -178,20 +178,42 @@ _map.navigation = function()
             Opt("Show Harpoon")
         )
 
-        map("n", "<Leader><Leader>a",
-            function() hp():list():add() end,
-            Opt("Append file to Harpoon")
+        map("n", "<Leader>ra",
+            function()
+                local path = require("plenary.path")
+                local letter = vim.fn.input("Enter letter for this buffer: ")
+                if letter and letter ~= "" and letter:match("^[a-zA-Z]$") then
+                    local buf_name = vim.api.nvim_buf_get_name( vim.api.nvim_get_current_buf())
+                    local root = vim.loop.cwd()
+                    local np = path:new(buf_name):make_relative(root)
+                    hp():list():add({
+                        value = np,
+                        context = { row = 1, col = 0 },
+                        letter = letter:lower()
+                    })
+                    vim.notify("Added to harpoon with letter: " .. letter:lower())
+                else
+                    vim.notify("Invalid letter. Please enter a single letter.", vim.log.levels.WARN)
+                end
+            end,
+            Opt("Add file to Harpoon with letter")
         )
 
-        for i=1,10 do
-            local key = i
-            if i == 10 then
-                key = 0
-            end
-
-            map("n", "<Leader><Leader>"..key,
-                function() hp():list():select(i) end,
-                Opt("Harpoon file "..i)
+        local letters = 'abcdefghijklmnopqrstuvwxyz'
+        for i = 1, #letters do
+            local letter = letters:sub(i, i)
+            map("n", "<Leader><Leader>"..letter,
+                function()
+                    local list = hp():list()
+                    for idx, item in ipairs(list.items) do
+                        if item.letter == letter then
+                            hp():list():select(idx)
+                            return
+                        end
+                    end
+                    vim.notify("No harpoon entry found for letter: " .. letter, vim.log.levels.WARN)
+                end,
+                Opt("Harpoon file with letter " .. letter)
             )
         end
     end
@@ -202,15 +224,15 @@ M.harpoon_extend = function()
     -- Add keybinds to the harpoon picker
     harpoon:extend({
         UI_CREATE = function(cx)
-            for i=1,10 do
+            local list = harpoon:list()
+            local length = list:length()
+            for i=1,length do
                 local key = i
-                if i == 10 then
-                    key = 0
-                end
-
-                map("n", tostring(key),
-                    function() harpoon:list():select(i) end,
-                    { buffer = cx.bufnr }
+                map ("n", tostring(key),
+                    function()
+                        list:select(i)
+                    end,
+                    {buffer = cx.bufnr}
                 )
             end
             map("n", "%",
