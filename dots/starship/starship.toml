@@ -89,7 +89,7 @@ modified = '🔥'
 [character]
 success_symbol = '[❱](red)[❱](yellow)[❱](green)'
 error_symbol = '[❱❱❱](red)'
-vimcmd_symbol = '[❮](green)'
+vimcmd_symbol = '[❮❮❮](green)'
 
 # Keep your existing language module customizations but add them back
 [bun]
