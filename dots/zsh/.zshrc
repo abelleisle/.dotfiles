@@ -15,6 +15,15 @@ if [ -d ~/.zsh/extra/ ]; then
     done
 fi
 
+# ESW script settings
+ESW_HELPERS_SQUID_EN=1
+
+# ESW script source
+ESW_DOTS_DIR=~/.dots-esw # Change this to point to where you've cloned this repo
+if [ -d $ESW_DOTS_DIR ]; then
+    source $ESW_DOTS_DIR/shell/shellenv
+fi
+
 # Set name of the ZSH theme to load (if starship isn't installed)
 if ! command -v starship &> /dev/null; then
     ZSH_THEME="passion"
