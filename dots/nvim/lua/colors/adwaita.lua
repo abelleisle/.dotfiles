@@ -80,13 +80,21 @@ M.config = function ()
       green   = palette.green_1,
       cyan    = palette.chameleon_3,
       blue    = palette.blue_1,
-      grey0   = palette.dark_2,
-      grey1   = palette.dark_3,
-      grey2   = palette.dark_4,
+      grey0   = palette.dark_4,
+      grey1   = palette.dark_5,
+      grey2   = palette.dark_6,
     }
+
+    if vim.o.background == 'light' then
+        vim.g.colors.grey0 = palette.light_4
+        vim.g.colors.grey1 = palette.light_5
+        vim.g.colors.grey2 = palette.light_6
+    end
 
     -- setup must be called before loading
     vim.cmd.colorscheme "adwaita"
+
+    vim.api.nvim_set_hl(0, 'TelescopeSelection', {link='CursorLine'})
 end
 
 return M

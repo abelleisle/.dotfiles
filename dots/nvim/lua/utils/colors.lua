@@ -20,13 +20,20 @@ function M.tbl_deep_extend(...)
   return lhs
 end
 
-function M.hl_to_hex(hl_num)
+function M.hl_to_hex(hl_num, default_hl)
     if hl_num ~= nil then
-        if type(hl_num)=='string' and vim.startswith(hl_num, '#') then
-            return hl_num
-        else
-            return string.format("#%06X", hl_num)
+        if type(hl_num)=='string' then
+            if vim.startswith(hl_num, '#') then
+                return hl_num
+            elseif string.lower(hl_num) == 'none' then
+                assert(default_hl ~= nil, "Default cannot be nil if hl_num is none")
+                return default_hl
+            else
+                vim.notify("Invalid hl value "..hl_num, vim.log.levels.ERROR)
+            end
         end
+
+        return string.format("#%06X", hl_num)
     end
 
     return nil
