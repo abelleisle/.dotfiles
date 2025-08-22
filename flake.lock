@@ -176,28 +176,24 @@
         "type": "github"
       }
     },
-    "kmonad": {
+    "home-manager_3": {
       "inputs": {
         "nixpkgs": [
+          "zen-browser",
           "nixpkgs"
         ]
       },
       "locked": {
-        "dir": "nix",
-        "lastModified": 1755275124,
-        "narHash": "sha256-nZY/3Wx+sILtwpNbWuGkzgwxdTEcLCOCIAiKZ9k55PU=",
-        "ref": "refs/heads/master",
-        "rev": "a38004ff4df4beda648ec5b1374173d3192d61ae",
-        "revCount": 991,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/kmonad/kmonad?dir=nix"
+        "lastModified": 1755569926,
+        "narHash": "sha256-s7D28zPHlFWVZ7dDxm0L1o5+t423rMJUfgCMGUeyYSk=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "c613ac14f5600033bf84ae75c315d5ce24a0229b",
+        "type": "github"
       },
       "original": {
-        "dir": "nix",
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/kmonad/kmonad?dir=nix"
+        "id": "home-manager",
+        "type": "indirect"
       }
     },
     "nixGL": {
@@ -344,13 +340,13 @@
         "flake-parts": "flake-parts",
         "flake-registry": "flake-registry",
         "home-manager": "home-manager_2",
-        "kmonad": "kmonad",
         "nixGL": "nixGL",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-stable": "nixpkgs-stable",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "zen-browser": "zen-browser"
       }
     },
     "sops-nix": {
@@ -400,6 +396,27 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "home-manager": "home-manager_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755577394,
+        "narHash": "sha256-DsU5qMTdQvlq85cmPd08M57y3JgJRmgKoOEcvBc6Ikk=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "fed34c3fe29a694f62b23bcc63dd5ad284ab19fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

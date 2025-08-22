@@ -203,6 +203,11 @@
     };
   };
 
+  programs.captive-browser = {
+    enable = true;
+    interface = "wlp0s20f3";
+  };
+
   catppuccin = {
     sddm = {
       enable = false;
