@@ -111,6 +111,11 @@ in
         source = symlink zellijInstall;
         recursive = true;
       };
+      "git/config-bitcicle".text = ''
+        [user]
+          name = "andy"
+          email = "abelleisle@protonmail.com"
+      '';
     };
 
 
@@ -144,6 +149,16 @@ in
         userName = "abelleisle";
         # Allow this to get overridden per-system if required
         userEmail = lib.mkDefault "abelleisle@protonmail.com";
+        includes = [
+          {
+            condition = "hasconfig:remote.*.url:git@git.services.bitcicle.com:*/**";
+            path = "~/.git/config/config-bitcicle";
+          }
+          {
+            condition = "hasconfig:remote.*.url:https://git.services.bitcicle.com/*/**";
+            path = "~/.git/config/config-bitcicle";
+          }
+        ];
       };
     };
   };

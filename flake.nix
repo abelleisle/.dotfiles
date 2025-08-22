@@ -29,10 +29,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    kmonad = {
-      url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # kmonad = {
+    #   url = "git+https://github.com/kmonad/kmonad?submodules=1&dir=nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Secrets Management
     agenix.url = "github:ryantm/agenix";
@@ -56,6 +56,11 @@
     catppuccin.url = "github:catppuccin/nix";
 
     # Programs
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { flake-parts, ... } @ inputs:

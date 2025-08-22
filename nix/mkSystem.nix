@@ -94,6 +94,7 @@ let
       home-manager.users.${user} = {
         imports = [
           inputs.catppuccin.homeModules.catppuccin
+          inputs.zen-browser.homeModules.twilight-official
           ../templates/home
         ];
       };
