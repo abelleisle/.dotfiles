@@ -17,7 +17,12 @@ in
           -------------------
 
           -- require("colors.catppuccin").config("frappe")
-          require("colors.adwaita").config()
+          vim.schedule(
+            function()
+              vim.api.nvim_set_option("background", "dark")
+              require("colors.adwaita").config()
+            end
+          )
 
           ------------------------
           --  VIM CONFIG STUFF  --

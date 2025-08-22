@@ -87,8 +87,8 @@ local M = {}
 M.config = function()
 
 local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal"} )
-local normal_bg = colorutils.hl_to_hex(normal_hl.bg or vim.g.terminal_color_0)
-local normal_fg = colorutils.hl_to_hex(normal_hl.fg or vim.g.terminal_color_15)
+local normal_bg = colorutils.hl_to_hex(normal_hl.bg or vim.g.terminal_color_0, "#000000")
+local normal_fg = colorutils.hl_to_hex(normal_hl.fg or vim.g.terminal_color_15, "#FFFFFF")
 
 ---------------
 --    UI     --

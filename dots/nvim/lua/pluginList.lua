@@ -169,6 +169,13 @@ return require('lazy').setup({ spec = {
         end
     },
 
+    { -- Tokyo Night
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+
     { -- Wal theme
         "dylanaraps/wal.vim",
         lazy = true,
