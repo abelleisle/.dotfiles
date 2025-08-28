@@ -8,6 +8,7 @@ local M   = {} -- For any helper functions
 
 -- Global Stuff
 g.mapleader = " "
+g.maplocalleader = " "
 g.auto_save = true
 
 -- Misc options

@@ -56,6 +56,36 @@ M.print_variable = function(var, depth)
     end
 end
 
+M.get_gnome_theme = function()
+    if vim.fn.has("unix") == 0 then
+        return nil
+    end
+
+    local desktop = vim.fn.getenv("XDG_CURRENT_DESKTOP")
+    if not desktop or not string.find(desktop:lower(), "gnome") then
+        return nil
+    end
+
+    local handle = io.popen("gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null")
+    if not handle then
+        return nil
+    end
+
+    local result = handle:read("*a")
+    handle:close()
+
+    if result and result ~= "" then
+        local theme = result:gsub("'", ""):gsub("\n", ""):lower()
+        if string.find(theme, "dark") then
+            return "dark"
+        else
+            return "light"
+        end
+    end
+
+    return nil
+end
+
 M.hsluv  = require("utils.hsluv")
 M.colors = require("utils.colors")
 M.indent = require("utils.indent")

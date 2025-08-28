@@ -17,12 +17,19 @@ in
           -------------------
 
           -- require("colors.catppuccin").config("frappe")
-          vim.schedule(
-            function()
-              vim.api.nvim_set_option("background", "dark")
-              require("colors.adwaita").config()
-            end
-          )
+          local utils = require("utils")
+          local theme = utils.get_gnome_theme()
+          if theme == "dark" then
+            vim.api.nvim_set_option("background", "dark")
+          elseif theme == "light" then
+            vim.api.nvim_set_option("background", "light")
+          end
+          require("colors.adwaita").config()
+          -- vim.schedule(
+          --   function()
+          --     require("colors.adwaita").config()
+          --   end
+          -- )
 
           ------------------------
           --  VIM CONFIG STUFF  --

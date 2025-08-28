@@ -1,4 +1,8 @@
 -----------------------------------------------------------
+-- Configuration
+require("options")
+
+-----------------------------------------------------------
 -- Load plugins
 
 -- Remote Plugins
@@ -6,10 +10,6 @@ require("pluginList")
 
 -- "Local" Plugins
 require("utils.search").setup()
-
------------------------------------------------------------
--- Configuration
-require("options")
 
 -----------------------------------------------------------
 -- Keybinds

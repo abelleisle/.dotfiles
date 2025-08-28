@@ -4,11 +4,14 @@ M.config = function()
     local status, lualine = pcall(require, 'lualine')
     if not status then return end
 
-    local colors = vim.g.colors
-    if colors == nil then
-        print("Error: StatusLine vim.g.colors are not set")
-        return
-    end
+    local cutils = require("utils.colors")
+    local colors = cutils.get_palette()
+
+    -- local colors = vim.g.colors
+    -- if colors == nil then
+    --     print("Error: StatusLine vim.g.colors are not set")
+    --     return
+    -- end
 
     ---------------
     --  HELPERS  --
@@ -79,18 +82,18 @@ M.config = function()
         options = {
             theme = {
                 normal = {
-                    a = { bg = colors.grey1 },
-                    b = { bg = colors.grey0 },
-                    c = { bg = colors.bg},
-                    x = { fg = colors.grey2, bg = colors.grey0},
-                    y = { fg = colors.grey2, bg = colors.grey1},
-                    z = { fg = colors.blue, bg = colors.grey0}
+                    a = { bg = colors.grey3 },
+                    b = { bg = colors.grey1 },
+                    c = { bg = colors.panel },
+                    x = { fg = colors.grey5, bg = colors.grey1 },
+                    y = { fg = colors.grey5, bg = colors.grey3 },
+                    z = { fg = colors.blue, bg = colors.grey1 }
                 },
                 inactive = {
-                    a = { bg = colors.grey1 },
-                    b = { bg = colors.bg },
-                    c = { bg = colors.bg},
-                    z = { fg = colors.red, bg = colors.grey0}
+                    a = { bg = colors.grey3 },
+                    b = { bg = colors.panel },
+                    c = { bg = colors.panel },
+                    z = { fg = colors.red, bg = colors.grey1 }
                 },
             },
             disabled_filetypes = {
@@ -106,52 +109,52 @@ M.config = function()
         },
         sections = {
             lualine_a = {
-                sep('▋', colors.blue, colors.grey0),
-                {'mode', color = {fg = colors.yellow, bg = colors.grey0, gui = 'bold'}, padding = 0},
-                sep('', colors.grey0),
+                sep('▋', colors.blue, colors.grey1),
+                {'mode', color = {fg = colors.yellow, bg = colors.grey1, gui = 'bold'}, padding = 0},
+                sep('', colors.grey1),
                 {'filetype', icon_only = true, padding = 0},
                 {filename_and_parent, color = {fg = colors.magenta}, padding = 0},
                 {'filesize', padding = {left = 0, right = 1}},
             },
             lualine_b = {
-                csep(buffer_wide, '', colors.grey1),
-                csep(buffer_narrow_or_empty, '', colors.grey1, colors.bg),
-                {'branch', icon = {'', color = {fg = colors.orange}}, color = {fg = colors.grey2}, cond = buffer_wide},
+                csep(buffer_wide, '', colors.grey3),
+                csep(buffer_narrow_or_empty, '', colors.grey3, colors.panel),
+                {'branch', icon = {'', color = {fg = colors.orange}}, color = {fg = colors.grey5}, cond = buffer_wide},
                 {'diff', symbols = {added = ' ', modified = ' ', removed = ' '}, cond = buffer_wide},
             },
             lualine_c = {
-                csep(buffer_wide, '', colors.grey0),
+                csep(buffer_wide, '', colors.grey1),
                 {'diagnostics', sources = {"nvim_lsp"}, symbols = {error = '  ', warn = '  '}, cond = buffer_wide},
             },
             lualine_x = {
-                sep('', colors.grey0, colors.bg),
+                sep('', colors.grey1, colors.status),
                 {'fileformat', symbols = {unix = "UNIX", dos = "WIN", mac = "MAC"}},
-                sep('|', colors.grey1, colors.grey0),
+                sep('|', colors.grey3, colors.grey1),
                 {'location'},
-                sep('', colors.grey1, colors.grey0),
+                sep('', colors.grey3, colors.grey1),
             },
             lualine_y = {
                 {'progress'},
             },
             lualine_z = {
-                sep('', colors.grey0, colors.grey1),
+                sep('', colors.grey1, colors.grey3),
                 {'filetype', icons_enabled = false, fmt=string.upper}
             }
         },
         inactive_sections = {
             lualine_a = {
-                sep('▋ ', colors.red, colors.grey0),
-                sep('', colors.grey0),
+                sep('▋ ', colors.red, colors.grey1),
+                sep('', colors.grey1),
                 {'filetype', icon_only = true, padding = 0},
                 {filename_and_parent, cond = buffer_not_empty, color = {fg = colors.magenta}, padding = 0},
             },
             lualine_b = {
-                sep('', colors.grey1),
+                sep('', colors.grey3),
             },
             lualine_c = {},
             lualine_x = {},
             lualine_y = {
-                sep('', colors.grey0)
+                sep('', colors.grey1)
             },
             lualine_z = {
                 {'filetype', icons_enabled = false, fmt=string.upper}
@@ -163,8 +166,8 @@ M.config = function()
     --  COLORS  --
     --------------
 
-    -- vim.api.nvim_command(string.format("highlight StatusLine guifg=%s", colors.grey0))
-    -- vim.api.nvim_command(string.format("highlight StatusLineNC guifg=%s", colors.grey0))
+    -- vim.api.nvim_command(string.format("highlight StatusLine guifg=%s", colors.grey1))
+    -- vim.api.nvim_command(string.format("highlight StatusLineNC guifg=%s", colors.grey1))
 
     --------------------
     --  AUTOCOMMANDS  --

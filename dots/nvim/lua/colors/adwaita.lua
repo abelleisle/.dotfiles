@@ -68,28 +68,30 @@ M.config = function ()
     -- })
 
 
-    local palette = require('adwaita.utils').gen_colors()
-
-    vim.g.colors = {
-      bg      = palette.libadwaita_dark,
-      fg      = palette.dark_4,
-      magenta = palette.purple_1,
-      red     = palette.red_1,
-      orange  = palette.orange_1,
-      yellow  = palette.yellow_1,
-      green   = palette.green_1,
-      cyan    = palette.chameleon_3,
-      blue    = palette.blue_1,
-      grey0   = palette.dark_4,
-      grey1   = palette.dark_5,
-      grey2   = palette.dark_6,
-    }
-
-    if vim.o.background == 'light' then
-        vim.g.colors.grey0 = palette.light_4
-        vim.g.colors.grey1 = palette.light_5
-        vim.g.colors.grey2 = palette.light_6
-    end
+    -- local palette = require('adwaita.utils').gen_colors()
+    --
+    -- vim.g.colors = {
+    --   bg      = palette.libadwaita_dark,
+    --   fg      = palette.dark_4,
+    --   magenta = palette.purple_1,
+    --   red     = palette.red_1,
+    --   orange  = palette.orange_1,
+    --   yellow  = palette.yellow_1,
+    --   green   = palette.green_1,
+    --   cyan    = palette.chameleon_3,
+    --   blue    = palette.blue_1,
+    --   grey0   = palette.dark_4,
+    --   grey1   = palette.dark_5,
+    --   grey2   = palette.dark_6,
+    -- }
+    --
+    -- if vim.o.background == 'light' then
+    --     vim.g.colors.bg = palette.light_1
+    --     vim.g.colors.fg = palette.dark_4
+    --     vim.g.colors.grey0 = palette.light_4
+    --     vim.g.colors.grey1 = palette.light_5
+    --     vim.g.colors.grey2 = palette.light_6
+    -- end
 
     -- setup must be called before loading
     vim.cmd.colorscheme "adwaita"
