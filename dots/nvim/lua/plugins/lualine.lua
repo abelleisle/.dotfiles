@@ -67,7 +67,19 @@ M.config = function()
     end
 
     local csep = function(cond, char, fg, bg)
-        return {function() return char end, color = {fg = fg, bg = bg}, padding = 0, cond = cond}
+        return {
+            function()
+                return char
+            end,
+            color = function()
+                return {
+                    fg = fg,
+                    bg = bg
+                }
+            end,
+            padding = 0,
+            cond = cond,
+        }
     end
 
     local sep = function(char, fg, bg)
@@ -85,15 +97,25 @@ M.config = function()
                     a = { bg = colors.grey3 },
                     b = { bg = colors.grey1 },
                     c = { bg = colors.panel },
-                    x = { fg = colors.grey5, bg = colors.grey1 },
+                    x = { fg = colors.grey5 },
                     y = { fg = colors.grey5, bg = colors.grey3 },
                     z = { fg = colors.blue, bg = colors.grey1 }
                 },
                 inactive = {
                     a = { bg = colors.grey3 },
-                    b = { bg = colors.panel },
-                    c = { bg = colors.panel },
-                    z = { fg = colors.red, bg = colors.grey1 }
+                    b = {  },
+                    c = {  },
+                    x = {  },
+                    y = {  },
+                    z = { fg = colors.red, bg = colors.grey1}
+                },
+                insert = {
+                    a = { bg = colors.grey3 },
+                    b = { bg = colors.grey1 },
+                    c = {  },
+                    x = { fg = colors.grey5 },
+                    y = { fg = colors.grey5, bg = colors.grey3 },
+                    z = { fg = colors.blue, bg = colors.grey1 }
                 },
             },
             disabled_filetypes = {
@@ -104,6 +126,7 @@ M.config = function()
                 },
             },
             section_separators = '',
+            -- section_separators = { left = '', right = '' },
             component_separators = '',
             always_divide_middle = true,
         },
@@ -127,10 +150,10 @@ M.config = function()
                 {'diagnostics', sources = {"nvim_lsp"}, symbols = {error = '  ', warn = '  '}, cond = buffer_wide},
             },
             lualine_x = {
-                sep('', colors.grey1, colors.status),
-                {'fileformat', symbols = {unix = "UNIX", dos = "WIN", mac = "MAC"}},
+                sep('', colors.grey1),
+                {'fileformat', symbols = {unix = "UNIX", dos = "WIN", mac = "MAC"}, color={fg=colors.grey3, bg=colors.grey1}},
                 sep('|', colors.grey3, colors.grey1),
-                {'location'},
+                {'location', color={fg=colors.grey3, bg=colors.grey1}},
                 sep('', colors.grey3, colors.grey1),
             },
             lualine_y = {
@@ -154,7 +177,7 @@ M.config = function()
             lualine_c = {},
             lualine_x = {},
             lualine_y = {
-                sep('', colors.grey1)
+                sep('', colors.grey1),
             },
             lualine_z = {
                 {'filetype', icons_enabled = false, fmt=string.upper}

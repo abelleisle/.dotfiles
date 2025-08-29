@@ -85,12 +85,13 @@ function M.get_palette(...)
 
     local bg = string.format("#%06X", M.get_bg() or 0x111111)
     local fg = string.format("#%06X", M.get_fg() or 0xeeeeee)
-    local status = string.format("#%06X", vim.api.nvim_get_hl(0, {name="StatusLine"}).bg or 0x111111)
+    local statusline_hl = vim.api.nvim_get_hl(0, {name="StatusLine"})
+    local status = statusline_hl.bg and string.format("#%06X", statusline_hl.bg) or nil
 
     return {
       bg      = bg,
       fg      = fg,
-      magenta = t(5) or '#d16d9e',
+      magenta = t(13) or '#d16d9e',
       red     = t(1) or '#ec5f67',
       orange  = t(11) or '#ff8800', -- TODO Not sure is orange is 11
       yellow  = t(3) or '#fabd2f',
