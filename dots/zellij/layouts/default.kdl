@@ -6,10 +6,10 @@ layout {
                 format_hide_on_overlength "true"
                 format_precedence         "lrc"
 
-                format_left "{mode}#[bg=bright_blue,fg=yellow] {session} #[fg=bright_blue,bg=black]#[bg=black,fg=black]█{tabs}#[fg=black]█"
+                format_left "{mode}#[bg=bright_blue,fg=yellow] {session} #[fg=bright_blue] {tabs}"
                 format_center "{notifications}"
-                //format_right  "#[fg=white]{command_cpu} | {command_mem} #[fg=white]#[bg=white,fg=yellow] {command_user}@{command_host} #[bg=white,fg=black]#[bg=black,fg=white] {datetime} "
-                format_right  "#[fg=white]#[bg=white,fg=yellow] {command_user}@{command_host} #[bg=white,fg=black]#[bg=black,fg=white] {datetime} "
+                //format_right  "#[fg=white]{command_cpu} | {command_mem} #[fg=white]#[bg=white,fg=yellow] {command_user}@{command_host} #[bg=white,fg=black]#[fg=white] {datetime} "
+                format_right  "#[fg=white]#[bg=white,fg=yellow] {command_user}@{command_host} #[fg=white]#[fg=white] {datetime} "
                 format_space  "#[fg=white]"
                 format_hide_on_overlength "true"
                 format_precedence "lrc"
@@ -39,16 +39,16 @@ layout {
                 mode_prompt        "#[fg=red]▋#[fg=bright_yellow,bold]PROMPT#[fg=bright_blue]"
 
                 // Inactive Tabs
-                tab_normal                "#[fg=bright_blue,bg=black]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[bg=black,fg=bright_blue] {name} {floating_indicator}#[fg=black,bg=black]"
-                tab_normal_fullscreen     "#[fg=bright_blue,bg=black]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[bg=black,fg=bright_blue] {name} {fullscreen_indicator}#[fg=black,bg=black]"
-                fab_normal_sync           "#[fg=bright_blue,bg=black]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[bg=black,fg=bright_blue] {name} {sync_indicator}#[fg=black,bg=black]"
+                tab_normal                "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {floating_indicator}#[fg=black]"
+                tab_normal_fullscreen     "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {fullscreen_indicator}#[fg=black]"
+                fab_normal_sync           "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {sync_indicator}#[fg=black]"
 
                 // Active tabs
-                tab_active                "#[fg=green,bg=black]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {floating_indicator}#[fg=bright_green,bg=black]"
-                tab_active_fullscreen     "#[fg=green,bg=black]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {fullscreen_indicator}#[fg=bright_green,bg=black]"
-                tab_active_sync           "#[fg=green,bg=black]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {sync_indicator}#[fg=bright_green,bg=black]"
+                tab_active                "#[fg=green]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {floating_indicator} #[fg=bright_green]"
+                tab_active_fullscreen     "#[fg=green]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {fullscreen_indicator} #[fg=bright_green]"
+                tab_active_sync           "#[fg=green]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {sync_indicator} #[fg=bright_green]"
 
-                tab_separator           "#[fg=blue,bg=black]"
+                tab_separator           "#[fg=blue]"
 
                 tab_sync_indicator       ""
                 tab_fullscreen_indicator "󰊓"
