@@ -98,7 +98,7 @@
     };
 
     # Enable kdeconnect
-    kdeconnect.enable = true;
+    kdeconnect.enable = false;
 
     ladybird = {
       enable = false;
@@ -214,7 +214,7 @@
       flavor = "frappe";
     };
     plymouth = {
-      enable = true;
+      enable = false;
       flavor = "frappe";
     };
   };

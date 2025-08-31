@@ -2,6 +2,13 @@
   boot = {
     plymouth = {
       enable = true;
+      theme = "sphere";
+      themePackages = with pkgs; [
+        # Only install the selected themes
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "sphere" ];
+        })
+      ];
     };
 
     # Enable "Silent Boot"

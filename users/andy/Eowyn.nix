@@ -52,7 +52,7 @@ in
     #   winDecStyles = [ "modern" "classic" ];
     # })
     gimp
-    jellyfin-media-player
+    # jellyfin-media-player # Have to disable because it uses EOL QT5
     logseq
     ollama
     meshcentral
@@ -137,14 +137,14 @@ in
   #   extraPortals = with pkgs; [xdg-desktop-portal-gtk];
   # };
 
-  home.pointerCursor = 
-    let 
+  home.pointerCursor =
+    let
       getFrom = url: hash: name: {
           gtk.enable = true;
           x11.enable = false;
           name = name;
           size = 24;
-          package = 
+          package =
             pkgs.runCommand "moveUp" {} ''
               mkdir -p $out/share/icons
               ln -s ${pkgs.fetchzip {
@@ -154,7 +154,7 @@ in
           '';
         };
     in
-      getFrom 
+      getFrom
         "https://github.com/ful1e5/fuchsia-cursor/releases/download/v2.0.1/Fuchsia-Pop.tar.xz"
         "sha256-rjeDa/hRZVOS8XeTWEG0Uzf3nTWPd2leWQ2krQFVKks="
         # "sha256-YkOXzVxlEU22n1Zta7plAkvUEcPoTBXdGjew9Dl5vP0="
@@ -162,14 +162,19 @@ in
 
   programs = {
     zed-editor = {
-      enable = true;
+      enable = false;
       userSettings = {
         vim_mode = true;
       };
     };
     zen-browser = {
       enable = true;
-      policies = {
+      policies = let
+        mkExtensionSettings = builtins.mapAttrs (_: pluginId: {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/${pluginId}/latest.xpi";
+          installation_mode = "force_installed";
+        });
+      in{
         AutofillAddressEnabled = false;
         AutofillCreditCardEnabled = false;
         DisableAppUpdate = true;
@@ -189,6 +194,9 @@ in
         SearchEngines = {
           Default = "DuckDuckGo";
         };
+        ExtensionSettings = mkExtensionSettings {
+          "{446900e4-71c2-419f-a6a7-df9c091e268b}" = "4562769";
+        };
       };
     };
   };
@@ -200,7 +208,7 @@ in
     };
     "org/gnome/desktop/interface" = {
       accent-color = "red";  # Matches catppuccin blue accent
-      color-scheme = "default";  # Can be "default", "prefer-dark", or "prefer-light"
+      # color-scheme = "default";  # Can be "default", "prefer-dark", or "prefer-light"
       # gtk-theme = "Matcha-dark-aliz";
     };
     "org/gnome/shell" = {
