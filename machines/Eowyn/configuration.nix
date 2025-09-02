@@ -189,6 +189,7 @@
     pkgs.wl-clipboard
     pkgs.adwaita-icon-theme
     pkgs.kdePackages.breeze-icons
+    pkgs.iotop
   ];
   services.udev.packages = [ pkgs.gnome-settings-daemon ];
 

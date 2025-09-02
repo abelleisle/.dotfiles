@@ -195,7 +195,10 @@ in
           Default = "DuckDuckGo";
         };
         ExtensionSettings = mkExtensionSettings {
-          "{446900e4-71c2-419f-a6a7-df9c091e268b}" = "4562769";
+          "{446900e4-71c2-419f-a6a7-df9c091e268b}" = "4562769"; # Bitwarden
+          "uBlock0@raymondhill.net" = "4531307"; # uBlock Origin
+          "addon@darkreader.org" = "4535824"; # Dark Reader
+          "jid1-MnnxcxisBPnSXQ@jetpack" = "4504218"; # Privacy Badger
         };
       };
     };
