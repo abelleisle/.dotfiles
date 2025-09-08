@@ -14,8 +14,6 @@ g.auto_save = true
 -- Misc options
 opt.ruler         = true
 opt.hidden        = true
-opt.smartcase     = true
-opt.ignorecase    = true
 opt.splitbelow    = true
 opt.splitright    = true
 opt.termguicolors = true
@@ -31,6 +29,12 @@ opt.shortmess:append("cI")
 opt.autowrite = true
 opt.autowriteall = true
 
+-- Searching
+opt.smartcase     = true
+opt.ignorecase    = true
+opt.hlsearch      = true
+opt.incsearch     = true
+
 -- Text
 opt.cursorline    = false
 opt.textwidth     = 80
@@ -40,6 +44,7 @@ opt.sidescrolloff = 8
 opt.wrap          = true
 opt.linebreak     = true
 opt.breakindent   = true
+opt.iskeyword:append("-") -- Letters separated by "-" are still words
 
 -- Numbers
 opt.number         = true
