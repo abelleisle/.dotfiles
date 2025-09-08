@@ -1,0 +1,34 @@
+#!/bin/zsh
+
+# Global flag to track if we should announce the result
+_nr_announce=0
+
+# Hook that runs after each command completes
+_nr_precmd() {
+    LAST_EXIT_CODE=$?
+    if [[ $_nr_announce -eq 1 ]]; then
+        if [[ $LAST_EXIT_CODE -eq 0 ]]; then
+            say "COMMAND COMPLETE"
+        else
+            say "command failure"
+        fi
+        _nr_announce=0
+    fi
+}
+
+# Add our hook to the precmd functions
+autoload -U add-zsh-hook
+add-zsh-hook precmd _nr_precmd
+
+nr() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: nr <command>"
+        return 1
+    fi
+
+    # Set flag to announce result after command completes
+    _nr_announce=1
+
+    # Execute the command(s)
+    eval "$*"
+}
