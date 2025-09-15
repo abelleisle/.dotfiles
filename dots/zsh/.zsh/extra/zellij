@@ -40,8 +40,8 @@ z() {
 
 # Zellij sessionizer
 zs() {
-    session_path=$1
-    current_path=0
+    local session_path=${1:A}
+    local current_path=0
 
     # If no session path was provided as an argument
     if [[ -z $session_path ]]; then
@@ -70,7 +70,7 @@ zs() {
     #     5. Replace '§' with '.' (Zellij can't have '/' in session name)
     #     6. Reverse the string again (correct way around now)
     #     7. Replace ~. at beginning with ~ (looks better than '~.' if it's a short path)
-    session_name=$(reduce_path $session_path | rev | sed 's|/|§|1; s|/|§|1; s|/||g; s|\.|_|g; s|§|.|g' | rev | sed 's|~\.|~|1')
+    local session_name=$(reduce_path $session_path | rev | sed 's|/|§|1; s|/|§|1; s|/||g; s|\.|_|g; s|§|.|g' | rev | sed 's|~\.|~|1')
 
     echo "Session name: $session_name"
 
