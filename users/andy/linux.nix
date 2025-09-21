@@ -8,7 +8,7 @@ in
       # Enable zsh
       zsh = {
         enable = true;
-        enableCompletion = true;
+        enableCompletion = false; # We manage this with zinit
       };
 
       # Enable/install git
