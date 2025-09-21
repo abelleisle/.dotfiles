@@ -157,9 +157,7 @@ if [ -f ${HOME}/.profile ]; then
     warn "~/.profile already exists. Renaming to .profile.old"
     mv ${HOME}/.profile ${HOME}/.profile.old
 fi
-run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.zshrc ${HOME}/.zshrc"
-run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.profile ${HOME}/.profile"
-run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.zprofile ${HOME}/.zprofile"
+run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.zshenv ${HOME}/.zshenv"
 run "ln -sfn ${DOTFILES_DIR}/dots/zsh/.zsh ${HOME}/.zsh"
 # run ${STOW_CMD} zsh
 
@@ -167,7 +165,7 @@ header "Setting zsh as default shell"
 run sudo chsh -s $(which zsh) ${DOTFILES_USER}
 
 header "Sourcing .zshrc to install deps"
-zsh -c "source ~/.zshrc"
+zsh -c "source ~/.zsh/.zshrc"
 
 ####################
 #  CONFIGURE TMUX  #

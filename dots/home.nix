@@ -79,9 +79,7 @@ in
 
       file = {
         # ZSH
-        ".zshrc".source = symlink (zshInstall + ".zshrc");
-        ".profile".source = symlink (zshInstall + ".profile");
-        ".zprofile".source = symlink (zshInstall + ".zprofile");
+        ".zshenv".source = symlink (zshInstall + ".zshenv");
         ".zsh" = {
           source = symlink (zshInstall + ".zsh");
           recursive = true;

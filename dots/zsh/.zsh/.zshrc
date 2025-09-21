@@ -1,16 +1,17 @@
 # zmodload zsh/zprof
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.zsh/oh-my-zsh
+# Make sure zsh cache dir exists
+[[ ! -d $ZSH_CACHE_DIR ]] && command mkdir -p "$ZSH_CACHE_DIR"
 
-# ~/.zprofile will source ~/.profile, so we don't need to here
-if [ -f ~/.profile ]; then
-    source ~/.profile
-fi
+# Zinit installation and setup
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
 # Source our custom functions
-if [ -d ~/.zsh/extra/ ]; then
-    for file in ~/.zsh/extra/**; do
+if [ -d ${ZDOTDIR}/extra/ ]; then
+    for file in ${ZDOTDIR}/extra/**; do
         source $file;
     done
 fi
@@ -23,17 +24,6 @@ ESW_DOTS_DIR=~/.dots-esw # Change this to point to where you've cloned this repo
 if [ -d $ESW_DOTS_DIR ]; then
     source $ESW_DOTS_DIR/shell/shellenv
 fi
-
-# Set name of the ZSH theme to load (if starship isn't installed)
-if ! command -v starship &> /dev/null; then
-    ZSH_THEME="passion"
-fi
-
-# Disable OMZ update reminders
-zstyle ':omz:update' mode disabled  # disable automatic updates
-
-# Disable OMZ async git fetching
-# zstyle ':omz:alpha:lib:git' async-prompt no
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -65,25 +55,15 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# ZSH History Settings
-HIST_STAMPS="mm/dd/yyyy"
-#HISTFILE=~/.cache/zsh/zsh_histfile
-HISTSIZE=20000
-SAVEHIST=100000
-
-# Start completions
-# autoload -Uz compinit
-# compinit #-d ~/.cache/zsh/zcompdump-$ZSH_VERSION
-
-# Start completions and only refresh the comp dump once every 24 hours
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-
-# Extra plugins and themes
-export ZSH_CUSTOM=$HOME/.zsh/custom
+# History settings
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
+setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
+setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+setopt SHARE_HISTORY             # Share history between all sessions.
 
 # Plugin Settings
 VI_MODE_SET_CURSOR=true
@@ -92,29 +72,32 @@ MODE_INDICATOR="%F{white}[N]%f"
 INSERT_MODE_INDICATOR="%F{yellow}[I]%f"
 FZF_DEFAULT_OPTS='--height 75% --layout=reverse'
 
-# Load the plugins
-plugins=(
-    zsh-autosuggestions
-    # gitfast
-    sudo
-    zsh-autopair
-    vi-mode
-    # fzf
-    direnv
-)
+# Load OMZ libs that we need
+zinit snippet OMZL::git.zsh
+zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZL::theme-and-appearance.zsh
+
+# Load zinit plugins
+zinit snippet OMZP::sudo
+zinit snippet OMZP::vi-mode
+zinit lucid wait for hlissner/zsh-autopair
 
 # If we aren't running MacOS add nix-shell plugin.
 # We can't use this on MacOS because Apple refuses to use
 # a bash version >4 due to GPLv3 licensing.
 if [[ $(uname) != "Darwin" ]]; then
-    plugins+=(nix-shell)
+    zinit light chisui/zsh-nix-shell
 fi
 
-# This plugin needs to be loaded last
-plugins+=(zsh-syntax-highlighting)
-
-# Load OMZ
-source $ZSH/oh-my-zsh.sh
+# Load completions and syntax highlighting
+ZINIT[ZCOMPDUMP_PATH]=${ZSH_CACHE_DIR}/compdump
+zinit wait lucid for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+     zdharma/fast-syntax-highlighting \
+  blockf \
+     zsh-users/zsh-completions \
+  atload"!_zsh_autosuggest_start" \
+     zsh-users/zsh-autosuggestions
 
 # Set VIM mode bindings
 bindkey -v
@@ -124,19 +107,6 @@ bindkey zx vi-cmd-mode
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
 # export LANG=en_US.UTF-8
-
-# Sets the EDITOR env variable. Used for git commits and the like
-if [[ -n $(command -v nvim) ]]; then
-    export EDITOR=nvim
-elif [[ -n $(command -v vim) ]]; then
-    export EDITOR=vim
-elif [[ -n $(command -v vi) ]]; then
-    export EDITOR=vi
-fi
-export VISUAL="$EDITOR"
-
-# Sets the SHELL env variable so tmux opens the correct shell
-export SHELL="$(which zsh)"
 
 # If there is no SSH connection, set colors
 if [ -z "$SSH_CONNECTION" ]; then
@@ -158,7 +128,7 @@ fi
 # ZSH Completions
 #zstyle ':completion:*' menu select
 zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
-fpath+=~/.zfunc
+fpath+=${ZDOTDIR}/.zfunc
 
 # Ghostty resources loading
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
@@ -185,10 +155,19 @@ fi
 #     echo $elapsed":" $plugin
 # done
 
-source <(fzf --zsh)
+if (( $+commands[direnv] )); then
+    eval "$(direnv hook zsh)"
+fi
 
-if command -v starship &> /dev/null; then
+if (( $+commands[fzf] )); then
+    source <(fzf --zsh)
+fi
+
+# Load shell theme
+if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
+else
+    source ${ZDOTDIR}/custom/themes/passion.zsh-theme
 fi
 
 # zprof
