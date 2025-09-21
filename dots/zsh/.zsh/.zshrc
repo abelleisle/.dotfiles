@@ -56,6 +56,11 @@ fi
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # History settings
+HIST_STAMPS="mm/dd/yyyy"
+HISTFILE=${HOME:-~}/.zsh_history
+HISTSIZE=100000
+SAVEHIST=1000000
+
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
 setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
@@ -73,6 +78,7 @@ INSERT_MODE_INDICATOR="%F{yellow}[I]%f"
 FZF_DEFAULT_OPTS='--height 75% --layout=reverse'
 
 # Load OMZ libs that we need
+zinit snippet OMZL::async_prompt.zsh
 zinit snippet OMZL::git.zsh
 zinit snippet OMZL::key-bindings.zsh
 zinit snippet OMZL::theme-and-appearance.zsh

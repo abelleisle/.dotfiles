@@ -4,12 +4,6 @@ ZDOTDIR=${HOME:-~}/.zsh
 # ZSH cache should go to ~/.cache/zsh
 ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 
-# ZSH History Settings
-HIST_STAMPS="mm/dd/yyyy"
-HISTFILE=${HOME:-~}/.zsh_history
-HISTSIZE=100000
-SAVEHIST=1000000
-
 # Sets the EDITOR env variable. Used for git commits and the like
 if [[ -n $(command -v nvim) ]]; then
     export EDITOR=nvim
@@ -22,3 +16,6 @@ export VISUAL="$EDITOR"
 
 # Sets the SHELL env variable so tmux opens the correct shell
 export SHELL="$(which zsh)"
+
+# Don't let Darwin and some other Linux distros run compinit globally
+skip_global_compinit=1
