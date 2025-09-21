@@ -81,6 +81,7 @@ zinit snippet OMZL::theme-and-appearance.zsh
 zinit snippet OMZP::sudo
 zinit snippet OMZP::vi-mode
 zinit lucid wait for hlissner/zsh-autopair
+zinit lucid wait for BronzeDeer/zsh-completion-sync
 
 # If we aren't running MacOS add nix-shell plugin.
 # We can't use this on MacOS because Apple refuses to use
@@ -96,6 +97,8 @@ zinit wait lucid for \
      zdharma/fast-syntax-highlighting \
   blockf \
      zsh-users/zsh-completions \
+  blockf \
+     nix-community/nix-zsh-completions \
   atload"!_zsh_autosuggest_start" \
      zsh-users/zsh-autosuggestions
 
