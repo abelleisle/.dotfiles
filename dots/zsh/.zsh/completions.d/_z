@@ -1,0 +1,5 @@
+#compdef z
+
+_z() {
+    compadd $(zellij ls -s) dps
+}

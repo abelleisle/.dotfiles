@@ -136,7 +136,8 @@ fi
 # ZSH Completions
 #zstyle ':completion:*' menu select
 zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
-fpath+=${ZDOTDIR}/.zfunc
+fpath+=(${HOME:-~}/.zfunc)
+fpath+=(${ZDOTDIR}/completions.d)
 
 # Ghostty resources loading
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
