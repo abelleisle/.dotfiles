@@ -39,9 +39,9 @@ layout {
                 mode_prompt        "#[fg=red]▋#[fg=bright_yellow,bold]PROMPT#[fg=bright_blue]"
 
                 // Inactive Tabs
-                tab_normal                "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {floating_indicator}#[fg=black]"
-                tab_normal_fullscreen     "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {fullscreen_indicator}#[fg=black]"
-                fab_normal_sync           "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {sync_indicator}#[fg=black]"
+                tab_normal                "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {floating_indicator} #[fg=black]"
+                tab_normal_fullscreen     "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {fullscreen_indicator} #[fg=black]"
+                tab_normal_sync           "#[fg=bright_blue]#[bg=bright_blue,fg=black]{index}#[fg=black,bg=bright_blue]#[fg=bright_blue,bg=black] {name} {sync_indicator} #[fg=black]"
 
                 // Active tabs
                 tab_active                "#[fg=green]#[bg=green,fg=black]{index}#[bg=green,fg=bright_green]#[bg=bright_green,fg=black] {name} {floating_indicator} #[fg=bright_green]"
