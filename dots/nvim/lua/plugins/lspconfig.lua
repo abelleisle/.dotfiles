@@ -88,8 +88,6 @@ M.servers = {
     zig      = lsp_entry("zls"                 , false),
     gdscript = lsp_entry("gdscript"            , false),
     tsclint  = lsp_entry("oxlint"              , false),
-    tsclsp   = lsp_entry("typescript-language-server", false),
-    tailwind = lsp_entry("tailwindcss-language-server", false),
 }
 
 local get_setup_handlers = function(default_opts)
