@@ -61,6 +61,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Programs
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -69,17 +74,26 @@
     };
   };
 
-  outputs = { flake-parts, ... } @ inputs:
-  (flake-parts.lib.evalFlakeModule { inherit inputs; }
-    ({ self, inputs, ... }: {
-    systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
-    imports = [
-      # ./devShells/flake-module.nix
-      # ./pkgs/flake-module.nix
-      ./nix/devshell.nix
-      ./nix/treefmt.nix
-      ./configurations.nix
-      inputs.treefmt-nix.flakeModule
-    ];
-  })).config.flake;
+  outputs =
+    { flake-parts, ... }@inputs:
+    (flake-parts.lib.evalFlakeModule { inherit inputs; } (
+      { inputs, ... }:
+      {
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "aarch64-darwin"
+        ];
+        imports = [
+          # ./devShells/flake-module.nix
+          # ./pkgs/flake-module.nix
+          ./nix/devshell.nix
+          ./nix/treefmt.nix
+          ./nix/git-hooks.nix
+          ./configurations.nix
+          inputs.treefmt-nix.flakeModule
+          inputs.git-hooks.flakeModule
+        ];
+      }
+    )).config.flake;
 }

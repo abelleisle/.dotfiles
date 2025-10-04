@@ -9,3 +9,4 @@ dots/zsh/.zsh/extra/*.local
 
 result
 .direnv
+.pre-commit-config.yaml

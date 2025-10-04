@@ -1,19 +1,21 @@
 {
-  perSystem = { pkgs, ... }: {
-    treefmt = {
-      programs.nixfmt = {
-        enable = true;
-        package = pkgs.nixfmt-rfc-style;
-      };
+  perSystem =
+    { pkgs, ... }:
+    {
+      treefmt = {
+        programs.nixfmt = {
+          enable = true;
+          package = pkgs.nixfmt-rfc-style;
+        };
 
-      programs.deadnix.enable = true;
-      programs.statix.enable = true;
+        programs.deadnix.enable = true;
+        programs.statix.enable = true;
 
-      settings.formatter = {
-        nixfmt = {
-          includes = [ "*.nix" ];
+        settings.formatter = {
+          nixfmt = {
+            includes = [ "*.nix" ];
+          };
         };
       };
     };
-  };
 }
