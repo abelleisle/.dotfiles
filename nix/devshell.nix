@@ -8,10 +8,10 @@
         pkgs.home-manager
 
         # Python dependencies
-        pkgs.python311.pkgs.invoke
-        pkgs.python311.pkgs.deploykit
-        pkgs.python311.pkgs.black
-        pkgs.python311.pkgs.isort
+        # pkgs.python311.pkgs.invoke
+        # pkgs.python311.pkgs.deploykit
+        # pkgs.python311.pkgs.black
+        # pkgs.python311.pkgs.isort
 
         # Sops stuff
         inputs'.agenix.packages.default

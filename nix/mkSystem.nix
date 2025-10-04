@@ -102,7 +102,6 @@ let
   ];
 
   commonSettings = {
-    time.timeZone = lib.mkDefault "UTC";
     nix = {
       nixPath = [
         "nixpkgs=${pkgs.path}"

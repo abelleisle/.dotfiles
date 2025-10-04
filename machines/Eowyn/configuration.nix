@@ -16,6 +16,7 @@
       };
       gdm = {
         enable = true;
+        debug = false;
       };
     };
 
@@ -26,10 +27,11 @@
       };
       gnome = {
         enable = true;
+        debug = false;
       };
     };
 
-    # Remap keys to colemake-d
+    # Remap keys to colemak-d
     kmonad = {
       enable = true;
       keyboards = {
@@ -81,10 +83,11 @@
       enable = true;
       path = with pkgs; [ pass gnome-keyring ];
     };
-  };
 
-  # time.timeZone = "America/New_York";
-  time.timeZone = "MST";
+    upower = {
+      enable = true;
+    };
+  };
 
   programs = {
     # Also enable hyprland wm
@@ -182,9 +185,9 @@
     pkgs.efibootmgr
     pkgs.nfs-utils
     pkgs.gnomeExtensions.appindicator
-    # pkgs.gnomeExtensions.keep-awake
     pkgs.gnomeExtensions.user-themes
     pkgs.gnomeExtensions.caffeine
+    pkgs.gnomeExtensions.blur-my-shell
     pkgs.gnome-tweaks
     pkgs.wl-clipboard
     pkgs.adwaita-icon-theme
@@ -203,6 +206,9 @@
       # extraDrivers = ["i915"]
     };
   };
+  templates.system.networking.dns = {
+    enable = false;
+  };
 
   programs.captive-browser = {
     enable = true;
@@ -219,4 +225,6 @@
       flavor = "frappe";
     };
   };
+
+  boot.kernel.sysctl."net.ipv4.ip_default_ttl" = 65;
 }

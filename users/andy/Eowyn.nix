@@ -58,6 +58,7 @@ in
     meshcentral
     dig
     claude-code
+    slack
   ];
 
   # Allow jellyfin-media-player to get controlled via mpris
@@ -214,12 +215,21 @@ in
       # color-scheme = "default";  # Can be "default", "prefer-dark", or "prefer-light"
       # gtk-theme = "Matcha-dark-aliz";
     };
+    "org/gnome/desktop/background" = {
+      picture-uri = "file://${../../assets/wallpapers/a_house_with_snow_on_the_roof.jpg}";
+      picture-uri-dark = "file://${../../assets/wallpapers/a_canal_between_buildings_with_boats.jpg}";
+    };
+    # "org/gnome/desktop/screensaver" = {
+    #   picture-uri = "file://${../../assets/wallpapers/a_canal_between_buildings_with_boats.jpg}";
+    #   primary-color = "#cdcdcd";
+    #   secondary-color = "#1e1e1e;
+    # };
     "org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = with pkgs.gnomeExtensions; [
-        # keep-awake.extensionUuid
         user-themes.extensionUuid
         caffeine.extensionUuid
+        blur-my-shell.extensionUuid
       ];
     };
     # "org/gnome/shell/extensions/user-theme" = {
