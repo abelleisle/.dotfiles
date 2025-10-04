@@ -55,6 +55,12 @@
     # Themes
     catppuccin.url = "github:catppuccin/nix";
 
+    # Formatters
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Programs
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -71,7 +77,9 @@
       # ./devShells/flake-module.nix
       # ./pkgs/flake-module.nix
       ./nix/devshell.nix
+      ./nix/treefmt.nix
       ./configurations.nix
+      inputs.treefmt-nix.flakeModule
     ];
   })).config.flake;
 }
