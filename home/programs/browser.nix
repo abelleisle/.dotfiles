@@ -2,7 +2,8 @@
 let
   cfg = config.dotfiles.programs;
 in
-with lib; {
+with lib;
+{
   options = {
     # Enable browsers
     dotfiles.programs.browser.enable = mkOption {

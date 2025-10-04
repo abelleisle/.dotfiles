@@ -3,13 +3,14 @@
     { pkgs, ... }:
     {
       treefmt = {
-        programs.nixfmt = {
-          enable = true;
-          package = pkgs.nixfmt-rfc-style;
+        programs = {
+          nixfmt = {
+            enable = true;
+            package = pkgs.nixfmt-rfc-style;
+          };
+          deadnix.enable = true;
+          statix.enable = true;
         };
-
-        programs.deadnix.enable = true;
-        programs.statix.enable = true;
 
         settings.formatter = {
           nixfmt = {

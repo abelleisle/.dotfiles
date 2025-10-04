@@ -1,4 +1,9 @@
-{ lib, isVM, pkgs, ... }:
+{
+  lib,
+  isVM,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./plymouth.nix
@@ -81,7 +86,10 @@
 
     protonmail-bridge = {
       enable = true;
-      path = with pkgs; [ pass gnome-keyring ];
+      path = with pkgs; [
+        pass
+        gnome-keyring
+      ];
     };
 
     upower = {
@@ -115,7 +123,7 @@
   };
 
   environment = {
-    sessionVariables = lib.mkIf (isVM) {
+    sessionVariables = lib.mkIf isVM {
       WLR_RENDERER_ALLOW_SOFTWARE = "1";
     };
     plasma6.excludePackages = with pkgs.kdePackages; [
@@ -199,7 +207,7 @@
   # Configure the virt-manager template
   templates.system.virtualization.virt-manager = {
     enable = true;
-    users = [ "andy" ];  # List of users to add to libvirtd group
+    users = [ "andy" ]; # List of users to add to libvirtd group
     pciPassthrough = {
       enable = true;
       cpu = "intel";

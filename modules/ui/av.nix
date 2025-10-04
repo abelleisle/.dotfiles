@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   services.pipewire = {
     enable = true;
 

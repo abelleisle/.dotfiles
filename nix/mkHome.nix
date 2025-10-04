@@ -1,22 +1,23 @@
 # NixOS args
-{ self
-, overlays
-, lib
-, unfree_whitelist
+{
+  self,
+  overlays,
+  lib,
+  unfree_whitelist,
 }:
 
 # Required args
 username: system:
 
 # Optional args
-{ darwin ? false
-, extraImports ? []
-, allowUnfree ? false
+{
+  extraImports ? [ ],
+  allowUnfree ? false,
 }:
 let
-  inputs = self.inputs;
+  inherit (self) inputs;
 
-  home-manager = inputs.home-manager;
+  inherit (inputs) home-manager;
 
   pkgs = import inputs.nixpkgs {
     inherit system overlays;
@@ -35,8 +36,8 @@ let
     inherit pkgs-stable;
   };
 
-in home-manager.lib.homeManagerConfiguration
-{
+in
+home-manager.lib.homeManagerConfiguration {
   inherit pkgs extraSpecialArgs;
 
   modules = [
@@ -58,6 +59,6 @@ in home-manager.lib.homeManagerConfiguration
     inputs.catppuccin.homeModules.catppuccin
     inputs.zen-browser.homeModules.twilight-official
     ../templates/home
-  ] ++ extraImports;
+  ]
+  ++ extraImports;
 }
-

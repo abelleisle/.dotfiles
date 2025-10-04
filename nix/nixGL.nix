@@ -7,21 +7,24 @@ pkg:
 if config.nixGLPrefix == "" then
   pkg
 else
-# Wrap the package's binaries with nixGL, while preserving the rest of
-# the outputs and derivation attributes.
+  # Wrap the package's binaries with nixGL, while preserving the rest of
+  # the outputs and derivation attributes.
   (pkg.overrideAttrs (old: {
     name = "nixGL-${pkg.name}";
     buildCommand = ''
       set -eo pipefail
 
       ${
-      # Heavily inspired by https://stackoverflow.com/a/68523368/6259505
-      pkgs.lib.concatStringsSep "\n" (map (outputName: ''
-        echo "Copying output ${outputName}"
-        set -x
-        cp -rs --no-preserve=mode "${pkg.${outputName}}" "''$${outputName}"
-        set +x
-      '') (old.outputs or [ "out" ]))}
+        # Heavily inspired by https://stackoverflow.com/a/68523368/6259505
+        pkgs.lib.concatStringsSep "\n" (
+          map (outputName: ''
+            echo "Copying output ${outputName}"
+            set -x
+            cp -rs --no-preserve=mode "${pkg.${outputName}}" "''$${outputName}"
+            set +x
+          '') (old.outputs or [ "out" ])
+        )
+      }
 
       rm -rf $out/bin/*
       shopt -s nullglob # Prevent loop from running if no files

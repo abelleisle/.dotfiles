@@ -1,25 +1,22 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.dotfiles;
   dotsLocation = cfg.dotDir;
 
   symlink = config.lib.file.mkOutOfStoreSymlink;
 
-  nvimInstall = if dotsLocation != null
-    then dotsLocation + "/dots/nvim/"
-    else ./nvim;
+  nvimInstall = if dotsLocation != null then dotsLocation + "/dots/nvim/" else ./nvim;
 
-  tmuxInstall = if dotsLocation != null
-    then dotsLocation + "/dots/tmux/"
-    else ./tmux;
+  tmuxInstall = if dotsLocation != null then dotsLocation + "/dots/tmux/" else ./tmux;
 
-  zshInstall = if dotsLocation != null
-    then dotsLocation + "/dots/zsh/"
-    else ./zsh;
+  zshInstall = if dotsLocation != null then dotsLocation + "/dots/zsh/" else ./zsh;
 
-  zellijInstall = if dotsLocation != null
-    then dotsLocation + "/dots/zellij/"
-    else ./zellij;
+  zellijInstall = if dotsLocation != null then dotsLocation + "/dots/zellij/" else ./zellij;
 in
 {
   options = {
@@ -94,7 +91,7 @@ in
 
         # Common
         ".shelf/.nixmanaged".text = ''
-            This file indicates that this system is managed by nix
+          This file indicates that this system is managed by nix
         '';
       };
     };
@@ -116,7 +113,6 @@ in
       '';
     };
 
-
     fonts.fontconfig.enable = true;
 
     programs = {
@@ -127,8 +123,8 @@ in
 
       # Don't need zsh integration because it's already configured in zshrc
       direnv = {
-       enable = true;
-       nix-direnv.enable = true;
+        enable = true;
+        nix-direnv.enable = true;
       };
 
       # Enable zsh so we source the correct nix env vars

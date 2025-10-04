@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 let
   cfg = config.colors;
 
@@ -115,8 +115,6 @@ in
       };
     };
 
-    colors.palette = if (cfg.theme != null)
-      then import ./themes/${cfg.theme}.nix
-      else defaultPalette;
+    colors.palette = if (cfg.theme != null) then import ./themes/${cfg.theme}.nix else defaultPalette;
   };
 }

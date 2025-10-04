@@ -1,9 +1,9 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   homebrew = {
     enable = true;
-    casks  = [
+    casks = [
       # "1password"
       # "cleanshot"
       # "discord"

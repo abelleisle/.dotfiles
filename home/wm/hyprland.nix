@@ -3,7 +3,8 @@ let
   cfg = config.dotfiles.wm.hyprland;
   cp = config.colors.palette;
 in
-with lib; {
+with lib;
+{
   options = {
     dotfiles.wm.hyprland = {
       enable = mkOption {
@@ -21,11 +22,10 @@ with lib; {
     ../colors
   ];
 
-  config = mkIf (cfg.enable) {
-    warnings =
-      lib.optional (cfg.config == "")
-        ("Please add a machine-specific hyprland configuration with "
-         + "`dotfiles.wm.hyprland.config`");
+  config = mkIf cfg.enable {
+    warnings = lib.optional (cfg.config == "") (
+      "Please add a machine-specific hyprland configuration with " + "`dotfiles.wm.hyprland.config`"
+    );
 
     # Fuzzel
     # dmenu picker
@@ -48,8 +48,8 @@ with lib; {
           width = 2;
           radius = 10;
         };
-        dmenu = {};
-        key-bindings = {};
+        dmenu = { };
+        key-bindings = { };
       };
     };
 

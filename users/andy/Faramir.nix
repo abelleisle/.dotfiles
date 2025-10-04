@@ -1,19 +1,20 @@
-{ lib, ...}:
-{
-  dotfiles.wm.hyprland = {
-    enable = false;
-    config = ''
-      monitor=,preferred,auto,1
-    '';
-  };
+_: {
+  dotfiles = {
+    wm.hyprland = {
+      enable = false;
+      config = ''
+        monitor=,preferred,auto,1
+      '';
+    };
 
-  dotfiles.programs = {
-    personal.enable = true;
-    email.enable = true;
-    browser.enable = true;
-  };
+    programs = {
+      personal.enable = true;
+      email.enable = true;
+      browser.enable = true;
+    };
 
-  dotfiles.keyboard.enable = false;
+    keyboard.enable = false;
+  };
 
   # programs.fuzzel = {
   #   enable = true;

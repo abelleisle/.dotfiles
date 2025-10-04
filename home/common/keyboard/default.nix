@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.dotfiles.keyboard;
 in
@@ -13,7 +18,7 @@ with lib;
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = [
       pkgs.vial
       pkgs.uhk-agent

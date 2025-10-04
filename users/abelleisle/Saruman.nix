@@ -1,5 +1,4 @@
-
-{ lib, ...}:
+{ ... }:
 {
   imports = [
     ../../../home/colors

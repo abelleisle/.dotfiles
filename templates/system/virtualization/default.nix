@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 {
   imports = [
     ./virt-manager.nix

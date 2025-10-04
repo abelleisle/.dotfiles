@@ -1,7 +1,6 @@
 { pkgs, config, ... }:
 let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
+  inherit (pkgs.stdenv) isDarwin;
 
   installDir = config.home.homeDirectory + "/.dots";
 in
@@ -13,10 +12,8 @@ in
   home = {
     username = "abelleisle";
     stateVersion = "23.11";
-    homeDirectory = if isDarwin
-      then "/Users/abelleisle"
-      else "/home/abelleisle";
-    packages = [];
+    homeDirectory = if isDarwin then "/Users/abelleisle" else "/home/abelleisle";
+    packages = [ ];
   };
 
   dotfiles.dotDir = installDir;

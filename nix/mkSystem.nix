@@ -1,39 +1,39 @@
 # NixOS args
-{ self
-, overlays
-, lib
-, unfree_whitelist
+{
+  self,
+  overlays,
+  lib,
+  unfree_whitelist,
 }:
 
 # Required args
 hostname: system:
 
 # Optional args
-{ isBareMetal ? true
-, isVM ? false
-, isLXC ? false
-, isHeadless ? false
-, user ? "andy"
-, allowUnfree ? false
-, extraModules ? []
-, darwin ? false
+{
+  isBareMetal ? true,
+  isVM ? false,
+  isLXC ? false,
+  isHeadless ? false,
+  user ? "andy",
+  allowUnfree ? false,
+  extraModules ? [ ],
+  darwin ? false,
 }:
-assert lib.assertMsg
-  ((isVM != isLXC) != isBareMetal)
-  "System (${hostname}) must be one of: LXC, VM, or baremetal.";
+assert lib.assertMsg (
+  (isVM != isLXC) != isBareMetal
+) "System (${hostname}) must be one of: LXC, VM, or baremetal.";
 let
 
-  inputs = self.inputs;
+  inherit (self) inputs;
 
-  agenixMod = if darwin
-    then inputs.agenix.darwinModules
-    else inputs.agenix.nixosModules;
+  agenixMod = if darwin then inputs.agenix.darwinModules else inputs.agenix.nixosModules;
 
   commonModules = [
     {
       config._module.args = {
-        self = self;
-        inputs = inputs;
+        inherit self;
+        inherit inputs;
         currentSystem = system;
         currentHostname = hostname;
         inherit isVM isBareMetal isLXC;
@@ -53,9 +53,7 @@ let
     inputs.catppuccin.nixosModules.catppuccin
   ];
 
-  vmModules =
-    commonModules
-    ++ [
+  vmModules = commonModules ++ [
     ../modules/system/bootloader.nix
     # ./modules/disks/disko-ext4.nix
     ../modules/system/vm.nix
@@ -63,15 +61,9 @@ let
     inputs.disko.nixosModules.disko
   ];
 
-  lxcModules =
-    commonModules
-    ++ [
-    # ./modules/lxc.nix
-  ];
+  lxcModules = commonModules;
 
-  bareMetalModules =
-    commonModules
-    ++ [
+  bareMetalModules = commonModules ++ [
     ../modules/system/bootloader.nix
   ];
 
@@ -80,23 +72,24 @@ let
   ];
 
   userOSConfig = ../users/${user}/${if darwin then "darwin" else "linux"}.nix;
-  hm = if darwin
-    then inputs.home-manager.darwinModules
-    else inputs.home-manager.nixosModules;
+  hm = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
 
   homeModules = [
-    hm.home-manager {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = {
-        inherit pkgs-stable;
-      };
-      home-manager.users.${user} = {
-        imports = [
-          inputs.catppuccin.homeModules.catppuccin
-          inputs.zen-browser.homeModules.twilight-official
-          ../templates/home
-        ];
+    hm.home-manager
+    {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        extraSpecialArgs = {
+          inherit pkgs-stable;
+        };
+        users.${user} = {
+          imports = [
+            inputs.catppuccin.homeModules.catppuccin
+            inputs.zen-browser.homeModules.twilight-official
+            ../templates/home
+          ];
+        };
       };
     }
   ];
@@ -109,7 +102,10 @@ let
       ];
 
       settings = {
-        trusted-users = [ "root" "@wheel" ];
+        trusted-users = [
+          "root"
+          "@wheel"
+        ];
       };
 
       extraOptions = ''
@@ -159,25 +155,25 @@ let
     inherit pkgs-stable;
   };
 
-in inputs.nixpkgs.lib.nixosSystem
-{
+in
+inputs.nixpkgs.lib.nixosSystem {
   inherit system pkgs specialArgs;
 
   modules =
-    lib.optionals isVM vmModules ++
-    lib.optionals isLXC lxcModules ++
-    lib.optionals isBareMetal bareMetalModules ++
-    lib.optionals (!darwin && !isHeadless) uiModules ++
-    [
+    lib.optionals isVM vmModules
+    ++ lib.optionals isLXC lxcModules
+    ++ lib.optionals isBareMetal bareMetalModules
+    ++ lib.optionals (!darwin && !isHeadless) uiModules
+    ++ [
       {
         networking.hostName = "${hostname}"; # Force hostname setting
-        system.stateVersion = "24.05";       # Nixpkgs is based on 24.05
+        system.stateVersion = "24.05"; # Nixpkgs is based on 24.05
       }
       ../machines/${hostname}/configuration.nix
       ../machines/${hostname}/hardware.nix
     ]
-    ++ [commonSettings]
-    ++ [userOSConfig]
+    ++ [ commonSettings ]
+    ++ [ userOSConfig ]
     ++ homeModules
     ++ extraModules;
 }

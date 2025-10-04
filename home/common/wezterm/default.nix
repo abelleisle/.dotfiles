@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  palette = config.colors.palette;
+  inherit (config.colors) palette;
 in
 {
   # Wezterm requires colors
@@ -11,13 +11,9 @@ in
   # Enable wezterm and configure it
   programs.wezterm = {
     enable = true;
-    extraConfig =
-      builtins.elemAt (
-        lib.strings.splitString
-          "--NIXSPLIT" # Remove the first wezterm import
-          (lib.strings.fileContents ./wezterm.lua)
-        )
-        1; # Access the file AFTER the split
+    extraConfig = builtins.elemAt (lib.strings.splitString "--NIXSPLIT" # Remove the first wezterm import
+      (lib.strings.fileContents ./wezterm.lua)
+    ) 1; # Access the file AFTER the split
   };
 
   home.file = {

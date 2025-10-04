@@ -1,4 +1,10 @@
-{ pkgs, currentHostname, lib, config, ... }:
+{
+  pkgs,
+  currentHostname,
+  lib,
+  config,
+  ...
+}:
 let
   usingNM = config.networking.networkmanager.enable;
 in
@@ -22,8 +28,12 @@ in
       isNormalUser = true;
       home = "/home/andy";
       description = "Andy";
-      extraGroups = [ "docker" "wheel" "wireshark" ]
-        ++ lib.optionals (usingNM) ["networkmanager" ];
+      extraGroups = [
+        "docker"
+        "wheel"
+        "wireshark"
+      ]
+      ++ lib.optionals usingNM [ "networkmanager" ];
       shell = pkgs.zsh;
     };
 

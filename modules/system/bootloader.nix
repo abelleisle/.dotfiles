@@ -1,7 +1,4 @@
-{ lib
-, pkgs
-, ...
-}: {
+_: {
   # boot.loader = {
   #   efi = {
   #     # Enable this when you install NixOS on a new machine!
