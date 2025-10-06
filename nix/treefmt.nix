@@ -3,20 +3,22 @@
     { pkgs, ... }:
     {
       treefmt = {
+        # Enable formatters
         programs = {
+          # Nix
           nixfmt = {
             enable = true;
             package = pkgs.nixfmt-rfc-style;
           };
           deadnix.enable = true;
           statix.enable = true;
+
+          # Lua
+          stylua.enable = true;
         };
 
-        settings.formatter = {
-          nixfmt = {
-            includes = [ "*.nix" ];
-          };
-        };
+        # Formatter settings
+        settings.formatter = { };
       };
     };
 }

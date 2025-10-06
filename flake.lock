@@ -238,7 +238,6 @@
     "home-manager_3": {
       "inputs": {
         "nixpkgs": [
-          "zen-browser",
           "nixpkgs"
         ]
       },
