@@ -87,6 +87,26 @@ g.loaded_spec = 0
 -- Configure vim diagnostics
 vim.diagnostic.config({
     virtual_lines = true,
+    virtual_text = false,
+    underline = true,
+    update_in_insert = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+        },
+        -- linehl = {
+        --     [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        -- },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticDefaultError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticDefaultWarn",
+            [vim.diagnostic.severity.INFO] = "DiagnosticDefaultInfo",
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+        },
+    },
 })
 
 -- Highlight configuration

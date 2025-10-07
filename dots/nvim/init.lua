@@ -16,6 +16,10 @@ require("utils.search").setup()
 require("mappings").setup()
 
 -----------------------------------------------------------
+-- LSP
+require("lsp").setup()
+
+-----------------------------------------------------------
 -- Configuration
 
 -- Call local nvim configs/overrides

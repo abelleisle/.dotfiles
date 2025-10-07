@@ -297,13 +297,13 @@ return require("lazy").setup({
         },
 
         { -- Neovim Language Server
-            "neovim/nvim-lspconfig",
-            event = Events.OpenFile,
-            config = require("plugins.lspconfig").config,
-            dependencies = {
-                "williamboman/mason.nvim",
-                "williamboman/mason-lspconfig.nvim",
-            },
+            -- "neovim/nvim-lspconfig",
+            -- event = Events.OpenFile,
+            -- config = require("plugins.lspconfig").config,
+            -- dependencies = {
+            --     "williamboman/mason.nvim",
+            --     "williamboman/mason-lspconfig.nvim",
+            -- },
         },
 
         { -- Images inside neovim LSP completion menu
