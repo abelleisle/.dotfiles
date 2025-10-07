@@ -1,2 +1,5 @@
-# Run all files through nixfmt, statix, and deadnix
+# Run all lua files through stylua (via treefmt)
+9bad65ada2900430d358fa7daabcfe6c0e9b35f1
+
+# Run all nix files through nixfmt, statix, and deadnix (via treefmt)
 2fc6d0fe9cfca09394fa6ffab35ad3824b4a1c97
