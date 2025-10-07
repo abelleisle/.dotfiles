@@ -93,18 +93,17 @@ return require("lazy").setup({
         { -- Leap
             "ggandor/leap.nvim",
             enabled = true,
-            keys = require("mappings").leap,
             opts = {
-                labels = "tnseriaoplfuvmwyqjc,x.z", --home row & least effort keys for Colemak layout
+
+                safe_labels = "rtklb/RTKIHMLGBZ?",
+                labels = "tnseriaoplfuvmwyqjc,x.zTNSERIAOPLFUVMWYQJCXZ", --home row & least effort keys for Colemak layout
             },
             config = function(_, opts)
                 local leap = require("leap")
+                leap.add_default_mappings(true)
                 for k, v in pairs(opts) do
                     leap.opts[k] = v
                 end
-                leap.add_default_mappings(true)
-                vim.keymap.del({ "x", "o" }, "x")
-                vim.keymap.del({ "x", "o" }, "X")
             end,
         },
 
@@ -294,16 +293,6 @@ return require("lazy").setup({
             config = function()
                 require("plugins.treesitter").config()
             end,
-        },
-
-        { -- Neovim Language Server
-            -- "neovim/nvim-lspconfig",
-            -- event = Events.OpenFile,
-            -- config = require("plugins.lspconfig").config,
-            -- dependencies = {
-            --     "williamboman/mason.nvim",
-            --     "williamboman/mason-lspconfig.nvim",
-            -- },
         },
 
         { -- Images inside neovim LSP completion menu
