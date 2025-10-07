@@ -1,11 +1,11 @@
-local M = {}    -- Global to return
+local M = {} -- Global to return
 local _map = {} -- Local table to store config functions
 
 ------------------------------------------------------------------------
 --                              HELPERS                               --
 ------------------------------------------------------------------------
 -- TODO: consolidate these functions
-local default_key_options = {noremap = true, silent = true}
+local default_key_options = { noremap = true, silent = true }
 
 local function map(mode, lhs, rhs, opts)
     local options = default_key_options
@@ -16,7 +16,7 @@ local function map(mode, lhs, rhs, opts)
     if type(lhs) == "string" then
         vim.keymap.set(mode, lhs, rhs, options)
     elseif type(lhs) == "table" then
-        for _,key in pairs(lhs) do
+        for _, key in pairs(lhs) do
             vim.keymap.set(mode, key, rhs, options)
         end
     end
@@ -33,7 +33,7 @@ local function Opt(desc)
 
     if desc then
         opt_desc = vim.tbl_extend("force", default_key_options, {
-            desc = desc
+            desc = desc,
         })
     end
 
@@ -79,37 +79,35 @@ _map.misc = function()
     ----------------------------------
     -- Indent selected block and wrap with braces
     local indent_and_wrap_braces = require("utils").indent.indent_and_wrap_braces
-    map({'n', 'x'}, '<leader>sb', indent_and_wrap_braces, Opt("Wrap block with braces"))
-
+    map({ "n", "x" }, "<leader>sb", indent_and_wrap_braces, Opt("Wrap block with braces"))
 end
 
 ------------------------------------------------------------------------
 --                             NAVIGATION                             --
 ------------------------------------------------------------------------
 _map.navigation = function()
-
     -----------------
     --  NAVIGATOR  --
     -----------------
-    local has_navigator, navigator = pcall(require, 'Navigator')
+    local has_navigator, navigator = pcall(require, "Navigator")
     if has_navigator then
-        map({'n','t'}, {"<A-h>", "<A-Left>"},  navigator.left,     Opt("Navigation: Left a window"))
-        map({'n','t'}, {"<A-k>", "<A-Up>"},    navigator.up,       Opt("Navigation: Up a window"))
-        map({'n','t'}, {"<A-l>", "<A-Right>"}, navigator.right,    Opt("Navigation: Right a window"))
-        map({'n','t'}, {"<A-j>", "<A-Down>"},  navigator.down,     Opt("Navigation: Down a window"))
-        map({'n','t'}, "<A-p>",                navigator.previous, Opt("Navigation: Go to previous window"))
+        map({ "n", "t" }, { "<A-h>", "<A-Left>" }, navigator.left, Opt("Navigation: Left a window"))
+        map({ "n", "t" }, { "<A-k>", "<A-Up>" }, navigator.up, Opt("Navigation: Up a window"))
+        map({ "n", "t" }, { "<A-l>", "<A-Right>" }, navigator.right, Opt("Navigation: Right a window"))
+        map({ "n", "t" }, { "<A-j>", "<A-Down>" }, navigator.down, Opt("Navigation: Down a window"))
+        map({ "n", "t" }, "<A-p>", navigator.previous, Opt("Navigation: Go to previous window"))
     else
-        map({'n','t'}, {"<A-h>", "<A-Left>"},  "<C-w>h",           Opt("Navigation: Left a window"))
-        map({'n','t'}, {"<A-k>", "<A-Up>"},    "<C-w>k",           Opt("Navigation: Up a window"))
-        map({'n','t'}, {"<A-l>", "<A-Right>"}, "<C-w>l",           Opt("Navigation: Right a window"))
-        map({'n','t'}, {"<A-j>", "<A-Down>"},  "<C-w>j",           Opt("Navigation: Down a window"))
-        map({'n','t'}, "<A-p>",                "<C-w>p",           Opt("Navigation: Go to previous window"))
+        map({ "n", "t" }, { "<A-h>", "<A-Left>" }, "<C-w>h", Opt("Navigation: Left a window"))
+        map({ "n", "t" }, { "<A-k>", "<A-Up>" }, "<C-w>k", Opt("Navigation: Up a window"))
+        map({ "n", "t" }, { "<A-l>", "<A-Right>" }, "<C-w>l", Opt("Navigation: Right a window"))
+        map({ "n", "t" }, { "<A-j>", "<A-Down>" }, "<C-w>j", Opt("Navigation: Down a window"))
+        map({ "n", "t" }, "<A-p>", "<C-w>p", Opt("Navigation: Go to previous window"))
     end
 
     ------------------------------
     -- LSP Signature Navigation --
     ------------------------------
-    local has_noice, noice = pcall(require, 'noice.lsp')
+    local has_noice, noice = pcall(require, "noice.lsp")
     if has_noice then
         vim.keymap.set({ "n", "i", "s" }, "<c-d>", function()
             if not noice.scroll(4) then
@@ -126,14 +124,14 @@ _map.navigation = function()
     -----------------------
     --  MODE NAVIGATION  --
     -----------------------
-    map('i', "jk", "<Esc>", Opt("Navigation: Exit insert mode"))
-    map('i', "zx", "<Esc>", Opt("Navigation: Exit insert mode"))
+    map("i", "jk", "<Esc>", Opt("Navigation: Exit insert mode"))
+    map("i", "zx", "<Esc>", Opt("Navigation: Exit insert mode"))
 
     ------------------------
     --  SPLIT NAVIGATION  --
     ------------------------
-    map('n', "<C-w>%", ":vsplit<CR>", Opt("Navigation: Vertical Split"))
-    map('n', "<C-w>\"", ":split<CR>", Opt("Navigation: Horizontal Split"))
+    map("n", "<C-w>%", ":vsplit<CR>", Opt("Navigation: Vertical Split"))
+    map("n", '<C-w>"', ":split<CR>", Opt("Navigation: Horizontal Split"))
 
     -----------------
     --  CLIPBOARD  --
@@ -159,62 +157,56 @@ _map.navigation = function()
                 table.insert(file_paths, item.value)
             end
 
-            require("telescope.pickers").new({}, {
-                prompt_title = "Harpoon",
-                finder = require("telescope.finders").new_table({
-                    results = file_paths,
-                }),
-                previewer = conf.file_previewer({}),
-                sorter = conf.generic_sorter({}),
-            }):find()
+            require("telescope.pickers")
+                .new({}, {
+                    prompt_title = "Harpoon",
+                    finder = require("telescope.finders").new_table({
+                        results = file_paths,
+                    }),
+                    previewer = conf.file_previewer({}),
+                    sorter = conf.generic_sorter({}),
+                })
+                :find()
         end
 
-        map("n", "<Leader>ro",
-            function() hp_telescope(hp():list()) end,
-            Opt("Show Harpoon (Telescope)")
-        )
-        map("n", "<Leader>o",
-            function() hp().ui:toggle_quick_menu(hp():list()) end,
-            Opt("Show Harpoon")
-        )
+        map("n", "<Leader>ro", function()
+            hp_telescope(hp():list())
+        end, Opt("Show Harpoon (Telescope)"))
+        map("n", "<Leader>o", function()
+            hp().ui:toggle_quick_menu(hp():list())
+        end, Opt("Show Harpoon"))
 
-        map("n", "<Leader>ra",
-            function()
-                local path = require("plenary.path")
-                local letter = vim.fn.input("Enter letter for this buffer: ")
-                if letter and letter ~= "" and letter:match("^[a-zA-Z]$") then
-                    local buf_name = vim.api.nvim_buf_get_name( vim.api.nvim_get_current_buf())
-                    local root = vim.loop.cwd()
-                    local np = path:new(buf_name):make_relative(root)
-                    hp():list():add({
-                        value = np,
-                        context = { row = 1, col = 0 },
-                        letter = letter:lower()
-                    })
-                    vim.notify("Added to harpoon with letter: " .. letter:lower())
-                else
-                    vim.notify("Invalid letter. Please enter a single letter.", vim.log.levels.WARN)
-                end
-            end,
-            Opt("Add file to Harpoon with letter")
-        )
+        map("n", "<Leader>ra", function()
+            local path = require("plenary.path")
+            local letter = vim.fn.input("Enter letter for this buffer: ")
+            if letter and letter ~= "" and letter:match("^[a-zA-Z]$") then
+                local buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+                local root = vim.loop.cwd()
+                local np = path:new(buf_name):make_relative(root)
+                hp():list():add({
+                    value = np,
+                    context = { row = 1, col = 0 },
+                    letter = letter:lower(),
+                })
+                vim.notify("Added to harpoon with letter: " .. letter:lower())
+            else
+                vim.notify("Invalid letter. Please enter a single letter.", vim.log.levels.WARN)
+            end
+        end, Opt("Add file to Harpoon with letter"))
 
-        local letters = 'abcdefghijklmnopqrstuvwxyz'
+        local letters = "abcdefghijklmnopqrstuvwxyz"
         for i = 1, #letters do
             local letter = letters:sub(i, i)
-            map("n", "<Leader><Leader>"..letter,
-                function()
-                    local list = hp():list()
-                    for idx, item in ipairs(list.items) do
-                        if item.letter == letter then
-                            hp():list():select(idx)
-                            return
-                        end
+            map("n", "<Leader><Leader>" .. letter, function()
+                local list = hp():list()
+                for idx, item in ipairs(list.items) do
+                    if item.letter == letter then
+                        hp():list():select(idx)
+                        return
                     end
-                    vim.notify("No harpoon entry found for letter: " .. letter, vim.log.levels.WARN)
-                end,
-                Opt("Harpoon file with letter " .. letter)
-            )
+                end
+                vim.notify("No harpoon entry found for letter: " .. letter, vim.log.levels.WARN)
+            end, Opt("Harpoon file with letter " .. letter))
         end
     end
 end
@@ -226,25 +218,20 @@ M.harpoon_extend = function()
         UI_CREATE = function(cx)
             local list = harpoon:list()
             local length = list:length()
-            for i=1,length do
+            for i = 1, length do
                 local key = i
-                map ("n", tostring(key),
-                    function()
-                        list:select(i)
-                    end,
-                    {buffer = cx.bufnr}
-                )
+                map("n", tostring(key), function()
+                    list:select(i)
+                end, { buffer = cx.bufnr })
             end
-            map("n", "%",
-                function() harpoon.ui:select_menu_item({ vsplit = true }) end,
-                { buffer = cx.bufnr }
-            )
+            map("n", "%", function()
+                harpoon.ui:select_menu_item({ vsplit = true })
+            end, { buffer = cx.bufnr })
 
-            map("n", "\"",
-                function() harpoon.ui:select_menu_item({ split = true }) end,
-                { buffer = cx.bufnr }
-            )
-        end
+            map("n", '"', function()
+                harpoon.ui:select_menu_item({ split = true })
+            end, { buffer = cx.bufnr })
+        end,
     })
 end
 
@@ -255,7 +242,7 @@ _map.display = function()
     -----------------------
     --  HIDE HIGHLIGHTS  --
     -----------------------
-    map("n", "<Leader>h", ":noh<CR>", Opt("Display: Hide \"find\" highlight"))
+    map("n", "<Leader>h", ":noh<CR>", Opt('Display: Hide "find" highlight'))
 
     ----------------
     --  COMMENTS  --
@@ -298,80 +285,89 @@ _map.project = function()
     ------------------
     if vim.g.plugins_installed then
         local ts = {
-            builtin    = function() return require('telescope.builtin') end,
-            extensions = function() return require('telescope').extensions end,
+            builtin = function()
+                return require("telescope.builtin")
+            end,
+            extensions = function()
+                return require("telescope").extensions
+            end,
             grep_fuzzy = function()
-                require('telescope.builtin').grep_string({
+                require("telescope.builtin").grep_string({
                     prompt_title = "Fuzzy Find",
                     shorten_path = true,
                     word_match = "-w",
                     only_sort_text = true,
-                    search = ''
+                    search = "",
                 })
             end,
             grep_string = function()
-                require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ")})
+                require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
             end,
             grep_file = function()
-                local current_file = vim.fn.expand('%:p')
-                if current_file ~= '' then
-                    require('telescope.builtin').live_grep({
+                local current_file = vim.fn.expand("%:p")
+                if current_file ~= "" then
+                    require("telescope.builtin").live_grep({
                         search_dirs = { current_file },
-                        prompt_title = 'Live Grep: ' .. vim.fn.expand('%:t'),
+                        prompt_title = "Live Grep: " .. vim.fn.expand("%:t"),
                     })
                 else
-                    vim.notify('No file currently open', vim.log.levels.WARN)
+                    vim.notify("No file currently open", vim.log.levels.WARN)
                 end
-            end
+            end,
         }
 
         -- File pickers
-        vim.keymap.set('n', '<Leader>f',  ts.builtin().find_files,                 Opt("Telescope: Fuzzy file finder"))
-        vim.keymap.set('n', '<Leader>b',  ts.builtin().buffers,                    Opt("Telescope: Show active buffers"))
-        vim.keymap.set('n', '<Leader>n',  ts.grep_file,                            Opt("Telescope: Search current file"))
+        vim.keymap.set("n", "<Leader>f", ts.builtin().find_files, Opt("Telescope: Fuzzy file finder"))
+        vim.keymap.set("n", "<Leader>b", ts.builtin().buffers, Opt("Telescope: Show active buffers"))
+        vim.keymap.set("n", "<Leader>n", ts.grep_file, Opt("Telescope: Search current file"))
 
         -- Extra pickers
-        vim.keymap.set('n', '<Leader>pz', ts.grep_fuzzy,                           Opt("Telescope: Fuzzy finder"))
-        vim.keymap.set('n', '<Leader>pm', ts.extensions().media_files.media_files, Opt("Telescope: Show media files"))
-        vim.keymap.set('n', '<Leader>ph', ts.builtin().help_tags,                  Opt("Telescope: interactive help menu"))
-        vim.keymap.set('n', '<Leader>po', ts.builtin().oldfiles,                   Opt("Telescope: Previously edited files"))
+        vim.keymap.set("n", "<Leader>pz", ts.grep_fuzzy, Opt("Telescope: Fuzzy finder"))
+        vim.keymap.set("n", "<Leader>pm", ts.extensions().media_files.media_files, Opt("Telescope: Show media files"))
+        vim.keymap.set("n", "<Leader>ph", ts.builtin().help_tags, Opt("Telescope: interactive help menu"))
+        vim.keymap.set("n", "<Leader>po", ts.builtin().oldfiles, Opt("Telescope: Previously edited files"))
 
         -- Global search/help
-        vim.keymap.set('n', '<Leader>/',  ts.builtin().live_grep,                  Opt("Telescope: Live grep"))
-        vim.keymap.set('n', '<Leader>,',  ts.grep_string,                          Opt("Telescope: Grep string (statusline)"))
-        vim.keymap.set('n', '<Leader>?',  ts.builtin().keymaps,                    Opt("Telescope: Show all keybinds"))
-        vim.keymap.set('n', '<Leader>*',  ts.builtin().grep_string,                Opt("Telescope: Find word under cursor"))
-        vim.keymap.set('n', '<Leader>d',  ts.builtin().lsp_document_symbols,       Opt("Telescope: Show LSP symbols in current file"))
+        vim.keymap.set("n", "<Leader>/", ts.builtin().live_grep, Opt("Telescope: Live grep"))
+        vim.keymap.set("n", "<Leader>,", ts.grep_string, Opt("Telescope: Grep string (statusline)"))
+        vim.keymap.set("n", "<Leader>?", ts.builtin().keymaps, Opt("Telescope: Show all keybinds"))
+        vim.keymap.set("n", "<Leader>*", ts.builtin().grep_string, Opt("Telescope: Find word under cursor"))
+        vim.keymap.set(
+            "n",
+            "<Leader>d",
+            ts.builtin().lsp_document_symbols,
+            Opt("Telescope: Show LSP symbols in current file")
+        )
     end
 
     -----------------
     --  GIT SIGNS  --
     -----------------
     pmap("n", "<Leader>vb", '<cmd>lua require"gitsigns".blame_line()<CR>', Opt("Git: Blame this line"))
-    pmap("n", "<Leader>vs", '<cmd>Telescope git_status<CR>',               Opt("Git: Git status"))
-    pmap("n", "<Leader>vc", '<cmd>Telescope git_commits<CR>',              Opt("Git: Git commits"))
+    pmap("n", "<Leader>vs", "<cmd>Telescope git_status<CR>", Opt("Git: Git status"))
+    pmap("n", "<Leader>vc", "<cmd>Telescope git_commits<CR>", Opt("Git: Git commits"))
 
     ----------------
     -- GIT Linker --
     ----------------
     local gl_func = function(range)
         return function()
-            require('gitlinker').get_buf_range_url(range, {
-                action_callback = require('gitlinker.actions').copy_to_clipboard
+            require("gitlinker").get_buf_range_url(range, {
+                action_callback = require("gitlinker.actions").copy_to_clipboard,
             })
-            if range == 'v' then
+            if range == "v" then
                 vim.fn.feedkeys(":", "nx") -- Return to normal mode
             end
         end
     end
 
-    pmap('n', '<leader>vl', gl_func('n'), Opt("Git: Copy Permalink"))
-    pmap('x', '<leader>vl', gl_func('v'), Opt("Git: Copy Permalink"))
+    pmap("n", "<leader>vl", gl_func("n"), Opt("Git: Copy Permalink"))
+    pmap("x", "<leader>vl", gl_func("v"), Opt("Git: Copy Permalink"))
 
     --------------
     --  WINDOW  --
     --------------
-    map("n", "<Leader>w", "<C-w>", {remap = true; desc = "Window operations"})
+    map("n", "<Leader>w", "<C-w>", { remap = true, desc = "Window operations" })
 end
 
 ------------------------------------------------------------------------
@@ -387,43 +383,54 @@ M.lsp_configure = function(client, bufnr)
     -- `vim.lsp.buf.declaration`, it will resolve at mapping time, not at
     -- run time.
     local function buf_run(str)
-        return "<Cmd>lua "..str.."<CR>"
+        return "<Cmd>lua " .. str .. "<CR>"
     end
 
-    local lOpts = function(desc) return Opt("LSP: "..desc) end
+    local lOpts = function(desc)
+        return Opt("LSP: " .. desc)
+    end
 
     -- goto bindings
-    buf_set_keymap("n", "gD",        buf_run("vim.lsp.buf.declaration()"),                                lOpts("goto declaration"))
-    buf_set_keymap("n", "gd",        buf_run("vim.lsp.buf.definition()"),                                 lOpts("goto definition"))
-    buf_set_keymap("n", "gi",        buf_run("vim.lsp.buf.implementation()"),                             lOpts("goto implementation"))
-    buf_set_keymap("n", "gl",        buf_run("vim.lsp.buf.type_definition()"),                            lOpts("goto type definition"))
-    buf_set_keymap("n", "gr",        buf_run("vim.lsp.buf.references()"),                                 lOpts("see all object references"))
+    buf_set_keymap("n", "gD", buf_run("vim.lsp.buf.declaration()"), lOpts("goto declaration"))
+    buf_set_keymap("n", "gd", buf_run("vim.lsp.buf.definition()"), lOpts("goto definition"))
+    buf_set_keymap("n", "gi", buf_run("vim.lsp.buf.implementation()"), lOpts("goto implementation"))
+    buf_set_keymap("n", "gl", buf_run("vim.lsp.buf.type_definition()"), lOpts("goto type definition"))
+    buf_set_keymap("n", "gr", buf_run("vim.lsp.buf.references()"), lOpts("see all object references"))
 
     -- Hints, diagnostics, etc..
-    buf_set_keymap("n", "<Leader>k",  buf_run("vim.lsp.buf.signature_help()"),                             lOpts("signature"))
-    buf_set_keymap("n", "<Leader>K",  buf_run("vim.lsp.buf.hover()"),                                      lOpts("start hover"))
-    buf_set_keymap("n", "<Leader>e",  buf_run("vim.diagnostic.open_float()"),                              lOpts("open diagnostic float (window)"))
+    buf_set_keymap("n", "<Leader>k", buf_run("vim.lsp.buf.signature_help()"), lOpts("signature"))
+    buf_set_keymap("n", "<Leader>K", buf_run("vim.lsp.buf.hover()"), lOpts("start hover"))
+    buf_set_keymap("n", "<Leader>e", buf_run("vim.diagnostic.open_float()"), lOpts("open diagnostic float (window)"))
 
     -- Usage jumping
-    buf_set_keymap("n", "<Leader>l[", buf_run("vim.lsp.diagnostic.goto_prev()"),                           lOpts("goto previous use"))
-    buf_set_keymap("n", "<Leader>l]", buf_run("vim.lsp.diagnostic.goto_next()"),                           lOpts("goto next use"))
+    buf_set_keymap("n", "<Leader>l[", buf_run("vim.lsp.diagnostic.goto_prev()"), lOpts("goto previous use"))
+    buf_set_keymap("n", "<Leader>l]", buf_run("vim.lsp.diagnostic.goto_next()"), lOpts("goto next use"))
 
     -- Workspace operations
-    buf_set_keymap("n", "<Leader>lwa", buf_run("vim.lsp.buf.add_workspace_folder()"),                       lOpts("add workspace folder"))
-    buf_set_keymap("n", "<Leader>lwr", buf_run("vim.lsp.buf.remove_workspace_folder()"),                    lOpts("remove workspace folder"))
-    buf_set_keymap("n", "<Leader>lwl", buf_run("print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"), lOpts("list workspace folders"))
+    buf_set_keymap("n", "<Leader>lwa", buf_run("vim.lsp.buf.add_workspace_folder()"), lOpts("add workspace folder"))
+    buf_set_keymap(
+        "n",
+        "<Leader>lwr",
+        buf_run("vim.lsp.buf.remove_workspace_folder()"),
+        lOpts("remove workspace folder")
+    )
+    buf_set_keymap(
+        "n",
+        "<Leader>lwl",
+        buf_run("print(vim.inspect(vim.lsp.buf.list_workspace_folders()))"),
+        lOpts("list workspace folders")
+    )
 
     -- Workspace operations
-    buf_set_keymap("n", "<Leader>lr", buf_run("vim.lsp.buf.rename()"),                                     lOpts("rename LSP object"))
-    buf_set_keymap("n", "<Leader>lq", buf_run("vim.lsp.diagnostic.set_loclist()"),                         lOpts("set the location list ???"))
+    buf_set_keymap("n", "<Leader>lr", buf_run("vim.lsp.buf.rename()"), lOpts("rename LSP object"))
+    buf_set_keymap("n", "<Leader>lq", buf_run("vim.lsp.diagnostic.set_loclist()"), lOpts("set the location list ???"))
 
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.document_formatting then
-        buf_set_keymap("n", "<Leader>lf", buf_run("vim.lsp.buf.formatting()"),       lOpts("format buffer"))
+        buf_set_keymap("n", "<Leader>lf", buf_run("vim.lsp.buf.formatting()"), lOpts("format buffer"))
     elseif client.server_capabilities.document_range_formatting then
         buf_set_keymap("n", "<Leader>lr", buf_run("vim.lsp.buf.range_formatting()"), lOpts("format range"))
     end
-
 end
 
 ------------------------------------------------------------------------
@@ -443,49 +450,49 @@ M.clue = {
     -- Clue popup triggers
     triggers = {
         -- Leader triggers
-        { mode = 'n', keys = '<Leader>' },
-        { mode = 'x', keys = '<Leader>' },
+        { mode = "n", keys = "<Leader>" },
+        { mode = "x", keys = "<Leader>" },
 
         -- Built-in completion
-        { mode = 'i', keys = '<C-x>' },
+        { mode = "i", keys = "<C-x>" },
 
         -- `g` key
-        { mode = 'n', keys = 'g' },
-        { mode = 'x', keys = 'g' },
+        { mode = "n", keys = "g" },
+        { mode = "x", keys = "g" },
 
         -- Marks
-        { mode = 'n', keys = "'" },
-        { mode = 'n', keys = '`' },
-        { mode = 'x', keys = "'" },
-        { mode = 'x', keys = '`' },
+        { mode = "n", keys = "'" },
+        { mode = "n", keys = "`" },
+        { mode = "x", keys = "'" },
+        { mode = "x", keys = "`" },
 
         -- Registers
-        { mode = 'n', keys = '"' },
-        { mode = 'x', keys = '"' },
-        { mode = 'i', keys = '<C-r>' },
-        { mode = 'c', keys = '<C-r>' },
+        { mode = "n", keys = '"' },
+        { mode = "x", keys = '"' },
+        { mode = "i", keys = "<C-r>" },
+        { mode = "c", keys = "<C-r>" },
 
         -- Window commands
-        { mode = 'n', keys = '<C-w>' },
+        { mode = "n", keys = "<C-w>" },
         -- { mode = 'n', keys = '<Leader>w' },
 
         -- `z` key
-        { mode = 'n', keys = 'z' },
-        { mode = 'x', keys = 'z' },
+        { mode = "n", keys = "z" },
+        { mode = "x", keys = "z" },
     },
     -- Additional clue hints
     clues = {
-        { mode = 'n', keys = '<Leader>l',  desc = 'LSP: Extra'},
-        { mode = 'n', keys = '<Leader>lw', desc = 'Workspace'},
-        { mode = 'n', keys = '<Leader>v',  desc = 'VCS (git)'},
-        { mode = 'x', keys = '<Leader>v',  desc = 'VCS (git)'},
-        { mode = 'n', keys = '<Leader>s',  desc = 'Surround'},
-        { mode = 'x', keys = '<Leader>s',  desc = 'Surround'},
-        { mode = 'n', keys = '<Leader>p',  desc = 'Misc. Pickers'},
-        { mode = 'n', keys = '<Leader><Leader>',  desc = 'Harpoon'},
-        { mode = 'n', keys = '<Leader>a',  desc = 'Code Companion'},
-        { mode = 'v', keys = '<Leader>a',  desc = 'Code Companion'},
-    }
+        { mode = "n", keys = "<Leader>l", desc = "LSP: Extra" },
+        { mode = "n", keys = "<Leader>lw", desc = "Workspace" },
+        { mode = "n", keys = "<Leader>v", desc = "VCS (git)" },
+        { mode = "x", keys = "<Leader>v", desc = "VCS (git)" },
+        { mode = "n", keys = "<Leader>s", desc = "Surround" },
+        { mode = "x", keys = "<Leader>s", desc = "Surround" },
+        { mode = "n", keys = "<Leader>p", desc = "Misc. Pickers" },
+        { mode = "n", keys = "<Leader><Leader>", desc = "Harpoon" },
+        { mode = "n", keys = "<Leader>a", desc = "Code Companion" },
+        { mode = "v", keys = "<Leader>a", desc = "Code Companion" },
+    },
 }
 
 ------------

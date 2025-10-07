@@ -1,20 +1,20 @@
 local M = {}
 
-M.config = function ()
-    require"octo".setup({
-        default_remote = {"upstream", "origin"}; -- order to try remotes
-        ssh_aliases = {},                        -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`
-        reaction_viewer_hint_icon = "";         -- marker for user reactions
-        user_icon = " ";                        -- user icon
-        timeline_marker = "";                   -- timeline marker
-        timeline_indent = "2";                   -- timeline indentation
-        right_bubble_delimiter = "";            -- Bubble delimiter
-        left_bubble_delimiter = "";             -- Bubble delimiter
-        github_hostname = "";                    -- GitHub Enterprise host
-        snippet_context_lines = 4;               -- number or lines around commented lines
+M.config = function()
+    require("octo").setup({
+        default_remote = { "upstream", "origin" }, -- order to try remotes
+        ssh_aliases = {}, -- SSH aliases. e.g. `ssh_aliases = {["github.com-work"] = "github.com"}`
+        reaction_viewer_hint_icon = "", -- marker for user reactions
+        user_icon = " ", -- user icon
+        timeline_marker = "", -- timeline marker
+        timeline_indent = "2", -- timeline indentation
+        right_bubble_delimiter = "", -- Bubble delimiter
+        left_bubble_delimiter = "", -- Bubble delimiter
+        github_hostname = "", -- GitHub Enterprise host
+        snippet_context_lines = 4, -- number or lines around commented lines
         file_panel = {
-            size = 10,                             -- changed files panel rows
-            use_icons = true                       -- use web-devicons in file panel (if false, nvim-web-devicons does not need to be installed)
+            size = 10, -- changed files panel rows
+            use_icons = true, -- use web-devicons in file panel (if false, nvim-web-devicons does not need to be installed)
         },
         mappings = {
             issue = {
@@ -126,8 +126,8 @@ M.config = function ()
                 -- select_prev_entry = { lhs = "[q", desc = "move to next changed file" },
                 -- close_review_tab = { lhs = "<C-c>", desc = "close review tab" },
                 -- toggle_viewed = { lhs = "<leader><space>", desc = "toggle viewer viewed state" },
-            }
-        }
+            },
+        },
     })
 end
 

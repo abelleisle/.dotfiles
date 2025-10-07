@@ -18,7 +18,18 @@
         };
 
         # Formatter settings
-        settings.formatter = { };
+        settings.formatter = {
+          stylua = {
+            options = [
+              "--syntax"
+              "LuaJIT"
+              "--indent-type"
+              "spaces"
+              "--indent-width"
+              "4"
+            ];
+          };
+        };
       };
     };
 }

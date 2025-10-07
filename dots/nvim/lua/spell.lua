@@ -1,11 +1,11 @@
 local G = {}
 
-G.spellpath = vim.fn.stdpath 'config' .. '/spell/en.utf-8.add'
+G.spellpath = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 
 function G.userdict()
     local words = {}
 
-    for word in io.open(G.spellpath, 'r'):lines() do
+    for word in io.open(G.spellpath, "r"):lines() do
         table.insert(words, word)
     end
 

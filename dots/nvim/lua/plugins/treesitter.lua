@@ -3,7 +3,7 @@ local M = {}
 M.config = function()
     local ts_config = require("nvim-treesitter.configs")
 
-    ts_config.setup {
+    ts_config.setup({
         ensure_installed = {
             -- Programming
             "bash",
@@ -31,7 +31,7 @@ M.config = function()
             "markdown",
             "markdown_inline",
             "proto",
-            "yaml"
+            "yaml",
         },
         sync_install = true, -- Wait while parsers install
         highlight = {
@@ -53,7 +53,7 @@ M.config = function()
 
         autotag = { -- windwp/nvim-ts-autotag
             enable = true,
-            filetypes = { "html" , "xml", "php" },
+            filetypes = { "html", "xml", "php" },
         },
 
         matchup = { -- andymass/vim-matchup
@@ -71,7 +71,7 @@ M.config = function()
         --         'cpp'
         --     }
         -- }
-    }
+    })
 end
 
 return M

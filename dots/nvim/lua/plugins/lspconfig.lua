@@ -16,20 +16,19 @@ local get_capabilities = function()
                     tagSupport = { valueSet = { 1 } },
                     resolveSupport = {
                         properties = {
-                            'documentation',
-                            'detail',
-                            'additionalTextEdits',
-                        }
-                    }
-                }
-            }
-        }
+                            "documentation",
+                            "detail",
+                            "additionalTextEdits",
+                        },
+                    },
+                },
+            },
+        },
     }
     local merged_capabilities = vim.tbl_deep_extend("force", default_capabilities, modified_capabilities)
 
     return require("cmp_nvim_lsp").default_capabilities(merged_capabilities)
 end -- fn get_capabilities
-
 
 local get_options = function()
     local opts = {
@@ -39,18 +38,16 @@ local get_options = function()
         root_dir = vim.loop.cwd,
         launch = true,
         flags = {
-            debounce_text_changes = 150
+            debounce_text_changes = 150,
         },
         handlers = {
-            ["textDocument/publishDiagnostics"] = vim.lsp.with(
-                vim.lsp.diagnostic.on_publish_diagnostics, {
-                    virtual_text = true,
-                    underline = true,
-                    signs = true,
-                    update_in_insert = true,
-                }
-            )
-        }
+            ["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+                virtual_text = true,
+                underline = true,
+                signs = true,
+                update_in_insert = true,
+            }),
+        },
     }
     return opts
 end -- fn get_options
@@ -74,20 +71,20 @@ local lsp_entry = function(server_name, auto_install)
 end --fn create_lsp_entry
 
 M.servers = {
-    clang    = lsp_entry("clangd"                     ),
-    lua      = lsp_entry("lua_ls"                     ),
-    latex    = lsp_entry("ltex"                       ),
-    python   = lsp_entry("jedi_language_server"       ),
-    rust     = lsp_entry("rust_analyzer"              ),
-    cmake    = lsp_entry("cmake"                      ),
-    proto    = lsp_entry("pbls"                       ),
-    nix      = lsp_entry("nil_ls"              ,  true),
- -- yaml     = lsp_entry("yaml-language-server", false),
-    ccls     = lsp_entry("ccls"                , false),
-    vhdl     = lsp_entry("rust_hdl"            , false),
-    zig      = lsp_entry("zls"                 , false),
-    gdscript = lsp_entry("gdscript"            , false),
-    tsclint  = lsp_entry("oxlint"              , false),
+    clang = lsp_entry("clangd"),
+    lua = lsp_entry("lua_ls"),
+    latex = lsp_entry("ltex"),
+    python = lsp_entry("jedi_language_server"),
+    rust = lsp_entry("rust_analyzer"),
+    cmake = lsp_entry("cmake"),
+    proto = lsp_entry("pbls"),
+    nix = lsp_entry("nil_ls", true),
+    -- yaml     = lsp_entry("yaml-language-server", false),
+    ccls = lsp_entry("ccls", false),
+    vhdl = lsp_entry("rust_hdl", false),
+    zig = lsp_entry("zls", false),
+    gdscript = lsp_entry("gdscript", false),
+    tsclint = lsp_entry("oxlint", false),
 }
 
 local get_setup_handlers = function(default_opts)
@@ -105,9 +102,9 @@ local get_setup_handlers = function(default_opts)
                         },
                     },
                     procMacro = {
-                        enable = true
+                        enable = true,
                     },
-                }
+                },
             })
             lspconfig[M.servers.rust.lsp].setup(rust_opts)
         end,
@@ -116,18 +113,18 @@ local get_setup_handlers = function(default_opts)
                 single_file_support = true,
                 init_options = {
                     client = {
-                        snippetSupport = true
+                        snippetSupport = true,
                     },
-                    compilationDatabaseDirectory = "build";
+                    compilationDatabaseDirectory = "build",
                     index = {
-                        threads = 0;
-                    };
+                        threads = 0,
+                    },
                     cache = {
-                        directory = "/tmp/clangd/";
-                    };
+                        directory = "/tmp/clangd/",
+                    },
                     highlight = {
-                        lsRangers = true;
-                    };
+                        lsRangers = true,
+                    },
                     clang = {
                         excludeArgs = {
                             "-mlongcalls",
@@ -136,18 +133,19 @@ local get_setup_handlers = function(default_opts)
                             "-fno-tree-switch-conversion",
                             "-mtext-section-literals",
                         },
-                    }
+                    },
                 },
                 cmd = { "clangd" },
                 filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "arduino" },
                 --root_dir = util.root_pattern('compile_commands.json', '.ccls', 'compile_flags.txt', '.git')
                 --root_dir = vim.loop.cwd,
                 root_dir = function(fname)
-                    return lspconfig_util.root_pattern(--'build/compile_commands.json',
-                                            'compile_commands.json',
-                                            'compile_flags.txt',
-                                            '.git')(fname) or lspconfig_util.path.dirname(fname)
-                end
+                    return lspconfig_util.root_pattern( --'build/compile_commands.json',
+                        "compile_commands.json",
+                        "compile_flags.txt",
+                        ".git"
+                    )(fname) or lspconfig_util.path.dirname(fname)
+                end,
                 -- root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls") or dirname
             })
             lspconfig[M.servers.clang.lsp].setup(clang_opts)
@@ -158,10 +156,10 @@ local get_setup_handlers = function(default_opts)
                     Lua = {
                         runtime = {
                             -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                            version = 'LuaJIT',
+                            version = "LuaJIT",
                         },
                         diagnostics = {
-                            globals = {"vim"}
+                            globals = { "vim" },
                         },
                         workspace = {
                             library = {
@@ -174,15 +172,15 @@ local get_setup_handlers = function(default_opts)
                             checkThirdParty = "Apply",
                         },
                         telemetry = {
-                            enable = false
-                        }
-                    }
-                }
+                            enable = false,
+                        },
+                    },
+                },
             })
 
-            local proj_override = vim.env.LUA_LS_LIBRARY_PATH;
+            local proj_override = vim.env.LUA_LS_LIBRARY_PATH
             if proj_override then
-                local third_party_table = vim.split(proj_override, ":", {trimempty=true})
+                local third_party_table = vim.split(proj_override, ":", { trimempty = true })
                 lua_opts.settings.Lua.workspace.userThirdParty = third_party_table
             end
 
@@ -193,19 +191,19 @@ local get_setup_handlers = function(default_opts)
                 settings = {
                     ltex = {
                         dictionary = {
-                            ['en-US'] = require("spell").userdict()
-                        }
-                    }
-                }
+                            ["en-US"] = require("spell").userdict(),
+                        },
+                    },
+                },
             })
             lspconfig[M.servers.latex.lsp].setup(latex_opts)
         end,
         [M.servers.zig.lsp] = function()
             local zig_opts = vim.tbl_deep_extend("force", opts, {
-                cmd = {"zls"},
-                filetypes = {"zig", "zir"},
+                cmd = { "zls" },
+                filetypes = { "zig", "zir" },
                 root_dir = lspconfig_util.root_pattern("zls.json", ".git", "build.zig"),
-                single_file_support = false
+                single_file_support = false,
             })
             lspconfig[M.servers.zig.lsp].setup(zig_opts)
         end,
@@ -217,7 +215,7 @@ local get_setup_handlers = function(default_opts)
             lspconfig[M.servers.nix.lsp].setup(nix_opts)
         end,
         [M.servers.vhdl.lsp] = function()
-        --[[
+            --[[
             local vhdl_opts = vim.tbl_deep_extend("force", opts, {
                 default_config = {
                     cmd = {"vhdl_ls"};
@@ -232,7 +230,7 @@ local get_setup_handlers = function(default_opts)
         --]]
         end,
         [M.servers.ccls.lsp] = function()
-        --[[
+            --[[
             local ccls_opts = vim.tbl_deep_extend("force", opts, {
                 init_options = {
                     client = {
@@ -277,14 +275,14 @@ local get_setup_handlers = function(default_opts)
         end,
         [M.servers.tsclint.lsp] = function()
             local oxlint_opts = vim.tbl_deep_extend("force", opts, {
-                cmd = { 'oxc_language_server' },
+                cmd = { "oxc_language_server" },
                 filetypes = {
-                    'javascript',
-                    'javascriptreact',
-                    'javascript.jsx',
-                    'typescript',
-                    'typescriptreact',
-                    'typescript.tsx',
+                    "javascript",
+                    "javascriptreact",
+                    "javascript.jsx",
+                    "typescript",
+                    "typescriptreact",
+                    "typescript.tsx",
                 },
                 workspace_required = true,
                 -- root_dir = function(bufnr, on_dir)
@@ -293,19 +291,21 @@ local get_setup_handlers = function(default_opts)
                 --     local root_markers = lspconfig_util.insert_package_json({ '.oxlintrc.json' }, 'oxlint', fname)
                 --     on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
                 -- end,
-                root_dir = lspconfig_util.root_pattern('.oxlintrc.json'),
+                root_dir = lspconfig_util.root_pattern(".oxlintrc.json"),
             })
             lspconfig[M.servers.tsclint.lsp].setup(oxlint_opts)
-        end
+        end,
     }
     return setup_handlers_list
 end
 
 local get_lsp_auto_install = function(auto_install)
-    if auto_install == nil then auto_install = true end
+    if auto_install == nil then
+        auto_install = true
+    end
 
     local t = {}
-    for _,v in pairs(M.servers) do
+    for _, v in pairs(M.servers) do
         if v.auto_install == auto_install then
             table.insert(t, v.lsp)
         end
@@ -315,7 +315,6 @@ local get_lsp_auto_install = function(auto_install)
 end -- fn get_lsp_auto_install
 
 M.on_attach = function(client, bufnr)
-
     -- LSP buffer settings
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
@@ -324,7 +323,7 @@ M.on_attach = function(client, bufnr)
     local cfg = {
         bind = true,
         handler_opts = {
-            border = "rounded"
+            border = "rounded",
         },
         hint_enable = false,
         cursorhold_update = false,
@@ -358,7 +357,7 @@ M.config = function()
         end,
     }
     local mason_install_list = get_lsp_auto_install(true)
-    for _,s in ipairs(setup_handlers_list) do
+    for _, s in ipairs(setup_handlers_list) do
         if setup_handlers_list[s] ~= nil then
             mason_setup_handlers[s] = setup_handlers_list[s]
         end
@@ -372,23 +371,22 @@ M.config = function()
     end
 
     mason.setup()
-    mason_lspconfig.setup {
+    mason_lspconfig.setup({
         ensure_installed = get_lsp_auto_install(true),
         automatic_installation = false,
-    }
+    })
 
-    mason_lspconfig.setup_handlers (mason_setup_handlers)
+    mason_lspconfig.setup_handlers(mason_setup_handlers)
 
     local manual_setup_handlers = {
         function(server_name)
             lspconfig[server_name].setup(opts)
         end,
-
     } -- manual_setup_handlers
 
     -- Setup manually configured LSPs
     local manual_install_list = get_lsp_auto_install(false)
-    for _,s in ipairs(manual_install_list) do
+    for _, s in ipairs(manual_install_list) do
         if setup_handlers_list[s] ~= nil then
             manual_setup_handlers[s] = setup_handlers_list[s]
         end
@@ -404,11 +402,11 @@ M.config = function()
     -- adds a check to see if any of the active clients have the capability
     -- textDocument/documentHighlight. without the check it was causing constant
     -- errors when servers didn't have that capability
-    for _,client in ipairs(vim.lsp.get_clients()) do
+    for _, client in ipairs(vim.lsp.get_clients()) do
         if client.server_capabilities.document_highlight then
-            vim.cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-            vim.cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
-            vim.cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
+            vim.cmd([[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]])
+            vim.cmd([[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]])
+            vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
             break -- only add the autocmds once
         end
     end
@@ -420,14 +418,13 @@ M.config = function()
     --end
 
     -- replace the default lsp diagnostic letters with prettier symbols
-    vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
-    vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
-    vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
-    vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
+    vim.fn.sign_define("LspDiagnosticsSignError", { text = "", numhl = "LspDiagnosticsDefaultError" })
+    vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", numhl = "LspDiagnosticsDefaultWarning" })
+    vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "", numhl = "LspDiagnosticsDefaultInformation" })
+    vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", numhl = "LspDiagnosticsDefaultHint" })
 
     -- vim.cmd("autocmd CursorHold * lua vim.diagnostic.open_float()")
     -- vim.cmd("autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()")
-
 end -- fn M.config
 
 return M

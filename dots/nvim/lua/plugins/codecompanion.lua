@@ -1,21 +1,20 @@
 local M = {}
 
-M.config = function()
-end
+M.config = function() end
 
 M.opts = {
     strategies = {
         chat = {
             adapter = "qwen",
             roles = {
-                user = "andy"
+                user = "andy",
             },
         },
         inline = {
-            adapter = "qwen"
+            adapter = "qwen",
         },
         cmd = {
-            adapter = "qwen"
+            adapter = "qwen",
         },
     },
     display = {
@@ -27,7 +26,7 @@ M.opts = {
             opts = {
                 show_default_actions = true,
                 show_default_prompt_library = true,
-            }
+            },
         },
         diff = {
             -- provider = "mini_diff", -- default|mini_diff
@@ -36,8 +35,8 @@ M.opts = {
         chat = {
             window = {
                 layout = "vertical", -- "vertical" will open this to the side
-                width = 0.3 -- Ignored if using "buffer"
-            }
+                width = 0.3, -- Ignored if using "buffer"
+            },
         },
     },
     adapters = {
@@ -57,7 +56,7 @@ M.opts = {
     },
     opts = {
         log_level = "ERROR",
-    }
+    },
 }
 
 return M

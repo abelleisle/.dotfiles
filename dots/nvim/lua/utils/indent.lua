@@ -2,9 +2,9 @@ local function get_selection_range()
     local start_line, end_line
 
     local mode = vim.api.nvim_get_mode().mode
-    if mode == 'v' or mode == 'V' or mode == '\22' then
-        local current_pos = vim.fn.getpos('.')
-        local visual_pos = vim.fn.getpos('v')
+    if mode == "v" or mode == "V" or mode == "\22" then
+        local current_pos = vim.fn.getpos(".")
+        local visual_pos = vim.fn.getpos("v")
         local current_line = current_pos[2]
         local visual_line = visual_pos[2]
 
@@ -17,8 +17,8 @@ local function get_selection_range()
         -- start_line = start_pos[2]
         -- end_line = end_pos[2]
 
-        local count = vim.v.count1  -- Get count (defaults to 1 if not specified)
-        start_line = vim.fn.line('.')
+        local count = vim.v.count1 -- Get count (defaults to 1 if not specified)
+        start_line = vim.fn.line(".")
         end_line = start_line + count - 1
     end
 
@@ -37,18 +37,14 @@ local function indent_and_wrap_braces()
     local current_indent = vim.fn.indent(start_line)
 
     -- Insert closing brace with same indentation as start
-    vim.api.nvim_buf_set_lines(0, end_line, end_line, true,
-        {string.rep(' ', current_indent) .. '}'}
-    )
+    vim.api.nvim_buf_set_lines(0, end_line, end_line, true, { string.rep(" ", current_indent) .. "}" })
 
     -- Insert opening brace with same indentation as start
-    vim.api.nvim_buf_set_lines(0, start_line - 1, start_line - 1, true,
-        {string.rep(' ', current_indent) .. '{'}
-    )
+    vim.api.nvim_buf_set_lines(0, start_line - 1, start_line - 1, true, { string.rep(" ", current_indent) .. "{" })
 
     -- Indent the lines between braces
-    for line = start_line+1, end_line+1 do
-        vim.cmd(line .. '>')
+    for line = start_line + 1, end_line + 1 do
+        vim.cmd(line .. ">")
     end
 
     -- TODO look into fixing final cursor positioning
@@ -59,7 +55,7 @@ local function indent_and_wrap_braces()
 end
 
 local M = {
-    indent_and_wrap_braces = indent_and_wrap_braces
+    indent_and_wrap_braces = indent_and_wrap_braces,
 }
 
 return M

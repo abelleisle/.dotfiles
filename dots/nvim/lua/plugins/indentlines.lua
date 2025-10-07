@@ -24,15 +24,15 @@ M.config = function()
         -- Indent line colors
         -- Indent scope colors
         local colorutils = require("utils.colors")
-        local sc_hl = vim.api.nvim_get_hl(0, { name = "Normal"} )
+        local sc_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
         local sc_hl_bg = colorutils.hl_to_hex(sc_hl.bg or vim.g.terminal_color_0, "#000000")
         local sc_hl_fg = colorutils.hl_to_hex(sc_hl.fg or vim.g.terminal_color_15, "#FFFFFF")
 
         local gray = colorutils.blend(sc_hl_fg, sc_hl_bg, 0.50)
         local spaces = colorutils.blend(sc_hl_fg, sc_hl_bg, 0.10)
 
-        vim.api.nvim_set_hl(0, "IblScope",      { fg=gray })
-        vim.api.nvim_set_hl(0, "IblWhitespace", { fg=spaces })
+        vim.api.nvim_set_hl(0, "IblScope", { fg = gray })
+        vim.api.nvim_set_hl(0, "IblWhitespace", { fg = spaces })
     end)
     local blank_line_opts = {
         indent = {
@@ -45,11 +45,14 @@ M.config = function()
         },
         exclude = {
             filetypes = {
-                "help", "terminal", "NvimTree",
-                "TelescopePrompt", "TelescopeResults"
+                "help",
+                "terminal",
+                "NvimTree",
+                "TelescopePrompt",
+                "TelescopeResults",
             },
             buftypes = {
-                "terminal"
+                "terminal",
             },
         },
         scope = {
@@ -67,7 +70,7 @@ M.config = function()
         -- eol = "" -- Option 1
         -- eol = "↴" -- Option 2
         tab = "   ",
-        lead= "∙",
+        lead = "∙",
         -- leadmultispace = "⋅˙",
     }
 

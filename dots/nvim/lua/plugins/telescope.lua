@@ -1,7 +1,7 @@
 local M = {}
 
 M.config = function()
-    require("telescope").setup {
+    require("telescope").setup({
         defaults = {
             vimgrep_arguments = {
                 "rg",
@@ -10,7 +10,7 @@ M.config = function()
                 "--with-filename",
                 "--line-number",
                 "--column",
-                "--smart-case"
+                "--smart-case",
             },
             prompt_prefix = "  ",
             selection_caret = "  ",
@@ -23,14 +23,14 @@ M.config = function()
                 horizontal = {
                     prompt_position = "top",
                     preview_width = 0.55,
-                    results_width = 0.8
+                    results_width = 0.8,
                 },
                 vertical = {
-                    mirror = false
+                    mirror = false,
                 },
                 width = 0.87,
                 height = 0.80,
-                preview_cutoff = 120
+                preview_cutoff = 120,
             },
             --file_sorter = require "telescope.sorters".get_fuzzy_file,
             file_ignore_patterns = {
@@ -39,24 +39,24 @@ M.config = function()
                 "docs/doxygen/*",
                 "doxygen/*",
                 "zig-cache/*",
-                "zig-out/*"
+                "zig-out/*",
             },
             --generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
             --path_display = {"smart", "shorten"}, -- TODO: truncate when required by shortening path
             dynamic_preview_title = true,
             winblend = 0,
             border = {},
-            borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
+            borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
             color_devicons = true,
             use_less = true,
-            set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
-            file_previewer = require "telescope.previewers".vim_buffer_cat.new,
-            grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new,
-            qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
+            set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+            file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+            grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+            qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
             -- Developer configurations: Not meant for general override
-            buffer_previewer_maker = require "telescope.previewers".buffer_previewer_maker,
+            buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
             preview = {
-                treesitter = true
+                treesitter = true,
             },
         },
         extensions = {
@@ -64,12 +64,12 @@ M.config = function()
                 fuzzy = true, -- false will only do exact matching
                 override_generic_sorter = true, -- override the generic sorter
                 override_file_sorter = true, -- override the file sorter
-                case_mode = "smart_case" -- or "ignore_case" or "respect_case"
+                case_mode = "smart_case", -- or "ignore_case" or "respect_case"
                 -- the default case_mode is "smart_case"
             },
             media_files = {
-                filetypes = {"png", "webp", "jpg", "jpeg"},
-                find_cmd = "rg" -- find command (defaults to `fd`)
+                filetypes = { "png", "webp", "jpg", "jpeg" },
+                find_cmd = "rg", -- find command (defaults to `fd`)
             },
         },
         pickers = {
@@ -87,8 +87,8 @@ M.config = function()
             --         "rg", "--ignore", "--hidden", "--files"
             --     }
             -- }
-        }
-    }
+        },
+    })
 
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("media_files")

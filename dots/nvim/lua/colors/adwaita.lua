@@ -19,7 +19,7 @@ local M = {}
 --     return flavour
 -- end
 
-M.config = function ()
+M.config = function()
     -- if not valid_palette(flavour) then
     --     vim.notify("Unknown catppuccin palette: "..flavour, vim.log.levels.ERROR)
     -- end
@@ -67,7 +67,6 @@ M.config = function ()
     --     },
     -- })
 
-
     -- local palette = require('adwaita.utils').gen_colors()
     --
     -- vim.g.colors = {
@@ -94,9 +93,9 @@ M.config = function ()
     -- end
 
     -- setup must be called before loading
-    vim.cmd.colorscheme "adwaita"
+    vim.cmd.colorscheme("adwaita")
 
-    vim.api.nvim_set_hl(0, 'TelescopeSelection', {link='CursorLine'})
+    vim.api.nvim_set_hl(0, "TelescopeSelection", { link = "CursorLine" })
 end
 
 return M

@@ -22,7 +22,7 @@ M.config = function()
     end
 
     -- nvim-cmp setup
-    cmp.setup {
+    cmp.setup({
         snippet = {
             expand = function(args)
                 luasnip.lsp_expand(args.body)
@@ -52,11 +52,15 @@ M.config = function()
                 local strings = vim.split(kind.kind, "%s", { trimempty = true })
                 local type_str = "    (" .. (strings[2] or "") .. ")"
                 kind.kind = " " .. (strings[1] or "") .. " "
-                kind.menu = type_str.." "..(({
-                    nvim_lsp = "[LSP]",
-                    nvim_lua = "[Lua]",
-                    buffer = "[BUF]",
-                })[entry.source.name] or "")
+                kind.menu = type_str
+                    .. " "
+                    .. (
+                        ({
+                            nvim_lsp = "[LSP]",
+                            nvim_lua = "[Lua]",
+                            buffer = "[BUF]",
+                        })[entry.source.name] or ""
+                    )
 
                 return kind
             end,
@@ -72,10 +76,10 @@ M.config = function()
             ["<C-d>"] = cmp.mapping.scroll_docs(4),
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<C-e>"] = cmp.mapping.close(),
-            ["<CR>"] = cmp.mapping.confirm {
+            ["<CR>"] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
                 select = false,
-            },
+            }),
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
@@ -98,32 +102,31 @@ M.config = function()
                 end
             end, { "i", "s" }),
         },
-        sources = cmp.config.sources {
+        sources = cmp.config.sources({
             { name = "nvim_lsp" },
             { name = "luasnip" },
             { name = "buffer" },
             { name = "nvim_lua" },
             { name = "path" },
-            { name = "codecompanion" }
-        },
-    } -- cmp.setup
+            { name = "codecompanion" },
+        }),
+    }) -- cmp.setup
 
-    cmp.setup.cmdline ({'/', '?'}, {
+    cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-            {name = 'buffer'},
-            {name = 'path'}
-        }
+            { name = "buffer" },
+            { name = "path" },
+        },
     })
 
-    cmp.setup.cmdline (':', {
+    cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-            {name = 'path'},
-            {name = 'cmdline'}
-        })
+            { name = "path" },
+            { name = "cmdline" },
+        }),
     })
-
 end
 
 M.luasnip = function()
@@ -134,17 +137,17 @@ M.luasnip = function()
         return
     end
 
-    luasnip.config.set_config {
+    luasnip.config.set_config({
         history = true,
         updateevents = "TextChanged,TextChangedI",
-    }
+    })
 
     -- Extend honza/vim-snippets "all" to LuaSnip all
     luasnip.filetype_extend("all", { "_" })
 
-    require('luasnip.loaders.from_vscode').lazy_load()
-    require('luasnip.loaders.from_snipmate').lazy_load()
-    require('luasnip.loaders.from_lua').lazy_load()
+    require("luasnip.loaders.from_vscode").lazy_load()
+    require("luasnip.loaders.from_snipmate").lazy_load()
+    require("luasnip.loaders.from_lua").lazy_load()
 end
 
 return M

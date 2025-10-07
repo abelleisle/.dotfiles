@@ -3,8 +3,7 @@
 local M = {}
 
 -- Configuration function for additional setup (currently empty)
-M.config = function()
-end
+M.config = function() end
 
 -- Options table to configure the Avante plugin
 M.opts = {

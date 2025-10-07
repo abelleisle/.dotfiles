@@ -1,10 +1,10 @@
 local M = {}
 
-M.flavours = {"latte", "frappe", "macchiato", "mocha"}
+M.flavours = { "latte", "frappe", "macchiato", "mocha" }
 
 local function valid_palette(str)
     for _, element in ipairs(M.flavours) do
-        if (element == str) then
+        if element == str then
             return true
         end
     end
@@ -19,9 +19,9 @@ local function get_dark_background(flavour)
     return flavour
 end
 
-M.config = function (flavour)
+M.config = function(flavour)
     if not valid_palette(flavour) then
-        vim.notify("Unknown catppuccin palette: "..flavour, vim.log.levels.ERROR)
+        vim.notify("Unknown catppuccin palette: " .. flavour, vim.log.levels.ERROR)
     end
     require("catppuccin").setup({
         flavour = flavour,
@@ -67,25 +67,25 @@ M.config = function (flavour)
         },
     })
 
-    local palette = require("catppuccin.palettes").get_palette(flavour);
+    local palette = require("catppuccin.palettes").get_palette(flavour)
 
     vim.g.colors = {
-      bg      = palette.base,
-      fg      = palette.text,
-      magenta = palette.muave,
-      red     = palette.red,
-      orange  = palette.peach,
-      yellow  = palette.yellow,
-      green   = palette.green,
-      cyan    = palette.sky,
-      blue    = palette.blue,
-      grey0   = palette.surface0,
-      grey1   = palette.overlay1,
-      grey2   = palette.subtext1,
+        bg = palette.base,
+        fg = palette.text,
+        magenta = palette.muave,
+        red = palette.red,
+        orange = palette.peach,
+        yellow = palette.yellow,
+        green = palette.green,
+        cyan = palette.sky,
+        blue = palette.blue,
+        grey0 = palette.surface0,
+        grey1 = palette.overlay1,
+        grey2 = palette.subtext1,
     }
 
     -- setup must be called before loading
-    vim.cmd.colorscheme "catppuccin"
+    vim.cmd.colorscheme("catppuccin")
 end
 
 return M
