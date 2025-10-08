@@ -77,4 +77,13 @@ M.config = function()
     ibl.setup(blank_line_opts)
 end
 
-return M
+local events = require("plugins").events
+return {
+    { -- Add indent lines
+        "lukas-reineke/indent-blankline.nvim",
+        dependencies = "nvim-treesitter",
+        event = events.OpenFile,
+        main = "ibl",
+        config = M.config
+    },
+}

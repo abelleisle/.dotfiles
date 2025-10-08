@@ -1,9 +1,7 @@
 local M = {}
 
-M.config = function()
-    local ts_config = require("nvim-treesitter.configs")
-
-    ts_config.setup({
+M.opts =
+    {
         ensure_installed = {
             -- Programming
             "bash",
@@ -71,7 +69,24 @@ M.config = function()
         --         'cpp'
         --     }
         -- }
-    })
+    }
+
+M.config = function()
+    local ts_config = require("nvim-treesitter.configs")
+
+    ts_config.setup(M.opts)
 end
 
-return M
+------------------
+--  TREESITTER  --
+------------------
+return {
+    { -- Treesitter front end
+        "nvim-treesitter/nvim-treesitter",
+        branch = "master", -- TODO: check back when 'main' branch gets stabilized
+        lazy = false,
+        build = ":TSUpdate",
+        config = M.config
+    },
+
+}

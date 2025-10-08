@@ -131,4 +131,15 @@ M.config = function()
     })
 end
 
-return M
+return {
+    { -- Github PRs in Neovim
+        "pwntester/octo.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "telescope.nvim",
+            "nvim-tree/nvim-web-devicons",
+        },
+        cmd = "Octo",
+        config = M.config
+    },
+}

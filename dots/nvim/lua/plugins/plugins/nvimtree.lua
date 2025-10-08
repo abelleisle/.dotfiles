@@ -104,11 +104,9 @@ local function on_attach(bufnr)
     vim.keymap.set("n", "g?", api.tree.toggle_help, opts("Help"))
 end
 
-M.config = function()
-    vim.o.termguicolors = true
-
-    -- following options are the default
-    require("nvim-tree").setup({
+-- following options are mostly default
+M.opts =
+    {
         on_attach = on_attach,
         -- disables netrw completely
         disable_netrw = false,
@@ -195,7 +193,13 @@ M.config = function()
                 },
             },
         },
-    })
-end
+    }
 
-return M
+return {
+    { -- File manager/browser
+        "nvim-tree/nvim-tree.lua",
+        cmd = "NvimTreeToggle",
+        opts = M.opts,
+    },
+
+}

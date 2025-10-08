@@ -1,7 +1,6 @@
 local M = {}
 
-M.config = function()
-    require("gitsigns").setup({
+M.opts = {
         signs = {
             add = { text = "┃" },
             change = { text = "┃" },
@@ -26,12 +25,21 @@ M.config = function()
         diff_opts = {
             internal = true,
         },
-    })
+    }
 
-    -- vim.cmd("hi signcolumn guifg=bg   guibg=bg")
-    -- vim.cmd("hi DiffAdd    guibg=yellow guifg=bg")
-    -- vim.cmd("hi DiffChange guibg=cyan guifg=bg")
-    -- vim.cmd("hi DiffDelete guibg=red guifg=bg")
-end
+-- M.config = function()
+--     vim.cmd("hi signcolumn guifg=bg   guibg=bg")
+--     vim.cmd("hi DiffAdd    guibg=yellow guifg=bg")
+--     vim.cmd("hi DiffChange guibg=cyan guifg=bg")
+--     vim.cmd("hi DiffDelete guibg=red guifg=bg")
+-- end
 
-return M
+local events = require("plugins").events
+return {
+    { -- Git modification signs
+        "lewis6991/gitsigns.nvim",
+        event = events.OpenFile,
+        opts = M.opts
+    },
+
+}

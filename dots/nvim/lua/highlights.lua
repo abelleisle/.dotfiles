@@ -305,8 +305,7 @@ M.config = function()
     --  STATUS BAR  --
     ------------------
 
-    -- require("plugins.statusline").config()
-    require("plugins.lualine").config()
+    require("plugins.statusline").config()
 end
 
 return M

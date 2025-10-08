@@ -1,7 +1,5 @@
 local M = {}
 
-M.config = function() end
-
 M.opts = {
     strategies = {
         chat = {
@@ -59,4 +57,20 @@ M.opts = {
     },
 }
 
-return M
+
+----------------
+--  AI STUFF  --
+----------------
+-- I really don't want this stuff in here,
+-- but I guess this is the future :(
+return {
+    { -- Copilot chat
+        "olimorris/codecompanion.nvim",
+        config = true,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = M.opts
+    },
+}

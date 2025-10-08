@@ -6,7 +6,7 @@ require("options")
 -- Load plugins
 
 -- Remote Plugins
-require("pluginList")
+require("plugins").setup()
 
 -- "Local" Plugins
 require("utils.search").setup()

@@ -1,32 +1,35 @@
 local M = {}
 
 M.config = function()
-    local gle, gl = pcall(require, "galaxyline")
-
-    if not gle then
+    local status, lualine = pcall(require, "lualine")
+    if not status then
         return
     end
 
-    local gls = gl.section
-    gl.short_line_list = { "LuaTree", "vista", "dbui" }
+    local cutils = require("utils.colors")
+    local colors = cutils.get_palette()
 
-    local colors = vim.g.colors
-    if colors == nil then
-        print("Error: StatusLine vim.g.colors are not set")
-        return
-    end
+    -- local colors = vim.g.colors
+    -- if colors == nil then
+    --     print("Error: StatusLine vim.g.colors are not set")
+    --     return
+    -- end
+
+    ---------------
+    --  HELPERS  --
+    ---------------
 
     local buffer_not_empty = function()
-        if vim.fn.empty(vim.fn.expand("%:t")) ~= 1 then
-            return true
-        end
-        return false
+        return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+    end
+
+    local buffer_empty = function()
+        return vim.fn.empty(vim.fn.expand("%:t")) == 1
     end
 
     local filename_and_parent = function()
         if buffer_not_empty() then
-            -- return vim.fn.expand("%:p:h:t") .. "/" .. vim.fn.expand('%:t') .. " "
-            local file = vim.fn.expand("%:.")
+            local file = vim.fn.expand("%:")
             local t = {}
             local entries = 0
             local sep = "/"
@@ -45,7 +48,7 @@ M.config = function()
             end
             return pr:sub(2) .. " "
         end
-        return ""
+        return " [BLANK] "
     end
 
     local checkwidth = function()
@@ -54,233 +57,170 @@ M.config = function()
             current_win = 0
         end
         local squeeze_width = vim.fn.winwidth(current_win) / 2
-        if squeeze_width > 60 then
-            return true
-        end
-        return false
+        return squeeze_width > 60
     end
 
     local buffer_wide = function()
-        if buffer_not_empty() then
-            return checkwidth()
-        end
-        return false
+        return buffer_not_empty() and checkwidth()
     end
 
-    gls.left[1] = {
-        FirstElement = {
-            provider = function()
-                return "▋"
+    local buffer_narrow_or_empty = function()
+        return buffer_empty() or not checkwidth()
+    end
+
+    local csep = function(cond, char, fg, bg)
+        return {
+            function()
+                return char
             end,
-            highlight = { colors.blue, colors.grey0 },
-        },
-    }
-    gls.left[2] = {
-        ViMode = {
-            provider = function()
-                local alias = {
-                    n = "NORMAL",
-                    i = "INSERT",
-                    c = "COMMAND",
-                    v = "VISUAL",
-                    V = "VISUAL LINE",
-                    [""] = "VISUAL BLOCK",
+            color = function()
+                return {
+                    fg = fg,
+                    bg = bg,
                 }
-                return alias[vim.fn.mode()]
             end,
-            separator = "",
-            separator_highlight = {
-                colors.grey0,
-                function()
-                    if not buffer_not_empty() then
-                        return colors.grey0
-                    end
-                    return colors.grey1
-                end,
+            padding = 0,
+            cond = cond,
+        }
+    end
+
+    local sep = function(char, fg, bg)
+        return csep(nil, char, fg, bg)
+    end
+
+    ---------------------
+    --  CONFIGURATION  --
+    ---------------------
+
+    lualine.setup({
+        options = {
+            theme = {
+                normal = {
+                    a = { bg = colors.grey3 },
+                    b = { bg = colors.grey1 },
+                    c = { bg = colors.panel },
+                    x = { fg = colors.grey5 },
+                    y = { fg = colors.grey5, bg = colors.grey3 },
+                    z = { fg = colors.blue, bg = colors.grey1 },
+                },
+                inactive = {
+                    a = { bg = colors.grey3 },
+                    b = {},
+                    c = {},
+                    x = {},
+                    y = {},
+                    z = { fg = colors.red, bg = colors.grey1 },
+                },
+                insert = {
+                    a = { bg = colors.grey3 },
+                    b = { bg = colors.grey1 },
+                    c = {},
+                    x = { fg = colors.grey5 },
+                    y = { fg = colors.grey5, bg = colors.grey3 },
+                    z = { fg = colors.blue, bg = colors.grey1 },
+                },
             },
-            highlight = { colors.yellow, colors.grey0, "bold" },
-        },
-    }
-    gls.left[3] = {
-        FileIcon = {
-            provider = "FileIcon",
-            condition = buffer_not_empty,
-            highlight = { require("galaxyline.providers.fileinfo").get_file_icon_color, colors.grey1 },
-        },
-    }
-    gls.left[4] = {
-        FileName = {
-            --provider = {'FileName','FileSize'},
-            provider = {
-                filename_and_parent,
-                "FileSize",
+            disabled_filetypes = {
+                statusline = {
+                    "Avante",
+                    "AvanteSelectedFiles",
+                    "NvimTree",
+                },
             },
-            condition = buffer_not_empty,
-            separator = "",
-            separator_highlight = { colors.grey0, colors.grey1 },
-            highlight = { colors.magenta, colors.grey1 },
+            section_separators = "",
+            -- section_separators = { left = '', right = '' },
+            component_separators = "",
+            always_divide_middle = true,
         },
-    }
-    gls.left[5] = {
-        GitIcon = {
-            provider = function()
-                return "  "
-            end,
-            condition = buffer_wide,
-            highlight = { colors.orange, colors.grey0 },
+        sections = {
+            lualine_a = {
+                sep("▋", colors.blue, colors.grey1),
+                { "mode", color = { fg = colors.yellow, bg = colors.grey1, gui = "bold" }, padding = 0 },
+                sep("", colors.grey1),
+                { "filetype", icon_only = true, padding = 0 },
+                { filename_and_parent, color = { fg = colors.magenta }, padding = 0 },
+                { "filesize", padding = { left = 0, right = 1 } },
+            },
+            lualine_b = {
+                csep(buffer_wide, "", colors.grey3),
+                csep(buffer_narrow_or_empty, "", colors.grey3, colors.panel),
+                {
+                    "branch",
+                    icon = { "", color = { fg = colors.orange } },
+                    color = { fg = colors.grey5 },
+                    cond = buffer_wide,
+                },
+                { "diff", symbols = { added = " ", modified = " ", removed = " " }, cond = buffer_wide },
+            },
+            lualine_c = {
+                csep(buffer_wide, "", colors.grey1),
+                {
+                    "diagnostics",
+                    sources = { "nvim_lsp" },
+                    symbols = { error = "  ", warn = "  " },
+                    cond = buffer_wide,
+                },
+            },
+            lualine_x = {
+                sep("", colors.grey1),
+                {
+                    "fileformat",
+                    symbols = { unix = "UNIX", dos = "WIN", mac = "MAC" },
+                    color = { fg = colors.grey3, bg = colors.grey1 },
+                },
+                sep("|", colors.grey3, colors.grey1),
+                { "location", color = { fg = colors.grey3, bg = colors.grey1 } },
+                sep("", colors.grey3, colors.grey1),
+            },
+            lualine_y = {
+                { "progress" },
+            },
+            lualine_z = {
+                sep("", colors.grey1, colors.grey3),
+                { "filetype", icons_enabled = false, fmt = string.upper },
+            },
         },
-    }
-    gls.left[6] = {
-        GitBranch = {
-            provider = function()
-                if require("galaxyline.condition").check_git_workspace() then
-                    return require("galaxyline.providers.vcs").get_git_branch()
-                else
-                    return "N/A"
-                end
-            end,
-            condition = buffer_wide,
-            separator = " ",
-            separator_highlight = { colors.grey0, colors.grey0 },
-            highlight = { colors.grey2, colors.grey0 },
+        inactive_sections = {
+            lualine_a = {
+                sep("▋ ", colors.red, colors.grey1),
+                sep("", colors.grey1),
+                { "filetype", icon_only = true, padding = 0 },
+                { filename_and_parent, cond = buffer_not_empty, color = { fg = colors.magenta }, padding = 0 },
+            },
+            lualine_b = {
+                sep("", colors.grey3),
+            },
+            lualine_c = {},
+            lualine_x = {},
+            lualine_y = {
+                sep("", colors.grey1),
+            },
+            lualine_z = {
+                { "filetype", icons_enabled = false, fmt = string.upper },
+            },
         },
-    }
-    gls.left[7] = {
-        DiffAdd = {
-            provider = "DiffAdd",
-            condition = checkwidth,
-            icon = " ",
-            highlight = { colors.green, colors.grey0 },
-        },
-    }
-    gls.left[8] = {
-        DiffModified = {
-            provider = "DiffModified",
-            condition = checkwidth,
-            icon = " ",
-            highlight = { colors.orange, colors.grey0 },
-        },
-    }
-    gls.left[9] = {
-        DiffRemove = {
-            provider = "DiffRemove",
-            condition = checkwidth,
-            icon = " ",
-            highlight = { colors.red, colors.grey0 },
-        },
-    }
-    gls.left[10] = {
-        LeftEnd = {
-            provider = function()
-                return ""
-            end,
-            separator = "",
-            separator_highlight = { colors.grey0, colors.bg },
-            highlight = { colors.grey0, colors.grey0 },
-        },
-    }
-    gls.left[11] = {
-        DiagnosticError = {
-            provider = "DiagnosticError",
-            icon = "  ",
-            highlight = { colors.red, colors.bg },
-        },
-    }
-    gls.left[12] = {
-        Space = {
-            provider = function()
-                return " "
-            end,
-            highlight = { colors.bg, colors.bg },
-        },
-    }
-    gls.left[13] = {
-        DiagnosticWarn = {
-            provider = "DiagnosticWarn",
-            icon = "  ",
-            highlight = { colors.blue, colors.bg },
-        },
-    }
-    gls.right[1] = {
-        FileFormat = {
-            provider = "FileFormat",
-            separator = " ",
-            separator_highlight = { colors.bg, colors.grey0 },
-            highlight = { colors.grey2, colors.grey0 },
-        },
-    }
-    gls.right[2] = {
-        LineInfo = {
-            provider = "LineColumn",
-            separator = " | ",
-            separator_highlight = { colors.grey1, colors.grey0 },
-            highlight = { colors.grey2, colors.grey0 },
-        },
-    }
-    gls.right[3] = {
-        PerCent = {
-            provider = "LinePercent",
-            separator = "",
-            separator_highlight = { colors.grey1, colors.grey0 },
-            highlight = { colors.grey2, colors.grey1 },
-        },
-    }
-    gls.right[4] = {
-        FileTypeName = {
-            provider = "FileTypeName",
-            condition = buffer_not_empty,
-            separator = " ",
-            separator_highlight = { colors.grey1, colors.grey0 },
-            highlight = { colors.blue, colors.grey0 },
-        },
-    }
-    gls.right[5] = {
-        LastElement = {
-            condition = buffer_not_empty,
-            provider = function()
-                return "▋"
-            end,
-            highlight = { colors.grey0, colors.grey0 },
-        },
-    }
+    }) -- lualine.setup
 
-    gls.short_line_left[1] = {
-        SmallFirst = {
-            provider = function()
-                return "▋"
-            end,
-            highlight = { colors.red, colors.grey0 },
-        },
-    }
+    --------------
+    --  COLORS  --
+    --------------
 
-    gls.short_line_left[2] = {
-        SmallFileName = {
-            condition = buffer_not_empty,
-            provider = filename_and_parent,
-            separator = "",
-            separator_highlight = { colors.grey0, colors.bg },
-            highlight = { colors.grey2, colors.grey0 },
-        },
-    }
+    -- vim.api.nvim_command(string.format("highlight StatusLine guifg=%s", colors.grey1))
+    -- vim.api.nvim_command(string.format("highlight StatusLineNC guifg=%s", colors.grey1))
 
-    gls.short_line_right[1] = {
-        SmallFileTypeName = {
-            provider = "FileTypeName",
-            condition = buffer_not_empty,
-            separator = "█",
-            separator_highlight = { colors.grey0, colors.bg },
-            highlight = { colors.red, colors.grey0 },
-        },
-    }
+    --------------------
+    --  AUTOCOMMANDS  --
+    --------------------
 
-    gls.short_line_right[2] = {
-        SmallLastElement = {
-            condition = buffer_not_empty,
-            provider = function()
-                return "▋"
-            end,
-            highlight = { colors.grey0, colors.grey0 },
-        },
-    }
+    -- vim.api.nvim_create_augroup('lualine_custom', {clear = true})
+    --
+    -- vim.api.nvim_create_autocmd({'BufEnter'}, {
+    --     group    = 'lualine_custom',
+    --     pattern  = '*',
+    --     callback = function()
+    --         lualine.refresh()
+    --     end
+    -- })
 end
+
 return M

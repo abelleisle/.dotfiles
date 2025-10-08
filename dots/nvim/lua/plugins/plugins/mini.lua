@@ -1,16 +1,16 @@
 local M = {}
 
-local mini = {
-    ai = require("mini.ai"),
-    align = require("mini.align"),
-    clue = require("mini.clue"),
-    jump2d = require("mini.jump2d"),
-    pairs = require("mini.pairs"),
-    surround = require("mini.surround"),
-    trailspace = require("mini.trailspace"),
-}
-
 M.config = function()
+    local mini = {
+        ai = require("mini.ai"),
+        align = require("mini.align"),
+        clue = require("mini.clue"),
+        jump2d = require("mini.jump2d"),
+        pairs = require("mini.pairs"),
+        surround = require("mini.surround"),
+        trailspace = require("mini.trailspace"),
+    }
+
     ---------------------------------
     -- A,I
     mini.ai.setup({
@@ -117,4 +117,15 @@ M.config = function()
     })
 end
 
-return M
+-----------------
+--  MINI.NVIM  --
+-----------------
+return {
+    { -- Various small utilies
+        "nvim-mini/mini.nvim",
+        branch = "main",
+        -- TODO: check to see if we need to lazy load this
+        -- event = events.OpenFile,
+        config = M.config
+    },
+}

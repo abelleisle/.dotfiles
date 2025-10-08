@@ -1,7 +1,7 @@
 local M = {}
 
-M.config = function()
-    require("telescope").setup({
+M.opts =
+    {
         defaults = {
             vimgrep_arguments = {
                 "rg",
@@ -88,12 +88,36 @@ M.config = function()
             --     }
             -- }
         },
-    })
+    }
 
+M.config = function()
+    require("telescope").setup(M.opts)
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("media_files")
     require("telescope").load_extension("notify")
     require("telescope").load_extension("noice")
 end
 
-return M
+-----------------
+--  TELESCOPE  --
+-----------------
+local events = require("plugins").events
+return {
+    { -- Fuzzy search
+        "nvim-telescope/telescope.nvim",
+        dependencies = {
+            { "nvim-lua/popup.nvim" },
+            { "nvim-lua/plenary.nvim" },
+        },
+        event = events.EnterWindow,
+        config = M.config
+    },
+
+    { -- Telescope plugins
+        { "abelleisle/telescope-fzf-native.nvim", build = "make" }, -- Prod
+        -- {dir = "~/Development/telescope-fzf-native.nvim", build = "make"}, -- Dev
+        { "nvim-telescope/telescope-media-files.nvim" },
+        lazy = true,
+    },
+
+}

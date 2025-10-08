@@ -1,6 +1,6 @@
 local M = {}
 
-M.config = function()
+M.cmp = function()
     local cmp_present, cmp = pcall(require, "cmp")
     local lua_present, luasnip = pcall(require, "luasnip")
 
@@ -150,4 +150,38 @@ M.luasnip = function()
     require("luasnip.loaders.from_lua").lazy_load()
 end
 
-return M
+---------------------------
+--  SNIPPETS/COMPLETION  --
+---------------------------
+local events = require("plugins").events
+return {
+
+    { -- Snippet sources
+        "honza/vim-snippets",
+        "rafamadriz/friendly-snippets",
+        event = events.InsertMode,
+    },
+
+    { -- Snippet engine
+        "L3MON4D3/LuaSnip",
+        event = events.InsertMode,
+        build = "make install_jsregexp",
+        config = M.luasnip
+    },
+
+    { -- Completion engine
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "LuaSnip",
+        },
+        module = "cmp",
+        event = events.InsertMode,
+        config = M.cmp,
+    },
+}
