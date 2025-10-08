@@ -1,7 +1,6 @@
 ---------------
 --  VCS/Git  --
 ---------------
-
 local events = require("plugins").events
 return {
     { -- Git commands within Neovim
