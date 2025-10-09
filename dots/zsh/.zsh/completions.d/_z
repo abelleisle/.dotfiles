@@ -1,5 +1,13 @@
 #compdef z
 
 _z() {
-    compadd $(zellij ls -s) dps
+    # Only complete for the first argument
+    if [[ $CURRENT -gt 2 ]]; then
+        return 1
+    fi
+
+    local -a sessions
+    sessions=($(zellij ls -s 2>/dev/null) dps)
+
+    _describe 'zellij sessions' sessions
 }

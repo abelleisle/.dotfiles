@@ -134,7 +134,8 @@ if [ -z "$SSH_CONNECTION" ]; then
 fi
 
 # ZSH Completions
-#zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select # Enable menu selection for completions (easier to see)
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} r:|?=**'
 zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
 fpath+=(${HOME:-~}/.zfunc)
 fpath+=(${ZDOTDIR}/completions.d)
