@@ -1,3 +1,6 @@
+# Stylua ran again during precommit
+06541d10421ee41619a49683a11a991f5f04c4fb
+
 # Run all lua files through stylua (via treefmt)
 9bad65ada2900430d358fa7daabcfe6c0e9b35f1
 
