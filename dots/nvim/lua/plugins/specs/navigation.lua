@@ -51,5 +51,4 @@ return {
             disabled_keys = {},
         },
     },
-
 }

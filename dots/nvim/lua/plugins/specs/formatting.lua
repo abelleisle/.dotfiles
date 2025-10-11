@@ -53,5 +53,4 @@ return {
     --     "tpope/vim-sleuth",
     --     event = Events.OpenFile
     -- },
-
 }

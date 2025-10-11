@@ -126,6 +126,6 @@ return {
         branch = "main",
         -- TODO: check to see if we need to lazy load this
         -- event = events.OpenFile,
-        config = M.config
+        config = M.config,
     },
 }

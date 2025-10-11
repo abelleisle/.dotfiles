@@ -26,5 +26,4 @@ return {
     { -- View git diffs for any revision
         "sindrets/diffview.nvim",
     },
-
 }

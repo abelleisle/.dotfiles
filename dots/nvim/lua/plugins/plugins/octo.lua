@@ -140,6 +140,6 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         cmd = "Octo",
-        config = M.config
+        config = M.config,
     },
 }

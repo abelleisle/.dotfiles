@@ -84,6 +84,6 @@ return {
         dependencies = "nvim-treesitter",
         event = events.OpenFile,
         main = "ibl",
-        config = M.config
+        config = M.config,
     },
 }

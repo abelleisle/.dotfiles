@@ -37,7 +37,7 @@ return {
                     Event = "",
                     Operator = "󰆕",
                     TypeParameter = "",
-                }
+                },
             })
         end,
     },

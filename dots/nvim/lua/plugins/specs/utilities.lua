@@ -27,5 +27,4 @@ return {
     { -- Nicer CSV rendering
         "mechatroner/rainbow_csv",
     },
-
 }

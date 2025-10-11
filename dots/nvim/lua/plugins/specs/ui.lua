@@ -68,7 +68,6 @@ return {
         },
     },
 
-
     { -- Auto buffer resizing
         "anuvyklack/windows.nvim",
         dependencies = {
@@ -108,5 +107,4 @@ return {
             },
         },
     },
-
 }

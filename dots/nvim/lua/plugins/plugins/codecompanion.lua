@@ -57,7 +57,6 @@ M.opts = {
     },
 }
 
-
 ----------------
 --  AI STUFF  --
 ----------------
@@ -71,6 +70,6 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
         },
-        opts = M.opts
+        opts = M.opts,
     },
 }

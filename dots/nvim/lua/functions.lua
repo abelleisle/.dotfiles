@@ -65,4 +65,3 @@ vim.api.nvim_create_user_command("GodotServer", function()
         },
     }
 end, { desc = "Start Godot debug adapter server" })
-

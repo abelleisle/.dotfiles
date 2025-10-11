@@ -166,7 +166,7 @@ return {
         "L3MON4D3/LuaSnip",
         event = events.InsertMode,
         build = "make install_jsregexp",
-        config = M.luasnip
+        config = M.luasnip,
     },
 
     { -- Completion engine

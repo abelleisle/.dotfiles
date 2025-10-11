@@ -23,5 +23,4 @@ return {
             require("hex").setup()
         end,
     },
-
 }
