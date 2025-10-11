@@ -18,6 +18,8 @@ local enabled_servers = {
     "zls",
     -- Python
     "pylsp",
+    -- Docker
+    "docker_language_server",
 }
 
 local _disabled_servers = {

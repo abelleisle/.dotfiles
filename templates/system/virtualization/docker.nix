@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 let
@@ -32,7 +33,13 @@ in
           ipv6 = true;
           fixed-cidr-v6 = "fd00::/80";
         };
+        extraPackages = with pkgs; [
+          docker-buildx
+        ];
       };
       users.extraGroups.docker.members = cfg.users;
+      environment.systemPackages = with pkgs; [
+        docker-language-server
+      ];
     };
 }

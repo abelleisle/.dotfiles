@@ -23,6 +23,7 @@ require("lsp").setup()
 -- Configuration
 require("autocmd")
 require("functions")
+require("filetype")
 
 -- Call local nvim configs/overrides
 local path = vim.fn.expand("$HOME/.shelf/nvim.lua")
