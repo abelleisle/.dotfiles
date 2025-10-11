@@ -205,15 +205,23 @@
   services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
   # Configure the virt-manager template
-  templates.system.virtualization.virt-manager = {
-    enable = true;
-    users = [ "andy" ]; # List of users to add to libvirtd group
-    pciPassthrough = {
+  templates.system.virtualization = {
+    docker = {
       enable = true;
-      cpu = "intel";
-      # extraDrivers = ["i915"]
+      users = [ "andy" ]; # List of users to add to the docker group
+    };
+
+    virt-manager = {
+      enable = true;
+      users = [ "andy" ]; # List of users to add to libvirtd group
+      pciPassthrough = {
+        enable = true;
+        cpu = "intel";
+        # extraDrivers = ["i915"]
+      };
     };
   };
+
   templates.system.networking.dns = {
     enable = false;
   };
