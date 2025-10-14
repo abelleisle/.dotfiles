@@ -134,6 +134,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     -- colorschemes, e.g. `pattern = "gruvbox"`.
     callback = function()
         require("highlights").config()
-        vim.notify("Colorscheme changed!", vim.log.levels.INFO)
+        -- vim.notify("Colorscheme changed!", vim.log.levels.INFO)
     end,
 })

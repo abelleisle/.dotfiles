@@ -283,69 +283,14 @@ _map.project = function()
     ------------------
     --  TELESCROPE  --
     ------------------
-    if vim.g.plugins_installed then
-        local ts = {
-            builtin = function()
-                return require("telescope.builtin")
-            end,
-            extensions = function()
-                return require("telescope").extensions
-            end,
-            grep_fuzzy = function()
-                require("telescope.builtin").grep_string({
-                    prompt_title = "Fuzzy Find",
-                    shorten_path = true,
-                    word_match = "-w",
-                    only_sort_text = true,
-                    search = "",
-                })
-            end,
-            grep_string = function()
-                require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
-            end,
-            grep_file = function()
-                local current_file = vim.fn.expand("%:p")
-                if current_file ~= "" then
-                    require("telescope.builtin").live_grep({
-                        search_dirs = { current_file },
-                        prompt_title = "Live Grep: " .. vim.fn.expand("%:t"),
-                    })
-                else
-                    vim.notify("No file currently open", vim.log.levels.WARN)
-                end
-            end,
-        }
-
-        -- File pickers
-        vim.keymap.set("n", "<Leader>f", ts.builtin().find_files, Opt("Telescope: Fuzzy file finder"))
-        vim.keymap.set("n", "<Leader>b", ts.builtin().buffers, Opt("Telescope: Show active buffers"))
-        vim.keymap.set("n", "<Leader>n", ts.grep_file, Opt("Telescope: Search current file"))
-
-        -- Extra pickers
-        vim.keymap.set("n", "<Leader>pz", ts.grep_fuzzy, Opt("Telescope: Fuzzy finder"))
-        vim.keymap.set("n", "<Leader>pm", ts.extensions().media_files.media_files, Opt("Telescope: Show media files"))
-        vim.keymap.set("n", "<Leader>ph", ts.builtin().help_tags, Opt("Telescope: interactive help menu"))
-        vim.keymap.set("n", "<Leader>po", ts.builtin().oldfiles, Opt("Telescope: Previously edited files"))
-
-        -- Global search/help
-        vim.keymap.set("n", "<Leader>/", ts.builtin().live_grep, Opt("Telescope: Live grep"))
-        vim.keymap.set("n", "<Leader>,", ts.grep_string, Opt("Telescope: Grep string (statusline)"))
-        vim.keymap.set("n", "<Leader>?", ts.builtin().keymaps, Opt("Telescope: Show all keybinds"))
-        vim.keymap.set("n", "<Leader>*", ts.builtin().grep_string, Opt("Telescope: Find word under cursor"))
-        vim.keymap.set(
-            "n",
-            "<Leader>d",
-            ts.builtin().lsp_document_symbols,
-            Opt("Telescope: Show LSP symbols in current file")
-        )
-    end
+    -- Telescope keybinds are now defined in lua/plugins/plugins/telescope.lua
+    -- for lazy loading on keymap trigger
 
     -----------------
     --  GIT SIGNS  --
     -----------------
     pmap("n", "<Leader>vb", '<cmd>lua require"gitsigns".blame_line()<CR>', Opt("Git: Blame this line"))
-    pmap("n", "<Leader>vs", "<cmd>Telescope git_status<CR>", Opt("Git: Git status"))
-    pmap("n", "<Leader>vc", "<cmd>Telescope git_commits<CR>", Opt("Git: Git commits"))
+    -- Git status and commits are now mapped in telescope.lua
 
     ----------------
     -- GIT Linker --
@@ -502,6 +447,87 @@ M.leap = {
     { "s", mode = { "n", "x", "o" }, desc = "Leap Forward to" },
     { "S", mode = { "n", "x", "o" }, desc = "Leap Backward to" },
     { "gs", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
+}
+
+-----------------
+--  TELESCOPE  --
+-----------------
+M.telescope = {
+    -- File pickers
+    {
+        "<Leader>f",
+        function()
+            require("telescope.builtin").find_files()
+        end,
+        desc = "Telescope: Fuzzy file finder",
+    },
+    {
+        "<Leader>b",
+        function()
+            require("telescope.builtin").buffers()
+        end,
+        desc = "Telescope: Show active buffers",
+    },
+    { "<Leader>n", M.grep_file, desc = "Telescope: Search current file" },
+
+    -- Extra pickers
+    { "<Leader>pz", M.grep_fuzzy, desc = "Telescope: Fuzzy finder" },
+    {
+        "<Leader>pm",
+        function()
+            require("telescope").extensions.media_files.media_files()
+        end,
+        desc = "Telescope: Show media files",
+    },
+    {
+        "<Leader>ph",
+        function()
+            require("telescope.builtin").help_tags()
+        end,
+        desc = "Telescope: interactive help menu",
+    },
+    {
+        "<Leader>po",
+        function()
+            require("telescope.builtin").oldfiles()
+        end,
+        desc = "Telescope: Previously edited files",
+    },
+
+    -- Global search/help
+    {
+        "<Leader>/",
+        function()
+            require("telescope.builtin").live_grep()
+        end,
+        desc = "Telescope: Live grep",
+    },
+    { "<Leader>,", M.grep_string, desc = "Telescope: Grep string (statusline)" },
+    {
+        "<Leader>?",
+        function()
+            require("telescope.builtin").keymaps()
+        end,
+        desc = "Telescope: Show all keybinds",
+    },
+    {
+        "<Leader>*",
+        function()
+            require("telescope.builtin").grep_string()
+        end,
+        desc = "Telescope: Find word under cursor",
+    },
+    {
+        "<Leader>d",
+        function()
+            require("telescope.builtin").lsp_document_symbols()
+        end,
+        desc = "Telescope: Show LSP symbols in current file",
+    },
+
+    -- Git pickers
+    { "<Leader>vs", "<cmd>Telescope git_status<CR>", desc = "Git: Git status" },
+    { "<Leader>vc", "<cmd>Telescope git_commits<CR>", desc = "Git: Git commits" },
 }
 
 return M

@@ -65,7 +65,13 @@ M.opts = {
 return {
     { -- Copilot chat
         "olimorris/codecompanion.nvim",
-        config = true,
+        -- config = true,
+        cmd = {
+            "CodeCompanion",
+            "CodeCompanionCmd",
+            "CodeCompanionChat",
+            "CodeCompanionActions",
+        },
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",

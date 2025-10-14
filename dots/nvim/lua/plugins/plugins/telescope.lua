@@ -97,10 +97,36 @@ M.config = function()
     require("telescope").load_extension("noice")
 end
 
+-- Helper functions for keymaps
+M.grep_fuzzy = function()
+    require("telescope.builtin").grep_string({
+        prompt_title = "Fuzzy Find",
+        shorten_path = true,
+        word_match = "-w",
+        only_sort_text = true,
+        search = "",
+    })
+end
+
+M.grep_string = function()
+    require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
+end
+
+M.grep_file = function()
+    local current_file = vim.fn.expand("%:p")
+    if current_file ~= "" then
+        require("telescope.builtin").live_grep({
+            search_dirs = { current_file },
+            prompt_title = "Live Grep: " .. vim.fn.expand("%:t"),
+        })
+    else
+        vim.notify("No file currently open", vim.log.levels.WARN)
+    end
+end
+
 -----------------
 --  TELESCOPE  --
 -----------------
-local events = require("plugins").events
 return {
     { -- Fuzzy search
         "nvim-telescope/telescope.nvim",
@@ -108,7 +134,8 @@ return {
             { "nvim-lua/popup.nvim" },
             { "nvim-lua/plenary.nvim" },
         },
-        event = events.EnterWindow,
+        cmd = "Telescope",
+        keys = require("mappings").telescope,
         config = M.config,
     },
 
