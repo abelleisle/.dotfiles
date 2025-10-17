@@ -10,10 +10,11 @@
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # ~/.profile: executed by the command interpreter for login shells.
+zdebug "Loading .zprofile"
 
 # Load zprofile stuff from zprofile.d to keep this file clean
 for file in ${ZDOTDIR}/zprofile.d/**/*(N); do
 	[[ -r $file ]] && source $file
-    echo $file
+    zdebug "Loading $file"
 done
 unset file

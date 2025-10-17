@@ -1,16 +1,17 @@
+zdebug "Loading .zshrc"
 # zmodload zsh/zprof
 
 # Load ZSH settings from zshrc.d
 for file in ${ZDOTDIR}/zshrc.d/**/*(N); do
 	[[ -r $file ]] && source $file
-    echo $file
+    zdebug "Loading $file"
 done
 unset file
 
 # Source our local settings
 for file in ${ZDOTDIR}/"local.d"/**/*(N); do
 	[[ -r $file ]] && source $file
-    source $file
+    zdebug "Loading $file"
 done
 unset file
 
@@ -39,17 +40,21 @@ bindkey zx vi-cmd-mode
 if [[ -n $(command -v nvim) ]]; then
     export EDITOR=nvim
     export MANPAGER='nvim +Man!'
+    zdebug "Pointing EDITOR and MANPAGER to nvim"
 elif [[ -n $(command -v vim) ]]; then
     export EDITOR=vim
     export MANPAGER='vim -M +MANPAGER --not-a-term -'
+    zdebug "Pointing EDITOR and MANPAGER to vim"
 elif [[ -n $(command -v vi) ]]; then
     export EDITOR=vi
+    zdebug "Pointing EDITOR to vi"
 fi
 export VISUAL="$EDITOR"
 
 # If bat is available, use that as our manpager (faster than vim for large pages)
 if [[ -n $(command -v bat) ]]; then
     export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
+    zdebug "Pointing MANPAGER to bat"
 fi
 
 # zprof
