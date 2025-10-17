@@ -10,8 +10,15 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Source our custom functions
-if [ -d ${ZDOTDIR}/extra/ ]; then
-    for file in ${ZDOTDIR}/extra/**; do
+if [ -d ${ZDOTDIR}/zsh.d/ ]; then
+    for file in ${ZDOTDIR}/zsh.d/**/*(N); do
+        source $file;
+    done
+fi
+
+# Source our local custom functions
+if [ -d ${ZDOTDIR}/"local.d"/ ]; then
+    for file in ${ZDOTDIR}/"local.d"/**/*(N); do
         source $file;
     done
 fi
