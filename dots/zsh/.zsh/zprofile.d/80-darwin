@@ -6,7 +6,7 @@ if [ $(sysctl -n sysctl.proc_translated) = '0' ]; then
 
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    export path=(/opt/local/bin $path)
+    path=(/opt/local/bin $path)
 
     export PYENV_ROOT="$HOME/.pyenv_arm"
 
@@ -34,7 +34,7 @@ fi
 
 
 if [[ -d $PYENV_ROOT ]]; then
-    export PATH="$PYENV_ROOT/bin:$PATH"
+    path=($PYENV_ROOT/bin $path)
 
     if [ ! -z ${ZSH_VERSION+x} ]; then
         eval "$(pyenv init - zsh)"
