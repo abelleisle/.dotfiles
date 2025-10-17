@@ -1,19 +1,9 @@
 local M = {}
 
 M.config = function()
-    local mini = {
-        ai = require("mini.ai"),
-        align = require("mini.align"),
-        clue = require("mini.clue"),
-        jump2d = require("mini.jump2d"),
-        pairs = require("mini.pairs"),
-        surround = require("mini.surround"),
-        trailspace = require("mini.trailspace"),
-    }
-
     ---------------------------------
     -- A,I
-    mini.ai.setup({
+    require("mini.ai").setup({
         -- Use `''` (empty string) to disable one.
         mappings = {
             -- Main textobject prefixes
@@ -34,7 +24,7 @@ M.config = function()
 
     ---------------------------------
     -- Align
-    mini.align.setup({
+    require("mini.align").setup({
         mappings = {
             start = "ga",
             start_with_preview = "gA",
@@ -43,7 +33,8 @@ M.config = function()
 
     ---------------------------------
     -- Clue
-    mini.clue.setup({
+    local clue = require("mini.clue")
+    clue.setup({
         window = {
             delay = 0,
             config = {
@@ -54,12 +45,12 @@ M.config = function()
 
         clues = {
             -- Enhance this by adding descriptions for <Leader> mapping groups
-            mini.clue.gen_clues.builtin_completion(),
-            mini.clue.gen_clues.g(),
-            mini.clue.gen_clues.marks(),
-            mini.clue.gen_clues.registers(),
-            mini.clue.gen_clues.windows(),
-            mini.clue.gen_clues.z(),
+            clue.gen_clues.builtin_completion(),
+            clue.gen_clues.g(),
+            clue.gen_clues.marks(),
+            clue.gen_clues.registers(),
+            clue.gen_clues.windows(),
+            clue.gen_clues.z(),
 
             require("mappings").clue.clues,
         },
@@ -67,7 +58,7 @@ M.config = function()
 
     ---------------------------------
     -- Pairs
-    mini.pairs.setup({
+    require("mini.pairs").setup({
         modes = {
             insert = true,
             command = true,
@@ -90,7 +81,7 @@ M.config = function()
 
     ---------------------------------
     -- Surround
-    mini.surround.setup({
+    require("mini.surround").setup({
         -- Module mappings. Use `''` (empty string) to disable one.
         mappings = {
             add = "<Leader>sa", -- Add surrounding in Normal and Visual modes
@@ -112,7 +103,7 @@ M.config = function()
 
     ---------------------------------
     -- Trailspace
-    mini.trailspace.setup({
+    require("mini.trailspace").setup({
         only_in_normal_buffers = true,
     })
 end
