@@ -5,8 +5,11 @@ plugged/
 dots/bspwm/.config/bspwm/bspwm-config
 dots/ncspot/.config/ncspot/userstate.cbor
 
-dots/zsh/.zsh/extra/*.local
 dots/zsh/.zsh/local.d/*
+
+.zsh_history
+.zcompdump
+.zsh_sessions/
 
 result
 .direnv

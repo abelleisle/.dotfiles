@@ -134,8 +134,6 @@ case `uname` in
 
         export LANG='en_US.UTF-8'
 
-        PATH="$HOME/.zsh/scripts/darwin:$PATH"
-
         ;;
     Linux)
 

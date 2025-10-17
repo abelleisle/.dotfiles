@@ -23,6 +23,20 @@ if [ -d ${ZDOTDIR}/"local.d"/ ]; then
     done
 fi
 
+# Source OS-specific configurations
+# case "$(uname -s)" in
+#     Darwin)
+#         for file in ~/.zsh/os.d/darwin/**/*(N); do
+#             [ -f "$file" ] && source "$file"
+#         done
+#         ;;
+#     Linux)
+#         for file in ~/.zsh/os.d/linux/**/*(N); do
+#             [ -f "$file" ] && source "$file"
+#         done
+#         ;;
+# esac
+
 # ESW script settings
 ESW_HELPERS_SQUID_EN=1
 
