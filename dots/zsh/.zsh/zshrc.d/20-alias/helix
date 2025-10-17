@@ -1,0 +1,6 @@
+# Helix is packaged inconsistently, let's always use hx
+if whence helix &> /dev/null ; then
+    alias hx="helix"
+fi
+
+# vim:ft=zsh

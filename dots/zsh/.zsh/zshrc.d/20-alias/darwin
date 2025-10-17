@@ -1,0 +1,10 @@
+[[ $(uname) == "Darwin" ]] || return
+
+# Darwin doesn't have lsusb, let's symlink it
+if whence cyme &>/dev/null; then
+    alias lsusb="cyme"
+else
+    alias lsusb="echo 'lsusb unavailable on Darwin, please install cyme'"
+fi
+
+# vim:ft=zsh

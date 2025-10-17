@@ -1,0 +1,10 @@
+# Prefer GNU coreutils over BSD if available
+if whence gls &>/dev/null; then
+	alias ls=gls
+	alias dircolors=gdircolors
+fi
+
+# Use best ls available, but with color
+alias ls="$(whence ls) --color=auto -G"
+
+# vim:ft=zsh

@@ -1,0 +1,17 @@
+# Set PATH so it includes user's cargo bin if it exists
+if [ -d "$HOME/.cargo" ] ; then
+    if [ -d "$HOME/.cargo/bin" ] ; then
+        path=($HOME/.cargo/bin $path)
+    fi
+
+    if [ -f "$HOME/.cargo/env" ] ; then
+        . "$HOME/.cargo/env"
+    fi
+fi
+
+# Set PATH so it includes user's zig bin if it exists
+if [ -d "$HOME/.zig" ] ; then
+    path=($HOME/.zig $path)
+fi
+
+# vim:ft=zsh

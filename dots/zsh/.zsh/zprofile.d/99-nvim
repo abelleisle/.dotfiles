@@ -1,0 +1,8 @@
+# Sometimes we want to use beta neovim binaries, this lets us do that
+
+# Set PATH to include beta nvim binaries
+if [ -d "$HOME/.local/share/nvim/beta/bin" ] ; then
+    path=($HOME/.local/share/nvim/beta/bin $path)
+fi
+
+# vim:ft=zsh

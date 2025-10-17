@@ -1,0 +1,50 @@
+[[ $(uname) == "Darwin" ]] || return
+
+
+if [ $(sysctl -n sysctl.proc_translated) = '0' ]; then
+    # echo 'Running natively (arm64)'
+
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
+    export path=(/opt/local/bin $path)
+
+    export PYENV_ROOT="$HOME/.pyenv_arm"
+
+    # Python installed via `pyenv` searches the default library path `/usr/local/lib`
+    # instead of the path used by homebrew (`/opt/homebrew/lib`). This can cause it
+    # to find libraries installed with x86_64 homebrew instead of arm64 homebrew.
+    #
+    # This will inform any Python installation managed by `pyenv` to check against the
+    # homebrew arm64 `lib` directory.
+    #
+    # Note: Apple's SIP considers this a security issue (with good reason), so the
+    # `DYLD_LIBRARY_PATH` variable is cleared before executing signed applications within
+    # the SIP umbrella. On the plus side, `pyenv` Python installations are not signed or SIP
+    # protected like the homebrew installed variants.
+    # export DYLD_LIBRARY_PATH=/opt/homebrew/lib
+    export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+
+else
+    # echo 'Running through Rosetta (x86_64)'
+
+    eval "$(/usr/local/bin/brew shellenv)"
+
+    export PYENV_ROOT="$HOME/.pyenv_intel"
+fi
+
+
+if [[ -d $PYENV_ROOT ]]; then
+    export PATH="$PYENV_ROOT/bin:$PATH"
+
+    if [ ! -z ${ZSH_VERSION+x} ]; then
+        eval "$(pyenv init - zsh)"
+    else
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+    fi
+else
+    alias python="echo 'pyenv is not installed, please install it to $PYENV_ROOT'"
+    unset PYENV_ROOT
+fi
+
+# vim:ft=zsh

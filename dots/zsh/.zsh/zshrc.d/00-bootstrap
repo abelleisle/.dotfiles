@@ -1,0 +1,7 @@
+# Let's just make sure umask is set to a sensible default
+umask 022
+
+# Make sure zsh cache dir exists
+[[ ! -d $ZSH_CACHE_DIR ]] && command mkdir -p "$ZSH_CACHE_DIR"
+
+# vim:ft=zsh

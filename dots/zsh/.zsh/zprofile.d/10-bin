@@ -1,0 +1,14 @@
+# Load custom scripts
+path=($ZDOTDIR/bin $path)
+
+# Set PATH so it includes user's private bin if it exists
+[[ -d "$HOME/bin" ]] && path=($HOME/bin $path)
+[[ -d "$HOME/.local/bin" ]] && path=($HOME/.local/bin $path)
+
+# Load OS specific scripts
+case `uname` in
+    Darwin) path=($ZDOTDIR/bin/darwin $path) ;;
+    Linux) path=($ZDOTDIR/bin/linux $path) ;;
+esac
+
+# vim:ft=zsh

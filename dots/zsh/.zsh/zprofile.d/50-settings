@@ -1,0 +1,10 @@
+# Make sure we can't install pip packages outside a virtual env
+export PIP_REQUIRE_VIRTUALENV=true
+
+# English? English. UTF-8? UTF-8.
+export LANG='en_US.UTF-8'
+
+# This is needed so Java windows show content on tiling window managers
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# vim:ft=zsh

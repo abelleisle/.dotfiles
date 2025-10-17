@@ -1,0 +1,6 @@
+# Loads fzf ZSH addon
+if (( $+commands[fzf] )); then
+    source <(fzf --zsh)
+fi
+
+# vim:ft=zsh

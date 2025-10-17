@@ -1,0 +1,31 @@
+# Load OMZ libs that we need
+zinit snippet OMZL::async_prompt.zsh
+zinit snippet OMZL::git.zsh
+zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZL::theme-and-appearance.zsh
+
+# Load zinit plugins
+zinit snippet OMZP::sudo
+zinit snippet OMZP::vi-mode
+zinit lucid wait for hlissner/zsh-autopair
+
+# If we aren't running MacOS add nix-shell plugin.
+# We can't use this on MacOS because Apple refuses to use
+# a bash version >4 due to GPLv3 licensing.
+if [[ $(uname) != "Darwin" ]]; then
+    zinit light chisui/zsh-nix-shell
+fi
+
+# Load completions and syntax highlighting
+ZINIT[ZCOMPDUMP_PATH]=${ZSH_CACHE_DIR}/compdump
+zinit wait lucid for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+     zdharma/fast-syntax-highlighting \
+  blockf \
+     zsh-users/zsh-completions \
+  blockf \
+     nix-community/nix-zsh-completions \
+  atload"!_zsh_autosuggest_start" \
+     zsh-users/zsh-autosuggestions
+
+# vim:ft=zsh

@@ -1,0 +1,8 @@
+# Load shell theme
+if (( $+commands[starship] )); then
+    eval "$(starship init zsh)"
+else
+    source ${ZDOTDIR}/custom/themes/passion.zsh-theme
+fi
+
+# vim:ft=zsh

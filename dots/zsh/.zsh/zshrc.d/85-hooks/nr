@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # Global flag to track if we should announce the result
 _nr_announce=0
 
@@ -32,3 +30,5 @@ nr() {
     # Execute the command(s)
     eval "$*"
 }
+
+# vim:ft=zsh

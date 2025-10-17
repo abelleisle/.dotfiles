@@ -6,3 +6,7 @@ ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 
 # Don't let Darwin and some Linux (Ubuntu) distros run compinit globally
 skip_global_compinit=1
+
+# Change sort order to be more predictable
+# numbers > uppercase > lowercase
+LC_COLLATE=C
