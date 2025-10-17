@@ -19,13 +19,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
-# if [ -n "$BASH_VERSION" ]; then
-#     # include .bashrc if it exists
-#     if [ -f "$HOME/.bashrc" ]; then
-#         . "$HOME/.bashrc"
-#     fi
-# fi
+# Load custom scripts
+PATH="$ZDOTDIR/bin:$PATH"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -91,6 +86,8 @@ export PIP_REQUIRE_VIRTUALENV=true
 
 case `uname` in
     Darwin)
+        # Load Darwin specifc scripts
+        PATH="$ZDOTDIR/bin/darwin:$PATH"
 
         if [ $(sysctl -n sysctl.proc_translated) = '0' ]; then
             # echo 'Running natively (arm64)'
@@ -136,6 +133,8 @@ case `uname` in
 
         ;;
     Linux)
+        # Load Linux specific scripts
+        PATH="$ZDOTDIR/bin/linux:$PATH"
 
         export _JAVA_AWT_WM_NONREPARENTING=1
 
