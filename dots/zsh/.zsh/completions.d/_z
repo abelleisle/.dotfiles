@@ -9,5 +9,5 @@ _z() {
     local -a sessions
     sessions=($(zellij ls -s 2>/dev/null) dps)
 
-    _describe 'zellij sessions' sessions
+    compadd -M 'm:{[:lower:]}={[:upper:]} r:|?=**' -d sessions -a sessions
 }

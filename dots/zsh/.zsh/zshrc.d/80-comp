@@ -1,6 +1,10 @@
 # ZSH Completions
+#
+# Enable completion debugging
+# zstyle ':completion:*' verbose yes
+# zstyle ':completion:*' format 'Completing %d'
+
 zstyle ':completion:*' menu select # Enable menu selection for completions (easier to see)
-zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} r:|?=**'
 zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
 
 if [ -d ~/.zfunc ]; then
@@ -8,5 +12,6 @@ if [ -d ~/.zfunc ]; then
 fi
 
 fpath=(${ZDOTDIR}/completions.d $fpath)
+
 
 # vim:ft=zsh
