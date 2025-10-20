@@ -2,6 +2,7 @@
 
 # ESW script settings
 ESW_HELPERS_SQUID_EN=1
+ESW_HELPERS_RIKER_EN=1
 
 # ESW script source
 ESW_DOTS_DIR=~/.dots-esw # Change this to point to where you've cloned this repo
