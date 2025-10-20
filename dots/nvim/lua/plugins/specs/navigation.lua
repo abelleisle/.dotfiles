@@ -4,7 +4,7 @@
 return {
 
     { -- Ctrl-<hjkl> navigation with TMUX
-        "dynamotn/Navigator.nvim",
+        "abelleisle/Navigator.nvim",
         opts = {
             auto_save = nil,
             disable_on_zoom = true,
