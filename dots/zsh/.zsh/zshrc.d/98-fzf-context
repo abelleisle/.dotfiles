@@ -1,0 +1,63 @@
+# Context-aware history search for zsh with fzf
+# Searches history based on current cursor position in command chain
+
+# Only setup if fzf is available
+(( $+commands[fzf] )) || return
+
+# Function to perform context-aware history search
+fzf-context-history-widget() {
+  emulate -L zsh
+  setopt localoptions pipefail no_aliases 2> /dev/null
+
+  local selected
+  local lbuffer="${LBUFFER}"
+  local rbuffer="${RBUFFER}"
+
+  # Find the position of the last command separator before cursor
+  local after_sep=""
+  local before_sep=""
+
+  # Extract text after the last separator (&&, ;, |, ||)
+  # This regex captures everything up to and including the last separator
+  if [[ "$lbuffer" =~ '(.*[;&|]+[[:space:]]*)(.*)$' ]]; then
+    before_sep="${match[1]}"
+    after_sep="${match[2]}"
+  else
+    # No separator found, use entire left buffer
+    after_sep="$lbuffer"
+  fi
+
+  # Trim leading whitespace from after_sep
+  after_sep="${after_sep##[[:space:]]##}"
+
+  # Use after_sep as the initial query for fzf
+  selected=($(fc -rl 1 | awk '{$1="";print substr($0,2)}' |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_CTRL_R_OPTS-} --query=${(q)after_sep}" $(__fzfcmd) +m))
+
+  local ret=$?
+  if [[ -n "$selected" ]]; then
+    # Replace the text after the last separator with the selected command
+    if [[ -n "$before_sep" ]]; then
+      LBUFFER="${before_sep}${selected}"
+    else
+      LBUFFER="${selected}"
+    fi
+    RBUFFER="$rbuffer"
+  fi
+  zle reset-prompt
+  return $ret
+}
+
+# Register the widget
+zle -N fzf-context-history-widget
+
+# Bind to Alt-R (Meta-R) for context-aware search
+bindkey '\er' fzf-context-history-widget
+# Also bind to Esc-R for terminals where Alt doesn't work
+bindkey '^[r' fzf-context-history-widget
+
+# Optional: Override Ctrl-R to always use context-aware search
+# Uncomment the line below if you want Ctrl-R to be context-aware by default
+# bindkey '^R' fzf-context-history-widget
+
+# vim:ft=zsh
