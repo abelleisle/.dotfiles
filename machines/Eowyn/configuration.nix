@@ -223,7 +223,7 @@
   };
 
   templates.system.networking.dns = {
-    enable = false;
+    enable = true;
   };
 
   programs.captive-browser = {
