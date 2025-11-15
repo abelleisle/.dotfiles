@@ -4,7 +4,13 @@
 # zstyle ':completion:*' verbose yes
 # zstyle ':completion:*' format 'Completing %d'
 
-zstyle ':completion:*' menu select # Enable menu selection for completions (easier to see)
+# Enable menu selection for completions (easier to see)
+zstyle ':completion:*:*:*:*:*' menu select
+
+# Case insensitive (all), partial-word and substring completion
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
+
+# Neovim completions for non-binary files
 zstyle ':completion:*:*:nvim:*' file-patterns '^*.(aux|pdf|dvi|o|elf|bin):source-files' '*:all-files'
 
 if [ -d ~/.zfunc ]; then
