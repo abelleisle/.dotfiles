@@ -57,6 +57,7 @@
       dig
       claude-code
       slack
+      filezilla
     ];
 
   };
