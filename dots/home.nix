@@ -145,7 +145,7 @@ in
         userEmail = lib.mkDefault "abelleisle@protonmail.com";
         includes = [
           {
-            condition = "hasconfig:remote.*.url:git@git.services.bitcicle.com:*/**";
+            condition = "hasconfig:remote.*.url:forgejo@git.services.bitcicle.com:*/**";
             path = "~/.git/config/config-bitcicle";
           }
           {
