@@ -149,6 +149,7 @@ output_command_execute_after() {
 # command execute before
 # REF: http://zsh.sourceforge.net/Doc/Release/Functions.html
 preexec() {
+    _passion_cmd_running=1;  # Guard for TRAPALRM to prevent crashes during command execution
     COMMAND_TIME_BEIGIN="$(current_time_millis)";
 }
 
@@ -180,6 +181,7 @@ current_time_millis() {
 precmd() {
     # last_cmd
     local last_cmd_return_code=$?;
+    unset _passion_cmd_running;  # Clear guard - command has finished
     local last_cmd_result=true;
     if [ "$last_cmd_return_code" = "0" ];
     then
@@ -211,8 +213,11 @@ TRAPALRM() {
     # if [ "$WIDGET" != "expand-or-complete" ] && [ "$WIDGET" != "self-insert" ] && [ "$WIDGET" != "backward-delete-char" ]; then
     # black list will not enum it completely. even some pipe broken will appear.
     # so we just put a white list here.
-    if [ "$WIDGET" = "" ] || [ "$WIDGET" = "accept-line" ] ; then
-        zle reset-prompt;
+    #
+    # Additional guard: only reset prompt when ZLE is active and no command is running
+    # This prevents crashes when TRAPALRM fires during git or other long-running commands
+    if [[ -o zle ]] && [[ -z "$_passion_cmd_running" ]] && { [ "$WIDGET" = "" ] || [ "$WIDGET" = "accept-line" ] ; }; then
+        zle reset-prompt 2>/dev/null;
     fi
 }
 

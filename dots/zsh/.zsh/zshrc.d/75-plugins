@@ -16,6 +16,8 @@ if [[ $(uname) != "Darwin" ]]; then
     zinit light chisui/zsh-nix-shell
 fi
 
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
 # Load completions and syntax highlighting
 ZINIT[ZCOMPDUMP_PATH]=${ZSH_CACHE_DIR}/compdump
 zinit wait lucid for \
