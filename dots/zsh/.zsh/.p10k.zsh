@@ -199,9 +199,9 @@
 
   ################################[ prompt_char: prompt symbol ]################################
   # Green prompt symbol if the last command succeeded.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=76
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=green
   # Red prompt symbol if the last command failed.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=196
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=red
   # Default prompt symbol (passion-style: multi-colored arrows)
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION='%B%F{red}❱%F{yellow}❱%F{green}❱%b'
   typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION='%B%F{red}❱❱❱%b'
@@ -386,29 +386,34 @@
 
     if (( $1 )); then
       # Styling for up-to-date Git status.
-      local       meta='%f'     # default foreground
-      local      clean='%76F'   # green foreground
-      local   modified='%178F'  # yellow foreground
-      local  untracked='%39F'   # blue foreground
-      local conflicted='%196F'  # red foreground
+      local       meta='%f'          # default foreground
+      local      clean='%F{green}'   # green foreground
+      local   modified='%F{yellow}'  # yellow foreground
+      local  untracked='%F{blue}'    # blue foreground
+      local conflicted='%F{red}'     # red foreground
     else
       # Styling for incomplete and stale Git status.
-      local       meta='%244F'  # grey foreground
-      local      clean='%244F'  # grey foreground
-      local   modified='%244F'  # grey foreground
-      local  untracked='%244F'  # grey foreground
-      local conflicted='%244F'  # grey foreground
+      local       meta='%F{grey}'    # grey foreground
+      local      clean='%F{grey}'    # grey foreground
+      local   modified='%F{grey}'    # grey foreground
+      local  untracked='%F{grey}'    # grey foreground
+      local conflicted='%F{grey}'    # grey foreground
     fi
 
     local res
+
+    # Detect VCS type (default to git, check for jj if in backends list)
+    local vcs_name='git'
+    (( ${POWERLEVEL9K_VCS_BACKENDS[(Ie)jj]} )) && [[ -d "${VCS_STATUS_WORKDIR}/.jj" ]] && vcs_name='jj'
 
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
       # If local branch name is at most 32 characters long, show it in full.
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show local branch name in full without truncation, delete the next line.
-      (( $#branch > 64 )) && branch[13,-13]="…"  # <-- this line
-      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+      # (( $#branch > 64 )) && branch[7,-58]="…"  # <-- this line
+      (( $#branch > 48 )) && branch[7,-42]="…"  # <-- this line
+      res+="%F{blue}${vcs_name}(%F{red}${branch//\%/%%}%F{blue})%f"
     fi
 
     if [[ -n $VCS_STATUS_TAG
@@ -503,8 +508,8 @@
   typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED,CONFLICTED,COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=-1
 
   # Icon color.
-  typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=76
-  typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=244
+  typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=green
+  typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=grey
   # Custom icon.
   typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION=
   # Custom prefix.
@@ -517,9 +522,9 @@
 
   # These settings are used for repositories other than Git or when gitstatusd fails and
   # Powerlevel10k has to fall back to using vcs_info.
-  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=76
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=76
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=178
+  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=green
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=green
+  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=yellow
 
   ##########################[ status: exit code of the last command ]###########################
   # Enable OK_PIPE, ERROR_PIPE and ERROR_SIGNAL status states to allow us to enable, disable and
@@ -1702,8 +1707,7 @@
     prompt_docker_container
   }
 
-  # Custom docker_container segment: shows [Docker] when running inside a container
-  # (passion theme style)
+  # Custom rosetta status segment: shows [ROSETTA] when running inside rosetta
   function prompt_darwin_rosetta() {
     [[ -f /.dockerenv ]] && p10k segment -f magenta -t '[Docker]'
 
@@ -1728,7 +1732,7 @@
   #   - always:   Trim down prompt when accepting a command line.
   #   - same-dir: Trim down prompt when accepting a command line unless this is the first command
   #               typed after changing current working directory.
-  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
+  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=same-dir
 
   # Instant prompt mode.
   #
