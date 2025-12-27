@@ -79,7 +79,7 @@
     };
 
     tailscale = {
-      enable = true;
+      enable = false;
       useRoutingFeatures = "client";
       authKeyFile = "/etc/tailscale/tailscale0_key";
     };
@@ -189,7 +189,7 @@
 
     wg-quick.interfaces = {
       "mgmt0" = {
-        autostart = false;
+        autostart = true;
         configFile = "/etc/wireguard/mgmt0.conf";
       };
     };
