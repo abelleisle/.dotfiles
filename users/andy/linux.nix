@@ -32,6 +32,7 @@ in
         "docker"
         "wheel"
         "wireshark"
+        "video"
       ]
       ++ lib.optionals usingNM [ "networkmanager" ];
       shell = pkgs.zsh;

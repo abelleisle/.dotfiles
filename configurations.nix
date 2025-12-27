@@ -41,7 +41,7 @@ in
         allowUnfree = true;
         user = "andy";
         extraModules = [
-          nixos-hw.lenovo-thinkpad-e14-intel
+          nixos-hw.lenovo-thinkpad-e14-intel-gen4
           # kmonad.default
         ];
       };

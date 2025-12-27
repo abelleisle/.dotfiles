@@ -133,8 +133,8 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk3";
-    style.name = "gtk2";
+    platformTheme.name = "qtct";
+    style.name = "kvantum";
   };
 
   # xdg.portal = {

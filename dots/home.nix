@@ -140,17 +140,21 @@ in
 
       git = {
         enable = true;
-        userName = "abelleisle";
-        # Allow this to get overridden per-system if required
-        userEmail = lib.mkDefault "abelleisle@protonmail.com";
+        settings = {
+          user = {
+            name = "abelleisle";
+            # Allow this to get overridden per-system if required
+            email = lib.mkDefault "abelleisle@protonmail.com";
+          };
+        };
         includes = [
           {
             condition = "hasconfig:remote.*.url:forgejo@git.services.bitcicle.com:*/**";
-            path = "~/.git/config/config-bitcicle";
+            path = "~/.config/git/config-bitcicle";
           }
           {
             condition = "hasconfig:remote.*.url:https://git.services.bitcicle.com/*/**";
-            path = "~/.git/config/config-bitcicle";
+            path = "~/.config/git/config-bitcicle";
           }
         ];
       };

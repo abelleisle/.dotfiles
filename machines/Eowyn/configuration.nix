@@ -120,11 +120,18 @@
       openFirewall = true;
       package = pkgs.winbox4;
     };
+
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+      dumpcap.enable = true;
+      usbmon.enable = true;
+    };
   };
 
   environment = {
     sessionVariables = lib.mkIf isVM {
-      WLR_RENDERER_ALLOW_SOFTWARE = "1";
+      # GSK_RENDERER = "ngl";
     };
     plasma6.excludePackages = with pkgs.kdePackages; [
       konsole
@@ -199,6 +206,7 @@
     pkgs.gnome-tweaks
     pkgs.wl-clipboard
     pkgs.adwaita-icon-theme
+    pkgs.adwaita-qt
     pkgs.kdePackages.breeze-icons
     pkgs.iotop
   ];
