@@ -146,6 +146,9 @@ in
             # Allow this to get overridden per-system if required
             email = lib.mkDefault "abelleisle@protonmail.com";
           };
+          push = {
+            autoSetupRemote = true;
+          };
         };
         includes = [
           {
