@@ -58,6 +58,7 @@
       claude-code
       slack
       filezilla
+      opencode
     ];
 
   };
