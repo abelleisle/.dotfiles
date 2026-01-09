@@ -2,6 +2,15 @@
 -- Configuration
 require("options")
 
+-- Call local nvim configs/overrides
+local path = vim.fn.expand("$HOME/.shelf/nvim.lua")
+local local_exists, local_configs = pcall(dofile, path)
+if local_exists then
+    local_configs.setup()
+else
+    print("No local configs... Using global")
+end
+
 -----------------------------------------------------------
 -- Load plugins
 
@@ -25,13 +34,10 @@ require("autocmd")
 require("functions")
 require("filetype")
 
--- Call local nvim configs/overrides
-local path = vim.fn.expand("$HOME/.shelf/nvim.lua")
-local local_exists, local_configs = pcall(dofile, path)
 if local_exists then
-    local_configs.setup()
+    local_configs.colorscheme()
 else
-    print("No local configs... Using global")
+    print("No local colorscheme... Using default")
 end
 
 -----------------------------------------------------------
