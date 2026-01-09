@@ -28,4 +28,7 @@ idf() {
     fi
 }
 
+# Set PATH so it includes opencode if it exists
+[[ -d "$HOME/.opencode/bin" ]] && path=($HOME/.opencode/bin $path)
+
 # vim:ft=zsh
