@@ -3,6 +3,7 @@ local M = {}
 M.cmp = function()
     local cmp_present, cmp = pcall(require, "cmp")
     local lua_present, luasnip = pcall(require, "luasnip")
+    local copilot_sug_present, copilot_sug = pcall(require, "copilot.suggestion")
 
     if not cmp_present then
         vim.notify("cmp.config(): nvim_cmp is not present!", vim.log.levels.ERROR)
@@ -81,7 +82,9 @@ M.cmp = function()
                 select = false,
             }),
             ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
+                if copilot_sug_present and copilot_sug.is_visible() then
+                    copilot_sug.accept()
+                elseif cmp.visible() then
                     cmp.select_next_item()
                 elseif luasnip.expand_or_jumpable() then
                     luasnip.expand_or_jump()
