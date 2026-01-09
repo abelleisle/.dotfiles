@@ -5,8 +5,9 @@ let
 
   overlays = [
     self.inputs.nixGL.overlay
-    (_final: _prev: {
+    (_final: prev: {
       # ghostty = self.inputs.ghostty.packages.${prev.system}.default;
+      opencode = self.inputs.opencode.packages.${prev.system}.default;
     })
   ];
 
