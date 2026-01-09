@@ -16,6 +16,14 @@ return {
         end,
     },
 
+    { -- Make markdown look pretty
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+            file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+    },
+
     { -- Edit hex
         "RaafatTurki/hex.nvim",
         enabled = (vim.fn.executable("xxd") == 1),
