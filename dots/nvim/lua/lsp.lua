@@ -23,6 +23,8 @@ local enabled_servers = {
 
     -- Typescript
     "vtsls",
+    -- Yaml
+    "yamlls",
 }
 
 local _disabled_servers = {
