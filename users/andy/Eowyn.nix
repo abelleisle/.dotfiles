@@ -10,6 +10,15 @@
         local M = {}
 
         M.setup = function()
+            ------------------------
+            --  VIM CONFIG STUFF  --
+            ------------------------
+
+            vim.opt.wrap = false
+            vim.g.nix = true
+        end
+
+        M.colorscheme = function()
             -------------------
             --  THEME STUFF  --
             -------------------
@@ -29,12 +38,6 @@
             --   end
             -- )
 
-            ------------------------
-            --  VIM CONFIG STUFF  --
-            ------------------------
-
-            vim.opt.wrap = false
-            vim.g.nix = true
         end
 
         return M
@@ -52,13 +55,10 @@
       gimp
       # jellyfin-media-player # Have to disable because it uses EOL QT5
       logseq
-      ollama
       meshcentral
       dig
-      claude-code
       slack
       filezilla
-      opencode
     ];
 
   };
@@ -88,6 +88,8 @@
     };
 
     keyboard.enable = true;
+
+    features.trash.enable = true;
   };
 
   # Override libGL since this is not a nixOS system

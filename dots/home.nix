@@ -40,6 +40,8 @@ in
     ./btop
     # Enable colors for shell
     ../home/colors
+    # AI trash
+    ./trash
   ];
 
   config = {
