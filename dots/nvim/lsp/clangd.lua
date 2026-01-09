@@ -84,6 +84,14 @@ return {
         highlight = {
             lsRangers = true,
         },
+        clang = {
+            excludeArgs = {
+                "-mcpu",
+                "-msoc-dir",
+                "-msoc",
+                "-fstrict-volatile-bitfields",
+            },
+        },
     },
     capabilities = {
         textDocument = {
