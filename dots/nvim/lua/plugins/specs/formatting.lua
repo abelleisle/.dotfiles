@@ -45,6 +45,7 @@ return {
             alternates = {
                 ["=="] = "!=",
                 ["yes"] = "no",
+                ["ON"] = "OFF",
             },
         },
     },
