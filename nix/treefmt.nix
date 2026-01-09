@@ -8,7 +8,7 @@
           # Nix
           nixfmt = {
             enable = true;
-            package = pkgs.nixfmt-rfc-style;
+            package = pkgs.nixfmt;
           };
           deadnix.enable = true;
           statix.enable = true;
