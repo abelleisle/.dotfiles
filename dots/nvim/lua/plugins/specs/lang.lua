@@ -31,4 +31,9 @@ return {
             require("hex").setup()
         end,
     },
+
+    { -- Log highlighter
+        "fei6409/log-highlight.nvim",
+        opts = {},
+    },
 }
