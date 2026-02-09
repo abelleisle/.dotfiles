@@ -77,9 +77,26 @@ _map.misc = function()
     ----------------------------------
     --     INDENT AND BRACES        --
     ----------------------------------
-    -- Indent selected block and wrap with braces
-    local indent_and_wrap_braces = require("utils").indent.indent_and_wrap_braces
-    map({ "n", "x" }, "<leader>sb", indent_and_wrap_braces, Opt("Wrap block with braces"))
+    local indent = require("utils").indent
+    -- Normal mode: <leader>sb{motion}
+    map(
+        "n",
+        "<leader>sb",
+        indent.operator_trigger,
+        { expr = true, noremap = true, silent = true, desc = "Wrap block with braces" }
+    )
+    -- Normal mode: <leader>sbb for current line (supports {count}<leader>sbb)
+    -- We need to use this special binding because running <leader>sb + b assumes
+    -- a 'b' motion. Creating a separate binding for <leader>sbb allows us to trigger the
+    -- operator on the current line without vim moving the cursor back a work.
+    map(
+        "n",
+        "<leader>sbb",
+        indent.operator_trigger_same_line,
+        { expr = true, noremap = true, silent = true, desc = "Wrap current line(s) with braces" }
+    )
+    -- Visual mode: select then <leader>sb
+    map("x", "<leader>sb", indent.visual_wrap, Opt("Wrap block with braces"))
 end
 
 ------------------------------------------------------------------------
