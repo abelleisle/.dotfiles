@@ -154,11 +154,11 @@ in
         };
         includes = [
           {
-            condition = "hasconfig:remote.*.url:forgejo@git.services.bitcicle.com:*/**";
+            condition = "hasconfig:remote.*.url:forgejo@git.bitcicle.com:*/**";
             path = "~/.config/git/config-bitcicle";
           }
           {
-            condition = "hasconfig:remote.*.url:https://git.services.bitcicle.com/*/**";
+            condition = "hasconfig:remote.*.url:https://git.bitcicle.com/*/**";
             path = "~/.config/git/config-bitcicle";
           }
         ];
