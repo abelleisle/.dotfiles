@@ -8,7 +8,7 @@ This is a stub mirror. The source code lives on Forgejo.
 
 | Branch | Commit | Link |
 |--------|--------|------|
-| `eowyn_v2` | `769e6b2c35ac` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/769e6b2c35ac46975adcd0b0be945d7118fb68b4) |
+| `eowyn_v2` | `6368483e6e81` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/6368483e6e8160a6d48a56dabe879daed495f705) |
 | `master` | `cdc9ff9efd0b` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/cdc9ff9efd0bae4cd233efbe1d0b92d98a5a446f) |
 | `gnome` | `06dd0b812f78` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/06dd0b812f785bb672b6e71992bfa41818fa8a1b) |
 | `legacy` | `50f83f0e4427` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/50f83f0e4427ad01ede945836473db62a1668874) |
@@ -16,4 +16,4 @@ This is a stub mirror. The source code lives on Forgejo.
 
 ---
 
-*Last updated: 2026-03-08 04:40:26 UTC*
+*Last updated: 2026-03-10 16:20:09 UTC*
