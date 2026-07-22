@@ -8,12 +8,11 @@ This is a stub mirror. The source code lives on Forgejo.
 
 | Branch | Commit | Link |
 |--------|--------|------|
-| `saruman` | `7659cebf0b7f` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/7659cebf0b7fb9ef72781d332c0622c2857226ad) |
-| `master` | `313dbd8ffbf6` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/313dbd8ffbf614de266cffa4f90f1b1617d8b08d) |
+| `master` | `8869cb935046` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/8869cb9350468a1ed25093c3b378025e545db3a9) |
 | `gnome` | `06dd0b812f78` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/06dd0b812f785bb672b6e71992bfa41818fa8a1b) |
 | `legacy` | `50f83f0e4427` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/50f83f0e4427ad01ede945836473db62a1668874) |
 | `old` | `97c745354696` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/97c745354696643cf47a273633fb2b698f64f8fc) |
 
 ---
 
-*Last updated: 2026-07-22 00:10:08 UTC*
+*Last updated: 2026-07-22 04:10:28 UTC*
