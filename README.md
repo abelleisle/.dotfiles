@@ -8,6 +8,7 @@ This is a stub mirror. The source code lives on Forgejo.
 
 | Branch | Commit | Link |
 |--------|--------|------|
+| `saruman_nvidia` | `ff74b47c726b` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/ff74b47c726b638fdddb95f93f43b55241d63472) |
 | `master` | `8869cb935046` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/8869cb9350468a1ed25093c3b378025e545db3a9) |
 | `gnome` | `06dd0b812f78` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/06dd0b812f785bb672b6e71992bfa41818fa8a1b) |
 | `legacy` | `50f83f0e4427` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/50f83f0e4427ad01ede945836473db62a1668874) |
@@ -15,4 +16,4 @@ This is a stub mirror. The source code lives on Forgejo.
 
 ---
 
-*Last updated: 2026-07-22 04:10:28 UTC*
+*Last updated: 2026-07-23 00:40:28 UTC*
