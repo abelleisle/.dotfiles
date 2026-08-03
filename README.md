@@ -8,7 +8,7 @@ This is a stub mirror. The source code lives on Forgejo.
 
 | Branch | Commit | Link |
 |--------|--------|------|
-| `galadriel` | `5cfdd976f6b2` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/5cfdd976f6b2bb126b2bf410f214bc096149f96d) |
+| `galadriel` | `794b93dce8b0` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/794b93dce8b07dfa0c74d51672f995099502b80f) |
 | `master` | `c5823ff8b2a9` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/c5823ff8b2a93cdd6fb6c9d2dfc313b8a38f738f) |
 | `saruman_nvidia` | `ff74b47c726b` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/ff74b47c726b638fdddb95f93f43b55241d63472) |
 | `gnome` | `06dd0b812f78` | [view](https://git.bitcicle.com/andy/.dotfiles/src/commit/06dd0b812f785bb672b6e71992bfa41818fa8a1b) |
@@ -17,4 +17,4 @@ This is a stub mirror. The source code lives on Forgejo.
 
 ---
 
-*Last updated: 2026-08-03 07:00:28 UTC*
+*Last updated: 2026-08-03 07:20:21 UTC*
